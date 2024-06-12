@@ -1,0 +1,95 @@
+/* Estilos para el contenedor principal */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Estilos para el título */
+.title {
+  font-size: 3em;
+  color: #2c3e50; /* Azul oscuro */
+  margin-bottom: 20px;
+  font-family: 'Arial', sans-serif;
+  transition: color 0.3s ease-in-out; /* Efecto de transición para el color */
+}
+
+/* Estilos para la descripción */
+.description {
+  font-size: 1.5em;
+  color: #34495e; /* Azul un poco más claro */
+  line-height: 1.6;
+  font-family: 'Arial', sans-serif;
+  transition: color 0.3s ease-in-out; /* Efecto de transición para el color */
+}
+
+/* Estilos para hacer el diseño responsive */
+@media only screen and (max-width: 600px) {
+  .title {
+    font-size: 2.5em;
+  }
+  .description {
+    font-size: 1.2em;
+  }
+}
+
+/* Efecto de hover sobre el título */
+.title:hover {
+  color: #3498db; /* Azul más claro */
+}
+
+/* Efecto de hover sobre la descripción */
+.description:hover {
+  color: #f4b0ae; /* Azul más claro */
+}
+
+/*quinta tabla estilos*/
+
+.destino {
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.destino h2 {
+  margin: 0;
+  padding: 10px;
+  background-color: #f0f0f0;
+}
+
+.accordion {
+  position: relative;
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+input[type="checkbox"] + label {
+  display: block;
+  padding: 10px;
+  cursor: pointer;
+  background-color: #ddd;
+}
+
+input[type="checkbox"]:checked + label + .accordion-content {
+  max-height: 500px; /* Adjust according to your content */
+}
+
+.imagenes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.imagenes img {
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+}

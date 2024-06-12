@@ -1,0 +1,127 @@
+
+<div class="container">
+  <h2>Módulo para agregar una nueva Noticia</h2>
+  <form [formGroup]="crearForm" (ngSubmit)="onSubmit()">
+    <!-- inicio nombre -->
+    <div class="form-group">
+      <label for="titulo">Titulo de la Noticia</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i *ngIf="crearForm.get('titulo')?.valid || !crearForm.get('titulo')?.touched" class="fas fa-newspaper"></i>
+          <i *ngIf="crearForm.get('titulo')?.invalid && crearForm.get('titulo')?.touched" class="fas fa-times-circle text-danger"></i>
+        </span>
+        </div>
+        <input type="text" id="titulo" formControlName="titulo" placeholder="Ingresa el Titulo de la Noticia">
+      </div>
+      <div *ngIf="crearForm.get('titulo')?.invalid && (crearForm.get('titulo')?.dirty || crearForm.get('titulo')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('titulo')?.errors?.['required']">El Destino es obligatorio.</div>
+        <div class="text-danger" *ngIf="crearForm.get('titulo')?.errors?.['minlength']">El Destino debe tener al menos 5 caracteres.</div>
+        <div class="text-danger" *ngIf="crearForm.get('titulo')?.errors?.['maxlength']">El Destino no debe exceder los 50 caracteres.</div>
+      </div>
+    </div>
+    <!-- fin nombre -->
+    <!-- inicio Contenido -->
+    <div class="form-group">
+      <label for="contenido">Contenido de la Noticia</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i *ngIf="crearForm.get('contenido')?.valid || !crearForm.get('contenido')?.touched" class="fas fa-align-left"></i>
+            <i *ngIf="crearForm.get('contenido')?.invalid && crearForm.get('contenido')?.touched" class="fas fa-times-circle text-danger"></i>
+          </span>
+        </div>
+        <textarea id="contenido" formControlName="contenido" placeholder="Ingresa la Contenido de la Noticia" rows="5" class="form-control"></textarea>
+      </div>
+      <div *ngIf="crearForm.get('contenido')?.invalid && (crearForm.get('contenido')?.dirty || crearForm.get('contenido')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('contenido')?.errors?.['required']">La Contenido es obligatoria.</div>
+        <div class="text-danger" *ngIf="crearForm.get('contenido')?.errors?.['minlength']">La Contenido debe tener al menos 10 caracteres.</div>
+        <div class="text-danger" *ngIf="crearForm.get('contenido')?.errors?.['maxlength']">La Contenido no debe exceder los 500 caracteres.</div>
+      </div>
+    </div>
+    <!-- fin Contenido -->
+    <!-- inicio Fuente -->
+    <div class="form-group">
+      <label for="fuente">Fuente de la Noticia</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i *ngIf="crearForm.get('fuente')?.valid || !crearForm.get('fuente')?.touched" class="fa fa-envelope-open"></i>
+            <i *ngIf="crearForm.get('fuente')?.invalid && crearForm.get('fuente')?.touched" class="fas fa-times-circle text-danger"></i>
+          </span>
+        </div>
+        <input type="text" id="fuente" formControlName="fuente" placeholder="Ingresa la Fuente de la Noticia" class="form-control">
+      </div>
+      <div *ngIf="crearForm.get('fuente')?.invalid && (crearForm.get('fuente')?.dirty || crearForm.get('fuente')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('fuente')?.errors?.['required']">La ubicación es obligatoria.</div>
+      </div>
+    </div>
+    <!-- fin Fuente -->
+
+    <!-- inicio tipoTurismos turismo -->
+    <div class="form-group">
+      <label for="tipoTurismos">Tipo de Turismo Relacionado con la Noticia</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+      <span class="input-group-text">
+        <i *ngIf="crearForm.get('tipoTurismos')?.valid || !crearForm.get('tipoTurismos')?.touched" class="fas fa-umbrella-beach"></i>
+        <i *ngIf="crearForm.get('tipoTurismos')?.invalid && crearForm.get('tipoTurismos')?.touched" class="fas fa-times-circle text-danger"></i>
+      </span>
+        </div>
+        <select id="tipoTurismos" formControlName="tipoTurismos" class="form-control">
+          <option value="" disabled selected>Selecciona un Tipo de Turismo</option>
+          <option *ngFor="let tipoTurismo of tipoTurismos" [ngValue]="tipoTurismos">{{ tipoTurismo.nombre}}</option>
+        </select>
+      </div>
+      <div *ngIf="crearForm.get('tipoTurismos')?.invalid && (crearForm.get('tipoTurismos')?.dirty || crearForm.get('tipoTurismos')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('tipoTurismos')?.errors?.['required']">El Tipo de turismo es obligatorio.</div>
+      </div>
+    </div>
+    <!-- fin tipoTurismos turismo -->
+
+    <!-- inicio imágenes -->
+    <div class="form-group">
+      <label for="imagenes">Imágenes</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+      <span class="input-group-text">
+        <i *ngIf="crearForm.get('imagenes')?.valid || !crearForm.get('imagenes')?.touched" class="fas fa-image"></i>
+        <i *ngIf="crearForm.get('imagenes')?.invalid && crearForm.get('imagenes')?.touched" class="fas fa-times-circle text-danger"></i>
+      </span>
+        </div>
+        <select id="imagenes" formControlName="imagenes" class="form-control">
+          <option value="" disabled selected>Selecciona una imagen</option>
+          <option *ngFor="let imagen of imagenes" [ngValue]="imagen">{{ imagen.ruta }}</option>
+        </select>
+      </div>
+      <div *ngIf="crearForm.get('imagenes')?.invalid && (crearForm.get('imagenes')?.dirty || crearForm.get('imagenes')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('imagenes')?.errors?.['required']">Las imágenes son obligatorias.</div>
+      </div>
+    </div>
+    <!-- fin imágenes -->
+
+    <!-- inicio fecha y hora de creación -->
+    <div class="form-group">
+      <label>Fecha de Publicación</label>
+      <div class="input-group">
+        <!-- fecha de creación -->
+        <div class="input-group-prepend">
+      <span class="input-group-text">
+        <i *ngIf="crearForm.get('fechaPublicacion')?.valid || !crearForm.get('fechaPublicacion')?.touched" class="fas fa-calendar-plus"></i>
+        <i *ngIf="crearForm.get('fechaPublicacion')?.invalid && crearForm.get('fechaPublicacion')?.touched" class="fas fa-times-circle text-danger"></i>
+      </span>
+        </div>
+        <input type="date" id="fechaPublicacion" formControlName="fechaPublicacion" class="form-control" style="margin-right: 5px;">
+      </div>
+    </div>
+
+    <!-- Botones -->
+    <div class="form-group">
+      <button type="submit" class="custom-btn primary-btn">Guardar Destino</button>
+      <button type="button" class="custom-btn secondary-btn" style="margin-left: 10px;" (click)="limpiarFormulario()">Limpiar Formulario</button>
+      <button type="button" class="custom-btn info-btn" style="margin-left: 10px;" (click)="volver()">Volver</button>
+    </div>
+
+
+  </form>
+</div>

@@ -1,0 +1,113 @@
+<section class="experiencia">
+  <div class="experiencia-header">
+    <img src="assets/images/Mochileros.jpg" alt="Imagen de Experiencia" class="experiencia-imagen">
+    <h2 class="experiencia-titulo">¡Comparte tu Experiencia!</h2>
+  </div>
+  <!-- Párrafo que describe el propósito del módulo de experiencia -->
+  <div class="experiencia-descripcion">
+    <i class="fas fa-comment-alt experiencia-icono"></i>
+    <p>
+      Tu Experiencia te permite compartir tus vivencias, anécdotas y conocimientos con otros usuarios. Comparte tus aventuras, consejos y descubrimientos para inspirar y ayudar a la comunidad de viajeros.
+    </p>
+  </div>
+</section>
+<div class="mi-separador-div"></div>
+
+
+<div class="container">
+  <h2>Agrega tu Experiencia turística</h2>
+  <form [formGroup]="crearForm" (ngSubmit)="onSubmit()">
+
+    <!-- inicio Destino turismo -->
+    <div class="form-group">
+      <label for="destinos">Destino</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+      <span class="input-group-text">
+        <i *ngIf="crearForm.get('destinos')?.valid || !crearForm.get('destinos')?.touched" class="fas fa-umbrella-beach"></i>
+        <i *ngIf="crearForm.get('destinos')?.invalid && crearForm.get('destinos')?.touched" class="fas fa-times-circle text-danger"></i>
+      </span>
+        </div>
+        <select id="destinos" formControlName="destinos" class="form-control">
+          <option value="" disabled selected>Selecciona un destino para calificar</option>
+          <option *ngFor="let destino of destinos" [ngValue]="destino">{{ destino.destinoName }}</option>
+        </select>
+      </div>
+      <div *ngIf="crearForm.get('destinos')?.invalid && (crearForm.get('destinos')?.dirty || crearForm.get('destinos')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('destinos')?.errors?.['required']">El Destino de turismo es obligatorio.</div>
+      </div>
+    </div>
+    <!-- fin Destino turismo -->
+
+    <!-- inicio descripción -->
+    <div class="form-group">
+      <label for="comentario">Comentario del Sitio Turistico</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i *ngIf="crearForm.get('comentario')?.valid || !crearForm.get('comentario')?.touched" class="fas fa-align-left"></i>
+            <i *ngIf="crearForm.get('comentario')?.invalid && crearForm.get('comentario')?.touched" class="fas fa-times-circle text-danger"></i>
+          </span>
+        </div>
+        <textarea id="comentario" formControlName="comentario" placeholder="Ingresa la Descripción del Destino" rows="5" class="form-control"></textarea>
+      </div>
+      <div *ngIf="crearForm.get('comentario')?.invalid && (crearForm.get('comentario')?.dirty || crearForm.get('comentario')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('comentario')?.errors?.['required']">El Comentario es obligatoria.</div>
+        <div class="text-danger" *ngIf="crearForm.get('comentario')?.errors?.['minlength']">El Comentario debe tener al menos 10 caracteres.</div>
+        <div class="text-danger" *ngIf="crearForm.get('comentario')?.errors?.['maxlength']">El Comentario no debe exceder los 500 caracteres.</div>
+      </div>
+    </div>
+    <!-- fin descripción -->
+
+    <!-- inicio calificación -->
+    <div class="form-group">
+      <label>Calificación del Destino</label>
+      <!-- Sitio turístico -->
+      <div class="clasificacion">
+        <input id="radio1" type="radio" formControlName="calificacion" value="5">
+        <label for="radio1" class="star-label">★</label>
+        <span class="description">Excelente</span>
+        <input id="radio2" type="radio" formControlName="calificacion" value="4">
+        <label for="radio2" class="star-label">★</label>
+        <span class="description">Bueno</span>
+        <input id="radio3" type="radio" formControlName="calificacion" value="3">
+        <label for="radio3" class="star-label">★</label>
+        <span class="description">Bien</span>
+        <input id="radio4" type="radio" formControlName="calificacion" value="2">
+        <label for="radio4" class="star-label">★</label>
+        <span class="description">Aburrido</span>
+        <input id="radio5" type="radio" formControlName="calificacion" value="1">
+        <label for="radio5" class="star-label">★</label>
+        <span class="description">Malo</span>
+      </div>
+    </div>
+    <!-- fin calificación -->
+
+
+    <!-- inicio fecha de creación -->
+    <div class="form-group">
+      <label for="fecha">Fecha de Publicación</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+      <span class="input-group-text">
+        <i *ngIf="crearForm.get('fecha')?.valid || !crearForm.get('fecha')?.touched" class="fas fa-calendar"></i>
+        <i *ngIf="crearForm.get('fecha')?.invalid && crearForm.get('fecha')?.touched" class="fas fa-times-circle text-danger"></i>
+      </span>
+        </div>
+        <input type="date" id="fecha" formControlName="fecha" class="form-control">
+      </div>
+      <!-- mensaje de error -->
+      <div *ngIf="crearForm.get('fecha')?.invalid && (crearForm.get('fecha')?.dirty || crearForm.get('fecha')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('fecha')?.errors?.['required']">La fecha de Publicación es obligatoria.</div>
+      </div>
+    </div>
+    <!-- fin fecha de creación -->
+
+    <!-- Botones -->
+    <div class="form-group">
+      <button type="submit" class="custom-btn primary-btn">Guardar Destino</button>
+      <button type="button" class="custom-btn secondary-btn" style="margin-left: 10px;" (click)="limpiarFormulario()">Limpiar Formulario</button>
+      <button type="button" class="custom-btn info-btn" style="margin-left: 10px;" (click)="volver()">Volver</button>
+    </div>
+  </form>
+</div>

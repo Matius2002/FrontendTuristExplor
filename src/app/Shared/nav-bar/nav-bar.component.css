@@ -1,0 +1,179 @@
+/* Navbar Styles */
+.navbar {
+  position: fixed; /* Navbar fijo */
+  top: 50px; /* Cambiado el valor de top */
+  left: 0; /* Lo fija a la izquierda de la página */
+  width: auto; /* Cambiado a ancho automático */
+  /* height: 150px; */
+  margin: 10px auto;
+  z-index: 1000; /* Asegura que esté por encima de otros elementos */
+  transition: all 0.3s;
+  background-color: #f8f9fa; /* Slightly lighter background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0 16px 0 50px; /* Ajuste del padding */
+  border-radius: 80px; /* Redondear el cuadro negro */
+}
+
+
+.navbar-brand h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+  color: #007bff;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand .text-success {
+  color: #28a745;
+}
+
+.navbar-toggler {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.navbar-toggler:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.nav-item .nav-link {
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.3s, color 0.3s;
+  padding: 0.5rem 1rem;
+  color: #343a40; /* Darker text color */
+  display: flex;
+  align-items: center;
+}
+
+.nav-item .nav-link:hover,
+.nav-item .nav-link:focus {
+  background-color: #e9f5e6; /* Lighter green background */
+  color: #155724 !important;
+  border-radius: 4px; /* Rounded corners for hover effect */
+}
+
+.dropdown-item.custom-dropdown-item {
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dropdown-item.custom-dropdown-item:hover,
+.dropdown-item.custom-dropdown-item:focus {
+  background-color: #e9f5e6; /* Lighter green background */
+  color: #155724 !important;
+}
+
+.dropdown-menu {
+  border-radius: 4px; /* Rounded corners for dropdown */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  border: none;
+  padding: 0.5rem 0;
+}
+
+
+.dropdown-item {
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .navbar-brand h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    /* Modificado para permitir el ajuste automático de la altura */
+    height: auto;
+  }
+  .navbar-brand h1 {
+    font-size: 18px;
+  }
+  .nav-item .nav-link {
+    font-size: 14px;
+  }
+}
+
+/* Logo Styles */
+.logo {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  object-fit: contain; /* Ensure the logo is contained within the bounds */
+}
+
+/* Additional Styles for Professional Look */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-nav {
+  align-items: center;
+}
+
+.navbar-collapse {
+  justify-content: flex-end;
+}
+
+.nav-item.dropdown .nav-link::after {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: .255em;
+  vertical-align: .255em;
+  content: "";
+  border-top: .3em solid;
+  border-right: .3em solid transparent;
+  border-bottom: 0;
+  border-left: .3em solid transparent;
+}
+
+.nav-item.dropdown .nav-link[aria-expanded="true"]::after {
+  transform: rotate(-180deg);
+}
+
+/* Animation for dropdown menu */
+.dropdown-menu {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.nav-item.dropdown.show .dropdown-menu {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Icons for menu items */
+.nav-item .nav-link::before {
+  content: '⚬'; /* Bullet point as a placeholder for an icon */
+  margin-right: 8px;
+  color: #007bff;
+  font-size: 12px;
+  transition: color 0.3s;
+}
+
+.nav-item .nav-link:hover::before,
+.nav-item .nav-link:focus::before {
+  color: #28a745; /* Change icon color on hover */
+}
+
+/* Navbar Active Link */
+.nav-item .nav-link.active {
+  color: #007bff !important;
+  font-weight: bold;
+  border-bottom: 2px solid #007bff;
+}
+
+
+

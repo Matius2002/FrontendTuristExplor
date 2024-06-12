@@ -1,0 +1,521 @@
+<!-- Carousel Start -->
+<div class="container-fluid p-0 site-wrapper">
+  <div id="header-carousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="w-100" src="assets/images/carousel-1.jpg" alt="Image">
+        <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+          <div class="p-3" style="max-width: 900px;">
+            <h4 class="text-white text-uppercase mb-md-3">Ciudad de las acacias</h4>
+            <h1 class="display-3 text-white mb-md-4">Te Damos La Bienvenida a TuristExplor</h1>
+            <a href="https://www.girardot-cundinamarca.gov.co/Paginas/Inicio.aspx" class="btn btn-primary py-md-3 px-md-5 mt-2">Alcaldia de Girardot Cundinamarca</a>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img class="w-100" src="assets/images/carousel-2.jpg" alt="Image">
+        <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+          <div class="p-3" style="max-width: 900px;">
+            <h4 class="text-white text-uppercase mb-md-3">Explora y Aprende</h4>
+            <h1 class="display-3 text-white mb-md-4">Descubre Lugares Increíbles Con Nosotros</h1>
+            <a (click)="navigateTo('Conoce-Girardot')" class="btn btn-primary py-md-3 px-md-5 mt-2">¿Ya Conocias Girardot?</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+      <div class="btn btn-dark" style="width: 45px; height: 45px;">
+        <span class="carousel-control-prev-icon mb-n2"></span>
+      </div>
+    </a>
+    <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+      <div class="btn btn-dark" style="width: 45px; height: 45px;">
+        <span class="carousel-control-next-icon mb-n2"></span>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- Conócenos -->
+<div class="container-fluid py-5 site-wrapper">
+  <div class="container pt-5">
+    <div class="row">
+      <div class="col-lg-6" style="min-height: 500px;">
+        <div class="position-rico h-100">
+
+        </div>
+      </div>
+      <div class="col-lg-6 pt-5 pb-lg-5">
+        <div class="about-text bg-white p-4 p-lg-5 my-lg-5">
+          <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Conócenos</h6>
+          <h1 class="mb-3">Te damos la guía de todos los sitios turisticos que tiene Girardot</h1>
+          <p class="text-justify"> Ofrece una mezcla de clima agradable, opciones de alojamiento, actividades recreativas y una rica cultura local que atrae a turistas que buscan relajación y diversión en un entorno pintoresco. Sin embargo, como en cualquier destino turístico, es importante investigar y planificar tu viaje con anticipación para asegurarte de que se adapte a tus intereses y necesidades específicas.</p>
+          <div class="row mb-4">
+            <div class="col-6">
+              <img class="img-fluid" src="assets/images/about-1.jpg" alt="">
+            </div>
+            <div class="col-6">
+              <img class="img-fluid" src="assets/images/about-2.jpg" alt="">
+            </div>
+          </div>
+          <a (click)="navigateTo('Conoce-Girardot')" class="btn btn-primary mt-1">Ver más Información</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .position-rico {
+    display: grid;
+    grid-template-columns: 1fr; /* Una sola columna */
+    background-image: url('assets/images/mapa.png'); /* Ruta de la imagen de fondo */
+    background-size: cover; /* Ajusta el tamaño de la imagen */
+    background-position: center; /* Ajusta la posición de la imagen */
+  }
+
+  @media (min-width: 992px) {
+    .position-rico {
+      grid-template-columns: 1fr 1fr; /* Dos columnas en pantallas grandes */
+    }
+  }
+</style>
+
+<!-- Principales Destinos -->
+<div class="container-fluid py-5 site-wrapper">
+  <div class="container pt-5 pb-3">
+    <div class="text-center mb-3 pb-3">
+      <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Destinos populares</h6>
+      <h1>Explora los destino principales</h1>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="destination-item position-relative overflow-hidden mb-2">
+          <img class="img-fluid" src="assets/images/destination-1.jpg" alt="">
+          <a class="destination-overlay text-white text-decoration-none" (click)="navigateTo('tipo-aventura')">
+            <h5 class="text-white">parque de las olas</h5>
+            <span>Sol y Brisa</span>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="destination-item position-relative overflow-hidden mb-2">
+          <img class="img-fluid" src="assets/images/destination-2.jpg" alt="">
+          <a class="destination-overlay text-white text-decoration-none" (click)="navigateTo('tipo-aventura')">
+            <h5 class="text-white">El Arbolito</h5>
+            <span>Naturaleza</span>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="destination-item position-relative overflow-hidden mb-2">
+          <img class="img-fluid" src="assets/images/destination-3.jpg" alt="">
+          <a class="destination-overlay text-white text-decoration-none" (click)="navigateTo('tipo-cultural')">
+            <h5 class="text-white">Parque Simon Bolivar</h5>
+            <span>Entretenimiento</span>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="destination-item position-relative overflow-hidden mb-2">
+          <img class="img-fluid" src="assets/images/destination-4.jpg" (click)="navigateTo('tipo-aventura')">
+          <a class="destination-overlay text-white text-decoration-none" href="">
+            <h5 class="text-white">Piscilago</h5>
+            <span>Extremo</span>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="destination-item position-relative overflow-hidden mb-2">
+          <img class="img-fluid" src="assets/images/destination-5.jpg" alt="">
+          <a class="destination-overlay text-white text-decoration-none" (click)="navigateTo('tipo-cultural')">
+            <h5 class="text-white">Parque de la Locomotora</h5>
+            <span>Historico</span>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="destination-item position-relative overflow-hidden mb-2">
+          <img class="img-fluid" src="assets/images/destination-6.jpg" alt="">
+          <a class="destination-overlay text-white text-decoration-none" (click)="navigateTo('tipo-sostenible')">
+            <h5 class="text-white">Rio Magdalena</h5>
+            <span>Travesía</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Principales Destinos -->
+
+<main class="site-wrapper">
+  <div class="pt-table desktop-768">
+    <div class="pt-tablecell page-home relative" style="background-image: url(https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80);
+      background-position: center;
+      background-size: cover;">
+      <div class="overlay"></div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
+            <div class="page-title  home text-center">
+                                    <span class="heading-page"> ¿Que hacer en Girardot?
+                                    </span>
+              <p class="mt20 text-white">las actividades que elijas dependen de tus intereses personales y del tipo de experiencia que busques. Girardot ofrece una amplia gama de opciones para satisfacer a diferentes tipos de viajeros, ya sea que desees relajarte, explorar la naturaleza o sumergirte en la cultura local.
+              </p>
+            </div>
+
+            <div class="hexagon-menu clear">
+              <div class="hexagon-item">
+                <div class="hex-item">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+                <div class="hex-item">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+                <a  class="hex-content">
+                                              <span class="hex-content-inner">
+                                                  <span class="icon">
+                                                      <i class="fa fa-universal-access"></i>
+                                                  </span>
+                                                  <span class="title" (click)="navigateTo('tipo-aventura')">Relajarse en las piscinas</span>
+                                              </span>
+                  <svg viewBox="0 0 173.20508075688772 200" height="200" width="174" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M86.60254037844386 0L173.20508075688772 50L173.20508075688772 150L86.60254037844386 200L0 150L0 50Z" fill="#1e2530"></path></svg>
+                </a>
+              </div>
+              <div class="hexagon-item">
+                <div class="hex-item">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+                <div class="hex-item">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+                <a  class="hex-content">
+                                              <span class="hex-content-inner">
+                                                  <span class="icon">
+                                                      <i class="fa fa-bullseye"></i>
+                                                  </span>
+                                                  <span class="title" (click)="navigateTo('tipo-gastronomico')">Disfrutar de la gastronomía</span>
+                                              </span>
+                  <svg viewBox="0 0 173.20508075688772 200" height="200" width="174" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M86.60254037844386 0L173.20508075688772 50L173.20508075688772 150L86.60254037844386 200L0 150L0 50Z" fill="#1e2530"></path></svg>
+                </a>
+              </div>
+              <div class="hexagon-item">
+                <div class="hex-item">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+                <div class="hex-item">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+                <a  class="hex-content">
+                                              <span class="hex-content-inner">
+                                                  <span class="icon">
+                                                      <i class="fa fa-braille"></i>
+                                                  </span>
+                                                  <span class="title" (click)="navigateTo('tipo-aventura')">Explorar la naturaleza</span>
+                                              </span>
+                  <svg viewBox="0 0 173.20508075688772 200" height="200" width="174" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M86.60254037844386 0L173.20508075688772 50L173.20508075688772 150L86.60254037844386 200L0 150L0 50Z" fill="#1e2530"></path></svg>
+                </a>
+              </div>
+              <div class="hexagon-item">
+                <div class="hex-item">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+                <div class="hex-item">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+                <a  class="hex-content">
+                                              <span class="hex-content-inner">
+                                                  <span class="icon">
+                                                      <i class="fa fa-id-badge"></i>
+                                                  </span>
+                                                  <span class="title" (click)="navigateTo('tipo-nocturno')">Rumbas Nocturna</span>
+                                              </span>
+                  <svg viewBox="0 0 173.20508075688772 200" height="200" width="174" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M86.60254037844386 0L173.20508075688772 50L173.20508075688772 150L86.60254037844386 200L0 150L0 50Z" fill="#1e2530"></path></svg>
+                </a>
+              </div>
+              <div class="hexagon-item">
+                <div class="hex-item">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+                <div class="hex-item">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+                <a  class="hex-content">
+                                              <span class="hex-content-inner">
+                                                  <span class="icon">
+                                                      <i class="fa fa-life-ring"></i>
+                                                  </span>
+                                                  <span class="title" (click)="navigateTo('noticia-contenido')">Fiestas y Festivales</span>
+                                              </span>
+                  <svg viewBox="0 0 173.20508075688772 200" height="200" width="174" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M86.60254037844386 0L173.20508075688772 50L173.20508075688772 150L86.60254037844386 200L0 150L0 50Z" fill="#1e2530"></path></svg>
+                </a>
+              </div>
+              <div class="hexagon-item">
+                <div class="hex-item">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+                <div class="hex-item">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+                <a  class="hex-content">
+                                              <span class="hex-content-inner">
+                                                  <span class="icon">
+                                                      <i class="fa fa-clipboard"></i>
+                                                  </span>
+                                                  <span class="title" (click)="navigateTo('tipo-cultural')">Parques</span>
+                                              </span>
+                  <svg viewBox="0 0 173.20508075688772 200" height="200" width="174" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M86.60254037844386 0L173.20508075688772 50L173.20508075688772 150L86.60254037844386 200L0 150L0 50Z" fill="#1e2530"></path></svg>
+                </a>
+              </div>
+              <div class="hexagon-item">
+                <div class="hex-item">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+                <div class="hex-item">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+                <a  class="hex-content">
+                                              <span class="hex-content-inner">
+                                                  <span class="icon">
+                                                      <i class="fa fa-map-signs"></i>
+                                                  </span>
+                                                  <span class="title">Compras</span>
+                                              </span>
+                  <svg viewBox="0 0 173.20508075688772 200" height="200" width="174" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M86.60254037844386 0L173.20508075688772 50L173.20508075688772 150L86.60254037844386 200L0 150L0 50Z" fill="#1e2530"></path></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Team Start -->
+<div class="container-fluid py-5 site-wrapper" >
+  <div class="container pt-5 pb-3">
+    <div class="text-center mb-3 pb-3">
+      <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Guias</h6>
+      <h1>Nuestros colaboradores</h1>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-4 col-sm-6 pb-2">
+        <div class="team-item bg-white mb-4">
+          <div class="team-img position-relative overflow-hidden">
+            <img class="img-fluid w-100" src="assets/images/team-1.jpg" alt="">
+            <div class="team-social">
+              <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-twitter"></i></a>
+              <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-facebook-f"></i></a>
+              <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-instagram"></i></a>
+              <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+          <div class="text-center py-4">
+            <h5 class="text-truncate">Jose Nombre Ejemplo</h5>
+            <p class="m-0">Alcalde de Girardot</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-6 pb-2">
+        <div class="team-item bg-white mb-4">
+          <div class="team-img position-relative overflow-hidden">
+            <img class="img-fluid w-100" src="assets/images/team-2.jpg" alt="">
+            <div class="team-social">
+              <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-twitter"></i></a>
+              <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-facebook-f"></i></a>
+              <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-instagram"></i></a>
+              <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+          <div class="text-center py-4">
+            <h5 class="text-truncate">Martin Nombre Ejemplo</h5>
+            <p class="m-0">Jefe de Turismo</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-6 pb-2">
+        <div class="team-item bg-white mb-4">
+          <div class="team-img position-relative overflow-hidden">
+            <img class="img-fluid w-100" src="assets/images/team-3.jpg" alt="">
+            <div class="team-social">
+              <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-twitter"></i></a>
+              <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-facebook-f"></i></a>
+              <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-instagram"></i></a>
+              <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+          <div class="text-center py-4">
+            <h5 class="text-truncate">Luisa Nombre Ejemplo</h5>
+            <p class="m-0">Secretaria de Turismo</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-6 pb-2">
+        <div class="team-item bg-white mb-4">
+          <div class="team-img position-relative overflow-hidden">
+            <img class="img-fluid w-100" src="assets/images/team-4.jpg" alt="">
+            <div class="team-social">
+              <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-twitter"></i></a>
+              <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-facebook-f"></i></a>
+              <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-instagram"></i></a>
+              <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+          <div class="text-center py-4">
+            <h5 class="text-truncate">Mateo Mora Nombre Ejemplo</h5>
+            <p class="m-0">Ing. de sistemas</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Team End -->
+
+<!-- Turismo Testimonios Inicio -->
+<div class="container-fluid py-5 site-wrapper">
+  <div class="container py-5">
+    <div class="text-center mb-3 pb-3">
+      <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Turismo</h6>
+      <h1>Qué dicen nuestros visitantes</h1>
+      <br>
+    </div>
+    <div class="owl-carousel testimonial-carousel">
+      <div class="text-center pb-4">
+        <img class="img-fluid mx-auto" src="assets/images/testimonial-1.jpg" style="width: 100px; height: 100px;" alt="#">
+        <div class="testimonial-text bg-white p-4 mt-n5">
+          <p class="mt-5">Girardot es un lugar increíble para visitar. Sus paisajes son hermosos y las personas son muy amables.</p>
+          <h5 class="text-truncate">Juan Pérez</h5>
+          <span>Turista</span>
+        </div>
+      </div>
+      <div class="text-center pb-4">
+        <img class="img-fluid mx-auto" src="assets/images/testimonial-2.jpg" style="width: 100px; height: 100px;" alt="#">
+        <div class="testimonial-text bg-white p-4 mt-n5">
+          <p class="mt-5">Me encantó mi visita a Girardot. La oferta cultural y gastronómica es impresionante.</p>
+          <h5 class="text-truncate">María García</h5>
+          <span>Profesora</span>
+        </div>
+      </div>
+      <div class="text-center pb-4">
+        <img class="img-fluid mx-auto" src="assets/images/testimonial-3.jpg" style="width: 100px; height: 100px;" alt="#">
+        <div class="testimonial-text bg-white p-4 mt-n5">
+          <p class="mt-5">La experiencia turística en Girardot es inigualable. Recomiendo visitar sus parques y ríos.</p>
+          <h5 class="text-truncate">Carlos López</h5>
+          <span>Policía</span>
+        </div>
+      </div>
+      <div class="text-center pb-4">
+        <img class="img-fluid mx-auto" src="assets/images/testimonial-4.jpg" style="width: 100px; height: 100px;" alt="">
+        <div class="testimonial-text bg-white p-4 mt-n5">
+          <p class="mt-5">Girardot tiene una combinación perfecta de naturaleza y urbanismo. Es ideal para un descanso de la rutina diaria.</p>
+          <h5 class="text-truncate">Ana Martínez</h5>
+          <span>Doctora</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Turismo Testimonios Fin -->
+
+
+
+<!-- Noticias Inicio -->
+<div class="container-fluid py-5 site-wrapper">
+  <div class="container pt-5 pb-3">
+    <div class="text-center mb-3 pb-3">
+      <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Noticias</h6>
+      <h1>Lo Último de nuestras Noticias</h1>
+    </div>
+    <div class="row pb-3">
+      <div class="col-lg-4 col-md-6 mb-4 pb-2">
+        <div class="blog-item">
+          <div class="position-relative">
+            <img class="img-fluid col-12" src="assets/images/blog-1.jpg" alt="">
+            <div class="blog-date">
+              <h6 class="font-weight-bold mb-n1">01</h6>
+              <small class="text-white text-uppercase">Agosto</small>
+            </div>
+          </div>
+          <div class="bg-white p-4">
+            <div class="d-flex mb-2">
+              <a class="text-primary text-uppercase text-decoration-none" >La Republica</a>
+              <span class="text-primary px-2">|</span>
+              <a class="text-primary text-uppercase text-decoration-none" >Girardot y NIlo</a>
+            </div>
+            <a class="h5 m-0 text-decoration-none" (click)="navigateTo('noticia-contenido')">Girardot y Nilo, los destinos para el turismo empresarial de la mano de Compensar</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 mb-4 pb-2">
+        <div class="blog-item">
+          <div class="position-relative">
+            <img class="img-fluid col-12" src="assets/images/blog-2.jpg" alt="">
+            <div class="blog-date">
+              <h6 class="font-weight-bold mb-n1">08</h6>
+              <small class="text-white text-uppercase">Julio</small>
+            </div>
+          </div>
+          <div class="bg-white p-4">
+            <div class="d-flex mb-2">
+              <a class="text-primary text-uppercase text-decoration-none">Semana</a>
+              <span class="text-primary px-2">|</span>
+              <a class="text-primary text-uppercase text-decoration-none">Especial Cundinamarca</a>
+            </div>
+            <a class="h5 m-0 text-decoration-none" (click)="navigateTo('noticia-contenido')">¡Vuelve el Reinado Nacional del Turismo a Girardot! Prográmese para esta fiesta</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 mb-4 pb-2">
+        <div class="blog-item">
+          <div class="position-relative">
+            <img class="img-fluid col-12" src="assets/images/blog-3.jpg" alt="">
+            <div class="blog-date">
+              <h6 class="font-weight-bold mb-n1">01</h6>
+              <small class="text-white text-uppercase">Junio</small>
+            </div>
+          </div>
+          <div class="bg-white p-4">
+            <div class="d-flex mb-2">
+              <a class="text-primary text-uppercase text-decoration-none" >GOV.CO</a>
+              <span class="text-primary px-2">|</span>
+              <a class="text-primary text-uppercase text-decoration-none" >!Región que progresa¡</a>
+            </div>
+            <a class="h5 m-0 text-decoration-none" (click)="navigateTo('noticia-contenido')">Desde hoy, se abren las puertas de la Cuarta edición de ExpoCundinamarca.</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Noticias Fin -->
+

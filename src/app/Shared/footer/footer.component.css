@@ -1,0 +1,51 @@
+/* Footer Styles */
+.container-fluid {
+  background-color: #222121;
+  color: #fff;
+  border-top: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem 1rem; /* Ajuste el padding */
+}
+
+/* Social Icons */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #007bff;
+  border-radius: 50%;
+  color: #007bff;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.social-icons a:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Alignment Fix for Footer Text */
+.text-center {
+  text-align: center;
+}
+
+/* Responsive Styles */
+@media (min-width: 768px) {
+  .container-fluid {
+    padding: 1rem 2rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .text-center {
+    text-align: center;
+  }
+}

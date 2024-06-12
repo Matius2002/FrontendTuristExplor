@@ -1,0 +1,69 @@
+
+<div class="container">
+  <h2>Módulo para agregar un nuevo Tipo de Turismo</h2>
+  <form [formGroup]="crearForm" (ngSubmit)="onSubmit()">
+    <!-- inicio nombre -->
+    <div class="form-group">
+      <label for="nombre">Nombre Tipo de Turismo</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i *ngIf="crearForm.get('nombre')?.valid || !crearForm.get('nombre')?.touched" class="fas fa-user"></i>
+          <i *ngIf="crearForm.get('nombre')?.invalid && crearForm.get('nombre')?.touched" class="fas fa-times-circle text-danger"></i>
+        </span>
+        </div>
+        <input type="text" id="nombre" formControlName="nombre" placeholder="Ingresa el Nombre del Tipo de Turismo">
+      </div>
+      <div *ngIf="crearForm.get('nombre')?.invalid && (crearForm.get('nombre')?.dirty || crearForm.get('nombre')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('nombre')?.errors?.['required']">El Tipo de Turismo es obligatorio.</div>
+        <div class="text-danger" *ngIf="crearForm.get('nombre')?.errors?.['minlength']">El Tipo de Turismo debe tener al menos 5 caracteres.</div>
+        <div class="text-danger" *ngIf="crearForm.get('nombre')?.errors?.['maxlength']">El Tipo de Turismo no debe exceder los 50 caracteres.</div>
+      </div>
+    </div>
+    <!-- fin nombre -->
+    <!-- inicio descripción -->
+    <div class="form-group">
+      <label for="descripcion">Descripción</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i *ngIf="crearForm.get('descripcion')?.valid || !crearForm.get('descripcion')?.touched" class="fas fa-align-left"></i>
+            <i *ngIf="crearForm.get('descripcion')?.invalid && crearForm.get('descripcion')?.touched" class="fas fa-times-circle text-danger"></i>
+          </span>
+        </div>
+        <textarea id="descripcion" formControlName="descripcion" placeholder="Ingresa la Descripción del Tipo de Turismo" rows="5" class="form-control"></textarea>
+      </div>
+      <div *ngIf="crearForm.get('descripcion')?.invalid && (crearForm.get('descripcion')?.dirty || crearForm.get('descripcion')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('descripcion')?.errors?.['required']">La descripción es obligatoria.</div>
+        <div class="text-danger" *ngIf="crearForm.get('descripcion')?.errors?.['minlength']">La descripción debe tener al menos 10 caracteres.</div>
+        <div class="text-danger" *ngIf="crearForm.get('descripcion')?.errors?.['maxlength']">La descripción no debe exceder los 500 caracteres.</div>
+      </div>
+    </div>
+    <!-- fin descripción -->
+    <!-- inicio Popularidad -->
+    <div class="form-group">
+      <label for="popularidad">Popularidad</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i *ngIf="crearForm.get('popularidad')?.valid || !crearForm.get('popularidad')?.touched" class="fa fa-microphone"></i>
+            <i *ngIf="crearForm.get('popularidad')?.invalid && crearForm.get('popularidad')?.touched" class="fas fa-times-circle text-danger"></i>
+          </span>
+        </div>
+        <input type="text" id="popularidad" formControlName="popularidad" placeholder="Ingresa la Popularidad" class="form-control">
+      </div>
+      <div *ngIf="crearForm.get('popularidad')?.invalid && (crearForm.get('popularidad')?.dirty || crearForm.get('popularidad')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('popularidad')?.errors?.['required']">La Popularidad es obligatoria.</div>
+      </div>
+    </div>
+    <!-- fin Popularidad -->
+
+    <!-- Botones -->
+    <div class="form-group">
+      <button type="submit" class="custom-btn primary-btn">Guardar Destino</button>
+      <button type="button" class="custom-btn secondary-btn" style="margin-left: 10px;" (click)="limpiarFormulario()">Limpiar Formulario</button>
+      <button type="button" class="custom-btn info-btn" style="margin-left: 10px;" (click)="volver()">Volver</button>
+    </div>
+
+  </form>
+</div>

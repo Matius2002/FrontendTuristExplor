@@ -1,0 +1,61 @@
+.fecha-evento-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Espacio entre los dos elementos */
+}
+
+.fecha-evento-container .form-group {
+  flex: 1; /* Asegura que ambos elementos ocupen el mismo espacio */
+}
+
+.input-group-prepend .input-group-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.fecha-hora-evento-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Espacio entre los elementos */
+}
+
+.fecha-hora-evento-container .form-group {
+  flex: 1; /* Asegura que todos los elementos ocupen el mismo espacio */
+}
+
+.input-group-prepend .input-group-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.hora-evento-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Espacio entre los dos elementos */
+}
+
+.hora-evento-container .form-group {
+  flex: 1; /* Asegura que ambos elementos ocupen el mismo espacio */
+}
+
+.input-group-prepend .input-group-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+
+

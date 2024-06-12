@@ -1,0 +1,143 @@
+/* General Styles */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Topbar Styles */
+.container-fluid.topbar {
+  display: flex;
+  background-color: #d1e3f3;
+  padding: 0;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  top: 0;
+  align-items: center;
+  height: 60px;
+  overflow: hidden;
+}
+
+.col-lg-6 {
+  position: relative;
+  width: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.align-items-center {
+  align-items: center !important;
+}
+
+.mr-2 {
+  margin-right: 0.25rem !important;
+}
+
+.px-3 {
+  padding-right: 0.25rem !important;
+  padding-left: 0.25rem !important;
+}
+
+.text-body {
+  color: #6c757d !important;
+}
+
+/* Button Styles */
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.5rem 1rem; /* Modifica el padding para que se ajuste al nuevo tamaño */
+  font-size: 1rem; /* Aumenta el tamaño del texto del botón */
+  line-height: 1.25;
+  border-radius: 0.25rem;
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+
+
+.btn-outline-info {
+  color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.btn-outline-info:hover {
+  color: #fff;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.btn-outline-primary {
+  color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-outline-primary:hover {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+/* Right-align the buttons */
+.btn-group {
+  margin-left: auto;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .container-fluid.topbar {
+    display: flex !important;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    overflow-x: auto;
+  }
+
+  .col-lg-6 {
+    flex: 0 0 auto;
+    margin-right: 1rem;
+  }
+
+  .align-items-center {
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .mr-2 {
+    margin-right: 0.25rem !important;
+  }
+
+  .px-3 {
+    padding-right: 0.25rem !important;
+    padding-left: 0.25rem !important;
+  }
+
+  .align-items-center .btn {
+    flex-shrink: 0;
+    margin-bottom: 0;
+  }
+
+  .container-fluid.topbar .row {
+    width: 100%;
+  }
+
+  .container-fluid.topbar .row > div {
+    width: auto;
+  }
+}

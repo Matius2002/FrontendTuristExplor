@@ -1,0 +1,86 @@
+
+<div class="container">
+  <h2>Módulo para agregar Atracciones Turisticas</h2>
+  <form [formGroup]="crearForm" (ngSubmit)="onSubmit()">
+    <!-- inicio nombre -->
+    <div class="form-group">
+      <label for="nombre">Nombre de la Atracción</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i *ngIf="crearForm.get('nombre')?.valid || !crearForm.get('nombre')?.touched" class="fas fa-user"></i>
+          <i *ngIf="crearForm.get('nombre')?.invalid && crearForm.get('nombre')?.touched" class="fas fa-times-circle text-danger"></i>
+        </span>
+        </div>
+        <input type="text" id="nombre" formControlName="nombre" placeholder="Ingresa el Nombre de la Atracción">
+      </div>
+      <div *ngIf="crearForm.get('nombre')?.invalid && (crearForm.get('nombre')?.dirty || crearForm.get('nombre')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('nombre')?.errors?.['required']">La Atracción es obligatorio.</div>
+        <div class="text-danger" *ngIf="crearForm.get('nombre')?.errors?.['minlength']">La Atracción  debe tener al menos 5 caracteres.</div>
+        <div class="text-danger" *ngIf="crearForm.get('nombre')?.errors?.['maxlength']">La Atracción  no debe exceder los 50 caracteres.</div>
+      </div>
+    </div>
+    <!-- fin nombre -->
+    <!-- inicio descripción -->
+    <div class="form-group">
+      <label for="descripcion">Descripción</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i *ngIf="crearForm.get('descripcion')?.valid || !crearForm.get('descripcion')?.touched" class="fas fa-align-left"></i>
+            <i *ngIf="crearForm.get('descripcion')?.invalid && crearForm.get('descripcion')?.touched" class="fas fa-times-circle text-danger"></i>
+          </span>
+        </div>
+        <textarea id="descripcion" formControlName="descripcion" placeholder="Ingresa la Descripción de la Atracción" rows="5" class="form-control"></textarea>
+      </div>
+      <div *ngIf="crearForm.get('descripcion')?.invalid && (crearForm.get('descripcion')?.dirty || crearForm.get('descripcion')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('descripcion')?.errors?.['required']">La descripción es obligatoria.</div>
+        <div class="text-danger" *ngIf="crearForm.get('descripcion')?.errors?.['minlength']">La descripción debe tener al menos 10 caracteres.</div>
+        <div class="text-danger" *ngIf="crearForm.get('descripcion')?.errors?.['maxlength']">La descripción no debe exceder los 500 caracteres.</div>
+      </div>
+    </div>
+    <!-- fin descripción -->
+
+    <!-- inicio horario de funcionamiento -->
+    <div class="form-group">
+      <label for="horarioFuncionamiento">Horario de Funcionamiento Inicio</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+      <span class="input-group-text">
+        <i *ngIf="crearForm.get('horarioFuncionamiento')?.valid || !crearForm.get('horarioFuncionamiento')?.touched" class="fas fa-clock"></i>
+        <i *ngIf="crearForm.get('horarioFuncionamiento')?.invalid && crearForm.get('horarioFuncionamiento')?.touched" class="fas fa-times-circle text-danger"></i>
+      </span>
+        </div>
+        <input type="time" id="horarioFuncionamiento" formControlName="horarioFuncionamiento" placeholder="Ingresa el Horario de Funcionamiento">
+      </div>
+      <div *ngIf="crearForm.get('horarioFuncionamiento')?.invalid && (crearForm.get('horarioFuncionamiento')?.dirty || crearForm.get('horarioFuncionamiento')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('horarioFuncionamiento')?.errors?.['required']">El Horario de Funcionamiento es obligatorio.</div>
+      </div>
+    </div>
+    <!-- fin horario de funcionamiento -->
+    <!-- inicio horario de funcionamiento fin -->
+    <div class="form-group">
+      <label for="horarioFin">Horario de Funcionamiento Fin</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+      <span class="input-group-text">
+        <i *ngIf="crearForm.get('horarioFin')?.valid || !crearForm.get('horarioFin')?.touched" class="fas fa-clock"></i>
+        <i *ngIf="crearForm.get('horarioFin')?.invalid && crearForm.get('horarioFin')?.touched" class="fas fa-times-circle text-danger"></i>
+      </span>
+        </div>
+        <input type="time" id="horarioFin" formControlName="horarioFin" placeholder="Ingresa el Horario de Funcionamiento Fin">
+      </div>
+      <div *ngIf="crearForm.get('horarioFin')?.invalid && (crearForm.get('horarioFin')?.dirty || crearForm.get('horarioFin')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('horarioFin')?.errors?.['required']">El Horario de Funcionamiento Fin es obligatorio.</div>
+      </div>
+    </div>
+    <!-- fin horario de funcionamiento fin -->
+
+    <!-- Botones -->
+    <div class="form-group">
+      <button type="submit" class="custom-btn primary-btn">Guardar Destino</button>
+      <button type="button" class="custom-btn secondary-btn" style="margin-left: 10px;" (click)="limpiarFormulario()">Limpiar Formulario</button>
+      <button type="button" class="custom-btn info-btn" style="margin-left: 10px;" (click)="volver()">Volver</button>
+    </div>
+  </form>
+</div>

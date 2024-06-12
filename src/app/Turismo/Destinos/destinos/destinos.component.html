@@ -1,0 +1,155 @@
+
+<div class="card-header">
+  <button class="boton-ayuda" (click)="toggleHelpModal()">
+    <i class="fas fa-question-circle"></i> Ayuda
+  </button>
+  <h3 class="card-title text-center card-title m-2 text-primary font-weight-bold">Gestión de Destinos</h3>
+  <div class="buscador">
+    <input type="text" [(ngModel)]="searchText" (input)="performSearch()" placeholder="Buscar...">
+    <i class="fas fa-search"></i>
+  </div>
+  <br>
+  <div class="card-tools d-flex justify-content-center">
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-outline-danger btn-sm mx-2" (click)="navigateTo('sistemas')">
+        <i class="fas fa-home"></i><span>Regresar</span>
+      </button>
+      <button type="button" class="btn btn-outline-warning btn-sm mx-2" onclick="window.location.reload()">
+        <i class="fas fa-sync-alt"></i><span> Recargar Tabla</span>
+      </button>
+      <button type="button" class="btn btn-outline-primary btn-sm mx-2" (click)="onNuevoDestino()">
+        <i class="fas fa-plus"></i><span> Nuevo Destino</span>
+      </button>
+      <button type="button" class="btn btn-outline-success btn-sm mx-2" (click)="exportToExcel()">
+        <i class="far fa-file-excel"></i><span> Exportar a Excel</span>
+      </button>
+      <button type="button" class="btn btn-outline-info btn-sm mx-2" (click)="printTable()">
+        <i class="fas fa-print"></i><span> Imprimir</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Inicio tabla -->
+<div class="card-body table-responsive">
+  <table id="printable-table" class="table table-bordered table-striped">
+    <thead>
+    <tr class="text-center">
+      <th (click)="sortColumn('id')">
+        ID
+        <span *ngIf="currentColumn === 'id'" class="sorting-icon">
+          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
+        </span>
+      </th>
+      <th (click)="sortColumn('destinoName')">
+        Nombre
+        <span *ngIf="currentColumn === 'destinoName'" class="sorting-icon">
+          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
+        </span>
+      </th>
+      <th (click)="sortColumn('descripcion')">
+        Descripción
+        <span *ngIf="currentColumn === 'descripcion'" class="sorting-icon">
+          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
+        </span>
+      </th>
+      <th (click)="sortColumn('ubicacion')">
+        Ubicacion
+        <span *ngIf="currentColumn === 'ubicacion'" class="sorting-icon">
+          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
+        </span>
+      </th>
+      <th (click)="sortColumn('tipoTurismo')">
+        TipoTurismo
+        <span *ngIf="currentColumn === 'tipoTurismo'" class="sorting-icon">
+          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
+        </span>
+      </th>
+      <th (click)="sortColumn('atracionesPrincipales')">
+        AtracionesPrincipales
+        <span *ngIf="currentColumn === 'atracionesPrincipales'" class="sorting-icon">
+          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
+        </span>
+      </th>
+      <th (click)="sortColumn('epocasVisitar')">
+        epocasVisitar
+        <span *ngIf="currentColumn === 'epocasVisitar'" class="sorting-icon">
+          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
+        </span>
+      </th>
+      <th (click)="sortColumn('imagenes')">
+        Imagenes
+        <span *ngIf="currentColumn === 'imagenes'" class="sorting-icon">
+          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
+        </span>
+      </th>
+      <th (click)="sortColumn('fechaCreacion')">
+        FechaCreacion
+        <span *ngIf="currentColumn === 'fechaCreacion'" class="sorting-icon">
+          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
+        </span>
+      </th>
+      <th (click)="sortColumn('horaCreacion')">
+        horaCreacion
+        <span *ngIf="currentColumn === 'horaCreacion'" class="sorting-icon">
+          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
+        </span>
+      </th>
+      <th (click)="sortColumn('fechaActualizacion')">
+        fechaActualizacion
+        <span *ngIf="currentColumn === 'fechaActualizacion'" class="sorting-icon">
+          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
+        </span>
+      </th>
+      <th (click)="sortColumn('horaActualizacion')">
+        horaActualizacion
+        <span *ngIf="currentColumn === 'horaActualizacion'" class="sorting-icon">
+          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
+        </span>
+      </th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let destino of destinos | filterBy: searchText | paginate: { itemsPerPage: 5, currentPage: page }">
+      <td class="text-center">{{ destino.id }}</td>
+      <td [innerHTML]="highlightMatches(destino.destinoName, searchText)"></td>
+      <td>{{ destino.descripcion }}</td>
+      <td>{{ destino.ubicacion }}</td>
+      <td>{{ destino.tipoTurismo?.nombre }}</td>
+      <td>{{ destino.atracionesPrincipales?.nombre }}</td>
+      <td>{{ destino.epocasVisitar?.nombre }}</td>
+      <td>{{ destino.imagenes?.nombre }}</td>
+      <td>{{ destino.fechaCreacion }}</td>
+      <td>{{ destino.horaCreacion }}</td>
+      <td>{{ destino.fechaActualizacion }}</td>
+      <td>{{ destino.horaActualizacion }}</td>
+      <td class="d-flex justify-content-center align-items-center">
+        <button type="button" class="btn btn-outline-info btn-sm mr-1" appTooltip="Actualizar" (click)="openUpdateModal(destino)">
+          <i class="fas fa-edit"></i>
+        </button>
+        <button type="button" class="btn btn-outline-danger btn-sm" appTooltip="Eliminar" (click)="onEliminarDestino(destino)">
+          <i class="fas fa-trash"></i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <pagination-controls
+    (pageChange)="page = $event"
+    previousLabel="Anterior"
+    nextLabel="Siguiente"
+    [directionLinks]="true"
+    [maxSize]="10"
+    [autoHide]="true"
+    [responsive]="true"
+    size="sm">
+  </pagination-controls>
+
+  <button class="btn btn-sm pagination-btn pagination-btn-primary" (click)="page = 1" [disabled]="page === 1">Primera</button>
+  <button class="btn btn-sm pagination-btn pagination-btn-light" (click)="page = totalPages" [disabled]="page === totalPages">Última</button>
+  <div class="pagination-info">
+    <p>Total de elementos: {{ (destinos | paginate: { itemsPerPage: 5, currentPage: page }).length }}</p>
+    <p>Total de páginas: {{ Math.ceil(destinos.length / 5) }}</p>
+  </div>
+</div>

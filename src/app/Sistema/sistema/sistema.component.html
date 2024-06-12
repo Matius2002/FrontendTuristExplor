@@ -1,0 +1,116 @@
+<div class="contenedor-principal">
+  <div class="header">
+    <button class="boton-dashboard" (click)="navigateTo('tu-inicio')">
+      <i class="fas fa-home"></i> Regresar
+    </button>
+    <button class="boton-ayuda" (click)="toggleHelpModal()">
+      <i class="fas fa-question-circle"></i> Ayuda
+    </button>
+  </div>
+  <!-- Ventana emergente de ayuda -->
+  <div class="modal-ayuda" [class.show]="isHelpModalVisible">
+    <div class="modal-content">
+      <span class="close" (click)="toggleHelpModal()">&times;</span>
+      <h3 class="text-danger text-center" style="font-size: 2rem;">Ayuda del Panel Administrativo</h3>
+      <ul>
+        <li>
+          <strong>Destinos Turísticos:</strong> Permite gestionar la información sobre los destinos turísticos disponibles, incluyendo descripciones, ubicaciones, y características únicas.
+        </li>
+        <li>
+          <strong>Tipo de Turismo:</strong> Administra los diferentes tipos de turismo que se ofrecen, como turismo de aventura, cultural, ecológico, etc., y sus respectivas características.
+        </li>
+        <li>
+          <strong>Atracciones:</strong> Facilita la gestión de las principales atracciones turísticas, sus detalles, ubicaciones y recomendaciones para los visitantes.
+        </li>
+        <li>
+          <strong>Eventos:</strong> Permite la organización y administración de eventos turísticos, incluyendo fechas, lugares y descripciones detalladas.
+        </li>
+        <li>
+          <strong>Época para Visitar:</strong> Proporciona información sobre la mejor época para visitar cada destino, basándose en factores como el clima, eventos estacionales, etc.
+        </li>
+        <li>
+          <strong>Noticias:</strong> Administra las noticias relacionadas con el turismo, incluyendo actualizaciones, novedades y anuncios importantes.
+        </li>
+        <li>
+          <strong>Imágenes:</strong> Gestiona la galería de imágenes turísticas, permitiendo subir, organizar y eliminar fotos relevantes para los destinos y atracciones.
+        </li>
+        <li>
+          <strong>Experiencia:</strong> Gestiona las experiencias turísticas ofrecidas, incluyendo tours, actividades especiales, y comentarios de los visitantes.
+        </li>
+        <li>
+          <strong>Alojamiento:</strong> Permite la administración de los diferentes alojamientos disponibles, incluyendo detalles como precios, servicios ofrecidos, y disponibilidad.
+        </li>
+        <li>
+          <strong>Usuarios:</strong> Administra la información de los usuarios del sistema, incluyendo sus datos personales, roles asignados y permisos.
+        </li>
+        <li>
+          <strong>Roles:</strong> Facilita la gestión de los roles de usuario, definiendo los niveles de acceso y permisos específicos para cada rol.
+        </li>
+        <li>
+          <strong>Permisos:</strong> Administra los permisos de usuario, controlando qué acciones pueden realizar dentro del sistema basándose en sus roles asignados.
+        </li>
+        <li>
+          <strong>Reportes:</strong> Permite la generación y visualización de reportes detallados sobre diferentes aspectos del sistema, como estadísticas de visitas, reservas, etc.
+        </li>
+        <li>
+          <strong>Tipo Alojamiento:</strong> Gestiona las categorías de alojamiento disponibles, como hoteles, hostales, cabañas, entre otros, y sus características distintivas.
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="contenedor-secundario">
+    <h3 class="text-center">Panel Administrativo de TuristExplor</h3>
+    <p>El Panel Administrativo de TuristExplor te permite gestionar todos los aspectos relacionados con destinos turísticos, tipos de turismo, atracciones, eventos, épocas para visitar, noticias, imágenes, experiencias, alojamiento, usuarios, roles y permisos.</p>
+  </div>
+
+  <div class="contenedor-botones">
+    <button class="boton" data-name="Destinos Turísticos" (click)="navigateTo('destinos')">
+      <span>Destinos Turísticos</span><i class="fas fa-globe"></i>
+    </button>
+    <button class="boton" data-name="Tipo de Turismo" (click)="navigateTo('tipo-turismo')">
+      <span>Tipo de Turismo</span><i class="fas fa-map"></i>
+    </button>
+    <button class="boton" data-name="Atracciones" (click)="navigateTo('atraciones-principales')">
+      <span>Atracciones</span><i class="fas fa-map-marker-alt"></i>
+    </button>
+    <button class="boton" data-name="Eventos" (click)="navigateTo('eventos')">
+      <span>Eventos</span><i class="fas fa-calendar-alt"></i>
+    </button>
+
+    <button class="boton" data-name="Época para Visitar" (click)="navigateTo('epoca-visitar')">
+      <span>Mejor Época</span><i class="fas fa-clock"></i>
+    </button>
+    <button class="boton" data-name="Noticias" (click)="navigateTo('noticias')">
+      <span>Noticias</span><i class="fas fa-newspaper"></i>
+    </button>
+    <button class="boton" data-name="Imágenes" (click)="navigateTo('images')">
+      <span>Imágenes</span><i class="fas fa-image"></i>
+    </button>
+    <button class="boton" data-name="Experiencia" (click)="navigateTo('experiencias')">
+      <span>Experiencia</span><i class="fas fa-star"></i>
+    </button>
+
+    <button class="boton" data-name="Alojamiento" (click)="navigateTo('alojamientos')">
+      <span>Alojamiento</span><i class="fas fa-hotel"></i>
+    </button>
+    <button class="boton" data-name="Usuarios" (click)="navigateTo('usuarios')">
+      <span>Usuarios</span><i class="fas fa-users"></i>
+    </button>
+    <button class="boton" data-name="Roles" (click)="navigateTo('roles')">
+      <span>Roles</span><i class="fas fa-user-tag"></i>
+    </button>
+    <button class="boton" data-name="Permisos" (click)="navigateTo('permisos')">
+      <span>Permisos</span><i class="fas fa-lock"></i>
+    </button>
+    <button class="boton" data-name="Reportes" (click)="navigateTo('reportes')">
+      <span>Reportes</span><i class="fa fa-flag"></i>
+    </button>
+    <button class="boton" data-name="Tipos de Alojamiento" (click)="navigateTo('tipo-alojamiento')">
+      <span>Tipo Alojamiento</span><i class="fa fa-home"></i>
+    </button>
+  </div>
+</div>
+
+
+

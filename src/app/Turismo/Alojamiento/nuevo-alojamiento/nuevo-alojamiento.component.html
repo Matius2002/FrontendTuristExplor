@@ -1,0 +1,221 @@
+
+<div class="container">
+  <h2>Módulo para agregar un nuevo Alojamiento</h2>
+  <form [formGroup]="crearForm" (ngSubmit)="onSubmit()">
+    <!-- inicio nombre -->
+    <div class="form-group">
+      <label for="nombre">Nombre del Alojamiento</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i *ngIf="crearForm.get('nombre')?.valid || !crearForm.get('nombre')?.touched" class="fas fa-user"></i>
+          <i *ngIf="crearForm.get('nombre')?.invalid && crearForm.get('nombre')?.touched" class="fas fa-times-circle text-danger"></i>
+        </span>
+        </div>
+        <input type="text" id="nombre" formControlName="nombre" placeholder="Ingresa el Nombre del Alojamiento">
+      </div>
+      <div *ngIf="crearForm.get('nombre')?.invalid && (crearForm.get('nombre')?.dirty || crearForm.get('nombre')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('nombre')?.errors?.['required']">El Alojamiento es obligatorio.</div>
+        <div class="text-danger" *ngIf="crearForm.get('nombre')?.errors?.['minlength']">El Alojamiento debe tener al menos 5 caracteres.</div>
+        <div class="text-danger" *ngIf="crearForm.get('nombre')?.errors?.['maxlength']">El Alojamiento no debe exceder los 50 caracteres.</div>
+      </div>
+    </div>
+    <!-- fin nombre -->
+    <!-- inicio descripción -->
+    <div class="form-group">
+      <label for="descripcion">Descripción</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i *ngIf="crearForm.get('descripcion')?.valid || !crearForm.get('descripcion')?.touched" class="fas fa-align-left"></i>
+            <i *ngIf="crearForm.get('descripcion')?.invalid && crearForm.get('descripcion')?.touched" class="fas fa-times-circle text-danger"></i>
+          </span>
+        </div>
+        <textarea id="descripcion" formControlName="descripcion" placeholder="Ingresa la Descripción del Alojamiento" rows="5" class="form-control"></textarea>
+      </div>
+      <div *ngIf="crearForm.get('descripcion')?.invalid && (crearForm.get('descripcion')?.dirty || crearForm.get('descripcion')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('descripcion')?.errors?.['required']">La descripción es obligatoria.</div>
+        <div class="text-danger" *ngIf="crearForm.get('descripcion')?.errors?.['minlength']">La descripción debe tener al menos 10 caracteres.</div>
+        <div class="text-danger" *ngIf="crearForm.get('descripcion')?.errors?.['maxlength']">La descripción no debe exceder los 500 caracteres.</div>
+      </div>
+    </div>
+    <!-- fin descripción -->
+    <!-- inicio tipoAlojamiento -->
+    <div class="form-group">
+        <label for="tipoAlojamiento">Tipo de Alojamiento</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i *ngIf="crearForm.get('tipoAlojamiento')?.valid || !crearForm.get('tipoAlojamiento')?.touched" class="fas fa-umbrella-beach"></i>
+                <i *ngIf="crearForm.get('tipoAlojamiento')?.invalid && crearForm.get('tipoAlojamiento')?.touched" class="fas fa-times-circle text-danger"></i>
+              </span>
+          </div>
+          <select id="tipoAlojamiento" formControlName="tipoAlojamiento" class="form-control">
+            <option value="" disabled selected>Selecciona un tipo de alojamiento</option>
+            <option *ngFor="let tipo of tipoAlojamientos" [ngValue]="tipo">{{ tipo.nombre }}</option>
+          </select>
+        </div>
+        <div *ngIf="crearForm.get('tipoAlojamiento')?.invalid && (crearForm.get('tipoAlojamiento')?.dirty || crearForm.get('tipoAlojamiento')?.touched)">
+          <div class="text-danger" *ngIf="crearForm.get('tipoAlojamiento')?.errors?.['required']">El tipo de alojamiento es obligatorio.</div>
+        </div>
+    </div>
+    <!-- fin tipoAlojamiento -->
+
+      <!-- inicio destinos -->
+      <div class="form-group">
+        <label for="destinos">Destinos</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i *ngIf="crearForm.get('destinos')?.valid || !crearForm.get('destinos')?.touched" class="fa fa-life-ring"></i>
+                <i *ngIf="crearForm.get('destinos')?.invalid && crearForm.get('destinos')?.touched" class="fas fa-times-circle text-danger"></i>
+              </span>
+          </div>
+          <select id="destinos" formControlName="destinos" class="form-control">
+            <option value="" disabled selected>Selecciona un destino</option>
+            <option *ngFor="let destino of destinos" [ngValue]="destino">{{ destino.destinoName }}</option>
+          </select>
+        </div>
+        <div *ngIf="crearForm.get('destinos')?.invalid && (crearForm.get('destinos')?.dirty || crearForm.get('destinos')?.touched)">
+          <div class="text-danger" *ngIf="crearForm.get('destinos')?.errors?.['required']">El destino es obligatorio.</div>
+        </div>
+      </div>
+      <!-- fin destinos -->
+
+    <!-- inicio Dirreción -->
+    <div class="form-group">
+      <label for="direccion">Dirreción</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+      <span class="input-group-text">
+        <i *ngIf="crearForm.get('direccion')?.valid || !crearForm.get('direccion')?.touched" class="fas fa-map-marker-alt"></i>
+        <i *ngIf="crearForm.get('direccion')?.invalid && crearForm.get('direccion')?.touched" class="fas fa-times-circle text-danger"></i>
+      </span>
+        </div>
+        <input type="text" id="direccion" formControlName="direccion" placeholder="Ingresa La Dirreción" class="form-control">
+      </div>
+      <div *ngIf="crearForm.get('direccion')?.invalid && (crearForm.get('direccion')?.dirty || crearForm.get('direccion')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('direccion')?.errors?.['required']">La Dirreción es obligatorio.</div>
+      </div>
+    </div>
+    <!-- fin Dirreción -->
+
+    <!-- inicio email y celular -->
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="email">Correo Electrónico</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i *ngIf="crearForm.get('email')?.valid || !crearForm.get('email')?.touched" class="fas fa-envelope"></i>
+          <i *ngIf="crearForm.get('email')?.invalid && crearForm.get('email')?.touched" class="fas fa-times-circle text-danger"></i>
+        </span>
+          </div>
+          <input type="email" id="email" formControlName="email" placeholder="Ingresa el correo electrónico" class="form-control">
+        </div>
+        <div *ngIf="crearForm.get('email')?.invalid && (crearForm.get('email')?.dirty || crearForm.get('email')?.touched)">
+          <div class="text-danger" *ngIf="crearForm.get('email')?.errors?.['required']">El correo electrónico es obligatorio.</div>
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="celular">Celular</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i *ngIf="crearForm.get('celular')?.valid || !crearForm.get('celular')?.touched" class="fas fa-mobile-alt"></i>
+          <i *ngIf="crearForm.get('celular')?.invalid && crearForm.get('celular')?.touched" class="fas fa-times-circle text-danger"></i>
+        </span>
+          </div>
+          <input type="tel" id="celular" formControlName="celular" placeholder="Ingresa el número de celular" class="form-control">
+        </div>
+        <div *ngIf="crearForm.get('celular')?.invalid && (crearForm.get('celular')?.dirty || crearForm.get('celular')?.touched)">
+          <div class="text-danger" *ngIf="crearForm.get('celular')?.errors?.['required']">El número de celular es obligatorio.</div>
+        </div>
+      </div>
+    </div>
+    <!-- fin email y celular -->
+
+    <!-- inicio webUrl -->
+    <div class="form-group">
+      <label for="webUrl">Sitio Web</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+      <span class="input-group-text">
+        <i *ngIf="crearForm.get('webUrl')?.valid || !crearForm.get('webUrl')?.touched" class="fas fa-globe"></i>
+        <i *ngIf="crearForm.get('webUrl')?.invalid && crearForm.get('webUrl')?.touched" class="fas fa-times-circle text-danger"></i>
+      </span>
+        </div>
+        <input type="url" id="webUrl" formControlName="webUrl" placeholder="Ingresa la URL de tu sitio web" class="form-control">
+      </div>
+      <div *ngIf="crearForm.get('webUrl')?.invalid && (crearForm.get('webUrl')?.dirty || crearForm.get('webUrl')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('webUrl')?.errors?.['required']">La URL del sitio web es obligatoria.</div>
+        <div class="text-danger" *ngIf="crearForm.get('webUrl')?.errors?.['pattern']">Ingresa una URL válida.</div>
+      </div>
+    </div>
+    <!-- fin webUrl -->
+
+    <!-- inicio precioGeneral -->
+    <div class="form-group">
+      <label for="precioGeneral">Precio General</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+      <span class="input-group-text">
+        <i *ngIf="crearForm.get('precioGeneral')?.valid || !crearForm.get('precioGeneral')?.touched" class="fas fa-dollar-sign"></i>
+        <i *ngIf="crearForm.get('precioGeneral')?.invalid && crearForm.get('precioGeneral')?.touched" class="fas fa-times-circle text-danger"></i>
+      </span>
+        </div>
+        <input type="number" id="precioGeneral" formControlName="precioGeneral" placeholder="Ingresa el precio general" class="form-control">
+      </div>
+      <div *ngIf="crearForm.get('precioGeneral')?.invalid && (crearForm.get('precioGeneral')?.dirty || crearForm.get('precioGeneral')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('precioGeneral')?.errors?.['required']">El precio general es obligatorio.</div>
+      </div>
+    </div>
+    <!-- fin precioGeneral -->
+
+    <!-- inicio fechaCreacion y fechaActualizacion -->
+    <div class="form-row">
+      <div class="col">
+        <div class="form-group">
+          <label for="fechaCreacion">Fecha de Creación</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i *ngIf="crearForm.get('fechaCreacion')?.valid || !crearForm.get('fechaCreacion')?.touched" class="fas fa-calendar-alt"></i>
+                <i *ngIf="crearForm.get('fechaCreacion')?.invalid && crearForm.get('fechaCreacion')?.touched" class="fas fa-times-circle text-danger"></i>
+              </span>
+            </div>
+            <input type="date" id="fechaCreacion" formControlName="fechaCreacion" class="form-control">
+          </div>
+          <div *ngIf="crearForm.get('fechaCreacion')?.invalid && (crearForm.get('fechaCreacion')?.dirty || crearForm.get('fechaCreacion')?.touched)">
+            <div class="text-danger" *ngIf="crearForm.get('fechaCreacion')?.errors?.['required']">La fecha de creación es obligatoria.</div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="fechaActualizacion">Fecha de Actualización</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i *ngIf="crearForm.get('fechaActualizacion')?.valid || !crearForm.get('fechaActualizacion')?.touched" class="fas fa-calendar-alt"></i>
+                <i *ngIf="crearForm.get('fechaActualizacion')?.invalid && crearForm.get('fechaActualizacion')?.touched" class="fas fa-times-circle text-danger"></i>
+              </span>
+            </div>
+            <input type="date" id="fechaActualizacion" formControlName="fechaActualizacion" class="form-control">
+          </div>
+          <div *ngIf="crearForm.get('fechaActualizacion')?.invalid && (crearForm.get('fechaActualizacion')?.dirty || crearForm.get('fechaActualizacion')?.touched)">
+            <div class="text-danger" *ngIf="crearForm.get('fechaActualizacion')?.errors?.['required']">La fecha de actualización es obligatoria.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- fin fechaCreacion y fechaActualizacion -->
+
+    <!-- Botones -->
+    <div class="form-group">
+      <button type="submit" class="custom-btn primary-btn">Guardar Alojamiento</button>
+      <button type="button" class="custom-btn secondary-btn" style="margin-left: 10px;" (click)="limpiarFormulario()">Limpiar Formulario</button>
+      <button type="button" class="custom-btn info-btn" style="margin-left: 10px;" (click)="volver()">Volver</button>
+    </div>
+  </form>
+</div>

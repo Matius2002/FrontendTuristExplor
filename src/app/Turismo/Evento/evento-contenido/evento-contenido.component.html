@@ -1,0 +1,78 @@
+<header class="matias">
+  <div class="matias-content">
+    <h1 class="title">¡Bienvenidos!</h1>
+    <p class="subtitle">Descubre todos los eventos de Girardot</p>
+  </div>
+  <img src="assets/images/ExpoCundi.png" alt="Background Image" class="matias-background">
+</header>
+<div class="mi-separador-div"></div>
+<section class="event-categories">
+  <h2>Clasificación de Eventos</h2>
+  <div class="categories-grid">
+    <div class="category-card">
+      <i class="fas fa-theater-masks"></i>
+      <h3>Eventos culturales</h3>
+      <p>Explora la riqueza cultural de nuestra ciudad con eventos únicos.</p>
+    </div>
+    <div class="category-card">
+      <i class="fas fa-futbol"></i>
+      <h3>Eventos deportivos</h3>
+      <p>Participa o asiste a los eventos deportivos más emocionantes.</p>
+    </div>
+    <div class="category-card">
+      <i class="fas fa-music"></i>
+      <h3>Festivales</h3>
+      <p>Disfruta de los festivales locales con música, comida y más.</p>
+    </div>
+    <div class="category-card">
+      <i class="fas fa-store"></i>
+      <h3>Ferias y eventos comerciales</h3>
+      <p>Descubre las mejores ferias y eventos comerciales en Girardot.</p>
+    </div>
+    <div class="category-card">
+      <i class="fas fa-church"></i>
+      <h3>Eventos religiosos</h3>
+      <p>Únete a las celebraciones religiosas y eventos espirituales.</p>
+    </div>
+    <div class="category-card">
+      <i class="fas fa-calendar-alt"></i>
+      <h3>Eventos de temporada</h3>
+      <p>No te pierdas los eventos especiales de cada temporada.</p>
+    </div>
+    <div class="category-card">
+      <i class="fas fa-utensils"></i>
+      <h3>Eventos de comida</h3>
+      <p>Disfruta de eventos culinarios con la mejor gastronomía local.</p>
+    </div>
+  </div>
+</section>
+<div class="mi-separador-div"></div>
+
+<!-- tabla -->
+
+<div *ngIf="eventos.length === 0" class="no-eventos">No hay eventos disponibles</div>
+
+<div class="card-container" *ngFor="let evento of eventos">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">{{ evento.nombre }}</h2>
+    </div>
+    <div class="card-body">
+      <div class="card-image">
+        <img [src]="evento.images[0].ruta" [alt]="evento.nombre" />
+      </div>
+      <div class="card-content">
+        <p><i class="fas fa-info-circle"></i> <strong>Descripción:</strong> {{ evento.descripcion }}</p>
+        <p><i class="fas fa-calendar-alt"></i> <strong>Fecha:</strong> {{ evento.fechaInicio }} - {{ evento.fechaFin }}</p>
+        <p><i class="fas fa-map-marker-alt"></i> <strong>Ubicación:</strong> {{ evento.ubicacion }}</p>
+        <p><i class="fas fa-money-bill-wave"></i> <strong>Costo de Entrada:</strong> {{ evento.costoEntrada }}</p>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="card-thumbnails">
+        <img *ngFor="let imagen of evento.images" [src]="imagen.ruta" [alt]="evento.nombre" class="thumbnail" />
+      </div>
+    </div>
+  </div>
+</div>
+

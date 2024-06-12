@@ -1,0 +1,260 @@
+.matias {
+  position: relative;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+}
+
+.matias-background {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  filter: brightness(50%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.matias-content {
+  padding: 100px 20px;
+  z-index: 1;
+  position: relative;
+}
+
+.title {
+  font-size: 3.5em;
+  margin-bottom: 10px;
+  animation: fadeInDown 1s ease;
+  font-family: 'Arial', sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 1.8em;
+  animation: fadeInUp 1s ease;
+  font-family: 'Arial', sans-serif;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Animaciones */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5em;
+  }
+  .subtitle {
+    font-size: 1.5em;
+  }
+}
+
+/* Estilo para las categorías de eventos */
+.event-categories {
+  padding: 40px 20px;
+  text-align: center;
+  background-color: #f8f9fa;
+}
+
+.event-categories h2 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+.categories-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.category-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  max-width: 300px;
+  flex: 1 1 calc(33% - 40px);
+  box-sizing: border-box;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  animation: fadeInUp 1s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: #e0f7fa; /* Color suave al hacer hover */
+}
+
+.category-card i {
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  color: #007BFF;
+}
+
+.category-card h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.category-card p {
+  font-size: 1em;
+  color: #666;
+}
+
+/* Fondo animado para las tarjetas */
+@keyframes backgroundMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+/* Responsividad para las categorías */
+@media (max-width: 768px) {
+  .event-categories h2 {
+    font-size: 2em;
+  }
+  .category-card {
+    flex: 1 1 calc(50% - 40px);
+  }
+}
+
+@media (max-width: 480px) {
+  .category-card {
+    flex: 1 1 100%;
+  }
+}
+
+/* tabla 2 */
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 350px;
+  margin: 10px;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+  background: #008080;
+  color: #ffffff;
+  padding: 15px;
+  text-align: center;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.card-image img {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #ddd;
+  transition: transform 0.3s ease;
+}
+
+.card-image img:hover {
+  transform: scale(1.05);
+}
+
+.card-content p {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.card-content p strong {
+  color: #008080;
+}
+
+.card-content p i {
+  margin-right: 8px;
+  color: #666;
+}
+
+.card-footer {
+  padding: 10px;
+  background: #f9f9f9;
+  border-top: 1px solid #ddd;
+}
+
+.card-thumbnails {
+  display: flex;
+  gap: 5px;
+  overflow-x: auto;
+  padding: 5px;
+}
+
+.thumbnail {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  object-fit: cover;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.thumbnail:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 600px) {
+  .card-title {
+    font-size: 22px;
+  }
+  .card-content p {
+    font-size: 14px;
+  }
+  .thumbnail {
+    width: 40px;
+    height: 40px;
+  }
+}

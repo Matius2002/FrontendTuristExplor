@@ -1,0 +1,28 @@
+.main-container {
+  position: fixed;
+  top: 290px; /* Espacio para la barra de navegación */
+  left: 20px;
+  right: 20px;
+  bottom: 170px; /* Espacio para el pie de página */
+  background-color: rgb(218, 218, 248); /* Color azul */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px; /* Añade un borde redondeado */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Añade una sombra suave */
+  overflow: auto; /* Añade barras de desplazamiento si es necesario */
+}
+
+.breadcrumbs-content {
+  background-color: rgb(250, 244, 244); /* Color rojo */
+  width: calc(100% - 40px); /* Ajusta el ancho del cuadro para dejar espacio */
+  height: auto;
+  max-height: calc(100% - 40px); /* Ajusta la altura máxima para que no se salga del contenedor principal */
+  z-index: 1001; /* Asegúrate de que esté encima de otros elementos */
+  display: flex;
+  flex-direction: column; /* Para que los párrafos se apilen verticalmente */
+  justify-content: flex-start; /* Comienza desde la parte superior */
+  box-sizing: border-box;
+  padding: 20px; /* Espaciado interno */
+}
+

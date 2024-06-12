@@ -1,0 +1,324 @@
+.contenido-fluid {
+  position: relative;
+  width: 100%;
+  height: 400px; /* Ajusta la altura según sea necesario */
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añadir sombra para darle profundidad */
+  border-radius: 10px; /* Bordes redondeados */
+}
+
+.contenido-fluid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  filter: brightness(0.7); /* Oscurecer la imagen de fondo para mejorar la legibilidad del texto */
+}
+
+.contenido {
+  position: relative;
+  z-index: 1;
+  color: white;
+  text-align: center;
+  padding: 20px; /* Espaciado interno */
+}
+
+.contenido h3 {
+  font-size: 3rem;
+  margin: 0;
+  padding-top: 20px; /* Espacio arriba del texto */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto */
+}
+
+.text-container {
+  background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  padding: 20px; /* Espaciado interno */
+  border-radius: 10px; /* Bordes redondeados */
+}
+
+.breadcrumb-container {
+  font-size: 1.2rem;
+  background: rgba(255, 255, 255, 0.2); /* Fondo semitransparente */
+  padding: 10px 20px; /* Espaciado interno */
+  border-radius: 50px; /* Bordes redondeados */
+  margin-top: 20px; /* Margen superior */
+}
+
+.breadcrumb-link {
+  font-weight: bold;
+  transition: color 0.3s; /* Transición suave para el color */
+}
+
+.breadcrumb-link:hover {
+  color: #ffc107; /* Cambiar color al pasar el ratón */
+  text-decoration: underline; /* Subrayado al pasar el ratón */
+}
+
+.breadcrumb-icon {
+  font-size: 1.5rem;
+}
+
+.breadcrumb-text {
+  font-weight: lighter;
+  margin-left: 10px; /* Separación del texto */
+}
+
+/* General Styles */
+.container {
+  padding: 30px;
+}
+
+/* Títulos */
+h2.text-primary {
+  color: #007bff;
+  font-weight: bold;
+}
+
+/* Párrafos */
+p.mb-4 {
+  margin-bottom: 1.5rem;
+}
+
+/* Imagenes */
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.polaroid {
+  border: 10px solid white;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.polaroid:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.animated {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Textos centrados */
+.text-center {
+  text-align: center;
+}
+
+/* Márgenes */
+.mt-3 {
+  margin-top: 1rem;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+
+/* Colores primarios */
+.text-primary {
+  color: #007bff;
+}
+
+.font-weight-bold {
+  font-weight: bold;
+}
+
+/* Flexbox para columnas */
+.col-lg-4 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.col-lg-4 img {
+  margin-bottom: 1rem;
+}
+
+.col-lg-4 h5 {
+  font-size: 1.25rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.row .col-lg-4 {
+  margin-bottom: 2rem;
+}
+
+/* Columna de la izquierda */
+.col-lg-4:first-child h2 {
+  margin-bottom: 2rem;
+}
+
+/* Card Styles */
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  background: linear-gradient(to bottom right, #ffffff, #f9f9f9);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+  object-fit: cover;
+  max-height: 200px; /* Ajusta la altura máxima de las imágenes */
+}
+
+.card h5 {
+  font-size: 1.5rem;
+  margin-top: 0;
+  color: #007bff;
+}
+
+.card p {
+  font-size: 1rem;
+  color: #666;
+}
+
+.card i {
+  font-size: 1.5rem;
+  color: #007bff;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .col-lg-4 {
+    margin-bottom: 2rem;
+  }
+}
+section#girardot {
+  margin: 0 auto;
+  max-width: 800px; /* Cambiado de width a max-width */
+  padding: 20px;
+}
+
+.imagen {
+  width: 100%;
+  /* border-radius: 25%;
+  -webkit-border-radius: 25%; */
+}
+
+.imagen:hover {
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  box-shadow: 0 0 20px 20px #ec731e;
+  -webkit-box-shadow: 0 0 20px 20px #ec731e;
+  transform: rotate(180deg);
+  -webkit-transform: rotate(0deg);
+}
+
+/* Estilos generales para el elemento de audio */
+audio {
+  width: 80%; /* Hacer que el audio ocupe todo el ancho disponible */
+  margin-top: 20px; /* Agregar espacio superior */
+  border: 1px solid #f4e0e0; /* Agregar un borde */
+  border-radius: 10px; /* Agregar esquinas redondeadas */
+  background-color: #ecfae7; /* Agregar un color de fondo */
+  padding: 10px; /* Agregar espacio interno */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Agregar sombra */
+
+}
+
+/* Media query para pantallas más pequeñas */
+@media screen and (max-width: 600px) {
+  section#girardot {
+    padding: 10px;
+  }
+}
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-item {
+  width: 48%; /* Puedes ajustar este valor según sea necesario */
+}
+
+@media screen and (max-width: 600px) {
+  .flex-container {
+    flex-direction: column;
+  }
+
+  .flex-item {
+    width: 100%;
+  }
+}
+#bandera .flex-container {
+  flex-direction: row-reverse;
+}
+
+@media screen and (max-width: 600px) {
+  #bandera .flex-container {
+    flex-direction: column;
+  }
+}
+
+/* girardot-map.component.css */
+.map-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background-color: #f4f4f4; /* Fondo gris claro */
+  padding: 20px; /* Espaciado alrededor */
+  box-sizing: border-box;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.title-mapa { /* Usar un punto para clases */
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 35px;
+  color: #ef8787; /* Color de texto */
+}
+
+iframe {
+  width: 90%;
+  height: 500px;
+  border: 5px;
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+/* Bordes y sombras para tarjetas */
+.card {
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+/* Estilos responsivos para dispositivos móviles */
+@media (max-width: 768px) {
+  iframe {
+    width: 95%; /* Más ancho en dispositivos móviles */
+    height: 300px; /* Altura reducida en dispositivos móviles */
+  }
+  .title-mapa { /* Usar un punto para clases */
+    font-size: 20px; /* Tamaño de fuente más pequeño en dispositivos móviles */
+  }
+}
+
+
+
+

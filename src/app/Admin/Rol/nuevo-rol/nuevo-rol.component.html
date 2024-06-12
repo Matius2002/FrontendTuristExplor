@@ -1,0 +1,85 @@
+<div class="container">
+  <h2>Módulo para agregar un nuevo Rol</h2>
+  <form [formGroup]="crearForm" (ngSubmit)="onSubmit()">
+    <!-- inicio nombre -->
+    <div class="form-group">
+      <label for="rolName">Nombre del Rol</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i *ngIf="crearForm.get('rolName')?.valid || !crearForm.get('rolName')?.touched" class="fas fa-user"></i>
+            <i *ngIf="crearForm.get('rolName')?.invalid && crearForm.get('rolName')?.touched" class="fas fa-times-circle text-danger"></i>
+          </span>
+        </div>
+        <input type="text" id="rolName" formControlName="rolName" placeholder="Ingresa el Nombre del Rol">
+      </div>
+      <div *ngIf="crearForm.get('rolName')?.invalid && (crearForm.get('rolName')?.dirty || crearForm.get('rolName')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('rolName')?.errors?.['required']">El Rol es obligatorio.</div>
+        <div class="text-danger" *ngIf="crearForm.get('rolName')?.errors?.['minlength']">El Rol debe tener al menos 5 caracteres.</div>
+        <div class="text-danger" *ngIf="crearForm.get('rolName')?.errors?.['maxlength']">El Rol no debe exceder los 50 caracteres.</div>
+      </div>
+    </div>
+    <!-- fin nombre -->
+
+    <!-- inicio descripción -->
+    <div class="form-group">
+      <label for="rolDescripc">Descripción del Rol</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i *ngIf="crearForm.get('rolDescripc')?.valid || !crearForm.get('rolDescripc')?.touched" class="fas fa-align-left"></i>
+            <i *ngIf="crearForm.get('rolDescripc')?.invalid && crearForm.get('rolDescripc')?.touched" class="fas fa-times-circle text-danger"></i>
+          </span>
+        </div>
+        <textarea id="rolDescripc" formControlName="rolDescripc" placeholder="Ingresa la Descripción del Rol" rows="5" class="form-control"></textarea>
+      </div>
+      <div *ngIf="crearForm.get('rolDescripc')?.invalid && (crearForm.get('rolDescripc')?.dirty || crearForm.get('rolDescripc')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('rolDescripc')?.errors?.['required']">La descripción es obligatoria.</div>
+        <div class="text-danger" *ngIf="crearForm.get('rolDescripc')?.errors?.['minlength']">La descripción debe tener al menos 10 caracteres.</div>
+        <div class="text-danger" *ngIf="crearForm.get('rolDescripc')?.errors?.['maxlength']">La descripción no debe exceder los 500 caracteres.</div>
+      </div>
+    </div>
+    <!-- fin descripción -->
+
+    <!-- inicio fecha -->
+    <div class="form-group">
+      <div class="fecha-evento-container">
+        <!-- Fecha Creación -->
+        <div class="form-group">
+          <label for="rolFechaCreac">Fecha de Creación</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i *ngIf="crearForm.get('rolFechaCreac')?.valid || !crearForm.get('rolFechaCreac')?.touched" class="fas fa-calendar-plus"></i>
+                <i *ngIf="crearForm.get('rolFechaCreac')?.invalid && crearForm.get('rolFechaCreac')?.touched" class="fas fa-times-circle text-danger"></i>
+              </span>
+            </div>
+            <input type="date" id="rolFechaCreac" formControlName="rolFechaCreac" class="form-control">
+          </div>
+        </div>
+
+        <!-- Fecha Modificación -->
+        <div class="form-group">
+          <label for="rolFechaModic">Fecha Modificación</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i *ngIf="crearForm.get('rolFechaModic')?.valid || !crearForm.get('rolFechaModic')?.touched" class="fas fa-calendar-check"></i>
+                <i *ngIf="crearForm.get('rolFechaModic')?.invalid && crearForm.get('rolFechaModic')?.touched" class="fas fa-times-circle text-danger"></i>
+              </span>
+            </div>
+            <input type="date" id="rolFechaModic" formControlName="rolFechaModic" class="form-control">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- fin fecha -->
+
+    <!-- Botones -->
+    <div class="form-group">
+      <button type="submit" class="custom-btn primary-btn">Guardar Rol</button>
+      <button type="button" class="custom-btn secondary-btn" style="margin-left: 10px;" (click)="limpiarFormulario()">Limpiar Formulario</button>
+      <button type="button" class="custom-btn info-btn" style="margin-left: 10px;" (click)="volver()">Volver</button>
+    </div>
+  </form>
+</div>

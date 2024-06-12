@@ -1,1 +1,447 @@
-/* You can add global styles to this file, and also import other style files */
+/* Estilos generales */
+.container {
+  text-align: center;
+  margin: 50px auto;
+}
+h2 {
+  color: #333;
+  font-size: 2em;
+  margin-bottom: 20px;
+  font-family: 'Roboto', sans-serif; /* Ejemplo de fuente personalizada */
+  text-decoration: underline; /* Subrayado */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra de texto */
+  background-color: #cbdbf1; /* Fondo */
+  padding: 10px; /* Espaciado interno */
+  border-radius: 5px; /* Bordes redondeados */
+  display: inline-block; /* Para que el fondo se ajuste al contenido */
+  transition: transform 0.2s ease; /* Animación al pasar el ratón */
+}
+
+h2:hover {
+  transform: scale(1.1); /* Escalado al pasar el ratón */
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ddeff8;
+  border-radius: 10px;
+  background-color: #b2e2f1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+input,
+textarea,
+select {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+input,
+textarea,
+select {
+  font-size: 14px;
+}
+
+.input-group-text {
+  width: 30px;
+  height: 30px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.input-group-prepend {
+  margin-right: 10px;
+}
+
+.input-group-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #e9ecef;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input,
+textarea {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.text-danger {
+  color: #dc3545;
+  font-size: 0.875em;
+  margin-top: 5px;
+}
+
+.custom-btn {
+  padding: 12px;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, opacity 0.3s;
+  margin-bottom: 10px; /* Agregar margen inferior a los botones */
+}
+
+/* Estilos para botón primario */
+.custom-btn.primary-btn {
+  background-color: #007bff;
+}
+
+.custom-btn.primary-btn:hover:enabled {
+  background-color: #0056b3;
+}
+
+/* Estilos para botón secundario */
+.custom-btn.secondary-btn {
+  background-color: #6c757d;
+}
+
+.custom-btn.secondary-btn:hover:enabled {
+  background-color: #5a6268;
+}
+
+/* Estilos para botón de información */
+.custom-btn.info-btn {
+  background-color: #17a2b8;
+}
+
+.custom-btn.info-btn:hover:enabled {
+  background-color: #138496;
+}
+
+/* Media queries para hacer el formulario responsive */
+@media screen and (max-width: 768px) {
+  form {
+    width: 100%; /* Cambiar el ancho del formulario en pantallas pequeñas */
+    max-width: 100%; /* Ajustar el ancho máximo del formulario */
+  }
+
+  .custom-btn {
+    width: 100%; /* Hacer que los botones ocupen todo el ancho en pantallas pequeñas */
+  }
+}
+
+/* Media query específica para pantallas de 320x480 */
+@media screen and (max-width: 320px) and (max-height: 480px) {
+  .container {
+    margin: 10px auto; /* Reducir el margen del contenedor */
+  }
+
+  form {
+    width: 90%; /* Reducir el ancho del formulario */
+    max-width: none; /* Eliminar el ancho máximo */
+    margin: 20px auto; /* Reducir el margen del formulario */
+    padding: 10px; /* Reducir el relleno del formulario */
+  }
+
+  input,
+  textarea {
+    font-size: 12px; /* Reducir el tamaño de fuente en campos de entrada */
+  }
+
+  .input-group-text {
+    width: 25px; /* Reducir el ancho de los íconos en los grupos de entrada */
+    height: 25px;
+  }
+
+  label {
+    font-size: 12px; /* Reducir el tamaño de fuente en etiquetas */
+  }
+
+  .custom-btn {
+    width: calc(100% - 24px); /* Ancho del botón con margen */
+    margin-right: 12px; /* Margen derecho para separar los botones */
+    margin-left: 12px; /* Margen izquierdo para separar los botones */
+  }
+}
+.mt20{margin-top:20px;}
+.site-wrapper {
+  border-top: 4px solid #ff0037; }
+
+/* Separator styles */
+.mi-separador-div {
+  height: 2px;
+  background-color: #c52828;
+  margin: 20px 0;
+  border-radius: 5px; /* Bordes redondeados */
+  box-shadow: 0 2px 4px rgba(0, 1, 2, 0.2); /* Sombra para el separador */
+}
+
+/*MODAL DE AYUDA INICIO*/
+/* Estilos para la cabecera */
+.header {
+  background-color: #f8f9fa;
+  padding: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  gap: 10px; /* Espaciado entre botones */
+}
+
+/* Estilos para el botón del dashboard */
+.boton-dashboard, .boton-ayuda {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.boton-dashboard i, .boton-ayuda i {
+  margin-right: 8px;
+}
+
+/* Efecto hover para los botones del dashboard y ayuda */
+.boton-dashboard:hover, .boton-ayuda:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos para el contenedor principal */
+.contenedor-principal {
+  width: 80%;
+  margin: 100px auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para el contenedor secundario */
+.contenedor-secundario {
+  margin-bottom: 20px;
+}
+
+p {
+  text-align: justify;
+  margin-bottom: 20px;
+}
+
+/* Estilos para los botones */
+.boton {
+  width: calc(25% - 10px);
+  margin: 5px;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #df514c;
+  color: white;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.boton:hover {
+  background-color: #c43f3a;
+  transform: translateY(-3px);
+}
+
+.boton:focus {
+  outline: none;
+}
+
+/* Estilos para los botones específicos */
+.boton:nth-of-type(5),
+.boton:nth-of-type(6),
+.boton:nth-of-type(7),
+.boton:nth-of-type(8) {
+  background-color: #6fea6b;
+}
+
+.boton:nth-of-type(9),
+.boton:nth-of-type(10),
+.boton:nth-of-type(11),
+.boton:nth-of-type(12) {
+  background-color: #e9eef1;
+  color: #333;
+}
+
+/* Media query para dispositivos móviles */
+@media only screen and (max-width: 768px) {
+  .boton {
+    width: calc(50% - 10px);
+  }
+  .boton span {
+    display: none;
+  }
+  .boton i {
+    display: inline-block;
+  }
+  .boton-dashboard span, .boton-ayuda span {
+    display: none;
+  }
+  .boton-dashboard, .boton-ayuda {
+    padding: 8px 10px; /* Reducir padding en dispositivos móviles */
+    font-size: 14px; /* Reducir tamaño de fuente en dispositivos móviles */
+  }
+  h3 {
+    font-size: 20px;
+  }
+  p {
+    font-size: 14px;
+  }
+}
+
+/* Agregar pseudoclase ::after para mostrar el nombre del botón */
+.boton::after {
+  content: attr(data-name);
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.boton:hover::after {
+  opacity: 1;
+}
+
+/* Estilos para la ventana emergente de ayuda */
+.modal-ayuda {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-ayuda.show {
+  display: block;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px 40px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+/* Estilos para el botón de cerrar */
+.close {
+  color: #aaa;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover, .close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/*Modal de ayuda*/
+.modal-content h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.modal-content ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.modal-content ul li {
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.modal-content ul li:last-child {
+  border-bottom: none;
+}
+
+.modal-content ul li strong {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Media query para dispositivos móviles */
+@media only screen and (max-width: 768px) {
+  .modal-content {
+    padding: 10px 20px;
+    width: 90%;
+    margin: 10% auto;
+  }
+
+  .close {
+    font-size: 24px;
+    top: 5px;
+    right: 10px;
+  }
+
+  .modal-content h3 {
+    font-size: 18px;
+  }
+
+  .modal-content ul li {
+    padding: 8px 0;
+    font-size: 14px;
+  }
+}

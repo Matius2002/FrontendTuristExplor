@@ -1,0 +1,98 @@
+<div class="card-header">
+  <button class="boton-ayuda" (click)="toggleHelpModal()">
+    <i class="fas fa-question-circle"></i> Ayuda
+  </button>
+  <h3 class="card-title text-center card-title m-2 text-primary font-weight-bold">Gestión de Tipos de Turismos</h3>
+  <div class="buscador">
+    <input type="text" [(ngModel)]="searchText" (input)="performSearch()" placeholder="Buscar...">
+    <i class="fas fa-search"></i>
+  </div>
+  <br>
+  <div class="card-tools d-flex justify-content-center">
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-outline-danger btn-sm mx-2" (click)="navigateTo('sistemas')">
+        <i class="fas fa-home"></i><span>Regresar</span>
+      </button>
+      <button type="button" class="btn btn-outline-warning btn-sm mx-2" onclick="window.location.reload()">
+        <i class="fas fa-sync-alt"></i><span> Recargar Tabla</span>
+      </button>
+      <button type="button" class="btn btn-outline-primary btn-sm mx-2" (click)="onNuevoTipo()">
+        <i class="fas fa-plus"></i><span> Nuevo Tipo Turismo</span>
+      </button>
+      <button type="button" class="btn btn-outline-success btn-sm mx-2" (click)="exportToExcel()">
+        <i class="far fa-file-excel"></i><span> Exportar a Excel</span>
+      </button>
+      <button type="button" class="btn btn-outline-info btn-sm mx-2" (click)="printTable()">
+        <i class="fas fa-print"></i><span> Imprimir</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Inicio tabla -->
+<div class="card-body table-responsive">
+  <table id="printable-table" class="table table-bordered table-striped">
+    <thead>
+    <tr class="text-center">
+      <th (click)="sortColumn('id')">
+        ID
+        <span *ngIf="currentColumn === 'id'" class="sorting-icon">
+          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
+        </span>
+      </th>
+      <th (click)="sortColumn('nombre')">
+        Nombre
+        <span *ngIf="currentColumn === 'nombre'" class="sorting-icon">
+          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
+        </span>
+      </th>
+      <th (click)="sortColumn('descripcion')">
+        Descripción
+        <span *ngIf="currentColumn === 'descripcion'" class="sorting-icon">
+          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
+        </span>
+      </th>
+      <th (click)="sortColumn('popularidad')">
+        Popularidad
+        <span *ngIf="currentColumn === 'popularidad'" class="sorting-icon">
+          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
+        </span>
+      </th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let tipoTurismo of tipoTurismos | filterBy: searchText | paginate: { itemsPerPage: 5, currentPage: page }">
+      <td class="text-center">{{ tipoTurismo.id }}</td>
+      <td [innerHTML]="highlightMatches(tipoTurismo.nombre, searchText)"></td>
+      <td>{{ tipoTurismo.descripcion }}</td>
+      <td>{{ tipoTurismo.popularidad }}</td>
+      <td class="d-flex justify-content-center align-items-center">
+        <button type="button" class="btn btn-outline-info btn-sm mr-1" appTooltip="Actualizar" (click)="openUpdateModal(tipoTurismo)">
+          <i class="fas fa-edit"></i>
+        </button>
+        <button type="button" class="btn btn-outline-danger btn-sm" appTooltip="Eliminar" (click)="onEliminarTipo(tipoTurismo)">
+          <i class="fas fa-trash"></i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <pagination-controls
+    (pageChange)="page = $event"
+    previousLabel="Anterior"
+    nextLabel="Siguiente"
+    [directionLinks]="true"
+    [maxSize]="10"
+    [autoHide]="true"
+    [responsive]="true"
+    size="sm">
+  </pagination-controls>
+
+  <button class="btn btn-sm pagination-btn pagination-btn-primary" (click)="page = 1" [disabled]="page === 1">Primera</button>
+  <button class="btn btn-sm pagination-btn pagination-btn-light" (click)="page = totalPages" [disabled]="page === totalPages">Última</button>
+  <div class="pagination-info">
+    <p>Total de elementos: {{ (tipoTurismos | paginate: { itemsPerPage: 5, currentPage: page }).length }}</p>
+    <p>Total de páginas: {{ Math.ceil(tipoTurismos.length / 5) }}</p>
+  </div>
+</div>

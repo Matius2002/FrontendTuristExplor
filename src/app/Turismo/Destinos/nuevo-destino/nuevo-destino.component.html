@@ -1,0 +1,209 @@
+<div class="container">
+  <h2>Módulo para agregar un nuevo destino turístico</h2>
+<form [formGroup]="crearForm" (ngSubmit)="onSubmit()">
+  <!-- inicio nombre -->
+  <div class="form-group">
+    <label for="destinoName">Nombre del Destino</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i *ngIf="crearForm.get('destinoName')?.valid || !crearForm.get('destinoName')?.touched" class="fas fa-user"></i>
+          <i *ngIf="crearForm.get('destinoName')?.invalid && crearForm.get('destinoName')?.touched" class="fas fa-times-circle text-danger"></i>
+        </span>
+      </div>
+      <input type="text" id="destinoName" formControlName="destinoName" placeholder="Ingresa el Nombre del Destino">
+    </div>
+    <div *ngIf="crearForm.get('destinoName')?.invalid && (crearForm.get('destinoName')?.dirty || crearForm.get('destinoName')?.touched)">
+      <div class="text-danger" *ngIf="crearForm.get('destinoName')?.errors?.['required']">El Destino es obligatorio.</div>
+      <div class="text-danger" *ngIf="crearForm.get('destinoName')?.errors?.['minlength']">El Destino debe tener al menos 5 caracteres.</div>
+      <div class="text-danger" *ngIf="crearForm.get('destinoName')?.errors?.['maxlength']">El Destino no debe exceder los 50 caracteres.</div>
+    </div>
+  </div>
+  <!-- fin nombre -->
+  <!-- inicio descripción -->
+  <div class="form-group">
+    <label for="descripcion">Descripción</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i *ngIf="crearForm.get('descripcion')?.valid || !crearForm.get('descripcion')?.touched" class="fas fa-align-left"></i>
+            <i *ngIf="crearForm.get('descripcion')?.invalid && crearForm.get('descripcion')?.touched" class="fas fa-times-circle text-danger"></i>
+          </span>
+      </div>
+      <textarea id="descripcion" formControlName="descripcion" placeholder="Ingresa la Descripción del Destino" rows="5" class="form-control"></textarea>
+    </div>
+    <div *ngIf="crearForm.get('descripcion')?.invalid && (crearForm.get('descripcion')?.dirty || crearForm.get('descripcion')?.touched)">
+      <div class="text-danger" *ngIf="crearForm.get('descripcion')?.errors?.['required']">La descripción es obligatoria.</div>
+      <div class="text-danger" *ngIf="crearForm.get('descripcion')?.errors?.['minlength']">La descripción debe tener al menos 10 caracteres.</div>
+      <div class="text-danger" *ngIf="crearForm.get('descripcion')?.errors?.['maxlength']">La descripción no debe exceder los 500 caracteres.</div>
+    </div>
+  </div>
+  <!-- fin descripción -->
+  <!-- inicio ubicación -->
+  <div class="form-group">
+    <label for="ubicacion">Ubicación</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i *ngIf="crearForm.get('ubicacion')?.valid || !crearForm.get('ubicacion')?.touched" class="fas fa-map-marker-alt"></i>
+            <i *ngIf="crearForm.get('ubicacion')?.invalid && crearForm.get('ubicacion')?.touched" class="fas fa-times-circle text-danger"></i>
+          </span>
+      </div>
+      <input type="text" id="ubicacion" formControlName="ubicacion" placeholder="Ingresa la Ubicación" class="form-control">
+    </div>
+    <div *ngIf="crearForm.get('ubicacion')?.invalid && (crearForm.get('ubicacion')?.dirty || crearForm.get('ubicacion')?.touched)">
+      <div class="text-danger" *ngIf="crearForm.get('ubicacion')?.errors?.['required']">La ubicación es obligatoria.</div>
+    </div>
+  </div>
+  <!-- fin ubicación -->
+
+  <!-- inicio tipo de turismo -->
+  <div class="form-group">
+    <label for="tipoTurismo">Tipo de Turismo</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+      <span class="input-group-text">
+        <i *ngIf="crearForm.get('tipoTurismo')?.valid || !crearForm.get('tipoTurismo')?.touched" class="fas fa-umbrella-beach"></i>
+        <i *ngIf="crearForm.get('tipoTurismo')?.invalid && crearForm.get('tipoTurismo')?.touched" class="fas fa-times-circle text-danger"></i>
+      </span>
+      </div>
+      <select id="tipoTurismo" formControlName="tipoTurismo" class="form-control" multiple>
+        <option *ngFor="let tipo of tipoTurismos" [ngValue]="tipo">{{ tipo.nombre }}</option>
+      </select>
+    </div>
+    <div *ngIf="crearForm.get('tipoTurismo')?.invalid && (crearForm.get('tipoTurismo')?.dirty || crearForm.get('tipoTurismo')?.touched)">
+      <div class="text-danger" *ngIf="crearForm.get('tipoTurismo')?.errors?.['required']">El tipo de turismo es obligatorio.</div>
+    </div>
+  </div>
+  <!-- fin tipo de turismo -->
+
+  <!-- inicio atracciones principales -->
+  <div class="form-group">
+    <label for="atracionesPrincipales">Atracciones Principales</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+      <span class="input-group-text">
+        <i *ngIf="crearForm.get('atracionesPrincipales')?.valid || !crearForm.get('atracionesPrincipales')?.touched" class="fas fa-umbrella-beach"></i>
+        <i *ngIf="crearForm.get('atracionesPrincipales')?.invalid && crearForm.get('atracionesPrincipales')?.touched" class="fas fa-times-circle text-danger"></i>
+      </span>
+      </div>
+      <select id="atracionesPrincipales" formControlName="atracionesPrincipales" class="form-control" multiple>
+        <option *ngFor="let atracion of atracionesPrincipales" [value]="atracion.id">{{ atracion.nombre }}</option>
+      </select>
+    </div>
+    <div *ngIf="crearForm.get('atracionesPrincipales')?.invalid && (crearForm.get('atracionesPrincipales')?.dirty || crearForm.get('atracionesPrincipales')?.touched)">
+      <div class="text-danger" *ngIf="crearForm.get('atracionesPrincipales')?.errors?.['required']">Las atracciones principales son obligatorias.</div>
+    </div>
+  </div>
+  <!-- fin atracciones principales -->
+
+  <!-- inicio épocas para visitar -->
+  <div class="form-group">
+    <label for="epocasVisitar">Épocas para Visitar</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+      <span class="input-group-text">
+        <i *ngIf="crearForm.get('epocasVisitar')?.valid || !crearForm.get('epocasVisitar')?.touched" class="fas fa-umbrella-beach"></i>
+        <i *ngIf="crearForm.get('epocasVisitar')?.invalid && crearForm.get('epocasVisitar')?.touched" class="fas fa-times-circle text-danger"></i>
+      </span>
+      </div>
+      <select id="epocasVisitar" formControlName="epocasVisitar" class="form-control" multiple>
+        <option *ngFor="let epoca of epocasVisitar" [ngValue]="epoca">{{ epoca.nombre }}</option>
+      </select>
+    </div>
+    <div *ngIf="crearForm.get('epocasVisitar')?.invalid && (crearForm.get('epocasVisitar')?.dirty || crearForm.get('epocasVisitar')?.touched)">
+      <div class="text-danger" *ngIf="crearForm.get('epocasVisitar')?.errors?.['required']">Las épocas para visitar son obligatorias.</div>
+    </div>
+  </div>
+  <!-- fin épocas para visitar -->
+
+  <!-- inicio imágenes -->
+  <div class="form-group">
+    <label for="imagenes">Imágenes</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+      <span class="input-group-text">
+        <i *ngIf="crearForm.get('imagenes')?.valid || !crearForm.get('imagenes')?.touched" class="fas fa-umbrella-beach"></i>
+        <i *ngIf="crearForm.get('imagenes')?.invalid && crearForm.get('imagenes')?.touched" class="fas fa-times-circle text-danger"></i>
+      </span>
+      </div>
+      <select id="imagenes" formControlName="imagenes" class="form-control" multiple>
+        <option *ngFor="let imagen of imagenes" [ngValue]="imagen">{{ imagen.ruta }}</option>
+      </select>
+    </div>
+    <div *ngIf="crearForm.get('imagenes')?.invalid && (crearForm.get('imagenes')?.dirty || crearForm.get('imagenes')?.touched)">
+      <div class="text-danger" *ngIf="crearForm.get('imagenes')?.errors?.['required']">Las imágenes son obligatorias.</div>
+    </div>
+  </div>
+  <!-- fin imágenes -->
+
+  <!-- inicio fecha y hora de creación -->
+  <div class="form-group">
+    <label>Fecha y Hora de Creación</label>
+    <div class="input-group">
+      <!-- fecha de creación -->
+      <div class="input-group-prepend">
+      <span class="input-group-text">
+        <i *ngIf="crearForm.get('fechaCreacion')?.valid || !crearForm.get('fechaCreacion')?.touched" class="fas fa-calendar-plus"></i>
+        <i *ngIf="crearForm.get('fechaCreacion')?.invalid && crearForm.get('fechaCreacion')?.touched" class="fas fa-times-circle text-danger"></i>
+      </span>
+      </div>
+      <input type="date" id="fechaCreacion" formControlName="fechaCreacion" class="form-control" style="margin-right: 5px;">
+      <!-- hora de creación -->
+      <div class="input-group-prepend">
+      <span class="input-group-text">
+        <i *ngIf="crearForm.get('horaCreacion')?.valid || !crearForm.get('horaCreacion')?.touched" class="fas fa-clock"></i>
+        <i *ngIf="crearForm.get('horaCreacion')?.invalid && crearForm.get('horaCreacion')?.touched" class="fas fa-times-circle text-danger"></i>
+      </span>
+      </div>
+      <input type="time" id="horaCreacion" formControlName="horaCreacion" class="form-control">
+    </div>
+    <!-- mensajes de error -->
+    <div *ngIf="crearForm.get('fechaCreacion')?.invalid && (crearForm.get('fechaCreacion')?.dirty || crearForm.get('fechaCreacion')?.touched)">
+      <div class="text-danger" *ngIf="crearForm.get('fechaCreacion')?.errors?.['required']">La fecha de creación es obligatoria.</div>
+    </div>
+    <div *ngIf="crearForm.get('horaCreacion')?.invalid && (crearForm.get('horaCreacion')?.dirty || crearForm.get('horaCreacion')?.touched)">
+      <div class="text-danger" *ngIf="crearForm.get('horaCreacion')?.errors?.['required']">La hora de creación es obligatoria.</div>
+    </div>
+  </div>
+  <!-- fin fecha y hora de creación -->
+
+  <!-- inicio fecha y hora de actualización -->
+  <div class="form-group">
+    <label>Fecha y Hora de Actualización</label>
+    <div class="input-group">
+      <!-- fecha de actualización -->
+      <div class="input-group-prepend">
+      <span class="input-group-text">
+        <i *ngIf="crearForm.get('fechaActualizacion')?.valid || !crearForm.get('fechaActualizacion')?.touched" class="fas fa-calendar-check"></i>
+        <i *ngIf="crearForm.get('fechaActualizacion')?.invalid && crearForm.get('fechaActualizacion')?.touched" class="fas fa-times-circle text-danger"></i>
+      </span>
+      </div>
+      <input type="date" id="fechaActualizacion" formControlName="fechaActualizacion" class="form-control" style="margin-right: 5px;">
+      <!-- hora de actualización -->
+      <div class="input-group-prepend">
+      <span class="input-group-text">
+        <i *ngIf="crearForm.get('horaActualizacion')?.valid || !crearForm.get('horaActualizacion')?.touched" class="fas fa-clock"></i>
+        <i *ngIf="crearForm.get('horaActualizacion')?.invalid && crearForm.get('horaActualizacion')?.touched" class="fas fa-times-circle text-danger"></i>
+      </span>
+      </div>
+      <input type="time" id="horaActualizacion" formControlName="horaActualizacion" class="form-control">
+    </div>
+    <!-- mensajes de error -->
+    <div *ngIf="crearForm.get('fechaActualizacion')?.invalid && (crearForm.get('fechaActualizacion')?.dirty || crearForm.get('fechaActualizacion')?.touched)">
+      <div class="text-danger" *ngIf="crearForm.get('fechaActualizacion')?.errors?.['required']">La fecha de actualización es obligatoria.</div>
+    </div>
+    <div *ngIf="crearForm.get('horaActualizacion')?.invalid && (crearForm.get('horaActualizacion')?.dirty || crearForm.get('horaActualizacion')?.touched)">
+      <div class="text-danger" *ngIf="crearForm.get('horaActualizacion')?.errors?.['required']">La hora de actualización es obligatoria.</div>
+    </div>
+  </div>
+  <!-- fin fecha y hora de actualización -->
+
+  <!-- Botones -->
+  <div class="form-group">
+    <button type="submit" class="custom-btn primary-btn">Guardar Destino</button>
+    <button type="button" class="custom-btn secondary-btn" style="margin-left: 10px;" (click)="limpiarFormulario()">Limpiar Formulario</button>
+    <button type="button" class="custom-btn info-btn" style="margin-left: 10px;" (click)="volver()">Volver</button>
+  </div>
+</form>
+</div>

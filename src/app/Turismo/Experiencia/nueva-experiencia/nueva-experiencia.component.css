@@ -1,0 +1,98 @@
+.experiencia {
+  text-align: center;
+  padding: 80px 0; /* Aumenta el espacio alrededor del contenido */
+  background-color: #f9f9f9; /* Cambia el color de fondo según tu preferencia */
+}
+
+/* Estilos para el encabezado de la experiencia */
+.experiencia-header {
+  margin-bottom: 40px; /* Aumenta el espacio entre la imagen y el título */
+}
+
+/* Estilos para la imagen de la experiencia */
+.experiencia-imagen {
+  width: 200px; /* Ajusta el tamaño de la imagen según sea necesario */
+  height: 200px; /* Asegura que la imagen tenga una altura consistente */
+  border-radius: 50%; /* Hace que la imagen sea circular */
+  border: 4px solid #fff; /* Agrega un borde blanco */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Agrega una sombra suave */
+  transition: transform 0.3s ease-in-out; /* Agrega una transición suave */
+}
+
+/* Estilos para el título de la experiencia */
+.experiencia-titulo {
+  font-size: 32px; /* Aumenta el tamaño del título */
+  font-weight: bold;
+  color: #333; /* Cambia el color del texto según tu preferencia */
+}
+
+/* Estilos para el párrafo de descripción de la experiencia */
+.experiencia-descripcion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 600px; /* Limita el ancho del texto para una mejor legibilidad */
+  margin: 0 auto 40px; /* Centra el texto horizontalmente y agrega espacio inferior */
+}
+
+.experiencia-descripcion p {
+  font-size: 16px; /* Ajusta el tamaño del texto según tu preferencia */
+  line-height: 1.6; /* Ajusta la altura de línea para una mejor legibilidad */
+  color: #666; /* Cambia el color del texto según tu preferencia */
+  margin-left: 10px; /* Agrega un espacio entre el ícono y el texto */
+}
+
+/* Estilos para el ícono de la experiencia */
+.experiencia-icono {
+  font-size: 24px; /* Tamaño del ícono */
+  color: #333; /* Color del ícono */
+}
+
+/* Estilos para la imagen de la experiencia al pasar el cursor sobre ella */
+.experiencia-imagen:hover {
+  transform: scale(1.1); /* Hace que la imagen se agrande ligeramente al pasar el cursor sobre ella */
+}
+
+.clasificacion {
+  direction: ltr;
+  unicode-bidi: bidi-override;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+.star-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 0.5em;
+}
+
+label.star-label {
+  font-size: 2em; /* Aumenta el tamaño de las estrellas */
+  cursor: pointer;
+}
+
+.description {
+  font-size: 0.9em;
+  color: #555;
+  margin-top: 0.2em;
+}
+
+label.star-label:hover,
+label.star-label:hover ~ label.star-label {
+  color: orange;
+}
+
+input[type="radio"]:checked ~ label.star-label {
+  color: grey;
+}
+
+input[type="radio"]:checked + label.star-label,
+input[type="radio"]:checked + label.star-label ~ label.star-label {
+  color: orange;
+}

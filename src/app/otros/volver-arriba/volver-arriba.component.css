@@ -1,0 +1,44 @@
+/* volver-arriba.component.css */
+.volver-arriba {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: opacity 0.3s, visibility 0.3s, transform 0.5s cubic-bezier(0.42, 0, 0.58, 1);
+
+}
+
+.volver-arriba:hover,
+.volver-arriba:active {
+  background-color: #0056b3; /* Cambia el color al pasar el mouse o al hacer clic */
+}
+
+@media screen and (max-width: 600px) {
+  .volver-arriba {
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
+/* Definimos la animación */
+@keyframes aparecer {
+  0% {
+    transform: translateY(100%);
+  }
+  25% {
+    transform: translateY(-20%); /* Iniciamos suave */
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Aplicamos la animación cuando el botón esté visible */
+.volver-arriba.visible {
+  animation: aparecer 0.5s forwards;
+}

@@ -1,0 +1,70 @@
+
+<div class="container">
+  <h2>Módulo para agregar la Época para visitar sitios turisticos</h2>
+  <form [formGroup]="crearForm" (ngSubmit)="onSubmit()">
+    <!-- inicio nombre -->
+    <div class="form-group">
+      <label for="nombre">Nombre de la Época</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i *ngIf="crearForm.get('nombre')?.valid || !crearForm.get('nombre')?.touched" class="fas fa-user"></i>
+          <i *ngIf="crearForm.get('nombre')?.invalid && crearForm.get('nombre')?.touched" class="fas fa-times-circle text-danger"></i>
+        </span>
+        </div>
+        <input type="text" id="nombre" formControlName="nombre" placeholder="Ingresa el Nombre de la Época">
+      </div>
+      <div *ngIf="crearForm.get('nombre')?.invalid && (crearForm.get('nombre')?.dirty || crearForm.get('nombre')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('nombre')?.errors?.['required']">La Época es obligatorio.</div>
+        <div class="text-danger" *ngIf="crearForm.get('nombre')?.errors?.['minlength']">La Época  debe tener al menos 5 caracteres.</div>
+        <div class="text-danger" *ngIf="crearForm.get('nombre')?.errors?.['maxlength']">La Época  no debe exceder los 50 caracteres.</div>
+      </div>
+    </div>
+    <!-- fin nombre -->
+    <!-- inicio descripción -->
+    <div class="form-group">
+      <label for="descripcion">Descripción</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i *ngIf="crearForm.get('descripcion')?.valid || !crearForm.get('descripcion')?.touched" class="fas fa-align-left"></i>
+            <i *ngIf="crearForm.get('descripcion')?.invalid && crearForm.get('descripcion')?.touched" class="fas fa-times-circle text-danger"></i>
+          </span>
+        </div>
+        <textarea id="descripcion" formControlName="descripcion" placeholder="Ingresa la Descripción de la Época" rows="5" class="form-control"></textarea>
+      </div>
+      <div *ngIf="crearForm.get('descripcion')?.invalid && (crearForm.get('descripcion')?.dirty || crearForm.get('descripcion')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('descripcion')?.errors?.['required']">La descripción es obligatoria.</div>
+        <div class="text-danger" *ngIf="crearForm.get('descripcion')?.errors?.['minlength']">La descripción debe tener al menos 10 caracteres.</div>
+        <div class="text-danger" *ngIf="crearForm.get('descripcion')?.errors?.['maxlength']">La descripción no debe exceder los 500 caracteres.</div>
+      </div>
+    </div>
+    <!-- fin descripción -->
+    <!-- inicio clima -->
+    <div class="form-group">
+      <label for="clima">Clima</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i *ngIf="crearForm.get('clima')?.valid || !crearForm.get('clima')?.touched" class="fa fa-globe"></i>
+            <i *ngIf="crearForm.get('clima')?.invalid && crearForm.get('clima')?.touched" class="fas fa-times-circle text-danger"></i>
+          </span>
+        </div>
+        <input type="text" id="clima" formControlName="clima" placeholder="Ingresa el Clima" class="form-control">
+      </div>
+      <div *ngIf="crearForm.get('clima')?.invalid && (crearForm.get('clima')?.dirty || crearForm.get('clima')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('clima')?.errors?.['required']">El Clima es obligatoria.</div>
+      </div>
+    </div>
+    <!-- fin clima -->
+
+    <!-- Botones -->
+    <div class="form-group">
+      <button type="submit" class="custom-btn primary-btn">Guardar Destino</button>
+      <button type="button" class="custom-btn secondary-btn" style="margin-left: 10px;" (click)="limpiarFormulario()">Limpiar Formulario</button>
+      <button type="button" class="custom-btn info-btn" style="margin-left: 10px;" (click)="volver()">Volver</button>
+    </div>
+
+
+  </form>
+</div>

@@ -1,0 +1,162 @@
+/* Estilos generales */
+.container .card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.container .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.container .card-body {
+  padding: 10px;
+}
+
+.container .card-img-top {
+  width: 100%;
+  height: auto;
+  border-bottom: none;
+}
+
+/* Botones */
+.container .btn {
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.container .btn-outline-success {
+  color: #28a745;
+  border-color: #28a745;
+}
+
+.container .btn-outline-success:hover {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.container .btn-outline-danger {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+.container .btn-outline-danger:hover {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.container .btn-outline-primary {
+  color: #007bff;
+  border-color: #007bff;
+}
+
+.container .btn-outline-primary:hover {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.container .btn-outline-warning {
+  color: #ffc107;
+  border-color: #ffc107;
+}
+
+.container .btn-outline-warning:hover {
+  color: #212529;
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+
+.container .btn-group-sm > .btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+.container .btn-group-sm .fas {
+  font-size: 0.75rem;
+}
+
+/* Listas */
+.container .list-group-item {
+  border-color: #dee2e6;
+}
+
+.container .list-group-item.text-danger {
+  color: #dc3545;
+}
+
+/* Mensajes de error */
+.container .text-danger {
+  color: #dc3545;
+}
+
+/* Espaciado */
+.container .mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.container .mb-3 {
+  margin-bottom: 1rem;
+}
+
+/* Accesibilidad */
+.container .btn:focus {
+  outline: 3px solid #007bff;
+  outline-offset: 2px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+label {
+  font-weight: bold;
+}
+
+input[type="text"], input[type="file"] {
+  padding: 0.5em;
+  font-size: 1em;
+}
+.select-file-label {
+  display: block;
+  margin-bottom: 5px; /* Ajusta el margen inferior según tu diseño */
+  font-weight: bold; /* Opcional: establece el peso de la fuente */
+  color: #333; /* Opcional: establece el color de la fuente */
+  /* Agrega más estilos según tus preferencias */
+}
+/* Estilos para el input de archivo */
+.file-input {
+  display: block;
+  margin-bottom: 10px; /* Ajusta el margen inferior según tu diseño */
+  font-size: 16px; /* Tamaño de la fuente */
+  padding: 8px; /* Espaciado interno */
+  border: 1px solid #ccc; /* Borde */
+  border-radius: 4px; /* Borde redondeado */
+}
+
+/* Estilos para la información sobre el archivo */
+.file-info {
+  margin-top: 5px; /* Ajusta el margen superior según tu diseño */
+  font-size: 14px; /* Tamaño de la fuente */
+  color: #666; /* Color del texto */
+}
+
+/* Estilos para el contenedor de mensajes de error */
+.error-messages {
+  margin-top: 5px; /* Ajusta el margen superior según tu diseño */
+}
+
+/* Estilos para cada mensaje de error */
+.error-message {
+  display: block;
+  margin-top: 5px; /* Ajusta el margen superior según tu diseño */
+  font-size: 14px; /* Tamaño de la fuente */
+  color: #f00; /* Color del texto */
+}

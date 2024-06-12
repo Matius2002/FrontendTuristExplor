@@ -1,0 +1,21 @@
+<div class="mi-separador-div"></div>
+<div class="container">
+  <h1 class="title">Bienvenidos al Blog de Noticias Turísticas</h1>
+  <p class="description">¡Bienvenidos a nuestro blog de noticias turísticas! Aquí encontrarás las últimas novedades, consejos de viaje, destinos destacados y todo lo relacionado con el emocionante mundo del turismo. Ya sea que estés planeando tu próximo viaje o simplemente disfrutando de leer sobre lugares fascinantes, ¡estás en el lugar correcto!</p>
+</div>
+<div class="mi-separador-div"></div>
+
+<!-- tabla quinta -->
+<div *ngIf="noticias.length === 0" class="no-eventos">No hay Noticias disponibles</div>
+<div *ngFor="let noticia of noticias">
+  <div class="noticia">
+    <h2>{{ noticia.titulo }}</h2>
+    <p>{{ noticia.contenido }}</p>
+    <p><strong>Fecha de Publicación:</strong> {{ noticia.fechaPublicacion }}</p>
+    <p><strong>Fuente:</strong> {{ noticia.fuente }}</p>
+    <div class="imagenes">
+      <img *ngFor="let imagen of noticia.imagenes" [src]="imagen.ruta" alt="{{ imagen.ruta }}" />
+    </div>
+  </div>
+</div>
+
