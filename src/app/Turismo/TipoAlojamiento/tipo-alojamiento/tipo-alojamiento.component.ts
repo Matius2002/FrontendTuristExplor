@@ -20,7 +20,7 @@ interface TipoAlojamiento{
   nombre: string;
   descripcion: string;
   servicios: string;
-  precioPromedio: number;
+  precioPromedio: string;
 }
 interface Item {
   id: number;

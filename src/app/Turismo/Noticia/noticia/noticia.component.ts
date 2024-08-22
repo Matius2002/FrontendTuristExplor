@@ -31,10 +31,10 @@ interface Noticia {
   contenido: string;
   fechaPublicacion: Date;
   fuente: string;
-  imagenes: Images[];
-  tipoTurismos: TipoTurismo [];
-
+  images: Images[];
+  tipoTurismo: TipoTurismo;
 }
+
 interface Item {
   id: number;
   titulo: string;
@@ -97,10 +97,10 @@ export class NoticiaComponent implements OnInit{
     window.print();
   }
   // Actualizar alojamiento
-  openUpdateModal(noticia: Noticia): void {
+  openUpdateModal(noticias: Noticia): void {
     const dialogRef = this.dialog.open(EditarNoticiaComponent, {
       width: '400px',
-      data: {noticia}
+      data: {noticias}
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'success') {
@@ -124,8 +124,8 @@ export class NoticiaComponent implements OnInit{
             contenido: noticia.contenido,
             fechaPublicacion: noticia.fechaPublicacion,
             fuente: noticia.fuente,
-            imagenes: noticia.imagenes,
-            tipoTurismos: noticia.tipoTurismos
+            images: noticia.images,
+            tipoTurismo: noticia.tipoTurismo
 
           };
         });

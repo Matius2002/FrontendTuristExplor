@@ -1,1 +1,83 @@
-<p>turismo-cultural works!</p>
+<div class="mi-separador-div"></div>
+<header class="matias">
+  <div class="matias-content">
+    <h1 class="title">¡Bienvenidos!</h1>
+    <p class="subtitle">Descubre el turismo cultural de Girardot</p>
+  </div>
+  <img src="assets/images/destino15.JPG" alt="Background Image" class="matias-background">
+</header>
+<div class="mi-separador-div"></div>
+
+<!-- Carrusel de imágenes -->
+<div class="carousel-container">
+  <button class="carousel-control-prev" (click)="prevSlide()">&#10094;</button>
+  <div class="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item" *ngFor="let destino of destinos; let i = index" [class.active]="i === currentSlideIndex">
+        <img *ngFor="let imagen of destino.imagenes ?? []" [src]="getImageUrl(imagen.ruta)" [alt]="imagen.nombre" class="carousel-image">
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-next" (click)="nextSlide()">&#10095;</button>
+</div>
+
+<h1 class="titulo-event">Turismo Cultural</h1>
+<!-- Estructura básica del buscador -->
+<div class="search-container">
+  <input type="text" [(ngModel)]="searchText" placeholder="Buscar ..." class="search-box" />
+  <button class="search-button">
+    <i class="fas fa-search"></i>
+  </button>
+</div>
+
+<!-- Lista de turismo cultural -->
+<div *ngIf="getFilteredDestinos().length === 0" class="no-eventos">
+  No hay destinos de Turismo Cultural disponibles para la búsqueda "{{ searchText }}".
+  Por favor, ajusta tus criterios de búsqueda o intenta más tarde.
+</div>
+
+<div *ngIf="getFilteredDestinos().length > 0" class="mapa-container">
+  <div class="mapa">
+    <div class="destinos">
+      <div *ngFor="let destino of getFilteredDestinos()" class="destino">
+        <div class="destino-header">
+          <h3 class="destino-name">{{ destino.destinoName }}</h3>
+          <span class="badge">Nuevo</span>
+        </div>
+        <div class="destino-icon">
+          <i class="fa fa-compass" title="Ubicación"></i>
+        </div>
+        <div class="destino-info">
+          <p><strong>Descripción:</strong> {{ destino.descripcion }}</p>
+          <p><strong>Ubicación:</strong> {{ destino.ubicacion }}</p>
+          <p><strong>Tipo de Turismo:</strong>
+            <span *ngFor="let tipo of destino.tipoTurismo">{{ tipo.nombre }}</span>
+          </p>
+          <p><strong>Atracciones Principales:</strong>
+            <span *ngFor="let atraccion of destino.atracionesPrincipales">{{ atraccion.nombre }}</span>
+          </p>
+          <p><strong>Épocas para Visitar:</strong>
+            <span *ngFor="let epoca of destino.epocasVisitar">{{ epoca.nombre }}</span>
+          </p>
+          <!-- Imágenes -->
+          <div class="destino-images">
+            <img *ngFor="let imagen of destino.imagenes"
+                 [src]="getImageUrl(imagen.ruta)"
+                 [alt]="imagen.nombre"
+                 class="destino-image"
+                 (click)="openModal(imagen)"
+                 (error)="onImageError($event, imagen.ruta)"
+                 title="Haz clic para ampliar" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal para mostrar imagen ampliada -->
+<div class="modal" [ngClass]="{'show': isModalOpen}" (click)="closeModal()">
+  <span class="close" (click)="closeModal()">&times;</span>
+  <img class="modal-content" [src]="getImageUrl(selectedImage?.ruta)" (click)="$event.stopPropagation()" alt="image">
+  <div class="caption">{{ selectedImage?.nombre }}</div>
+</div>
+<div class="mi-separador-div"></div>

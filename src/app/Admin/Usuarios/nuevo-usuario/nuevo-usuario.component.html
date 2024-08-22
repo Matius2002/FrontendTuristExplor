@@ -61,34 +61,42 @@
       </div>
     </div>
 
-    <!-- inicio rol de ingreso -->
+    <!-- inicio rol -->
     <div class="form-group">
-      <label for="rol">Modo de Ingreso</label>
+      <label for="rol">Rol</label>
       <div class="input-group">
         <div class="input-group-prepend">
-      <span class="input-group-text">
-        <i *ngIf="crearForm.get('rol')?.valid || !crearForm.get('rol')?.touched" class="fas fa-user-tag"></i>
-        <i *ngIf="crearForm.get('rol')?.invalid && crearForm.get('rol')?.touched" class="fas fa-times-circle text-danger"></i>
-      </span>
+        <span class="input-group-text">
+          <i *ngIf="crearForm.get('rol')?.valid || !crearForm.get('rol')?.touched" class="fas fa-user-tag"></i>
+          <i *ngIf="crearForm.get('rol')?.invalid && crearForm.get('rol')?.touched" class="fas fa-times-circle text-danger"></i>
+        </span>
         </div>
-        <select class="form-control" id="rol" formControlName="rol" (change)="onRolChange()">
-          <option value="" disabled selected>Selecciona un Modo de Ingreso</option>
+        <select id="rol" formControlName="rol">
+          <option value="" disabled selected>Seleccione un Rol</option>
           <option *ngFor="let rol of roles" [value]="rol.rolName">{{ rol.rolName }}</option>
         </select>
       </div>
       <div *ngIf="crearForm.get('rol')?.invalid && (crearForm.get('rol')?.dirty || crearForm.get('rol')?.touched)">
-        <div class="text-danger" *ngIf="crearForm.get('rol')?.errors?.['required']">El Ingreso es obligatorio.</div>
+        <div class="text-danger" *ngIf="crearForm.get('rol')?.errors?.['required']">El Rol es obligatorio.</div>
       </div>
     </div>
-    <!-- fin rol de ingreso -->
-
-    <!-- Código de confirmación -->
-    <div *ngIf="crearForm.get('rol')?.value === 'Administrador'" class="form-group">
+    <!-- fin rol -->
+    <!-- inicio código de confirmación -->
+    <div class="form-group" *ngIf="crearForm.get('rol')?.value === 'ADMINISTRADOR'">
       <label for="codigoConfirmacion">Código de Confirmación</label>
-      <input type="text" class="form-control" id="codigoConfirmacion" formControlName="codigoConfirmacion" placeholder="Ingrese el código de confirmación">
-      <div *ngIf="codigoIncorrecto" class="text-danger">Código incorrecto. Inténtelo de nuevo.</div>
+      <div class="input-group">
+        <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i *ngIf="!codigoIncorrecto" class="fas fa-lock"></i>
+          <i *ngIf="codigoIncorrecto" class="fas fa-times-circle text-danger"></i>
+        </span>
+        </div>
+        <input type="text" id="codigoConfirmacion" formControlName="codigoConfirmacion" placeholder="Ingrese el código de confirmación">
+      </div>
+      <div *ngIf="codigoIncorrecto">
+        <div class="text-danger">El código de confirmación es incorrecto.</div>
+      </div>
     </div>
-    <!-- fin código de confirmación -->
 
     <!-- Botones -->
     <div class="form-group">

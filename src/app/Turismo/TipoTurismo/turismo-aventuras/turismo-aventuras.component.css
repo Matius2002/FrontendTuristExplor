@@ -1,0 +1,202 @@
+.adventure-header {
+  position: relative;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+  height: 100vh;
+  background: linear-gradient(to bottom right, rgba(0, 123, 255, 0.7), rgba(0, 123, 255, 0.3));
+}
+
+.adventure-background {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(50%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.adventure-content {
+  padding: 100px 20px;
+  z-index: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.adventure-title {
+  font-size: 4em;
+  margin-bottom: 20px;
+  animation: slideInFromLeft 1s ease;
+  font-family: 'Helvetica', sans-serif;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+.adventure-subtitle {
+  text-align: center;
+  font-size: 2em;
+  animation: slideInFromRight 1s ease;
+  font-family: 'Helvetica', sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Animaciones */
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .adventure-title {
+    font-size: 3em;
+  }
+  .adventure-subtitle {
+    font-size: 1.5em;
+  }
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centra el contenido horizontalmente */
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 18px;
+  background: white;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+  font-family: roboto, serif;
+  text-align: center;
+  transition: 0.5s ease;
+  cursor: pointer;
+  max-width: 300px; /* Asegura un tamaño máximo para las tarjetas */
+  width: 100%;
+}
+
+.card-image {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  background-size: cover;
+  background-position: center;
+  height: 210px; /* Asegura una altura consistente para todas las imágenes */
+}
+
+.card-text {
+  padding: 15px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-text .date {
+  color: rgb(255, 7, 110);
+  font-size: 13px;
+}
+
+.card-text h3 {
+  margin-top: 10px;
+  font-size: 24px;
+}
+
+.card-text p {
+  color: grey;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.card-images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px;
+  gap: 10px;
+}
+
+.card-thumbnail {
+  width: 60px;
+  height: 60px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.card-thumbnail:hover {
+  transform: scale(1.1);
+}
+
+.card-stats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  background: rgb(102, 181, 246);
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.card-stats .stat {
+  margin-bottom: 15px;
+  color: white;
+}
+
+.card-stats .type {
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.card-stats ul {
+  list-style-type: disc;
+  margin: 0;
+  padding-left: 20px;
+  text-align: left;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 5px 5px 15px rgb(71, 198, 239);
+}
+
+@media (max-width: 600px) {
+  .cards-container {
+    flex-direction: column;
+    align-items: center; /* Centra el contenido verticalmente */
+  }
+  .card {
+    max-width: 100%; /* Ajusta el tamaño máximo de la tarjeta para pantallas pequeñas */
+  }
+}
+
+
+

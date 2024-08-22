@@ -10,11 +10,17 @@ interface  TipoAlojamiento{
   id: number;
   nombre: string;
 }
+interface Images {
+  id: number;
+  nombre: string;
+  ruta: string;
+  activa: boolean;
+}
 interface Alojamiento{
   id: number;
-  destinos: Destinos;
-  nombre: string;
   descripcion: string;
+  destinos: Destinos [];
+  nombre: string;
   tipoAlojamiento: TipoAlojamiento;
   direccion: string;
   celular: string;
@@ -22,8 +28,7 @@ interface Alojamiento{
   webUrl: string;
   precioGeneral: number;
   fechaCreacion: Date;
-  fechaActualizacion: Date;
-
+  imagenes: Images[];
 }
 @Injectable({
   providedIn: 'root'
@@ -97,6 +102,15 @@ export class AlojamientoService {
         catchError(this.handleError)
       );
   }
+
+
+    recuperarTodosImages(): Observable<Images[]> {
+    return this.http.get<Images[]>(`${this.baseUrl}/images/obtenerTodosLosImages`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
 
   // Función para manejar errores de HTTP
   private handleError(error: HttpErrorResponse): Observable<any> {

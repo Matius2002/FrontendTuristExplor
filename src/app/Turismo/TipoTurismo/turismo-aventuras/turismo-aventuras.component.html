@@ -1,1 +1,74 @@
-<p>turismo-aventuras works!</p>
+<div class="mi-separador-div"></div>
+<header class="adventure-header">
+  <div class="adventure-content">
+    <h1 class="adventure-title">¡AVENTÚRATE CON NOSOTROS!</h1>
+    <p class="adventure-subtitle">Descubre el turismo Aventurero</p>
+  </div>
+  <img src="assets/images/Mochileros.jpg" alt="Background Image" class="adventure-background">
+</header>
+<div class="mi-separador-div"></div>
+
+
+<h1 class="titulo-event">Turismo Aventurero</h1>
+
+<!-- Estructura básica del buscador -->
+<div class="search-container">
+  <input type="text" [(ngModel)]="searchText" placeholder="Buscar ..." class="search-box" />
+  <button class="search-button">
+    <i class="fas fa-search"></i>
+  </button>
+</div>
+
+<div *ngIf="getFilteredDestinos().length === 0" class="no-eventos">
+  No hay destinos de Turismo de Aventura disponibles para la búsqueda "{{ searchText }}".
+  Por favor, ajusta tus criterios de búsqueda o intenta más tarde.
+</div>
+
+<!-- Contenedor de tarjetas -->
+<!-- Modal para mostrar imagen ampliada -->
+<div class="modal" [ngClass]="{'show': isModalOpen}" (click)="closeModal()">
+  <span class="close" (click)="closeModal()">&times;</span>
+  <img class="modal-content" [src]="getImageUrl(selectedImage?.ruta)" (click)="$event.stopPropagation()">
+  <div class="caption">{{ selectedImage?.nombre }}</div>
+</div>
+<!-- Contenedor de tarjetas -->
+<div class="cards-container">
+  <div class="card" *ngFor="let destino of getFilteredDestinos()">
+    <div class="card-image"
+         *ngIf="destino.imagenes && destino.imagenes.length > 0"
+         [ngStyle]="{'background-image': 'url(' + getImageUrl(destino.imagenes[0].ruta) + ')'}"
+         (click)="openModal(destino.imagenes[0])"></div>
+    <div class="card-text">
+      <span class="date">{{ destino.fechaCreacion | date:'mediumDate' }}</span>
+      <h3>{{ destino.destinoName }}</h3>
+      <p>{{ destino.descripcion }}</p>
+      <p><strong>Ubicación:</strong> {{ destino.ubicacion }}</p>
+      <p><strong>Tipo de Turismo:</strong>
+        <span *ngFor="let tipo of destino.tipoTurismo">{{ tipo.nombre }}</span>
+      </p>
+    </div>
+    <div class="card-images">
+      <div class="card-thumbnail"
+           *ngFor="let imagen of destino.imagenes"
+           [ngStyle]="{'background-image': 'url(' + getImageUrl(imagen.ruta) + ')'}"
+           (click)="openModal(imagen)"></div>
+    </div>
+    <div class="card-stats">
+      <div class="stat">
+        <div class="type">Épocas para Visitar</div>
+        <ul>
+          <li *ngFor="let epoca of destino.epocasVisitar">{{ epoca.nombre }}</li>
+        </ul>
+      </div>
+      <div class="stat">
+        <div class="type">Atracciones Principales</div>
+        <ul>
+          <li *ngFor="let atraccion of destino.atracionesPrincipales">{{ atraccion.nombre }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="mi-separador-div"></div>

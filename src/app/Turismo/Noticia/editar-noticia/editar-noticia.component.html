@@ -1,1 +1,76 @@
-<p>editar-noticia works!</p>
+<!-- editar-noticia.component.html -->
+<div mat-dialog-content class="modal-content-editar-turismo">
+    <div class="modal-header-editar-turismo">
+      <h5 class="modal-title-editar-turismo">Editar Noticia</h5>
+      <button type="button" class="close-editar-turismo" aria-label="Close" (click)="onCancelar()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body-editar-turismo">
+      <form [formGroup]="editarForm" (ngSubmit)="onSubmit()">
+        <div class="form-group-editar-turismo">
+          <label for="titulo">Título</label>
+          <input type="text" id="titulo" formControlName="titulo" placeholder="Ingresa el Título" class="form-control-editar-turismo">
+          <div *ngIf="editarForm.get('titulo')?.invalid && (editarForm.get('titulo')?.dirty || editarForm.get('titulo')?.touched)">
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('titulo')?.hasError('required')">El título es obligatorio.</div>
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('titulo')?.hasError('minlength')">El título debe tener al menos 5 caracteres.</div>
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('titulo')?.hasError('maxlength')">El título no debe exceder los 100 caracteres.</div>
+          </div>
+        </div>
+        <div class="form-group-editar-turismo">
+          <label for="contenido">Contenido</label>
+          <textarea id="contenido" formControlName="contenido" placeholder="Ingresa el Contenido" rows="5" class="form-control-editar-turismo"></textarea>
+          <div *ngIf="editarForm.get('contenido')?.invalid && (editarForm.get('contenido')?.dirty || editarForm.get('contenido')?.touched)">
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('contenido')?.hasError('required')">El contenido es obligatorio.</div>
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('contenido')?.hasError('minlength')">El contenido debe tener al menos 10 caracteres.</div>
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('contenido')?.hasError('maxlength')">El contenido no debe exceder los 2000 caracteres.</div>
+          </div>
+        </div>
+        <div class="form-group-editar-turismo">
+          <label for="fuente">Fuente</label>
+          <input type="text" id="fuente" formControlName="fuente" placeholder="Ingresa la Fuente" class="form-control-editar-turismo">
+          <div *ngIf="editarForm.get('fuente')?.invalid && (editarForm.get('fuente')?.dirty || editarForm.get('fuente')?.touched)">
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('fuente')?.hasError('required')">La fuente es obligatoria.</div>
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('fuente')?.hasError('minlength')">La fuente debe tener al menos 5 caracteres.</div>
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('fuente')?.hasError('maxlength')">La fuente no debe exceder los 100 caracteres.</div>
+          </div>
+        </div>
+
+        <!-- Fecha y Hora de Publicación -->
+        <div class="form-group-editar-turismo">
+          <label for="fechaPublicacion">Fecha y Hora de Publicación</label>
+          <div class="input-group">
+            <input type="datetime-local" id="fechaPublicacion" formControlName="fechaPublicacion" class="form-control-editar-turismo">
+          </div>
+          <div *ngIf="editarForm.get('fechaPublicacion')?.invalid && (editarForm.get('fechaPublicacion')?.dirty || editarForm.get('fechaPublicacion')?.touched)">
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('fechaPublicacion')?.errors?.['required']">La fecha de publicación es obligatoria.</div>
+          </div>
+        </div>
+
+        <div class="form-group-editar-turismo">
+          <label for="tipoTurismo">Tipo de Turismo</label>
+          <select id="tipoTurismo" formControlName="tipoTurismo" class="form-control-editar-turismo">
+            <option *ngFor="let tipo of tipoTurismo" [value]="tipo.id">{{ tipo.nombre }}</option>
+          </select>
+          <div *ngIf="editarForm.get('tipoTurismo')?.invalid && (editarForm.get('tipoTurismo')?.dirty || editarForm.get('tipoTurismo')?.touched)">
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('tipoTurismo')?.hasError('required')">Debe seleccionar un Tipo de Turismo.</div>
+          </div>
+        </div>
+        <div class="form-group-editar-turismo">
+          <label for="images">Imágenes</label>
+          <select id="images" formControlName="images" class="form-control-editar-turismo" multiple>
+            <option *ngFor="let imagen of imagenes" [value]="imagen.id">{{ imagen.nombre }}</option>
+          </select>
+          <div *ngIf="editarForm.get('images')?.invalid && (editarForm.get('images')?.dirty || editarForm.get('images')?.touched)">
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('images')?.hasError('required')">Debe seleccionar al menos una imagen.</div>
+          </div>
+        </div>
+        <div class="modal-footer-editar-turismo">
+          <button type="button" class="btn btn-secondary" (click)="onCancelar()">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Actualizar</button>
+          <button type="button" class="btn btn-danger" (click)="onClearForm()">Limpiar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+

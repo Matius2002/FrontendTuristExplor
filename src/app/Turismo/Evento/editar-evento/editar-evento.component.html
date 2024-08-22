@@ -1,1 +1,83 @@
-<p>editar-evento works!</p>
+<!-- editar-atraccion-turistica.component.html -->
+
+<div mat-dialog-content class="modal-content-editar-turismo">
+    <div class="modal-header-editar-turismo">
+      <h5 class="modal-title-editar-turismo">Editar Evento</h5>
+      <button type="button" class="close-editar-turismo" aria-label="Close" (click)="onCancelar()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body-editar-turismo">
+      <form [formGroup]="editarForm" (ngSubmit)="onSubmit()">
+        <div class="form-group-editar-turismo">
+          <label for="nombre">Nombre del Evento</label>
+          <input type="text" id="nombre" formControlName="nombre" placeholder="Ingresa el Nombre del Evento" class="form-control-editar-turismo">
+          <div *ngIf="editarForm.get('nombre')?.invalid && (editarForm.get('nombre')?.dirty || editarForm.get('nombre')?.touched)">
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('nombre')?.hasError('required')">El Nombre del Evento es obligatorio.</div>
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('nombre')?.hasError('minlength')">El Nombre del Evento debe tener al menos 5 caracteres.</div>
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('nombre')?.hasError('maxlength')">El Nombre del Evento no debe exceder los 50 caracteres.</div>
+          </div>
+        </div>
+        <div class="form-group-editar-turismo">
+          <label for="descripcion">Descripción</label>
+          <textarea id="descripcion" formControlName="descripcion" placeholder="Ingresa la Descripción del Evento" rows="5" class="form-control-editar-turismo"></textarea>
+          <div *ngIf="editarForm.get('descripcion')?.invalid && (editarForm.get('descripcion')?.dirty || editarForm.get('descripcion')?.touched)">
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('descripcion')?.hasError('required')">La Descripción es obligatoria.</div>
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('descripcion')?.hasError('minlength')">La Descripción debe tener al menos 10 caracteres.</div>
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('descripcion')?.hasError('maxlength')">La Descripción no debe exceder los 500 caracteres.</div>
+          </div>
+        </div>
+        <div class="form-group-editar-turismo">
+          <label for="ubicacion">Ubicación</label>
+          <input type="text" id="ubicacion" formControlName="ubicacion" placeholder="Ingresa la Ubicación" class="form-control-editar-turismo">
+          <div *ngIf="editarForm.get('ubicacion')?.invalid && (editarForm.get('ubicacion')?.dirty || editarForm.get('ubicacion')?.touched)">
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('ubicacion')?.hasError('required')">La Ubicación es obligatoria.</div>
+          </div>
+        </div>
+        <div class="form-group-editar-turismo">
+          <label for="costoEntrada">Costo de Entrada</label>
+          <input type="number" id="costoEntrada" formControlName="costoEntrada" placeholder="Ingrese el Costo de Entrada" class="form-control-editar-turismo">
+          <div *ngIf="editarForm.get('costoEntrada')?.invalid && (editarForm.get('costoEntrada')?.dirty || editarForm.get('costoEntrada')?.touched)">
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('costoEntrada')?.hasError('required')">El Costo de Entrada es obligatorio.</div>
+          </div>
+        </div>
+        <div class="form-group-editar-turismo">
+          <label for="fechaInicio">Fecha y Hora de Inicio</label>
+          <input type="datetime-local" id="fechaInicio" formControlName="fechaInicio" class="form-control-editar-turismo">
+          <div *ngIf="editarForm.get('fechaInicio')?.invalid && (editarForm.get('fechaInicio')?.dirty || editarForm.get('fechaInicio')?.touched)">
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('fechaInicio')?.errors?.['required']">La fecha de inicio es obligatoria.</div>
+          </div>
+        </div>
+        <div class="form-group-editar-turismo">
+          <label for="fechaFin">Fecha y Hora de Fin</label>
+          <input type="datetime-local" id="fechaFin" formControlName="fechaFin" class="form-control-editar-turismo">
+          <div *ngIf="editarForm.get('fechaFin')?.invalid && (editarForm.get('fechaFin')?.dirty || editarForm.get('fechaFin')?.touched)">
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('fechaFin')?.errors?.['required']">La fecha de fin es obligatoria.</div>
+          </div>
+        </div>
+        <div class="form-group-editar-turismo">
+          <label for="destinos">Destinos Asociados</label>
+          <select id="destinos" formControlName="destinos" multiple class="form-control-editar-turismo">
+            <option *ngFor="let destino of destinos" [value]="destino.id">{{ destino.destinoName }}</option>
+          </select>
+          <div *ngIf="editarForm.get('destinos')?.invalid && (editarForm.get('destinos')?.dirty || editarForm.get('destinos')?.touched)">
+            <div class="text-danger-editar-turismo">Debe seleccionar al menos un destino.</div>
+          </div>
+        </div>
+        <div class="form-group-editar-turismo">
+          <label for="images">Imágenes</label>
+          <select id="images" formControlName="images" multiple class="form-control-editar-turismo">
+            <option *ngFor="let image of imagenes" [value]="image.id">{{ image.nombre }}</option>
+          </select>
+          <div *ngIf="editarForm.get('images')?.invalid && (editarForm.get('images')?.dirty || editarForm.get('images')?.touched)">
+            <div class="text-danger-editar-turismo">Debe seleccionar al menos una imagen.</div>
+          </div>
+        </div>
+        <div class="modal-footer-editar-turismo">
+          <button type="button" class="btn btn-secondary" (click)="onCancelar()">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Actualizar</button>
+          <button type="button" class="btn btn-danger" (click)="onClearForm()">Limpiar</button>
+        </div>
+      </form>
+    </div>
+  </div>

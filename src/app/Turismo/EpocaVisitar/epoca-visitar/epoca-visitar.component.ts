@@ -80,11 +80,11 @@ export class EpocaVisitarComponent implements OnInit{
   printTable() {
     window.print();
   }
-  // Actualizar alojamiento
+  // Actualizar EPOCA
   openUpdateModal(epoca: EpocaVisitar): void {
     const dialogRef = this.dialog.open(EditarEpocaVisitarComponent, {
       width: '400px',
-      data: {epoca}
+      data: {epocaVisitar: epoca}
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'success') {

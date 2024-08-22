@@ -1,1 +1,78 @@
-<p>turismo-nocturno works!</p>
+<div class="mi-separador-div"></div>
+<header class="nightlife-header">
+  <div class="nightlife-content">
+    <h1 class="nightlife-title">¡Bienvenidos a la vida nocturna!</h1>
+    <p class="nightlife-subtitle text-center">Explora la energía nocturna de Girardot</p>
+  </div>
+  <img src="assets/images/discotecas.jpg" alt="Imagen de fondo" class="nightlife-background">
+</header>
+<div class="mi-separador-div"></div>
+
+<h1 class="titulo-event">Turismo Nocturno</h1>
+
+
+<!-- Estructura básica del buscador -->
+<div class="search-container">
+  <input type="text" [(ngModel)]="searchText" placeholder="Buscar ..." class="search-box" />
+  <button class="search-button">
+    <i class="fas fa-search"></i>
+  </button>
+</div>
+
+<div *ngIf="getFilteredDestinos().length === 0" class="no-eventos">
+  No hay destinos de Turismo Nocturno disponibles para la búsqueda "{{ searchText }}".
+  Por favor, ajusta tus criterios de búsqueda o intenta más tarde.
+</div>
+
+<div *ngIf="getFilteredDestinos().length > 0" class="cards-container">
+  <div class="card" *ngFor="let destino of getFilteredDestinos()">
+    <!-- Imágenes -->
+    <div class="destino-images">
+      <img *ngFor="let imagen of destino.imagenes"
+           [src]="getImageUrl(imagen.ruta)"
+           [alt]="imagen.nombre"
+           class="destino-image"
+           (click)="openModal(imagen)"
+           (error)="onImageError($event, imagen.ruta)"
+           title="Haz clic para ampliar" />
+    </div>
+
+    <div class="card-text">
+      <span class="date">Fecha de Creación: {{ destino.fechaCreacion | date:'mediumDate' }}</span>
+      <h3 class="card-title">{{ destino.destinoName }}</h3>
+      <p>{{ destino.descripcion }}</p>
+      <p><strong>Ubicación:</strong> {{ destino.ubicacion }}</p>
+      <p><strong>Tipo de Turismo:</strong>
+        <span *ngFor="let tipo of destino.tipoTurismo">{{ tipo.nombre }}</span>
+      </p>
+    </div>
+
+    <div class="card-stats">
+      <div class="stat">
+        <div class="type">Épocas para Visitar</div>
+        <ul>
+          <li *ngFor="let epoca of destino.epocasVisitar">{{ epoca.nombre }}</li>
+        </ul>
+      </div>
+      <div class="stat border">
+        <div class="type">Atracciones Principales</div>
+        <ul>
+          <li *ngFor="let atraccion of destino.atracionesPrincipales">{{ atraccion.nombre }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <span class="date">Última Actualización: {{ destino.fechaActualizacion | date:'mediumDate' }}</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal para mostrar imagen ampliada -->
+<div class="modal" [ngClass]="{'show': isModalOpen}" (click)="closeModal()">
+  <span class="close" (click)="closeModal()">&times;</span>
+  <img class="modal-content" [src]="getImageUrl(selectedImage?.ruta)" (click)="$event.stopPropagation()" alt="image">
+  <div class="caption">{{ selectedImage?.nombre }}</div>
+</div>
+<div class="mi-separador-div"></div>

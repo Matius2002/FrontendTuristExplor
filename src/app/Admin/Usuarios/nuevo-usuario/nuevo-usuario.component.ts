@@ -66,21 +66,21 @@ export class NuevoUsuarioComponent implements OnInit {
       nombreUsuario: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(50)]],
       email: ['', [Validators.required, Validators.email, Validators.minLength(10), Validators.maxLength(250)]],
       password: ['', [Validators.required]],
-      passwordConfirmar: ['', [Validators.required]],
       fechaRegistro: [new Date()],
       rol: ['', [Validators.required]],
-      codigoConfirmacion: ['', Validators.required]
+      codigoConfirmacion: ['']
     });
 
     // Observar cambios en el campo de contraseña para actualizar las validaciones
     this.crearForm.get('password')?.valueChanges.subscribe(value => {
       this.validatePassword(value);
     });
+
     // Observar cambios en el campo de rol para mostrar o cerrar el campo de confirmación
     this.crearForm.get('rol')?.valueChanges.subscribe(() => {
       this.onRolChange();
-
     });
+
     this.cargarRoles();
   }
 
@@ -100,8 +100,7 @@ export class NuevoUsuarioComponent implements OnInit {
     }
   }
 
-  cargarRoles(): void{
-    // Llamar a tu servicio para obtener todos los roles
+  cargarRoles(): void {
     this.usuarioService.recuperarTodosRoles().subscribe(
       (roles: Rol[]) => {
         this.roles = roles;
@@ -148,7 +147,7 @@ export class NuevoUsuarioComponent implements OnInit {
               this.isSubmitting = false;
             } else {
               // Validar el código de confirmación para el rol de Administrador
-              if (this.crearForm.get('rol')?.value?.rolName === 'Administrador' && this.crearForm.get('codigoConfirmacion')?.value !== '2024') {
+              if (this.crearForm.get('rol')?.value === 'ADMINISTRADOR' && this.crearForm.get('codigoConfirmacion')?.value !== '2024') {
                 this.codigoIncorrecto = true;
                 this.isSubmitting = false;
               } else {
@@ -160,9 +159,14 @@ export class NuevoUsuarioComponent implements OnInit {
         }
       });
     } else {
-      // Manejar el caso en que el formulario no sea válido
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Por favor complete todos los campos requeridos'
+      });
     }
   }
+
   guardarUsuario(usuarioData: Usuarios): void {
     this.usuarioService.guardarUsuario(usuarioData).subscribe(() => {
       Swal.fire({

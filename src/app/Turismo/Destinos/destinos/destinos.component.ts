@@ -42,11 +42,7 @@ interface Destinos {
   epocasVisitar: EpocasVisitar [];
   imagenes: Images [];
   fechaCreacion: Date;
-  horaCreacion: string;
   fechaActualizacion: Date;
-  horaActualizacion: string;
-
-
 }
 interface Item {
   id: number;
@@ -140,8 +136,11 @@ export class DestinosComponent implements OnInit{
       data => {
         console.log("Datos recibidos del servidor:", data);
         console.log("Cantidad de registros recibidos:", data.length);
+
         this.destinos = data.map(destino => {
-          return {
+          console.log("Destino original:", destino);
+
+          const destinoMapeado = {
             id: destino.id,
             destinoName: destino.destinoName,
             descripcion: destino.descripcion,
@@ -151,21 +150,23 @@ export class DestinosComponent implements OnInit{
             epocasVisitar: destino.epocasVisitar,
             imagenes: destino.imagenes,
             fechaCreacion: destino.fechaCreacion,
-            horaCreacion: destino.horaCreacion,
-            fechaActualizacion:destino.fechaActualizacion,
-            horaActualizacion:destino.horaActualizacion,
-
+            fechaActualizacion: destino.fechaActualizacion,
           };
-        });
-        this.totalPages = Math.ceil(this.destinos.length / this.itemsPerPage);
 
-        console.log("Datos de los tipos de Destinos cargados correctamente:", this.destinos);
+          console.log("Destino mapeado:", destinoMapeado);
+          return destinoMapeado;
+        });
+        console.log("Destinos actualizados:", this.destinos);
+
+        this.totalPages = Math.ceil(this.destinos.length / this.itemsPerPage);
+        console.log("Datos de los destinos cargados correctamente:", this.destinos);
       },
       error => {
         console.error('Error al cargar los Destinos:', error);
       }
     );
   }
+
   cargarTipoTurismos() {
     // Lógica para cargar los datos de la base de datos.
     this.destinoService.recuperarTodosTiposTurismo().subscribe(

@@ -1,1 +1,120 @@
-<p>editar-alojamiento works!</p>
+<!-- editar-alojamiento.component.html -->
+<div mat-dialog-content class="modal-content-editar-turismo">
+    <div class="modal-header-editar-turismo">
+      <h5 class="modal-title-editar-turismo">Editar Alojamiento</h5>
+      <button type="button" class="close-editar-turismo" aria-label="Close" (click)="onCancelar()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body-editar-turismo">
+      <form [formGroup]="editarForm" (ngSubmit)="onSubmit()">
+        <div class="form-group-editar-turismo">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" formControlName="nombre" placeholder="Ingresa el Nombre" class="form-control-editar-turismo">
+          <div *ngIf="editarForm.get('nombre')?.invalid && (editarForm.get('nombre')?.dirty || editarForm.get('nombre')?.touched)">
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('nombre')?.hasError('required')">El nombre es obligatorio.</div>
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('nombre')?.hasError('minlength')">El nombre debe tener al menos 5 caracteres.</div>
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('nombre')?.hasError('maxlength')">El nombre no debe exceder los 50 caracteres.</div>
+          </div>
+        </div>
+
+        <div class="form-group-editar-turismo">
+          <label for="descripcion">Descripción</label>
+          <textarea id="descripcion" formControlName="descripcion" placeholder="Ingresa la Descripción" rows="5" class="form-control-editar-turismo"></textarea>
+          <div *ngIf="editarForm.get('descripcion')?.invalid && (editarForm.get('descripcion')?.dirty || editarForm.get('descripcion')?.touched)">
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('descripcion')?.hasError('required')">La descripción es obligatoria.</div>
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('descripcion')?.hasError('minlength')">La descripción debe tener al menos 10 caracteres.</div>
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('descripcion')?.hasError('maxlength')">La descripción no debe exceder los 500 caracteres.</div>
+          </div>
+        </div>
+
+        <div class="form-group-editar-turismo">
+          <label for="direccion">Dirección</label>
+          <input type="text" id="direccion" formControlName="direccion" placeholder="Ingresa la Dirección" class="form-control-editar-turismo">
+          <div *ngIf="editarForm.get('direccion')?.invalid && (editarForm.get('direccion')?.dirty || editarForm.get('direccion')?.touched)">
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('direccion')?.hasError('required')">La dirección es obligatoria.</div>
+          </div>
+        </div>
+
+        <div class="form-group-editar-turismo">
+          <label for="celular">Celular</label>
+          <input type="text" id="celular" formControlName="celular" placeholder="Ingresa el número de celular" class="form-control-editar-turismo">
+          <div *ngIf="editarForm.get('celular')?.invalid && (editarForm.get('celular')?.dirty || editarForm.get('celular')?.touched)">
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('celular')?.hasError('required')">El celular es obligatorio.</div>
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('celular')?.hasError('pattern')">El número de celular no es válido.</div>
+          </div>
+        </div>
+
+        <div class="form-group-editar-turismo">
+          <label for="email">Email</label>
+          <input type="email" id="email" formControlName="email" placeholder="Ingresa el correo electrónico" class="form-control-editar-turismo">
+          <div *ngIf="editarForm.get('email')?.invalid && (editarForm.get('email')?.dirty || editarForm.get('email')?.touched)">
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('email')?.hasError('required')">El correo electrónico es obligatorio.</div>
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('email')?.hasError('email')">El correo electrónico no es válido.</div>
+          </div>
+        </div>
+
+        <div class="form-group-editar-turismo">
+          <label for="webUrl">URL del Sitio Web</label>
+          <input type="text" id="webUrl" formControlName="webUrl" placeholder="Ingresa la URL del sitio web" class="form-control-editar-turismo">
+          <div *ngIf="editarForm.get('webUrl')?.invalid && (editarForm.get('webUrl')?.dirty || editarForm.get('webUrl')?.touched)">
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('webUrl')?.hasError('required')">La URL del sitio web es obligatoria.</div>
+          </div>
+        </div>
+
+        <div class="form-group-editar-turismo">
+          <label for="precioGeneral">Precio General</label>
+          <input type="number" id="precioGeneral" formControlName="precioGeneral" placeholder="Ingresa el precio general" class="form-control-editar-turismo">
+          <div *ngIf="editarForm.get('precioGeneral')?.invalid && (editarForm.get('precioGeneral')?.dirty || editarForm.get('precioGeneral')?.touched)">
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('precioGeneral')?.hasError('required')">El precio general es obligatorio.</div>
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('precioGeneral')?.hasError('min')">El precio general debe ser un valor positivo.</div>
+          </div>
+        </div>
+
+        <div class="form-group-editar-turismo">
+          <label for="fechaCreacion">Fecha de Creación</label>
+          <input type="datetime-local" id="fechaCreacion" formControlName="fechaCreacion" class="form-control-editar-turismo">
+          <div *ngIf="editarForm.get('fechaCreacion')?.invalid && (editarForm.get('fechaCreacion')?.dirty || editarForm.get('fechaCreacion')?.touched)">
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('fechaCreacion')?.hasError('required')">La fecha de creación es obligatoria.</div>
+          </div>
+        </div>
+
+        <div class="form-group-editar-turismo">
+          <label for="tipoAlojamiento">Tipo de Alojamiento</label>
+          <select id="tipoAlojamiento" formControlName="tipoAlojamiento" class="form-control-editar-turismo">
+            <option *ngFor="let tipo of tipoAlojamientos" [value]="tipo.id">{{ tipo.nombre }}</option>
+          </select>
+          <div *ngIf="editarForm.get('tipoAlojamiento')?.invalid && (editarForm.get('tipoAlojamiento')?.dirty || editarForm.get('tipoAlojamiento')?.touched)">
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('tipoAlojamiento')?.hasError('required')">El tipo de alojamiento es obligatorio.</div>
+          </div>
+        </div>
+
+        <div class="form-group-editar-turismo">
+          <label for="destinos">Destinos</label>
+          <select id="destinos" formControlName="destinos" class="form-control-editar-turismo" multiple>
+            <option *ngFor="let destino of destinos" [value]="destino.id">{{ destino.destinoName }}</option>
+          </select>
+          <div *ngIf="editarForm.get('destinos')?.invalid && (editarForm.get('destinos')?.dirty || editarForm.get('destinos')?.touched)">
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('destinos')?.hasError('required')">Debe seleccionar al menos un destino.</div>
+          </div>
+        </div>
+
+        <div class="form-group-editar-turismo">
+          <label for="imagenes">Imágenes</label>
+          <select id="imagenes" formControlName="imagenes" class="form-control-editar-turismo" multiple>
+            <option *ngFor="let imagen of imagenes" [value]="imagen.id">{{ imagen.nombre }}</option>
+          </select>
+          <div *ngIf="editarForm.get('imagenes')?.invalid && (editarForm.get('imagenes')?.dirty || editarForm.get('imagenes')?.touched)">
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('imagenes')?.hasError('required')">Debe seleccionar al menos una imagen.</div>
+          </div>
+        </div>
+
+        <div class="modal-footer-editar-turismo">
+          <button type="button" class="btn btn-secondary" (click)="onCancelar()">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Actualizar</button>
+          <button type="button" class="btn btn-danger" (click)="onClearForm()">Limpiar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+

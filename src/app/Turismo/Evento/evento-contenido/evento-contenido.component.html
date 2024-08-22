@@ -1,3 +1,5 @@
+<div class="mi-separador-div"></div>
+
 <header class="matias">
   <div class="matias-content">
     <h1 class="title">¡Bienvenidos!</h1>
@@ -9,70 +11,99 @@
 <section class="event-categories">
   <h2>Clasificación de Eventos</h2>
   <div class="categories-grid">
-    <div class="category-card">
+    <div class="category-card" (click)="filtrarPorTipoTurismo('Turismo Cultural')">
       <i class="fas fa-theater-masks"></i>
       <h3>Eventos culturales</h3>
       <p>Explora la riqueza cultural de nuestra ciudad con eventos únicos.</p>
     </div>
-    <div class="category-card">
+    <div class="category-card" (click)="filtrarPorTipoTurismo('Turismo de Aventura')">
       <i class="fas fa-futbol"></i>
-      <h3>Eventos deportivos</h3>
-      <p>Participa o asiste a los eventos deportivos más emocionantes.</p>
+      <h3>Eventos de Aventura</h3>
+      <p>Participa o asiste a los eventos de Aventura más emocionantes.</p>
     </div>
-    <div class="category-card">
+    <div class="category-card" (click)="filtrarPorTipoTurismo('Turismo Nocturno')">
       <i class="fas fa-music"></i>
       <h3>Festivales</h3>
       <p>Disfruta de los festivales locales con música, comida y más.</p>
     </div>
-    <div class="category-card">
+    <div class="category-card" (click)="filtrarPorTipoTurismo('Turismo de Compras')">
       <i class="fas fa-store"></i>
       <h3>Ferias y eventos comerciales</h3>
       <p>Descubre las mejores ferias y eventos comerciales en Girardot.</p>
     </div>
-    <div class="category-card">
+    <div class="category-card" (click)="filtrarPorTipoTurismo('Turismo Religioso')">
       <i class="fas fa-church"></i>
       <h3>Eventos religiosos</h3>
       <p>Únete a las celebraciones religiosas y eventos espirituales.</p>
     </div>
-    <div class="category-card">
+    <div class="category-card" (click)="filtrarPorTipoTurismo('Turismo Sostenible')">
       <i class="fas fa-calendar-alt"></i>
-      <h3>Eventos de temporada</h3>
-      <p>No te pierdas los eventos especiales de cada temporada.</p>
+      <h3>Eventos de Ecologicos</h3>
+      <p>No te pierdas los eventos Ecologicos de cada temporada.</p>
     </div>
-    <div class="category-card">
+    <div class="category-card" (click)="filtrarPorTipoTurismo('Turismo Gastronómico')">
       <i class="fas fa-utensils"></i>
       <h3>Eventos de comida</h3>
       <p>Disfruta de eventos culinarios con la mejor gastronomía local.</p>
     </div>
   </div>
+  <br>
+  <button class="ver-todos-button" (click)="verTodosLosEventos()">Ver Todos los Eventos</button>
 </section>
+
 <div class="mi-separador-div"></div>
 
-<!-- tabla -->
+<h1 class="titulo-event">Lista de Eventos</h1>
+<!-- Estructura básica del buscador -->
+<div class="search-container">
+  <input type="text" [(ngModel)]="searchText" (ngModelChange)="aplicarFiltros()" placeholder="Buscar eventos..." class="search-box" />
+  <button class="search-button">
+    <i class="fas fa-search"></i>
+  </button>
+</div>
 
-<div *ngIf="eventos.length === 0" class="no-eventos">No hay eventos disponibles</div>
+<!-- Lista de eventos -->
+<div id="eventos-lista">
+  <!-- Lista de eventos -->
+  <div *ngIf="eventosFiltrados.length === 0" class="no-eventos">No hay eventos disponibles</div>
 
-<div class="card-container" *ngFor="let evento of eventos">
-  <div class="card">
-    <div class="card-header">
-      <h2 class="card-title">{{ evento.nombre }}</h2>
-    </div>
-    <div class="card-body">
-      <div class="card-image">
-        <img [src]="evento.images[0].ruta" [alt]="evento.nombre" />
+  <div class="card-container" *ngIf="eventosFiltrados.length > 0">
+    <div *ngFor="let evento of eventosFiltrados" class="card">
+      <!-- Contenido de cada tarjeta de evento -->
+      <div class="card-header">
+        <h2 class="card-title">{{ evento.nombre }}</h2>
       </div>
-      <div class="card-content">
-        <p><i class="fas fa-info-circle"></i> <strong>Descripción:</strong> {{ evento.descripcion }}</p>
-        <p><i class="fas fa-calendar-alt"></i> <strong>Fecha:</strong> {{ evento.fechaInicio }} - {{ evento.fechaFin }}</p>
-        <p><i class="fas fa-map-marker-alt"></i> <strong>Ubicación:</strong> {{ evento.ubicacion }}</p>
-        <p><i class="fas fa-money-bill-wave"></i> <strong>Costo de Entrada:</strong> {{ evento.costoEntrada }}</p>
+      <div class="card-body">
+        <div class="card-content">
+          <p><i class="fas fa-info-circle"></i> <strong>Descripción:</strong> {{ evento.descripcion }}</p>
+          <p><i class="fas fa-calendar-alt"></i> <strong>Fecha:</strong> {{ evento.fechaInicio | date }} - {{ evento.fechaFin | date }}</p>
+          <p><i class="fas fa-map-marker-alt"></i> <strong>Ubicación:</strong> {{ evento.ubicacion }}</p>
+          <p><i class="fas fa-money-bill-wave"></i> <strong>Costo de Entrada:</strong> {{ evento.costoEntrada | currency }}</p>
+          <p><i class="fas fa-globe"></i> <strong>Destinos:</strong>
+            <span *ngFor="let destino of evento.destinos">{{ destino.destinoName }}</span>
+          </p>
+          <p><i class="fas fa-flag"></i> <strong>Tipo de Turismo:</strong> {{ evento.tipoTurismo.nombre }}</p>
+        </div>
       </div>
-    </div>
-    <div class="card-footer">
-      <div class="card-thumbnails">
-        <img *ngFor="let imagen of evento.images" [src]="imagen.ruta" [alt]="evento.nombre" class="thumbnail" />
+      <div class="card-footer">
+        <div class="card-thumbnails">
+          <img *ngFor="let imagen of evento.images"
+               [src]="getImageUrl(imagen.ruta)"
+               [alt]="imagen.nombre"
+               class="thumbnail"
+               (click)="openModal(imagen)"
+               (error)="onImageError($event, imagen.ruta)" />
+        </div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- Modal para mostrar imagen ampliada -->
+<div class="modal" [ngClass]="{'show': isModalOpen}" (click)="closeModal()">
+  <span class="close" (click)="closeModal()">&times;</span>
+  <img class="modal-content" [src]="getImageUrl(selectedImage?.ruta)" (click)="$event.stopPropagation()">
+  <div class="caption">{{ selectedImage?.nombre }}</div>
+</div>
+
+<div class="mi-separador-div"></div>

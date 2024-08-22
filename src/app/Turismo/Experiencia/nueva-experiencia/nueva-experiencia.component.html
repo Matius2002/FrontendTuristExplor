@@ -1,4 +1,6 @@
-<section class="experiencia">
+<div class="mi-separador-div"></div>
+
+<section class="experiencia ">
   <div class="experiencia-header">
     <img src="assets/images/Mochileros.jpg" alt="Imagen de Experiencia" class="experiencia-imagen">
     <h2 class="experiencia-titulo">¡Comparte tu Experiencia!</h2>
@@ -83,26 +85,6 @@
     </div>
     <!-- fin calificación -->
 
-
-    <!-- inicio fecha de creación -->
-    <div class="form-group">
-      <label for="fecha">Fecha de Publicación</label>
-      <div class="input-group">
-        <div class="input-group-prepend">
-      <span class="input-group-text">
-        <i *ngIf="crearForm.get('fecha')?.valid || !crearForm.get('fecha')?.touched" class="fas fa-calendar"></i>
-        <i *ngIf="crearForm.get('fecha')?.invalid && crearForm.get('fecha')?.touched" class="fas fa-times-circle text-danger"></i>
-      </span>
-        </div>
-        <input type="date" id="fecha" formControlName="fecha" class="form-control">
-      </div>
-      <!-- mensaje de error -->
-      <div *ngIf="crearForm.get('fecha')?.invalid && (crearForm.get('fecha')?.dirty || crearForm.get('fecha')?.touched)">
-        <div class="text-danger" *ngIf="crearForm.get('fecha')?.errors?.['required']">La fecha de Publicación es obligatoria.</div>
-      </div>
-    </div>
-    <!-- fin fecha de creación -->
-
     <!-- Botones -->
     <div class="form-group">
       <button type="submit" class="custom-btn primary-btn">Guardar Destino</button>
@@ -111,3 +93,5 @@
     </div>
   </form>
 </div>
+<div class="mi-separador-div"></div>
+

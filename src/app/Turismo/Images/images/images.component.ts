@@ -81,10 +81,10 @@ export class ImagesComponent implements OnInit{
     window.print();
   }
   // Actualizar torre
-  openUpdateModal(image: Images): void {
+  openUpdateModal(imagenes: Images): void {
     const dialogRef = this.dialog.open(EditarImagesComponent, {
       width: '400px',
-      data: {image}
+      data: {imagenes}
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'success') {

@@ -15,19 +15,27 @@ import Swal from "sweetalert2";
 import * as ExcelJS from "exceljs";
 import {EditarEventoComponent} from "../editar-evento/editar-evento.component";
 
-interface Destinos{
+interface TipoTurismo{
+  id: number;
+  nombre: string;
+  descripcion: string;
+  popularidad: string;
+}
+interface Destinos {
   id: number;
   destinoName: string;
 }
-interface Images{
+
+interface Images {
   id: number;
   nombre: string;
   ruta: string;
   activa: boolean;
 }
-interface Evento{
+
+interface Evento {
   id: number;
-  destino: Destinos;
+  destinos: Destinos[];
   nombre: string;
   descripcion: string;
   fechaInicio: Date;
@@ -35,6 +43,7 @@ interface Evento{
   ubicacion: string;
   costoEntrada: number;
   images: Images[];
+  tipoTurismo: TipoTurismo;
 }
 interface Item {
   id: number;
@@ -98,10 +107,10 @@ export class EventoComponent implements OnInit{
     window.print();
   }
   // Actualizar evento
-  openUpdateModal(evento: Evento): void {
+  openUpdateModal(eventos: Evento): void {
     const dialogRef = this.dialog.open(EditarEventoComponent, {
       width: '400px',
-      data: {evento}
+      data: {eventos}
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'success') {
@@ -123,12 +132,13 @@ export class EventoComponent implements OnInit{
             id: evento.id,
             nombre: evento.nombre,
             descripcion: evento.descripcion,
-            destino: evento.destino,
+            destinos: evento.destinos,
             fechaInicio: evento.fechaInicio,
             fechaFin: evento.fechaFin,
             ubicacion: evento.ubicacion,
             costoEntrada: evento.costoEntrada,
-            images: evento.images
+            images: evento.images,
+            tipoTurismo: evento.tipoTurismo
           };
         });
         this.totalPages = Math.ceil(this.eventos.length / this.itemsPerPage);
@@ -153,6 +163,7 @@ export class EventoComponent implements OnInit{
       {header: 'Ubicacion', key: 'ubicacion', width: 15},
       {header: 'Costo Entrada', key: 'costoEntrada', width: 15},
       {header: 'Images', key: 'images', width: 30},
+      {header: 'tipoTurismo', key: 'tipoTurismo', width: 30},
     ];
     this.eventos.forEach(evento => {
       worksheet.addRow(evento);

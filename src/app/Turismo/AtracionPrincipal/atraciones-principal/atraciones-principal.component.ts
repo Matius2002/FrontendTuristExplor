@@ -82,17 +82,18 @@ export class AtracionesPrincipalComponent implements  OnInit{
   printTable() {
     window.print();
   }
-  // Actualizar atracion
-  openUpdateModal(atracion: Atraciones): void {
+// Actualizar atraccion
+  openUpdateModal(atraccion: Atraciones): void {
     const dialogRef = this.dialog.open(EditarAtracionesComponent, {
       width: '400px',
-      data: {atracion}
+      data: { atraciones: atraccion }
     });
+
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'success') {
         Swal.fire('¡Actualizado!', 'La Atracción se ha actualizado correctamente.', 'success');
       } else if (result === 'error') {
-        Swal.fire('Error', 'Ha ocurrido un error al actualizar La Atracción.', 'error');
+        Swal.fire('Error', 'Ha ocurrido un error al actualizar la Atracción.', 'error');
       }
     });
   }
@@ -229,7 +230,7 @@ export class AtracionesPrincipalComponent implements  OnInit{
   }
 
   onNuevaAtraccion() {
-    this.router.navigate(['/nueva-atracion']);
+    this.router.navigate(['/nueva-atracciones']);
   }
 
   navigateTo(route: string) {

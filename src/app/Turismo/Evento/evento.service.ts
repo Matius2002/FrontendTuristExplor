@@ -3,19 +3,27 @@ import {entornos} from "../../Entorno/entornos";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {catchError, Observable, throwError} from "rxjs";
 
-interface Destinos{
+interface TipoTurismo{
+  id: number;
+  nombre: string;
+  descripcion: string;
+  popularidad: string;
+}
+interface Destinos {
   id: number;
   destinoName: string;
 }
-interface Images{
+
+interface Images {
   id: number;
   nombre: string;
   ruta: string;
   activa: boolean;
 }
-interface Evento{
+
+interface Evento {
   id: number;
-  destino: Destinos;
+  destinos: Destinos[];
   nombre: string;
   descripcion: string;
   fechaInicio: Date;
@@ -23,6 +31,7 @@ interface Evento{
   ubicacion: string;
   costoEntrada: number;
   images: Images[];
+  tipoTurismo: TipoTurismo;
 }
 @Injectable({
   providedIn: 'root'
@@ -37,8 +46,8 @@ export class EventoService {
 
   }
   // Function para guardar un nuevo Evento
-  guardarEvento(tipoAlojamiento: Evento): Observable<Evento> {
-    return this.http.post<Evento>(`${this.baseUrl}/eventos/guardarEventos`, tipoAlojamiento)
+  guardarEvento(evento: Evento): Observable<Evento> {
+    return this.http.post<Evento>(`${this.baseUrl}/eventos/guardarEventos`, evento)
       .pipe(
         catchError(this.handleError)
       );
@@ -79,6 +88,26 @@ export class EventoService {
   // verificar Evento ya existe en la base de datos
   verificarEventoExistente(nombre: string): Observable<boolean> {
     return this.http.get<boolean>(`${this.baseUrl}/eventos/existe/${encodeURIComponent(nombre)}`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  recuperarImages(): Observable<Images[]> {
+    return this.http.get<Images[]>(`${this.baseUrl}/images/obtenerTodosLosImages`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  recuperarDestinos(): Observable<Destinos[]> {
+    return this.http.get<Destinos[]>(`${this.baseUrl}/destinos/obtenerTodosLosDestinos`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+  recuperarTipoTurismo():Observable<TipoTurismo[]>{
+    return this.http.get<TipoTurismo>(`${this.baseUrl}/tipoturismos/obtenerTodosLosTiposTurismos`)
       .pipe(
         catchError(this.handleError)
       );

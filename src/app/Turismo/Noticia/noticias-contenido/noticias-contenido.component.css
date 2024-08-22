@@ -1,95 +1,236 @@
-/* Estilos para el contenedor principal */
+/* Contenedor principal */
 .container {
-  max-width: 960px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
   text-align: center;
+  background-color: #f4f4f4; /* Color de fondo suave para resaltar el contenido */
+  border-radius: 15px; /* Bordes redondeados para un acabado más suave */
 }
 
 /* Estilos para el título */
 .title {
-  font-size: 3em;
+  font-size: 3.5em;
   color: #2c3e50; /* Azul oscuro */
   margin-bottom: 20px;
-  font-family: 'Arial', sans-serif;
-  transition: color 0.3s ease-in-out; /* Efecto de transición para el color */
+  font-family: 'Roboto', sans-serif; /* Fuente más moderna */
+  font-weight: 700; /* Negrita para mayor impacto */
+  transition: color 0.3s ease, transform 0.3s ease; /* Transición para color y movimiento */
 }
 
-/* Estilos para la descripción */
-.description {
-  font-size: 1.5em;
-  color: #34495e; /* Azul un poco más claro */
-  line-height: 1.6;
-  font-family: 'Arial', sans-serif;
-  transition: color 0.3s ease-in-out; /* Efecto de transición para el color */
-}
-
-/* Estilos para hacer el diseño responsive */
-@media only screen and (max-width: 600px) {
-  .title {
-    font-size: 2.5em;
-  }
-  .description {
-    font-size: 1.2em;
-  }
-}
-
-/* Efecto de hover sobre el título */
+/* Estilos para el título al pasar el ratón */
 .title:hover {
   color: #3498db; /* Azul más claro */
+  transform: scale(1.05); /* Ligeramente más grande al pasar el ratón */
 }
 
-/* Efecto de hover sobre la descripción */
-.description:hover {
-  color: #f4b0ae; /* Azul más claro */
+/* Estilos para la sección de noticias */
+.news-section {
+  padding: 20px;
+  background-color: #ffffff; /* Fondo blanco para la sección */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para resaltar la sección */
+  margin-bottom: 40px; /* Espacio inferior para separación */
 }
 
-/*quinta tabla estilos*/
+/* Estilos para el título de la sección */
+.section-title {
+  font-size: 2.5em;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-family: 'Roboto', sans-serif; /* Fuente más moderna */
+  font-weight: 600; /* Negrita para el título */
+}
 
-.destino {
-  border: 1px solid #ccc;
+/* Blog Container */
+.blog-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Tres columnas */
+  gap: 20px;
+  padding: 20px;
+}
+
+@media (max-width: 1024px) {
+  .blog-container {
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas en pantallas más pequeñas */
+  }
+}
+
+@media (max-width: 768px) {
+  .blog-container {
+    grid-template-columns: 1fr; /* Una columna en dispositivos pequeños */
+  }
+}
+
+/* Blog Post Styles */
+.blog-post {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  overflow: hidden; /* Para asegurar que el contenido no sobresalga */
+}
+
+.blog-post:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Encabezado de la publicación */
+.post-header {
+  margin-bottom: 15px;
+}
+
+/* Título de la publicación */
+.post-title {
+  font-size: 1.8em;
+  margin: 0 0 10px;
+  color: #333;
+  font-family: 'Roboto', sans-serif; /* Fuente moderna */
+  font-weight: 500; /* Peso de fuente regular */
+}
+
+/* Meta información de la publicación */
+.post-meta {
+  font-size: 14px;
+  color: #999;
+}
+
+/* Contenido de la publicación */
+.post-content {
+  font-size: 1em;
+  margin-bottom: 20px;
+  color: #555;
+  line-height: 1.6; /* Mejora la legibilidad */
+}
+
+/* Tipo de publicación */
+.post-type {
+  font-size: 1em;
+  font-weight: bold;
+  color: #3498db;
+}
+
+/* Estilos para las imágenes del post */
+.post-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.post-image {
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.post-image:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+/* Estilo para las noticias en posiciones 0, 1, 2 */
+.blog-post-style-1 {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  overflow: hidden;
+}
+
+.blog-post-style-1:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo para las noticias en posiciones 3, 4, 5 */
+.blog-post-style-2 {
+  background: #f0f0f0;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+  overflow: hidden;
+}
+
+.blog-post-style-2:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Encabezado de la publicación */
+.post-header {
+  margin-bottom: 15px;
+}
+
+/* Título de la publicación */
+.post-title {
+  font-size: 1.8em;
+  margin: 0 0 10px;
+  color: #333;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+}
+
+/* Meta información de la publicación */
+.post-meta {
+  font-size: 14px;
+  color: #999;
+}
+
+/* Contenido de la publicación */
+.post-content {
+  font-size: 1em;
+  margin-bottom: 20px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Tipo de publicación */
+.post-type {
+  font-size: 1em;
+  font-weight: bold;
+  color: #3498db;
+}
+
+/* Estilos para las imágenes del post */
+.post-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.post-image {
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.post-image:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.no-noticias {
+  padding: 20px;
+  text-align: center;
+  font-size: 1.2em;
+  color: #333;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
   margin-bottom: 20px;
 }
 
-.destino h2 {
-  margin: 0;
-  padding: 10px;
-  background-color: #f0f0f0;
-}
-
-.accordion {
-  position: relative;
-}
-
-.accordion-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease;
-}
-
-input[type="checkbox"] {
-  display: none;
-}
-
-input[type="checkbox"] + label {
-  display: block;
-  padding: 10px;
-  cursor: pointer;
-  background-color: #ddd;
-}
-
-input[type="checkbox"]:checked + label + .accordion-content {
-  max-height: 500px; /* Adjust according to your content */
-}
-
-.imagenes {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.imagenes img {
-  width: 100px;
-  height: 100px;
-  margin: 5px;
+.no-noticias::before {
+  content: "⚠️ ";
 }

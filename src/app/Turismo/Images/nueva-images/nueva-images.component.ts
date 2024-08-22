@@ -32,86 +32,87 @@ export class NuevaImagesComponent implements OnInit{
   @ViewChild('fileInput') fileInput!: ElementRef;
   crearForm!: FormGroup;
   imagenes!: Images;
-  isSubmitting: boolean = false;
-
-  //Carga de Fotos
   selectedFiles: File[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
-    //public dialogRef: MatDialogRef<NuevaImagesComponent>,
-    //@Inject(MAT_DIALOG_DATA) public data: any,
     private imagesService: ImagesService,
-    private router: Router,
+    private router: Router
   ) {}
+
   ngOnInit(): void {
     this.crearForm = this.formBuilder.group({
       nombre: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
       ruta: ['', [Validators.required]],
-      activa: ['true'] // Establecer el valor de activa como 'true' por defecto
+      activa: ['true']
     });
   }
 
   onFileChange(event: any): void {
-    this.selectedFiles = Array.from(event.target.files);
-    if (this.selectedFiles.length > 0) {
-      const fileName = this.crearForm.get('nombre')?.value + this.getFileExtension(this.selectedFiles[0].name);
+    const file = event.target.files[0];
+    if (file && this.validarTipoArchivo(file) && this.validarTamanoArchivo(file)) {
+      this.selectedFiles = [file];
+      const fileName = this.crearForm.get('nombre')?.value + this.getFileExtension(file.name);
       this.crearForm.patchValue({ ruta: fileName });
+    } else {
+      this.fileInput.nativeElement.value = ''; // Limpiar el campo de selección de archivo
+      Swal.fire('Error', 'Formato de archivo no válido o tamaño excedido. Solo se permiten archivos JPG, PNG, GIF o BMP de hasta 500MB.', 'error');
     }
   }
 
   onSubmit(): void {
-    console.log('Envío de formulario iniciado');
     if (this.crearForm.invalid) {
       return;
     }
-    console.log('El formulario es válido y no se envía.');
 
     const formData: FormData = new FormData();
     formData.append('archivo', this.selectedFiles[0], this.crearForm.get('nombre')?.value + this.getFileExtension(this.selectedFiles[0].name));
     formData.append('nombre', this.crearForm.get('nombre')?.value);
 
-    this.isSubmitting = true;
-    console.log('Envío de datos del formulario');
     this.imagesService.guardarImagenes(formData).pipe(
       catchError(error => {
-        this.isSubmitting = false;
         Swal.fire('Error', 'No se pudo cargar la imagen. Intente de nuevo.', 'error');
         return of(null);
       })
     ).subscribe((response) => {
-      this.isSubmitting = false;
-      console.log('Se recibió la respuesta de envío del formulario');
       if (response) {
         Swal.fire('Éxito', 'La imagen se ha cargado exitosamente.', 'success');
         this.limpiarFormulario(); // Limpiar el formulario después de cargar la imagen exitosamente
       }
     });
   }
+
   getFileExtension(filename: string): string {
     return filename.substring(filename.lastIndexOf('.'));
   }
+
   limpiarFormulario() {
-    this.crearForm.reset();
+    this.crearForm.reset(); // Resetear el formulario
+    this.selectedFiles = []; // Limpiar el arreglo de archivos seleccionados
+    if (this.fileInput) {
+      this.fileInput.nativeElement.value = ''; // Limpiar el campo de selección de archivo
+    }
+  }
+
+  volver() {
+    this.router.navigate(['/images']);
+  }
+
+  eliminarFoto(): void {
     this.selectedFiles = [];
+    this.crearForm.patchValue({ ruta: '' });
     if (this.fileInput) {
       this.fileInput.nativeElement.value = '';
     }
   }
-  volver() {
-    this.router.navigate(['/images']);
-  }
-  eliminarFoto(): void {
-    this.selectedFiles = [];
-    this.crearForm.patchValue({ ruta: null });
-    this.fileInput.nativeElement.value = '';
-  }
+
   verFotoCompleta(): void {
     if (this.selectedFiles.length > 0) {
       const fileURL = URL.createObjectURL(this.selectedFiles[0]);
       window.open(fileURL, '_blank');
     }
   }
+
   descargarFoto(): void {
     if (this.selectedFiles.length > 0) {
       const fileURL = URL.createObjectURL(this.selectedFiles[0]);
@@ -122,12 +123,15 @@ export class NuevaImagesComponent implements OnInit{
       URL.revokeObjectURL(fileURL);
     }
   }
+
   validarTipoArchivo(archivo: File): boolean {
     const tiposPermitidos = ['image/jpeg', 'image/png', 'image/gif', 'image/bmp'];
     return tiposPermitidos.includes(archivo.type);
   }
+
   validarTamanoArchivo(archivo: File): boolean {
     const tamanioMaximo = 500 * 1024 * 1024; // 500MB en bytes
     return archivo.size <= tamanioMaximo;
   }
 }
+//

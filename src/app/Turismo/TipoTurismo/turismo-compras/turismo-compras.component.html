@@ -1,1 +1,69 @@
-<p>turismo-compras works!</p>
+<div class="mi-separador-div"></div>
+<header class="shopping-header">
+  <div class="shopping-content">
+    <h1 class="shopping-title">¡Bienvenidos!</h1>
+    <p class="shopping-subtitle">Descubre el turismo de compras de Girardot</p>
+  </div>
+  <img src="assets/images/UNICENTRO.jpeg" alt="Background Image" class="shopping-background">
+</header>
+<div class="mi-separador-div"></div>
+<h1 class="titulo-event">Turismo Comercial</h1>
+
+<!-- Estructura básica del buscador -->
+<div class="search-container">
+  <input type="text" [(ngModel)]="searchText" placeholder="Buscar Turismo Comercial..." class="search-box" />
+  <button class="search-button">
+    <i class="fas fa-search"></i>
+  </button>
+</div>
+<div *ngIf="getFilteredDestinos().length === 0" class="no-eventos">
+  No hay destinos de Turismo Cultural disponibles para la búsqueda "{{ searchText }}".
+  Por favor, ajusta tus criterios de búsqueda o intenta más tarde.
+</div>
+
+<div class="main-container">
+  <!-- Contenido principal aquí -->
+  <div class="destinos-container">
+    <div class="row">
+      <div class="col" *ngFor="let destino of getFilteredDestinos()">
+        <div class="card">
+          <div class="image">
+            <img [src]="getImageUrl(destino.imagenes[0].ruta)" [alt]="destino.destinoName" class="logo" (click)="openModal(destino.imagenes[0])">
+          </div>
+          <div class="details">
+            <div class="center">
+              <h1>{{ destino.destinoName }}</h1>
+              <p><strong>Descripción:</strong> {{ destino.descripcion }}</p>
+              <p><strong>Ubicación:</strong> {{ destino.ubicacion }}</p>
+              <p><strong>Tipo de Turismo:</strong>
+                <span *ngFor="let tipo of destino.tipoTurismo">{{ tipo.nombre }}</span>
+              </p>
+              <p><strong>Atracciones Principales:</strong>
+                <span *ngFor="let atraccion of destino.atracionesPrincipales">{{ atraccion.nombre }}</span>
+              </p>
+              <p><strong>Épocas para Visitar:</strong>
+                <span *ngFor="let epoca of destino.epocasVisitar">{{ epoca.nombre }}</span>
+              </p>
+              <!-- Imágenes -->
+              <div class="destino-images">
+                <img *ngFor="let imagen of destino.imagenes"
+                     [src]="getImageUrl(imagen.ruta)"
+                     [alt]="imagen.nombre"
+                     class="destino-image"
+                     (click)="openModal(imagen)"
+                     title="Haz clic para ampliar" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal para mostrar imagen ampliada -->
+<div class="modal" [ngClass]="{'show': isModalOpen}" (click)="closeModal()">
+  <span class="close" (click)="closeModal()">&times;</span>
+  <img class="modal-content" [src]="getImageUrl(selectedImage?.ruta)" (click)="$event.stopPropagation()" alt="image">
+  <div class="caption">{{ selectedImage?.nombre }}</div>
+</div>
+<div class="mi-separador-div"></div>

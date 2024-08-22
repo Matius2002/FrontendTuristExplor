@@ -858,7 +858,6 @@ textarea, label {
 .text-white {
   color: white;
 }
-/*Colaboradores*/
 
 /* General Styles */
 .container-fluid {
@@ -869,6 +868,10 @@ textarea, label {
   margin-left: auto;
 }
 
+.m-0 {
+  text-align: center;
+}
+
 .position-relative {
   position: relative;
 }
@@ -876,6 +879,13 @@ textarea, label {
 .img-fluid {
   width: 100%;
   height: auto;
+}
+
+/* Fixed size for images */
+.fixed-size {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
 }
 
 .blog-date {
@@ -945,6 +955,58 @@ h6, h1 {
   border: 1px solid #e5e5e5;
   border-radius: 5px;
   overflow: hidden;
+}
+.blog-item {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.blog-item .position-relative {
+  position: relative;
+  width: 100%;
+}
+
+.position-relative img {
+  width: 100%;
+  height: 200px; /* Debe coincidir con la altura en .blog-item img */
+  object-fit: cover;
+}
+
+
+.bg-white {
+  background-color: #fff;
+}
+
+.p-4 {
+  padding: 1.5rem !important;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+.d-flex {
+  display: flex !important;
+}
+
+.flex-column {
+  flex-direction: column !important;
+}
+
+.justify-content-between {
+  justify-content: space-between !important;
+}
+
+.text-primary {
+  color: #007bff !important;
+}
+
+.text-decoration-none {
+  text-decoration: none !important;
 }
 
 /* Testimonial Carousel Styles */

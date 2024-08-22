@@ -22,11 +22,17 @@ interface  TipoAlojamiento{
   id: number;
   nombre: string;
 }
+interface Images {
+  id: number;
+  nombre: string;
+  ruta: string;
+  activa: boolean;
+}
 interface Alojamiento{
   id: number;
-  destinos: Destinos;
-  nombre: string;
   descripcion: string;
+  destinos: Destinos [];
+  nombre: string;
   tipoAlojamiento: TipoAlojamiento;
   direccion: string;
   celular: string;
@@ -34,8 +40,7 @@ interface Alojamiento{
   webUrl: string;
   precioGeneral: number;
   fechaCreacion: Date;
-  fechaActualizacion: Date;
-
+  imagenes: Images[];
 }
 interface Item {
   id: number;
@@ -98,10 +103,10 @@ export class AlojamientoComponent implements OnInit{
     window.print();
   }
   // Actualizar torre
-  openUpdateModal(alojamiento: Alojamiento): void {
+  openUpdateModal(alojamientos: Alojamiento): void {
     const dialogRef = this.dialog.open(EditarAlojamientoComponent, {
       width: '400px',
-      data: {alojamiento}
+      data: {alojamientos}
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'success') {
@@ -130,8 +135,8 @@ export class AlojamientoComponent implements OnInit{
             email: alojamiento.email,
             webUrl: alojamiento.webUrl,
             precioGeneral:alojamiento.precioGeneral,
-            fechaActualizacion: alojamiento.fechaActualizacion,
-            fechaCreacion: alojamiento.fechaCreacion
+            fechaCreacion: alojamiento.fechaCreacion,
+            imagenes: alojamiento.imagenes
           };
         });
         this.totalPages = Math.ceil(this.alojamientos.length / this.itemsPerPage);

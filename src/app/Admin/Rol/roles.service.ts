@@ -84,7 +84,8 @@ export class RolesService {
       );
   }
 
-  // Función para manejar errores de HTTP
+
+// Implementación única de la función handleError
   private handleError(error: HttpErrorResponse): Observable<any> {
     if (error.status === 403) {
       console.error('Acceso prohibido. No tienes permiso para acceder a este recurso.');
@@ -100,5 +101,6 @@ export class RolesService {
       return throwError(errorMessage);
     }
   }
+
 
 }

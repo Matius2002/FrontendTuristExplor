@@ -5,17 +5,53 @@
 </div>
 <div class="mi-separador-div"></div>
 
-<!-- tabla quinta -->
-<div *ngIf="noticias.length === 0" class="no-eventos">No hay Noticias disponibles</div>
-<div *ngFor="let noticia of noticias">
-  <div class="noticia">
-    <h2>{{ noticia.titulo }}</h2>
-    <p>{{ noticia.contenido }}</p>
-    <p><strong>Fecha de Publicación:</strong> {{ noticia.fechaPublicacion }}</p>
-    <p><strong>Fuente:</strong> {{ noticia.fuente }}</p>
-    <div class="imagenes">
-      <img *ngFor="let imagen of noticia.imagenes" [src]="imagen.ruta" alt="{{ imagen.ruta }}" />
+<h1 class="titulo-event">Noticias destacadas</h1>
+<!-- Estructura básica del buscador -->
+<div class="search-container">
+  <input type="text" [(ngModel)]="searchText" placeholder="Buscar ..." class="search-box" />
+  <button class="search-button">
+    <i class="fas fa-search"></i>
+  </button>
+</div>
+
+<!-- Mensaje cuando no hay noticias disponibles -->
+<div *ngIf="getFilteredNoticias().length === 0" class="no-noticias">
+  No hay noticias disponibles para la búsqueda "{{ searchText }}".
+  Por favor, ajusta tus criterios de búsqueda o intenta más tarde.
+</div>
+
+<!-- Tabla de noticias -->
+<div class="blog-container">
+  <div *ngFor="let noticia of getFilteredNoticias(); let i = index"
+       [ngClass]="{'blog-post-style-1': (i % 6) < 3, 'blog-post-style-2': (i % 6) >= 3}">
+    <div class="post-header">
+      <h2 class="post-title">{{ noticia.titulo }}</h2>
+      <p class="post-meta">
+        <span class="post-date">{{ noticia.fechaPublicacion | date:'dd/MM/yyyy' }}</span> |
+        <span class="post-source">{{ noticia.fuente }}</span>
+      </p>
+    </div>
+    <div class="post-content">
+      <p>{{ noticia.contenido }}</p>
+      <p>{{ noticia.tipoTurismo.nombre }}</p>
+    </div>
+    <div class="post-images">
+      <img *ngFor="let imagen of noticia.images"
+           [src]="getImageUrl(imagen.ruta)"
+           [alt]="imagen.nombre"
+           class="post-image"
+           (click)="openModal(imagen)"
+           (error)="onImageError($event, imagen.ruta)"
+           title="Haz clic para ampliar" />
     </div>
   </div>
 </div>
 
+
+<!-- Modal para mostrar imagen ampliada -->
+<div class="modal" [ngClass]="{'show': isModalOpen}" (click)="closeModal()">
+  <span class="close" (click)="closeModal()">&times;</span>
+  <img class="modal-content" [src]="getImageUrl(selectedImage?.ruta)" (click)="$event.stopPropagation()" alt="img">
+  <div class="caption">{{ selectedImage?.nombre }}</div>
+</div>
+<div class="mi-separador-div"></div>

@@ -71,7 +71,7 @@
                 <i *ngIf="crearForm.get('destinos')?.invalid && crearForm.get('destinos')?.touched" class="fas fa-times-circle text-danger"></i>
               </span>
           </div>
-          <select id="destinos" formControlName="destinos" class="form-control">
+          <select id="destinos" formControlName="destinos" class="form-control" multiple>
             <option value="" disabled selected>Selecciona un destino</option>
             <option *ngFor="let destino of destinos" [ngValue]="destino">{{ destino.destinoName }}</option>
           </select>
@@ -172,44 +172,52 @@
     </div>
     <!-- fin precioGeneral -->
 
-    <!-- inicio fechaCreacion y fechaActualizacion -->
+    <!-- inicio fechaCreacion y hora -->
     <div class="form-row">
       <div class="col">
         <div class="form-group">
-          <label for="fechaCreacion">Fecha de Creación</label>
+          <label for="fechaCreacion">Fecha y Hora de Creación</label>
           <div class="input-group">
             <div class="input-group-prepend">
-              <span class="input-group-text">
-                <i *ngIf="crearForm.get('fechaCreacion')?.valid || !crearForm.get('fechaCreacion')?.touched" class="fas fa-calendar-alt"></i>
-                <i *ngIf="crearForm.get('fechaCreacion')?.invalid && crearForm.get('fechaCreacion')?.touched" class="fas fa-times-circle text-danger"></i>
-              </span>
+          <span class="input-group-text">
+            <i *ngIf="crearForm.get('fechaCreacion')?.valid || !crearForm.get('fechaCreacion')?.touched" class="fas fa-calendar-alt"></i>
+            <i *ngIf="crearForm.get('fechaCreacion')?.invalid && crearForm.get('fechaCreacion')?.touched" class="fas fa-times-circle text-danger"></i>
+          </span>
             </div>
-            <input type="date" id="fechaCreacion" formControlName="fechaCreacion" class="form-control">
+            <input type="datetime-local" id="fechaCreacion" formControlName="fechaCreacion" class="form-control">
           </div>
           <div *ngIf="crearForm.get('fechaCreacion')?.invalid && (crearForm.get('fechaCreacion')?.dirty || crearForm.get('fechaCreacion')?.touched)">
             <div class="text-danger" *ngIf="crearForm.get('fechaCreacion')?.errors?.['required']">La fecha de creación es obligatoria.</div>
           </div>
         </div>
       </div>
-      <div class="col">
-        <div class="form-group">
-          <label for="fechaActualizacion">Fecha de Actualización</label>
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text">
-                <i *ngIf="crearForm.get('fechaActualizacion')?.valid || !crearForm.get('fechaActualizacion')?.touched" class="fas fa-calendar-alt"></i>
-                <i *ngIf="crearForm.get('fechaActualizacion')?.invalid && crearForm.get('fechaActualizacion')?.touched" class="fas fa-times-circle text-danger"></i>
-              </span>
-            </div>
-            <input type="date" id="fechaActualizacion" formControlName="fechaActualizacion" class="form-control">
-          </div>
-          <div *ngIf="crearForm.get('fechaActualizacion')?.invalid && (crearForm.get('fechaActualizacion')?.dirty || crearForm.get('fechaActualizacion')?.touched)">
-            <div class="text-danger" *ngIf="crearForm.get('fechaActualizacion')?.errors?.['required']">La fecha de actualización es obligatoria.</div>
-          </div>
+    </div>
+    <!-- fin fechaCreacion y hora -->
+
+    <!-- inicio imágenes -->
+    <div class="form-group">
+      <label for="imagenes">Imágenes</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <button class="btn btn-outline-primary mr-2" type="button" (click)="agregarNuevaImagen()" data-toggle="tooltip" data-placement="top" title="Agregar nueva imagen">
+            <i class="fas fa-plus"></i>
+          </button>
+          <span class="input-group-text">
+        <i *ngIf="crearForm.get('imagenes')?.valid || !crearForm.get('imagenes')?.touched" class="fas fa-image"></i>
+        <i *ngIf="crearForm.get('imagenes')?.invalid && crearForm.get('imagenes')?.touched" class="fas fa-times-circle text-danger"></i>
+      </span>
         </div>
+        <select id="imagenes" formControlName="imagenes" class="form-control" multiple>
+          <option value="" disabled selected>Selecciona una imagen</option>
+          <option *ngFor="let imagen of imagenes" [ngValue]="imagen">{{ imagen.ruta }}</option>
+        </select>
+      </div>
+
+      <div *ngIf="crearForm.get('imagenes')?.invalid && (crearForm.get('imagenes')?.dirty || crearForm.get('imagenes')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('imagenes')?.errors?.['required']">Las imágenes son obligatorias.</div>
       </div>
     </div>
-    <!-- fin fechaCreacion y fechaActualizacion -->
+    <!-- fin imágenes -->
 
     <!-- Botones -->
     <div class="form-group">

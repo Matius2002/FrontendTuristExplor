@@ -20,7 +20,9 @@ interface EpocasVisitar{
 }
 interface Images{
   id: number;
+  nombre: string;
   ruta: string;
+  activa: boolean;
 }
 interface Destinos {
   id: number;
@@ -32,9 +34,7 @@ interface Destinos {
   epocasVisitar: EpocasVisitar [];
   imagenes: Images [];
   fechaCreacion: Date;
-  horaCreacion: string;
   fechaActualizacion: Date;
-  horaActualizacion: string;
 }
 @Component({
   providers: [DestinoService,HttpClient],
@@ -75,9 +75,7 @@ export class NuevoDestinoComponent implements OnInit{
       epocasVisitar: [[], [Validators.required]],
       imagenes: [[], [Validators.required]],
       fechaCreacion: ['', [Validators.required]],
-      horaCreacion: ['', [Validators.required]],
       fechaActualizacion: ['', [Validators.required]],
-      horaActualizacion: ['', [Validators.required]],
     });
     this.cargarAtracionesPrincipales();
     this.cargarImages();
@@ -138,11 +136,12 @@ export class NuevoDestinoComponent implements OnInit{
           if (isExistente) {
             Swal.fire({
               icon: 'error',
-              title: 'EL Destino ya existe',
+              title: 'El Destino ya existe',
               text: 'Ingrese un nombre diferente'
             });
           } else {
             const formData = this.crearForm.value;
+            console.log('Datos del Destino antes de guardar:', formData); // Añadido console.log
             this.guardarDestinos(formData);
           }
           this.isSubmitting = false;
@@ -156,10 +155,16 @@ export class NuevoDestinoComponent implements OnInit{
         }
       });
     } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Formulario inválido',
+        text: 'Por favor, complete todos los campos requeridos'
+      });
     }
   }
+
   guardarDestinos(destinosData: Destinos): void {
-    console.log('Datos del Destino:', destinosData);
+    console.log('Datos del Destino a guardar:', destinosData); // Añadido console.log
     this.destinoService.guardarDestinos(destinosData).subscribe(() => {
       Swal.fire({
         icon: 'success',
@@ -176,10 +181,15 @@ export class NuevoDestinoComponent implements OnInit{
       });
     });
   }
+
   limpiarFormulario() {
     this.crearForm.reset();
   }
   volver() {
     this.router.navigate(['/destinos']);
+  }
+
+  agregarNuevaImagen() {
+    this.router.navigate(['/nueva-imagen']);
   }
 }

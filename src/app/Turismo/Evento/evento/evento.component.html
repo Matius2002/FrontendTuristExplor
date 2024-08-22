@@ -52,12 +52,7 @@
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
       </th>
-      <th (click)="sortColumn('destino')">
-        Destino
-        <span *ngIf="currentColumn === 'destino'" class="sorting-icon">
-          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
-        </span>
-      </th>
+
       <th (click)="sortColumn('fechaInicio')">
         Fecha Inicio
         <span *ngIf="currentColumn === 'fechaInicio'" class="sorting-icon">
@@ -82,9 +77,10 @@
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
       </th>
-      <th (click)="sortColumn('images')">
-        Images
-        <span *ngIf="currentColumn === 'images'" class="sorting-icon">
+
+      <th (click)="sortColumn('tipoTurismo')">
+        TiposTurismo
+        <span *ngIf="currentColumn === 'tipoTurismo'" class="sorting-icon">
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
       </th>
@@ -96,12 +92,15 @@
       <td class="text-center">{{ evento.id }}</td>
       <td [innerHTML]="highlightMatches(evento.nombre, searchText)"></td>
       <td>{{ evento.descripcion }}</td>
-      <td>{{ evento.destinos?.destinoName}}</td>
       <td>{{ evento.fechaInicio }}</td>
       <td>{{ evento.fechaFin }}</td>
       <td>{{ evento.ubicacion }}</td>
       <td>{{ evento.costoEntrada }}</td>
-      <td>{{ evento.images?.nombre}}</td>
+      <td>{{ evento.tipoTurismo?.nombre }}</td>
+
+
+      <!-- ayudame no me quiere cargar evento.tipoTurismo?.nombre revisa si todo esta bien  -->
+
       <td class="d-flex justify-content-center align-items-center">
         <button type="button" class="btn btn-outline-info btn-sm mr-1" appTooltip="Actualizar" (click)="openUpdateModal(evento)">
           <i class="fas fa-edit"></i>

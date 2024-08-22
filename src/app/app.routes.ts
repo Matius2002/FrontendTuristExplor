@@ -51,9 +51,9 @@ import { BreadcrumbsComponent } from './Shared/breadcrumbs/breadcrumbs.component
 import { AlojamientoComponent } from './Turismo/Alojamiento/alojamiento/alojamiento.component';
 import { FooterComponent } from './Shared/footer/footer.component';
 import { TurismoSostenibleComponent } from './Turismo/TipoTurismo/turismo-sostenible/turismo-sostenible.component';
-import {authGuard} from "./AuthGuard";
-
-
+import {MapasTuristicosComponent} from "./Mapas/mapas-turisticos/mapas-turisticos.component";
+import {DetalleNoticiaComponent} from "./Turismo/Noticia/detalle-noticia/detalle-noticia.component";
+import {VisitGuard} from "./guard/VisitGuard";
 
 export const routes: Routes = [
   {
@@ -62,13 +62,52 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'tu-inicio', pathMatch: 'full' },
       { path: 'tu-inicio', component: InicioComponent },
-      { path: 'Conoce-Girardot', component: ConoceGirardotComponent, canActivate: [authGuard]},
+      { path: 'Conoce-Girardot', component: ConoceGirardotComponent, canActivate: [VisitGuard] },
       { path: 'sistemas', component: SistemaComponent },
       { path: 'evento-contenido', component: EventoContenidoComponent },
       { path: 'tipo-sostenible', component: TurismoSostenibleComponent },
       { path: 'nueva-experiencia', component: NuevaExperienciaComponent },
+
+      { path: 'noticias/:id', component: DetalleNoticiaComponent },
+
       { path: 'noticia-contenido', component: NoticiasContenidoComponent },
-      //{ path: 'tu-inicio', component: InicioComponent, canActivate: [AuthGuard] },
+      { path: 'tipo-cultural', component: TurismoCulturalComponent },
+      { path: 'tipo-gastronomico', component: TurismoGastronomicoComponent },
+      { path: 'tipo-religioso', component: TurismoReligiosoComponent },
+      { path: 'tipo-aventura', component: TurismoAventurasComponent },
+      { path: 'tipo-compras', component: TurismoComprasComponent },
+      { path: 'tipo-nocturno', component: TurismoNocturnoComponent },
+      { path: 'alojamiento-contenido', component: AlojamientoContenidoComponent },
+      { path: 'destinos', component: DestinosComponent },
+      { path: 'tipo-turismo', component: TipoTurismoComponent },
+      { path: 'tipo-alojamiento', component: TipoAlojamientoComponent },
+      { path: 'images', component: ImagesComponent },
+      { path: 'atraciones-principales', component: AtracionesPrincipalComponent },
+      { path: 'epoca-visitar', component: EpocaVisitarComponent },
+      { path: 'noticias', component: NoticiaComponent },
+      { path: 'eventos', component: EventoComponent },
+      { path: 'experiencias', component: ExperienciaComponent },
+      { path: 'roles', component: RolesComponent },
+      { path: 'permisos', component: PermisosComponent },
+      { path: 'usuarios', component: UsuariosComponent },
+      { path: 'login', component: LoginComponent },
+      { path: 'reportes', component: ReportesComponent },
+      { path: 'alojamientos', component: AlojamientoComponent },
+
+      //SUB RAMAS
+      { path: 'nuevo-destinos', component: NuevoDestinoComponent },
+      { path: 'nuevo-tipoTurismo', component: NuevoTipoTurismoComponent },
+      { path: 'nuevo-tipoAlojamiento', component: NuevoTipoAlojamientoComponent },
+      { path: 'nueva-noticia', component: NuevaNoticiaComponent },
+      { path: 'nuevo-evento', component: NuevoEventoComponent },
+      { path: 'nueva-epoca', component: NuevaEpocaVisitarComponent },
+      { path: 'nueva-atracciones', component: NuevaAtracionesComponent },
+      { path: 'nueva-imagen', component: NuevaImagesComponent },
+      { path: 'nuevo-rol', component: NuevoRolComponent },
+      { path: 'nuevo-permiso', component: NuevoPermisoComponent },
+      { path: 'nuevo-usuario', component: NuevoUsuarioComponent },
+      { path: 'nuevo-alojamiento', component: NuevoAlojamientoComponent },
+
     ]
   },
   { path: 'pages', component: PagesComponent },
@@ -76,41 +115,9 @@ export const routes: Routes = [
   { path: 'navbar', component: NavBarComponent },
   { path: 'breadcrumbs', component: BreadcrumbsComponent },
   { path: 'footer', component: FooterComponent },
-  { path: 'nuevo-alojamiento', component: NuevoAlojamientoComponent },
-  { path: 'nuevo-destinos', component: NuevoDestinoComponent },
-  { path: 'nuevo-tipoTurismo', component: NuevoTipoTurismoComponent },
-  { path: 'nuevo-tipoAlojamiento', component: NuevoTipoAlojamientoComponent },
-  { path: 'nueva-noticia', component: NuevaNoticiaComponent },
-  { path: 'nuevo-evento', component: NuevoEventoComponent },
-  { path: 'nueva-epoca', component: NuevaEpocaVisitarComponent },
-  { path: 'nueva-atracciones', component: NuevaAtracionesComponent },
-  { path: 'nueva-imagen', component: NuevaImagesComponent },
-  { path: 'nuevo-rol', component: NuevoRolComponent },
-  { path: 'nuevo-permiso', component: NuevoPermisoComponent },
-  { path: 'nuevo-usuario', component: NuevoUsuarioComponent },
-  { path: 'tipo-turismo', component: TipoTurismoComponent },
-  { path: 'tipo-alojamiento', component: TipoAlojamientoComponent },
-  { path: 'images', component: ImagesComponent },
-  { path: 'destinos', component: DestinosComponent },
-  { path: 'atraciones-principales', component: AtracionesPrincipalComponent },
-  { path: 'epoca-visitar', component: EpocaVisitarComponent },
-  { path: 'noticias', component: NoticiaComponent },
-  { path: 'eventos', component: EventoComponent },
-  { path: 'experiencias', component: ExperienciaComponent },
-  { path: 'roles', component: RolesComponent },
-  { path: 'permisos', component: PermisosComponent },
-  { path: 'usuarios', component: UsuariosComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'reportes', component: ReportesComponent },
-  { path: 'alojamientos', component: AlojamientoComponent },
-  { path: 'tu-experiencia', component: ExperienciaContenidoComponent },
-  { path: 'alojamiento-contenido', component: AlojamientoContenidoComponent },
-  { path: 'tipo-cultural', component: TurismoCulturalComponent },
-  { path: 'tipo-gastronomico', component: TurismoGastronomicoComponent },
-  { path: 'tipo-religioso', component: TurismoReligiosoComponent },
-  { path: 'tipo-compras', component: TurismoComprasComponent },
-  { path: 'tipo-aventura', component: TurismoAventurasComponent },
-  { path: 'tipo-nocturno', component: TurismoNocturnoComponent },
+
+  {path: 'rutas-map', component: MapasTuristicosComponent},
+  {path: 'tu-experiencia', component: ExperienciaContenidoComponent },
 ];
 
 

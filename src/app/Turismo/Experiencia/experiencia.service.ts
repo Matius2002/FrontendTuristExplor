@@ -5,6 +5,7 @@ import {catchError, Observable, throwError} from "rxjs";
 interface Usuario {
   id: number;
   nombreUsuario: string;
+  email: string;
 
 }
 interface Destinos {
@@ -67,6 +68,13 @@ export class ExperienciaService {
     // Asegúrate de que el ID en el cuerpo de la solicitud sea igual al ID en la URL
     tipoActualizada.id = id;
     return this.http.put<Experiencia>(`${this.baseUrl}/experiencias/${id}`, tipoActualizada)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  recuperarTodosDestinos(): Observable<Destinos[]> {
+    return this.http.get<Destinos[]>(`${this.baseUrl}/destinos/obtenerTodosLosDestinos`)
       .pipe(
         catchError(this.handleError)
       );

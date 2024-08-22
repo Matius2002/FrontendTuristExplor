@@ -1,1 +1,44 @@
-<p>editar-epoca-visitar works!</p>
+<!-- editar-epoca-visita.component.html -->
+<div mat-dialog-content class="modal-content-editar-turismo">
+    <div class="modal-header-editar-turismo">
+      <h5 class="modal-title-editar-turismo">Editar Época de Visita</h5>
+      <button type="button" class="close-editar-turismo" aria-label="Close" (click)="onCancelar()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body-editar-turismo">
+      <form [formGroup]="editarForm" (ngSubmit)="onSubmit()">
+        <div class="form-group-editar-turismo">
+          <label for="nombre">Nombre de la Época</label>
+          <input type="text" id="nombre" formControlName="nombre" placeholder="Ingresa el Nombre de la Época" class="form-control-editar-turismo">
+          <div *ngIf="editarForm.get('nombre')?.invalid && (editarForm.get('nombre')?.dirty || editarForm.get('nombre')?.touched)">
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('nombre')?.hasError('required')">El Nombre de la Época es obligatorio.</div>
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('nombre')?.hasError('minlength')">El Nombre de la Época debe tener al menos 5 caracteres.</div>
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('nombre')?.hasError('maxlength')">El Nombre de la Época no debe exceder los 50 caracteres.</div>
+          </div>
+        </div>
+        <div class="form-group-editar-turismo">
+          <label for="descripcion">Descripción</label>
+          <textarea id="descripcion" formControlName="descripcion" placeholder="Ingresa la Descripción de la Época" rows="5" class="form-control-editar-turismo"></textarea>
+          <div *ngIf="editarForm.get('descripcion')?.invalid && (editarForm.get('descripcion')?.dirty || editarForm.get('descripcion')?.touched)">
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('descripcion')?.hasError('required')">La Descripción es obligatoria.</div>
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('descripcion')?.hasError('minlength')">La Descripción debe tener al menos 10 caracteres.</div>
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('descripcion')?.hasError('maxlength')">La Descripción no debe exceder los 500 caracteres.</div>
+          </div>
+        </div>
+        <div class="form-group-editar-turismo">
+          <label for="clima">Clima</label>
+          <input type="text" id="clima" formControlName="clima" placeholder="Ingresa el Clima" class="form-control-editar-turismo">
+          <div *ngIf="editarForm.get('clima')?.invalid && (editarForm.get('clima')?.dirty || editarForm.get('clima')?.touched)">
+            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('clima')?.hasError('required')">El Clima es obligatorio.</div>
+          </div>
+        </div>
+        <div class="modal-footer-editar-turismo">
+          <button type="button" class="btn btn-secondary" (click)="onCancelar()">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Actualizar</button>
+          <button type="button" class="btn btn-danger" (click)="onClearForm()">Limpiar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+

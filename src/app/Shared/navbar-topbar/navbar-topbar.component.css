@@ -92,6 +92,18 @@ a:hover {
   border-color: #007bff;
 }
 
+.btn-outline-danger {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+
 /* Right-align the buttons */
 .btn-group {
   margin-left: auto;

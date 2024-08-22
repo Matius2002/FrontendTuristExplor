@@ -1,0 +1,189 @@
+/* Estilos para .matias */
+.matias {
+  position: relative;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+}
+
+.matias-background {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  filter: brightness(50%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  animation: zoomInBackground 1s ease; /* Animación para el fondo */
+}
+
+.matias-content {
+  padding: 100px 20px;
+  z-index: 1;
+  position: relative;
+}
+
+.title {
+  font-size: 3.5em;
+  margin-bottom: 10px;
+  font-family: 'Arial', sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  animation: slideInFromLeft 1s ease; /* Animación para el título */
+}
+
+.subtitle {
+  font-size: 1.8em;
+  font-family: 'Arial', sans-serif;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  animation: slideInFromRight 1s ease; /* Animación para el subtítulo */
+}
+
+/* Animaciones */
+@keyframes zoomInBackground {
+  from {
+    transform: scale(1.1);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5em;
+  }
+  .subtitle {
+    font-size: 1.5em;
+  }
+}
+
+/* estilos de tabla tres*/
+
+/* Contenedor principal de la tabla */
+.table-container {
+  padding: 20px;
+  overflow-x: auto;
+}
+
+/* Estilos de la tabla */
+.table {
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 1400px; /* Ancho máximo ajustado */
+  overflow: hidden;
+}
+
+/* Encabezado de la tabla */
+.table-header {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Columnas automáticas con un mínimo de 150px */
+  background-color: #008080;
+  color: #ffffff;
+  font-weight: bold;
+  border-radius: 15px 15px 0 0;
+  gap: 1px;
+  overflow: hidden; /* Oculta cualquier overflow */
+}
+
+.header-cell {
+  padding: 15px;
+  text-align: center;
+  white-space: nowrap; /* Mantenemos nowrap para que el texto no se divida en varias líneas */
+  overflow: hidden; /* Oculta cualquier overflow */
+}
+
+/* Cuerpo de la tabla */
+.table-body {
+  max-height: 600px; /* Altura máxima del cuerpo de la tabla */
+  overflow-y: auto;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Columnas automáticas con un mínimo de 150px */
+  border-bottom: 1px solid #ddd;
+}
+
+.table-cell {
+  padding: 15px;
+  text-align: center;
+  white-space: normal; /* Permitimos que el texto se divida en líneas */
+  overflow: hidden; /* Oculta cualquier overflow */
+}
+
+/* Estilo de las imágenes */
+.image-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.thumbnail {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.thumbnail:hover {
+  transform: scale(1.1);
+}
+
+/* Adaptación para dispositivos móviles */
+@media (max-width: 768px) {
+  .header-cell, .table-cell {
+    padding: 12px; /* Ajustar el padding para dispositivos medianos */
+  }
+
+  .thumbnail {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-cell, .table-cell {
+    padding: 10px; /* Ajustar el padding para dispositivos pequeños */
+  }
+
+  .table-row {
+    grid-template-columns: repeat(1, 1fr); /* Una columna completa en dispositivos muy pequeños */
+  }
+
+  .thumbnail {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+

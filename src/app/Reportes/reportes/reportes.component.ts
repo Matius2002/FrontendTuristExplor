@@ -1,12 +1,34 @@
 import {Component, OnInit} from '@angular/core';
 import {NgClass} from "@angular/common";
 import {Router} from "@angular/router";
+import {HttpClientModule} from "@angular/common/http";
+import {UsuarioService} from "../../Admin/Usuarios/usuario.service";
+import {ReportService} from "../report.service";
 
+
+interface  Rol {
+  id: number;
+  rolName: string;
+  rolDescripc: string;
+  rolFechaCreac: Date;
+  rolFechaModic: Date;
+}
+interface Usuarios {
+  id: number;
+  nombreUsuario: string;
+  email: string;
+  password: string;
+  fechaRegistro: Date;
+  rol: Rol;
+}
 @Component({
+  providers: [UsuarioService, ReportService],
   selector: 'app-reportes',
   standalone: true,
   imports: [
-    NgClass
+    NgClass,
+    HttpClientModule,
+
   ],
   templateUrl: './reportes.component.html',
   styleUrl: './reportes.component.css'
@@ -17,10 +39,11 @@ export class ReportesComponent implements OnInit{
 
   constructor(
     private router: Router,
-  ) {
-  }
-  ngOnInit(): void {
-  }
+    private reportService: ReportService
+  ) {}
+
+  ngOnInit(): void {}
+
   showDownloadOptions(reportType: string) {
     this.selectedReport = reportType;
     this.isModalVisible = true;
@@ -31,29 +54,28 @@ export class ReportesComponent implements OnInit{
   }
 
   downloadReport(reportType: string, format: string) {
-    let url = '';
-    if (reportType === 'sitios') {
-      url = format === 'excel' ? 'URL_EXCEL_SITIOS' : 'URL_PDF_SITIOS';
-    } else if (reportType === 'usuarios') {
-      url = format === 'excel' ? 'URL_EXCEL_USUARIOS' : 'URL_PDF_USUARIOS';
-    }
-
-    if (url) {
-      window.location.href = url;
-    } else {
-      alert('Formato no reconocido. Por favor, intenta de nuevo.');
-    }
-
-    this.closeModal();
+    this.reportService.getReportUrl(reportType, format).subscribe(url => {
+      // Establece la extensión correcta para Excel
+      const extension = format === 'pdf' ? 'pdf' : 'xlsx';
+      const blob = new Blob([url], { type: extension === 'pdf' ? 'application/pdf' : 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      const downloadUrl = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = downloadUrl;
+      a.download = `${reportType}.${extension}`; // Usa la extensión correcta
+      a.click();
+      window.URL.revokeObjectURL(downloadUrl);
+      this.closeModal();
+    }, error => {
+      console.error('Error al descargar el reporte:', error);
+      alert('Error al descargar el reporte. Por favor, intenta de nuevo.');
+    });
   }
 
 
   goBack() {
-
+    this.router.navigate(['/']);
   }
-
   navigateTo(route: string) {
     this.router.navigate([`/${route}`]);
-
   }
 }

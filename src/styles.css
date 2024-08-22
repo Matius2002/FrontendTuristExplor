@@ -16,16 +16,14 @@ h2 {
   display: inline-block; /* Para que el fondo se ajuste al contenido */
   transition: transform 0.2s ease; /* Animación al pasar el ratón */
 }
-
 h2:hover {
   transform: scale(1.1); /* Escalado al pasar el ratón */
 }
-
 form {
   display: flex;
   flex-direction: column;
   width: 90%;
-  max-width: 400px;
+  max-width: 700px;
   margin: 50px auto;
   padding: 20px;
   border: 1px solid #ddeff8;
@@ -33,7 +31,6 @@ form {
   background-color: #b2e2f1;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
 .form-group {
   margin-bottom: 20px;
 }
@@ -46,7 +43,6 @@ select {
   border-radius: 4px;
   transition: border-color 0.3s, box-shadow 0.3s;
 }
-
 input:focus,
 textarea:focus,
 select:focus {
@@ -54,7 +50,6 @@ select:focus {
   outline: none;
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
-
 input,
 textarea,
 select {
@@ -161,7 +156,7 @@ textarea:focus {
   }
 
   .custom-btn {
-    width: 100%; /* Hacer que los botones ocupen todo el ancho en pantallas pequeñas */
+    width: 100%;
   }
 }
 
@@ -212,7 +207,6 @@ textarea:focus {
 }
 
 /*MODAL DE AYUDA INICIO*/
-/* Estilos para la cabecera */
 .header {
   background-color: #f8f9fa;
   padding: 10px;
@@ -351,37 +345,168 @@ p {
   opacity: 1;
 }
 
+
+/* Titulo */
+.titulo-event {
+  text-align: center; /* Centrar el texto */
+  font-size: 32px; /* Tamaño de fuente más grande */
+  margin-bottom: 20px; /* Espacio inferior */
+  color: #4A90E2; /* Color del texto */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente más moderna */
+  font-weight: 700; /* Negrita para mayor énfasis */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra del texto */
+  border-bottom: 2px solid #4A90E2; /* Línea inferior */
+  padding-bottom: 10px; /* Espaciado debajo del texto */
+  background: linear-gradient(to right, #e0f7fa, #b2ebf2); /* Fondo degradado */
+  border-radius: 8px; /* Esquinas redondeadas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil alrededor del título */
+  transition: all 0.3s ease; /* Transición suave */
+}
+
+.titulo-event:hover {
+  color: #333; /* Cambio de color al pasar el mouse */
+  background: linear-gradient(to right, #b2ebf2, #e0f7fa); /* Cambio en el fondo */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+
+/* buscador */
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px; /* Espacio adicional inferior */
+}
+
+.search-box {
+  width: 100%;
+  max-width: 600px; /* Aumentado el máximo ancho */
+  padding: 12px 20px; /* Aumentado el padding para mayor comodidad */
+  border: 2px solid #ccc; /* Borde más grueso */
+  border-radius: 8px 0 0 8px; /* Esquinas más redondeadas solo en la izquierda */
+  font-size: 18px; /* Tamaño de fuente aumentado para mejor legibilidad */
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.search-box:focus {
+  outline: none;
+  border-color: #008080; /* Borde de color verde azulado al enfocar */
+}
+
+.search-button {
+  background-color: #008080; /* Color de fondo del botón */
+  border: 2px solid #008080; /* Borde del mismo color que el fondo */
+  border-radius: 0 8px 8px 0; /* Esquinas más redondeadas solo en la derecha */
+  padding: 12px 20px; /* Aumentado el padding para mayor comodidad */
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.search-button i {
+  color: #fff; /* Color del ícono */
+  font-size: 18px; /* Tamaño del ícono */
+}
+
+.search-button:hover {
+  background-color: #006666; /* Color de fondo más oscuro al pasar el mouse */
+  border-color: #006666; /* Borde del mismo color que el fondo al pasar el mouse */
+}
+
+.no-eventos {
+  text-align: center;
+  font-size: 24px; /* Aumento adicional del tamaño de fuente */
+  color: #555; /* Color de texto más oscuro */
+  margin-top: 30px; /* Espacio superior adicional */
+  padding: 20px; /* Añadir padding para mayor espacio interior */
+  background-color: #f8f8f8; /* Fondo gris claro */
+  border: 1px solid #ccc; /* Borde del mensaje */
+  border-radius: 5px; /* Bordes redondeados */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+/* ver todo botón */
+
+.ver-todos-button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.ver-todos-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background-color: rgba(255, 255, 255, 0.3);
+  transition: width 0.4s ease, height 0.4s ease, top 0.4s ease, left 0.4s ease;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+.ver-todos-button:hover::before {
+  width: 0;
+  height: 0;
+  top: 50%;
+  left: 50%;
+}
+
+.ver-todos-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+.ver-todos-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+
+/* MODALES FINALES */
+
 /* Estilos para la ventana emergente de ayuda */
-.modal-ayuda {
+.modal-ayuda-unico {
   display: none;
   position: fixed;
-  z-index: 1;
+  z-index: 1000;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
 }
-
-.modal-ayuda.show {
+.modal-ayuda-unico.show {
   display: block;
 }
-
-.modal-content {
+.modal-content-ayuda-unico {
   background-color: #fefefe;
-  margin: 15% auto;
+  margin: 80px auto; /* Espacio desde el navbar */
   padding: 20px 40px;
   border: 1px solid #888;
   width: 80%;
   max-width: 600px;
   border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   position: relative;
 }
-
 /* Estilos para el botón de cerrar */
-.close {
+.close-ayuda-unico {
   color: #aaa;
   position: absolute;
   top: 10px;
@@ -389,59 +514,198 @@ p {
   font-size: 28px;
   font-weight: bold;
 }
+.close-ayuda-unico:hover, .close-ayuda-unico:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+/* Estilos adicionales para el contenido del modal */
+.modal-content-ayuda-unico h3 {
+  margin-top: 0;
+  color: #333;
+  font-size: 24px;
+  text-align: center;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+.modal-content-ayuda-unico ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 20px;
+}
+.modal-content-ayuda-unico ul li {
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 16px;
+  color: #555;
+}
+.modal-content-ayuda-unico ul li:last-child {
+  border-bottom: none;
+}
+.modal-content-ayuda-unico ul li strong {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+/* Media query para dispositivos móviles */
+@media only screen and (max-width: 768px) {
+  .modal-content-ayuda-unico {
+    padding: 15px 20px;
+    width: 90%;
+    margin: 20% auto; /* Ajustamos el margen para móviles */
+  }
+  .close-ayuda-unico {
+    font-size: 24px;
+    top: 5px;
+    right: 10px;
+  }
+  .modal-content-ayuda-unico h3 {
+    font-size: 20px;
+  }
+  .modal-content-ayuda-unico ul li {
+    padding: 8px 0;
+    font-size: 14px;
+  }
+}
 
-.close:hover, .close:focus {
+
+
+/* modal general específico para editar */
+
+.modal-content-editar-turismo {
+  background-color: #fefefe;
+  margin: 80px auto; /* Espacio desde el navbar */
+  padding: 20px 40px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: fixed; /* Asegúrate de que esté fijo */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centrar horizontal y verticalmente */
+  z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+}
+
+.modal-header-editar-turismo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.modal-title-editar-turismo {
+  margin-top: 0;
+  color: #333;
+  font-size: 24px;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.close-editar-turismo {
+  color: #aaa;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.close-editar-turismo:hover, .close-editar-turismo:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
 }
 
-/*Modal de ayuda*/
-.modal-content h3 {
-  margin-top: 0;
-  color: #333;
-}
-
-.modal-content ul {
-  list-style-type: none;
-  padding-left: 0;
-}
-
-.modal-content ul li {
+.modal-body-editar-turismo {
   padding: 10px 0;
-  border-bottom: 1px solid #ddd;
 }
 
-.modal-content ul li:last-child {
-  border-bottom: none;
+.form-group-editar-turismo {
+  margin-bottom: 15px;
 }
 
-.modal-content ul li strong {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
+.form-control-editar-turismo {
+  width: 100%;
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.text-danger-editar-turismo {
+  color: #dc3545;
+}
+
+.modal-footer-editar-turismo {
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* Media query para dispositivos móviles */
 @media only screen and (max-width: 768px) {
-  .modal-content {
-    padding: 10px 20px;
+  .modal-content-editar-turismo {
+    padding: 15px 20px;
     width: 90%;
-    margin: 10% auto;
+    margin: 20% auto; /* Ajustamos el margen para móviles */
   }
-
-  .close {
+  .close-editar-turismo {
     font-size: 24px;
     top: 5px;
     right: 10px;
   }
-
-  .modal-content h3 {
-    font-size: 18px;
+  .modal-title-editar-turismo {
+    font-size: 20px;
   }
-
-  .modal-content ul li {
-    padding: 8px 0;
-    font-size: 14px;
+  .form-group-editar-turismo {
+    margin-bottom: 8px;
   }
+  .form-control-editar-turismo {
+    padding: 6px;
+    font-size: 0.9rem;
+  }
+}
+.btn {
+  padding: 8px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.btn-secondary {
+  background-color: #6c757d;
+  color: #fff;
+  border: 1px solid #6c757d;
+}
+.btn-secondary:hover {
+  background-color: #5a6268;
+  border-color: #545b62;
+}
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+  border: 1px solid #007bff;
+}
+.btn-primary:hover {
+  background-color: #0069d9;
+  border-color: #0062cc;
+}
+.btn-danger {
+  background-color: #dc3545;
+  color: #fff;
+  border: 1px solid #dc3545;
+}
+.btn-danger:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
 }

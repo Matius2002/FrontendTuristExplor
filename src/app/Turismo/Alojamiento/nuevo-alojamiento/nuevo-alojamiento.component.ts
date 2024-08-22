@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgForOf, NgIf} from "@angular/common";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule, HttpErrorResponse} from "@angular/common/http";
 import {AlojamientoService} from "../alojamiento.service";
 import {Router} from "@angular/router";
 import {catchError, of} from "rxjs";
@@ -14,10 +14,16 @@ interface  TipoAlojamiento{
   id: number;
   nombre: string;
 }
+interface Images {
+  id: number;
+  nombre: string;
+  ruta: string;
+  activa: boolean;
+}
 interface Alojamiento{
   id: number;
   descripcion: string;
-  destinos: Destinos;
+  destinos: Destinos [];
   nombre: string;
   tipoAlojamiento: TipoAlojamiento;
   direccion: string;
@@ -26,8 +32,7 @@ interface Alojamiento{
   webUrl: string;
   precioGeneral: number;
   fechaCreacion: Date;
-  fechaActualizacion: Date;
-
+  imagenes: Images[];
 }
 @Component({
   providers: [AlojamientoService, HttpClient],
@@ -50,6 +55,7 @@ export class NuevoAlojamientoComponent implements OnInit{
   alojamientos!: Alojamiento;
   tipoAlojamientos: TipoAlojamiento []=[];
   destinos: Destinos[] = [];
+  imagenes: Images []=[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -63,25 +69,39 @@ export class NuevoAlojamientoComponent implements OnInit{
       nombre: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
       descripcion: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(250)]],
       tipoAlojamiento: ['', [Validators.required]],
-      destinos: ['', [Validators.required]],
+      destinos: [[], [Validators.required]],
       direccion: ['', [Validators.required]],
       celular: ['', [Validators.required]],
       email: ['', [Validators.required]],
       webUrl: ['', [Validators.required]],
       precioGeneral: ['', [Validators.required]],
       fechaCreacion: ['', [Validators.required]],
-      fechaActualizacion: ['', [Validators.required]],
+      imagenes: [[], [Validators.required]],
     });
     this.cargarTiposAlojamientos();
     this.cargarDestinos();
+    this.cargarImages();
   }
+
+  cargarImages(): void {
+    this.alojamientoService.recuperarTodosImages().subscribe(
+      (imagenes: Images[]) => {
+        this.imagenes = imagenes;
+        console.log('Imágenes cargadas:', this.imagenes);
+      },
+      (error) => {
+        console.error('Error al cargar imágenes:', error);
+      }
+    );
+  }
+
   cargarTiposAlojamientos(): void{
     this.alojamientoService.recuperarTodosTiposAlojamiento().subscribe(
       (tipos: TipoAlojamiento[]) =>{
         this.tipoAlojamientos = tipos;
       },
       (error) => {
-        console.error(error);
+        console.error('error al cargar el tipo de alojamiento',error);
       }
     );
   }
@@ -97,8 +117,49 @@ export class NuevoAlojamientoComponent implements OnInit{
   }
   onSubmit(): void {
     if (this.crearForm.valid) {
-      const nombre = this.crearForm.get('nombre')!.value;
-      this.isSubmitting = true; // Iniciar la animación de carga
+      const nombre = this.crearForm.get('nombre')?.value;
+      const descripcion = this.crearForm.get('descripcion')?.value;
+      const direccion = this.crearForm.get('direccion')?.value;
+      const celular = this.crearForm.get('celular')?.value;
+      const email = this.crearForm.get('email')?.value;
+      const webUrl = this.crearForm.get('webUrl')?.value;
+      const precioGeneral = this.crearForm.get('precioGeneral')?.value;
+      const fechaCreacion = this.crearForm.get('fechaCreacion')?.value;
+      const destinos = this.crearForm.get('destinos')?.value; // Si tienes un control para destinos
+      const tipoAlojamiento = this.crearForm.get('tipoAlojamiento')?.value; // Si tienes un control para tipoAlojamiento
+      const images = this.crearForm.get('imagenes')?.value;
+
+      console.log('Datos a enviar al backend:');
+      console.log('nombre:', nombre);
+      console.log('descripcion:', descripcion);
+      console.log('direccion:', direccion);
+      console.log('celular:', celular);
+      console.log('email:', email);
+      console.log('webUrl:', webUrl);
+      console.log('precioGeneral:', precioGeneral);
+      console.log('fechaCreacion:', fechaCreacion);
+      console.log('destinos:', destinos);
+      console.log('tipoAlojamiento:', tipoAlojamiento);
+      console.log('imagenes:', images);
+
+      const alojamientoData: Alojamiento = {
+        id: 0,
+        nombre: nombre,
+        descripcion: descripcion,
+        direccion: direccion,
+        celular: celular,
+        email: email,
+        webUrl: webUrl,
+        precioGeneral: precioGeneral,
+        fechaCreacion: fechaCreacion,
+        destinos: destinos,
+        tipoAlojamiento: tipoAlojamiento,
+        imagenes: images,
+      };
+
+      console.log('Datos a enviar al servicio:', alojamientoData);
+
+      this.isSubmitting = true;
       this.alojamientoService.verificarAlojamientoExistente(nombre).pipe(
         catchError((error) => {
           console.error(error);
@@ -113,44 +174,85 @@ export class NuevoAlojamientoComponent implements OnInit{
               text: 'Ingrese un nombre diferente'
             });
           } else {
-            const formData = this.crearForm.value;
-            this.guardarTipo(formData);
+            this.guardarAlojamiento(alojamientoData);
           }
           this.isSubmitting = false;
         },
         error: (error) => {
           Swal.fire({
             icon: 'error',
-            title: 'Error al verificar El Alojamiento',
+            title: 'Error al verificar el Alojamiento',
             text: error.message
           });
+          this.isSubmitting = false;
         }
       });
     } else {
-    }
-  }
-  guardarTipo(tipoData: Alojamiento): void {
-    console.log('Datos del Alojamiento:', tipoData);
-    this.alojamientoService.guardarAlojamiento(tipoData).subscribe(() => {
-      Swal.fire({
-        icon: 'success',
-        title: 'El Alojamiento fue creado correctamente',
-        showConfirmButton: false,
-        timer: 2500
-      });
-      this.crearForm.reset();
-    }, (error) => {
       Swal.fire({
         icon: 'error',
-        title: 'Error',
-        text: 'Error al guardar El Alojamiento'
+        title: 'Formulario inválido',
+        text: 'Por favor, complete todos los campos requeridos'
       });
+    }
+  }
+
+  guardarAlojamiento(alojamientoData: Alojamiento): void {
+    console.log('Enviando datos al servicio:', alojamientoData);
+
+    this.alojamientoService.guardarAlojamiento(alojamientoData).subscribe({
+      next: (response) => {
+        console.log('Respuesta del servidor:', response);
+        Swal.fire({
+          icon: 'success',
+          title: 'El Alojamiento fue creado correctamente',
+          showConfirmButton: false,
+          timer: 2500
+        });
+        this.crearForm.reset();
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error('Error al guardar el alojamiento:', error);
+        this.isSubmitting = false;
+
+        let errorMsg = 'Ocurrió un error al crear el Alojamiento';
+        console.log('Error status:', error.status);
+        console.log('Error message:', error.message);
+        console.log('Error details:', error);
+
+        if (error.status === 400) {
+          errorMsg = error.error ? error.error : 'Error de validación en el servidor';
+        } else if (error.status === 0) {
+          errorMsg = 'Error de red: no se puede conectar al servidor';
+        } else if (error.status === 500) {
+          errorMsg = 'Error interno del servidor: por favor, inténtelo de nuevo más tarde';
+        } else if (error.status === 401) {
+          errorMsg = 'Error de autenticación: no autorizado para realizar esta acción';
+        } else if (error.status === 403) {
+          errorMsg = 'Error de autorización: no tiene permisos para realizar esta acción';
+        } else if (error.status === 408) {
+          errorMsg = 'Error de tiempo de espera: la solicitud ha tardado demasiado en procesarse';
+        } else if (error.status === 422) {
+          errorMsg = 'Error de validación: los datos proporcionados no son válidos';
+        } else {
+          errorMsg = 'Error al crear el Alojamiento';
+        }
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: errorMsg
+        });
+      }
     });
   }
+
   limpiarFormulario() {
     this.crearForm.reset();
   }
   volver() {
     this.router.navigate(['/alojamientos']);
+  }
+
+  agregarNuevaImagen() {
+    this.router.navigate(['/nueva-imagen']);
   }
 }

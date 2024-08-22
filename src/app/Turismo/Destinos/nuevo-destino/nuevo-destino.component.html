@@ -78,6 +78,10 @@
   <!-- fin tipo de turismo -->
 
   <!-- inicio atracciones principales -->
+  <!--
+
+  -->
+  <!-- fin atracciones principales -->
   <div class="form-group">
     <label for="atracionesPrincipales">Atracciones Principales</label>
     <div class="input-group">
@@ -88,16 +92,15 @@
       </span>
       </div>
       <select id="atracionesPrincipales" formControlName="atracionesPrincipales" class="form-control" multiple>
-        <option *ngFor="let atracion of atracionesPrincipales" [value]="atracion.id">{{ atracion.nombre }}</option>
+        <option *ngFor="let atracion of atracionesPrincipales" [value]="atracion">{{ atracion.nombre }}</option>
       </select>
     </div>
     <div *ngIf="crearForm.get('atracionesPrincipales')?.invalid && (crearForm.get('atracionesPrincipales')?.dirty || crearForm.get('atracionesPrincipales')?.touched)">
       <div class="text-danger" *ngIf="crearForm.get('atracionesPrincipales')?.errors?.['required']">Las atracciones principales son obligatorias.</div>
     </div>
   </div>
-  <!-- fin atracciones principales -->
-
   <!-- inicio épocas para visitar -->
+
   <div class="form-group">
     <label for="epocasVisitar">Épocas para Visitar</label>
     <div class="input-group">
@@ -122,6 +125,9 @@
     <label for="imagenes">Imágenes</label>
     <div class="input-group">
       <div class="input-group-prepend">
+        <button class="btn btn-outline-primary mr-2" type="button" (click)="agregarNuevaImagen()" data-toggle="tooltip" data-placement="top" title="Agregar nueva imagen">
+          <i class="fas fa-plus"></i>
+        </button>
       <span class="input-group-text">
         <i *ngIf="crearForm.get('imagenes')?.valid || !crearForm.get('imagenes')?.touched" class="fas fa-umbrella-beach"></i>
         <i *ngIf="crearForm.get('imagenes')?.invalid && crearForm.get('imagenes')?.touched" class="fas fa-times-circle text-danger"></i>
@@ -137,67 +143,39 @@
   </div>
   <!-- fin imágenes -->
 
-  <!-- inicio fecha y hora de creación -->
+  <!-- Fecha y Hora de Creación -->
   <div class="form-group">
-    <label>Fecha y Hora de Creación</label>
+    <label for="fechaCreacion">Fecha y Hora de Creación</label>
     <div class="input-group">
-      <!-- fecha de creación -->
       <div class="input-group-prepend">
       <span class="input-group-text">
-        <i *ngIf="crearForm.get('fechaCreacion')?.valid || !crearForm.get('fechaCreacion')?.touched" class="fas fa-calendar-plus"></i>
+        <i *ngIf="crearForm.get('fechaCreacion')?.valid || !crearForm.get('fechaCreacion')?.touched" class="fas fa-calendar-alt"></i>
         <i *ngIf="crearForm.get('fechaCreacion')?.invalid && crearForm.get('fechaCreacion')?.touched" class="fas fa-times-circle text-danger"></i>
       </span>
       </div>
-      <input type="date" id="fechaCreacion" formControlName="fechaCreacion" class="form-control" style="margin-right: 5px;">
-      <!-- hora de creación -->
-      <div class="input-group-prepend">
-      <span class="input-group-text">
-        <i *ngIf="crearForm.get('horaCreacion')?.valid || !crearForm.get('horaCreacion')?.touched" class="fas fa-clock"></i>
-        <i *ngIf="crearForm.get('horaCreacion')?.invalid && crearForm.get('horaCreacion')?.touched" class="fas fa-times-circle text-danger"></i>
-      </span>
-      </div>
-      <input type="time" id="horaCreacion" formControlName="horaCreacion" class="form-control">
+      <input type="datetime-local" id="fechaCreacion" formControlName="fechaCreacion" class="form-control" required>
     </div>
-    <!-- mensajes de error -->
     <div *ngIf="crearForm.get('fechaCreacion')?.invalid && (crearForm.get('fechaCreacion')?.dirty || crearForm.get('fechaCreacion')?.touched)">
       <div class="text-danger" *ngIf="crearForm.get('fechaCreacion')?.errors?.['required']">La fecha de creación es obligatoria.</div>
     </div>
-    <div *ngIf="crearForm.get('horaCreacion')?.invalid && (crearForm.get('horaCreacion')?.dirty || crearForm.get('horaCreacion')?.touched)">
-      <div class="text-danger" *ngIf="crearForm.get('horaCreacion')?.errors?.['required']">La hora de creación es obligatoria.</div>
-    </div>
   </div>
-  <!-- fin fecha y hora de creación -->
 
-  <!-- inicio fecha y hora de actualización -->
+  <!-- Fecha y Hora de Actualización -->
   <div class="form-group">
-    <label>Fecha y Hora de Actualización</label>
+    <label for="fechaActualizacion">Fecha y Hora de Actualización</label>
     <div class="input-group">
-      <!-- fecha de actualización -->
       <div class="input-group-prepend">
       <span class="input-group-text">
         <i *ngIf="crearForm.get('fechaActualizacion')?.valid || !crearForm.get('fechaActualizacion')?.touched" class="fas fa-calendar-check"></i>
         <i *ngIf="crearForm.get('fechaActualizacion')?.invalid && crearForm.get('fechaActualizacion')?.touched" class="fas fa-times-circle text-danger"></i>
       </span>
       </div>
-      <input type="date" id="fechaActualizacion" formControlName="fechaActualizacion" class="form-control" style="margin-right: 5px;">
-      <!-- hora de actualización -->
-      <div class="input-group-prepend">
-      <span class="input-group-text">
-        <i *ngIf="crearForm.get('horaActualizacion')?.valid || !crearForm.get('horaActualizacion')?.touched" class="fas fa-clock"></i>
-        <i *ngIf="crearForm.get('horaActualizacion')?.invalid && crearForm.get('horaActualizacion')?.touched" class="fas fa-times-circle text-danger"></i>
-      </span>
-      </div>
-      <input type="time" id="horaActualizacion" formControlName="horaActualizacion" class="form-control">
+      <input type="datetime-local" id="fechaActualizacion" formControlName="fechaActualizacion" class="form-control" required>
     </div>
-    <!-- mensajes de error -->
     <div *ngIf="crearForm.get('fechaActualizacion')?.invalid && (crearForm.get('fechaActualizacion')?.dirty || crearForm.get('fechaActualizacion')?.touched)">
       <div class="text-danger" *ngIf="crearForm.get('fechaActualizacion')?.errors?.['required']">La fecha de actualización es obligatoria.</div>
     </div>
-    <div *ngIf="crearForm.get('horaActualizacion')?.invalid && (crearForm.get('horaActualizacion')?.dirty || crearForm.get('horaActualizacion')?.touched)">
-      <div class="text-danger" *ngIf="crearForm.get('horaActualizacion')?.errors?.['required']">La hora de actualización es obligatoria.</div>
-    </div>
   </div>
-  <!-- fin fecha y hora de actualización -->
 
   <!-- Botones -->
   <div class="form-group">

@@ -1,0 +1,223 @@
+
+.shopping-header {
+  position: relative;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom right, rgba(255, 165, 0, 0.7), rgba(255, 69, 0, 0.7));
+}
+
+.shopping-background {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(30%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.shopping-content {
+  z-index: 1;
+  position: relative;
+}
+
+.shopping-title {
+  font-size: 4em;
+  margin-bottom: 20px;
+  animation: fadeInDown 1s ease;
+  font-family: 'Roboto', sans-serif;
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.shopping-subtitle {
+  font-size: 2em;
+  animation: fadeInUp 1s ease;
+  font-family: 'Roboto', sans-serif;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* Animaciones */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .shopping-title {
+    font-size: 3em;
+  }
+  .shopping-subtitle {
+    font-size: 1.5em;
+  }
+}
+
+
+/* estilos nuevos */
+/* estilos nuevos */
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.destinos-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+}
+
+.col {
+  flex: 1 1 300px; /* Flexibilidad para adaptarse mejor */
+  max-width: 33.3333%;
+  padding: 10px;
+  box-sizing: border-box;
+  position: relative;
+  min-width: 250px; /* Asegura un ancho mínimo para las columnas */
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  min-height: 450px; /* Ajusta la altura mínima para garantizar que el contenido se vea completo */
+  background: #8addf8;
+  overflow: hidden;
+  transition: transform .5s, box-shadow .5s;
+  perspective: 1000px; /* Añadido para dar un efecto de perspectiva en la rotación */
+  display: flex;
+  flex-direction: column; /* Asegura que el contenido esté en columna */
+}
+
+.card .image {
+  width: 100%;
+  height: 250px; /* Ajusta la altura según sea necesario */
+  overflow: hidden;
+  position: relative;
+}
+
+.card .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Asegura que la imagen cubra el contenedor sin deformarse */
+  transition: opacity .5s, transform .5s;
+}
+
+.card:hover .image img {
+  opacity: .5;
+  transform: translateX(30%); /* Movimiento de la imagen al hacer hover */
+}
+
+.card .details {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #6fd4f4;
+  transition: transform .5s;
+  transform-origin: left;
+  transform: perspective(2000px) rotateY(-90deg); /* Inicialmente rotado */
+  display: flex;
+  flex-direction: column; /* Asegura que el contenido esté en columna */
+  justify-content: center; /* Centra verticalmente el contenido */
+  padding: 20px; /* Añade padding para el contenido */
+  box-sizing: border-box; /* Asegura que el padding no afecte el tamaño total */
+}
+
+.card:hover .details {
+  transform: perspective(2000px) rotateY(0deg); /* Rotado al hacer hover */
+}
+
+.card .details .center {
+  text-align: center;
+  width: 100%;
+}
+
+.card .details .center h1 {
+  margin: 0;
+  padding: 0;
+  color: #131111;
+  line-height: 20px;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.card .details .center h1 span {
+  font-size: 14px;
+  color: #262626;
+}
+
+.card .details .center p {
+  margin: 10px 0;
+  padding: 0;
+  color: #262626;
+}
+
+.destino-images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px; /* Añade un margen superior si es necesario */
+}
+
+.destino-image {
+  width: 30%;
+  margin: 5px;
+  height: auto; /* Ajusta automáticamente la altura */
+  max-height: 100px; /* Limita la altura máxima para mantener la proporción */
+  object-fit: cover; /* Asegura que la imagen cubra el contenedor sin deformarse */
+  cursor: pointer;
+  transition: transform .3s; /* Transición para el efecto de hover */
+}
+
+.destino-image:hover {
+  transform: scale(1.1); /* Escalado de la imagen al hacer hover */
+}
+
+/* Media queries para mejorar la responsividad */
+@media (max-width: 992px) {
+  .col {
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .col {
+    max-width: 100%;
+  }
+}
+
+
+
+
+

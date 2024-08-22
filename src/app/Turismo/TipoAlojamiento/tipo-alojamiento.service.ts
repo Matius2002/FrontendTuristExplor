@@ -8,7 +8,7 @@ interface TipoAlojamiento{
   nombre: string;
   descripcion: string;
   servicios: string;
-  precioPromedio: number;
+  precioPromedio: string;
 }
 @Injectable({
   providedIn: 'root'

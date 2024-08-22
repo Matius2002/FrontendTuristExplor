@@ -10,41 +10,137 @@
   font-size: 48px;
 }
 
-section {
-  padding: 40px;
-  margin: 40px auto;
-  background-color: #fff;
-  border-radius: 20px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
-  max-width: 800px;
+/* TARGETA NUEVA 3D */
+.destinos-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1500px;
+  padding: 20px;
 }
 
-section:hover {
-  transform: scale(1.02); /* Reducido el factor de escala */
+.destinos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  width: 100%;
 }
 
-.subtitulo {
-  color: #008080;
-  font-size: 32px;
-  margin-bottom: 20px;
+.destino-card {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.6s ease-in-out, box-shadow 0.6s ease-in-out;
+  transform-style: preserve-3d;
+  position: relative;
+  width: 100%;
+  height: 450px;
+  cursor: pointer;
 }
 
-.parafo {
-  line-height: 1.6;
-  font-size: 18px;
+.destino-card:hover {
+  transform: rotateY(180deg);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
-img {
-  max-width: 100%;
-  border-radius: 10px;
-  margin-top: 20px;
+.destino-content, .destino-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 15px;
+}
+
+.destino-content {
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.destino-back {
+  background: linear-gradient(135deg, #2c5364, #203a43, #0f2027);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotateY(180deg);
+}
+
+.destino-back-single-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.destino-back-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.destino-back-image {
+  width: 100px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.destino-back-single-image .destino-back-image {
+  width: 90%;
+  height: auto;
+  border-radius: 15px;
+}
+
+.destino-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.destino-icon {
+  font-size: 24px;
+  margin-right: 10px;
+  color: #ffcc00;
+}
+
+.destino-name {
+  font-size: 24px;
+  margin: 0;
+}
+
+.badge {
+  background-color: #ffcc00;
+  color: #000;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.destino-info {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.destino-info p {
+  margin: 5px 0;
+}
+
+.destino-info strong {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  transition: transform 0.3s ease;
+  margin-bottom: 3px;
 }
 
-img:hover {
-  transform: scale(1.05); /* Ajustado el factor de escala */
-}
+
+
+
+
+
+
+
+
+

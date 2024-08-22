@@ -9,6 +9,7 @@ import {UsuarioService} from "../../../Admin/Usuarios/usuario.service";
 interface Usuario {
   id: number;
   nombreUsuario: string;
+  email: string;
 
 }
 interface Destinos {
@@ -41,7 +42,6 @@ interface Experiencia {
   styleUrl: './nueva-experiencia.component.css'
 })
 export class NuevaExperienciaComponent implements OnInit{
-
   crearForm!: FormGroup;
   experiencias!: Experiencia;
   usuarios: Usuario [] = [];
@@ -51,8 +51,6 @@ export class NuevaExperienciaComponent implements OnInit{
 
   constructor(
     private formBuilder: FormBuilder,
-    //public dialogRef: MatDialogRef<NuevaExperienciaComponent>,
-    //@Inject(MAT_DIALOG_DATA) public data: any,
     private experienciaService: ExperienciaService,
     private router: Router,
     private usuariosService: UsuarioService,
@@ -61,71 +59,63 @@ export class NuevaExperienciaComponent implements OnInit{
   ngOnInit(): void {
     this.crearForm = this.formBuilder.group({
       comentario: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
-      fecha: ['', [Validators.required]],
-      //usuarios: ['', [Validators.required]],
       destinos: ['', [Validators.required]],
       calificacion: ['', Validators.required]
     });
-    this.currentUser = this.usuariosService.getCurrentUser(); // Obtener el usuario actual del servicio de autenticación
+    this.currentUser = this.usuariosService.getCurrentUser();
 
-    //this.usuarios();
-    //this.destinos();
+    this.cargarDestinos();
 
+  }
+
+  cargarDestinos(): void{
+    this.experienciaService.recuperarTodosDestinos().subscribe(
+      (destinos: Destinos[]) =>{
+        this.destinos = destinos;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
   onSubmit(): void {
-    if (this.crearForm.valid) {
-      this.isSubmitting = true;
-      const formData = this.crearForm.value;
-      if (!this.currentUser) {
-        formData.usuario = this.currentUser;// Agregar el usuario actual a los datos del formulario
-        this.guardarExperiencia(formData);
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Usuario no autenticado',
-          text: 'Por favor, inicie sesión'
-        });
-      }
-      this.isSubmitting = false;
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Formulario inválido',
-        text: 'Por favor, complete todos los campos requeridos'
-      });
+    if (this.crearForm.invalid) {
+      Swal.fire('Error', 'Por favor complete el formulario correctamente.', 'error');
+      return;
     }
-  }
-    guardarExperiencia(experienciaData: Experiencia): void {
-      console.log('Datos de la experiencia:', experienciaData);
-      this.experienciaService.guardarExperiencia(experienciaData).subscribe(() => {
-        Swal.fire({
-          icon: 'success',
-          title: 'La Experiencia fue creada correctamente',
-          showConfirmButton: false,
-          timer: 2500
-        });
-        this.crearForm.reset();
-      }, (error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Error al guardar La Experiencia'
-        });
-      });
+
+    if (!this.usuariosService.isLoggedIn()) {
+      Swal.fire('Usuario no autenticado', 'Debe iniciar sesión para guardar una experiencia.', 'error');
+      return;
+    }
+
+    const nuevaExperiencia: Experiencia = {
+      id: 0,
+      comentario: this.crearForm.value.comentario,
+      calificacion: this.crearForm.value.calificacion,
+      fecha: new Date().toISOString(),
+      usuario: this.currentUser!,
+      destinos: this.crearForm.value.destinos
+    };
+
+    this.isSubmitting = true;
+
+    this.experienciaService.guardarExperiencia(nuevaExperiencia).subscribe(
+      () => {
+        Swal.fire('Experiencia guardada', 'Su experiencia ha sido guardada exitosamente', 'success');
+        this.router.navigate(['/nueva-experiencia']);
+      },
+      (error) => {
+        console.error(error);
+        Swal.fire('Error', 'Ocurrió un error al guardar la experiencia', 'error');
+      }
+    );
   }
 
   limpiarFormulario() {
     this.crearForm.reset();
 
   }
-
-  /*
-    onCancelar(): void {
-      this.dialogRef.close();
-    }
-
-   */
-
   volver() {
     this.router.navigate(['/tu-inicio']);
   }

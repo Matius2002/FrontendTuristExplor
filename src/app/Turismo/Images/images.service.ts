@@ -16,12 +16,12 @@ export class ImagesService {
 
   // URL BASE API
   dynamicHost = entornos.dynamicHost;
-  private baseUrl: string = `http://${this.dynamicHost}/api`;  //Url Base API
+  private baseUrl: string = `http://${this.dynamicHost}/api`;
 
   constructor(private http: HttpClient) {
   }
 
-  // Función para guardar una nueva imagen
+// Función para guardar una nueva imagen
   guardarImagenes(archivo: FormData): Observable<Images> {
     return this.http.post<Images>(`${this.baseUrl}/images/cargar`, archivo, {
       reportProgress: true,
@@ -29,14 +29,6 @@ export class ImagesService {
     }).pipe(
       catchError(this.handleError)
     );
-  }
-
-  // Function para guardar un nuevo Images
-  guardarImages(tipoImages: FormData): Observable<Images> {
-    return this.http.post<Images>(`${this.baseUrl}/images/guardarImages`, tipoImages)
-      .pipe(
-        catchError(this.handleError)
-      );
   }
 
   // Eliminar TipoAlojamiento
@@ -63,14 +55,12 @@ export class ImagesService {
   }
 
   // Actualizar Images
-  actualizarImages(id: number, tipoActualizada: Images): Observable<Images> {
-    // Asegúrate de que el ID en el cuerpo de la solicitud sea igual al ID en la URL
-    tipoActualizada.id = id;
-    return this.http.put<Images>(`${this.baseUrl}/images/${id}`, tipoActualizada)
-      .pipe(
-        catchError(this.handleError)
-      );
+  actualizarImages(id: number, formData: FormData): Observable<Images> {
+    return this.http.put<Images>(`${this.baseUrl}/images/${id}`, formData).pipe(
+      catchError(this.handleError)
+    );
   }
+
   // verificar Images ya existe en la base de datos
   verificarImagesExistente(nombre: string): Observable<boolean> {
     return this.http.get<boolean>(`${this.baseUrl}/images/existe/${encodeURIComponent(nombre)}`)

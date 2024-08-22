@@ -1,1 +1,72 @@
-<p>turismo-gastronomico works!</p>
+<div class="mi-separador-div"></div>
+<header class="header-section">
+  <div class="header-content">
+    <h1 class="main-title">¡Bienvenidos!</h1>
+    <p class="main-subtitle">Encuentra la mejor Gastronomia de Girardot</p>
+  </div>
+  <img src="assets/images/gratronomiasostenible.jpg" alt="Background Image" class="header-background">
+</header>
+<div class="mi-separador-div"></div>
+<h1 class="titulo-event">Turismo Gastronomico</h1>
+
+<!-- Estructura básica del buscador -->
+<div class="search-container">
+  <input type="text" [(ngModel)]="searchText" placeholder="Buscar ..." class="search-box" />
+  <button class="search-button">
+    <i class="fas fa-search"></i>
+  </button>
+</div>
+<!-- Mensaje cuando no hay resultados disponibles -->
+<div *ngIf="getFilteredDestinos().length === 0" class="no-eventos">
+  No hay destinos disponibles para la búsqueda "{{ searchText }}".
+  Por favor, ajusta tus criterios de búsqueda o intenta más tarde.
+</div>
+
+<!-- Contenedor de destinos -->
+<div class="destinos-container">
+  <!-- Lista de destinos -->
+  <div *ngFor="let destino of getFilteredDestinos()" class="destino-card">
+    <div class="content-wrapper bg-white shadow-1 blue-hover">
+      <!-- Contenedor de imágenes -->
+      <div class="imagenes-wrapper">
+        <div class="imagenes-grid">
+          <img *ngFor="let imagen of destino.imagenes"
+               [src]="getImageUrl(imagen.ruta)"
+               (error)="onImageError($event, imagen.ruta)"
+               alt="{{ destino.destinoName }}"
+               class="destino-image"
+               (click)="openModal(imagen)"
+          >
+        </div>
+      </div>
+      <div class="px-2 py-2">
+        <p class="small font-weight-medium text-uppercase mb-1 text-muted lts-2px">
+          {{ destino.tipoTurismo[0].nombre }}
+        </p>
+        <h1 class="card-heading">
+          {{ destino.destinoName }}
+        </h1>
+        <p class="descripcion">
+          {{ destino.descripcion }}
+        </p>
+      </div>
+      <div class="footer bg-white">
+        <div class="footer-left">
+          Fecha de Creación: {{ destino.fechaCreacion | date }}
+        </div>
+        <div class="footer-right">
+          Fecha de Actualización: {{ destino.fechaActualizacion | date }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal para mostrar imagen ampliada -->
+<div class="modal" [ngClass]="{'show': isModalOpen}" (click)="closeModal()">
+  <span class="close" (click)="closeModal()">&times;</span>
+  <img class="modal-content" [src]="getImageUrl(selectedImage?.ruta)" (click)="$event.stopPropagation()">
+  <div class="caption">{{ selectedImage?.nombre }}</div>
+</div>
+<div class="mi-separador-div"></div>

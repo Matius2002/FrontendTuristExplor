@@ -59,7 +59,8 @@
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
       </th>
-      <th (click)="sortColumn('tipoTurismo')">
+      <!--
+       <th (click)="sortColumn('tipoTurismo')">
         TipoTurismo
         <span *ngIf="currentColumn === 'tipoTurismo'" class="sorting-icon">
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
@@ -83,27 +84,16 @@
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
       </th>
+       -->
       <th (click)="sortColumn('fechaCreacion')">
         FechaCreacion
         <span *ngIf="currentColumn === 'fechaCreacion'" class="sorting-icon">
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
       </th>
-      <th (click)="sortColumn('horaCreacion')">
-        horaCreacion
-        <span *ngIf="currentColumn === 'horaCreacion'" class="sorting-icon">
-          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
-        </span>
-      </th>
       <th (click)="sortColumn('fechaActualizacion')">
         fechaActualizacion
         <span *ngIf="currentColumn === 'fechaActualizacion'" class="sorting-icon">
-          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
-        </span>
-      </th>
-      <th (click)="sortColumn('horaActualizacion')">
-        horaActualizacion
-        <span *ngIf="currentColumn === 'horaActualizacion'" class="sorting-icon">
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
       </th>
@@ -116,14 +106,14 @@
       <td [innerHTML]="highlightMatches(destino.destinoName, searchText)"></td>
       <td>{{ destino.descripcion }}</td>
       <td>{{ destino.ubicacion }}</td>
+      <!--
       <td>{{ destino.tipoTurismo?.nombre }}</td>
       <td>{{ destino.atracionesPrincipales?.nombre }}</td>
       <td>{{ destino.epocasVisitar?.nombre }}</td>
-      <td>{{ destino.imagenes?.nombre }}</td>
+      <td>{{ destino.imagenes?.ruta }}</td>
+      -->
       <td>{{ destino.fechaCreacion }}</td>
-      <td>{{ destino.horaCreacion }}</td>
       <td>{{ destino.fechaActualizacion }}</td>
-      <td>{{ destino.horaActualizacion }}</td>
       <td class="d-flex justify-content-center align-items-center">
         <button type="button" class="btn btn-outline-info btn-sm mr-1" appTooltip="Actualizar" (click)="openUpdateModal(destino)">
           <i class="fas fa-edit"></i>

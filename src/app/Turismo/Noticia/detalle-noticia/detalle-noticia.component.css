@@ -1,0 +1,197 @@
+
+/* Estilo general */
+.container {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #ece9e6, #ffffff);
+  font-family: 'Montserrat', sans-serif;
+}
+
+.description {
+  font-size: 1.4em;
+  margin-bottom: 30px;
+  color: #4a5568;
+  font-weight: 400;
+}
+
+/* Estilo del blog */
+.blog-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.blog-post-style-1, .blog-post-style-2 {
+  width: calc(33.333% - 20px);
+  margin: 15px 0;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #ffffff;
+}
+
+.blog-post-style-1:hover, .blog-post-style-2:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+}
+
+.blog-post-style-1 {
+  background: linear-gradient(145deg, #ffffff, #f1f1f1);
+}
+
+.blog-post-style-2 {
+  background: linear-gradient(145deg, #ffffff, #f9f9f9);
+}
+
+.post-header {
+  margin-bottom: 20px;
+}
+
+.post-title {
+  font-size: 1.8em;
+  margin: 0 0 10px 0;
+  color: #2d3748;
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+}
+
+.post-meta {
+  color: #718096;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+.post-date {
+  margin-right: 10px;
+}
+
+.post-source {
+  color: #a0aec0;
+}
+
+.post-content {
+  margin-bottom: 20px;
+  max-height: 150px;
+  overflow: auto;
+  color: #4a5568;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.post-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.post-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-image:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo de los detalles de noticia */
+.detalle-noticia {
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  margin: 30px;
+  background: linear-gradient(135deg, #ffffff, #f7f7f7);
+  font-family: 'Montserrat', sans-serif;
+}
+
+.detalle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detalle-content {
+  margin-top: 20px;
+  color: #4a5568;
+}
+
+.detalle-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.detalle-images img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.detalle-images img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+/* BOTÓN */
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 1em;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: width 0.4s ease, height 0.4s ease;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+.btn-primary:hover::before {
+  width: 400%;
+  height: 400%;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Color de fondo más oscuro al pasar el ratón */
+  transform: scale(1.05); /* Efecto de escala */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+.btn-primary:active {
+  background-color: #004085; /* Color de fondo al hacer clic */
+  transform: scale(0.98); /* Efecto de presionar */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra al presionar */
+}
+
+.btn-primary:focus {
+  outline: none; /* Eliminar el borde predeterminado del foco */
+  box-shadow: 0 0 0 3px rgba(38, 143, 255, 0.5); /* Borde de enfoque personalizado */
+}

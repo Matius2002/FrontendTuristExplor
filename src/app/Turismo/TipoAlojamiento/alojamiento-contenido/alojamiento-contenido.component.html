@@ -1,1 +1,73 @@
-<p>alojamiento-contenido works!</p>
+<div class="mi-separador-div"></div>
+<header class="matias">
+  <div class="matias-content">
+    <h1 class="title">¡Encuentra tu alojamiento ideal!</h1>
+    <p class="subtitle text-center">Descubre los mejores lugares para hospedarte en Girardot</p>
+  </div>
+  <img src="assets/images/ALOJAMIENTOS.jpg" alt="Background Image" class="matias-background">
+</header>
+<div class="mi-separador-div"></div>
+
+<!-- evento-contenido.component.html -->
+<!-- Lista de Alojamientos -->
+<h1 class="titulo-event">Lista de Alojamientos</h1>
+
+<!-- Estructura básica del buscador -->
+<div class="search-container">
+  <input type="text" [(ngModel)]="searchText" placeholder="Buscar Alojamientos..." class="search-box" />
+  <button class="search-button">
+    <i class="fas fa-search"></i> <!-- Icono de búsqueda, asegúrate de tener FontAwesome instalado -->
+  </button>
+</div>
+
+<!-- Contenedor de la Tabla -->
+<div class="table-container">
+  <div class="table">
+    <!-- Encabezado de la Tabla -->
+    <div class="table-header">
+      <div class="header-cell">Nombre</div>
+      <div class="header-cell">Descripción</div>
+      <div class="header-cell">Tipo</div>
+      <div class="header-cell">Dirección</div>
+      <div class="header-cell">Celular</div>
+      <div class="header-cell">Email</div>
+      <div class="header-cell">Web</div>
+      <div class="header-cell">Precio</div>
+      <div class="header-cell">Imágenes</div>
+    </div>
+
+    <!-- Cuerpo de la Tabla -->
+    <div class="table-body">
+      <div *ngFor="let alojamiento of alojamientos | filterBy:searchText" class="table-row">
+        <div class="table-cell">{{ alojamiento.nombre }}</div>
+        <div class="table-cell">{{ alojamiento.descripcion }}</div>
+        <div class="table-cell">{{ alojamiento.tipoAlojamiento.nombre }}</div>
+        <div class="table-cell">{{ alojamiento.direccion }}</div>
+        <div class="table-cell">{{ alojamiento.celular }}</div>
+        <div class="table-cell">{{ alojamiento.email }}</div>
+        <div class="table-cell">{{ alojamiento.webUrl }}</div>
+        <div class="table-cell">{{ alojamiento.precioGeneral | currency }}</div>
+        <div class="table-cell">
+          <div class="image-grid">
+            <img *ngFor="let imagen of alojamiento.imagenes"
+                 [src]="getImageUrl(imagen.ruta)"
+                 [alt]="alojamiento.nombre"
+                 class="thumbnail"
+                 (click)="openModal(imagen)" /> <!-- Abrir modal al hacer clic en la imagen -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para mostrar imagen ampliada -->
+<div class="modal" [ngClass]="{'show': isModalOpen}" (click)="closeModal()">
+  <span class="close" (click)="closeModal()">&times;</span>
+  <img class="modal-content" [src]="getImageUrl(selectedImage?.ruta)" (click)="$event.stopPropagation()">
+  <div class="caption">{{ selectedImage?.nombre }}</div>
+</div>
+
+<div class="mi-separador-div"></div>
+
+

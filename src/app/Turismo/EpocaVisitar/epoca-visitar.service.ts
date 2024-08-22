@@ -53,7 +53,7 @@ export class EpocaVisitarService {
   }
 
   // Actualizar EpocaVisitar
-  actualizarEpocaVisitaro(id: number, tipoActualizada: EpocaVisitar): Observable<EpocaVisitar> {
+  actualizarEpocaVisitar(id: number, tipoActualizada: EpocaVisitar): Observable<EpocaVisitar> {
     // Asegúrate de que el ID en el cuerpo de la solicitud sea igual al ID en la URL
     tipoActualizada.id = id;
     return this.http.put<EpocaVisitar>(`${this.baseUrl}/epocaVisitars/${id}`, tipoActualizada)

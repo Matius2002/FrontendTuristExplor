@@ -1,1 +1,55 @@
-<p>editar-roles works!</p>
+<!-- editar-rol.component.html -->
+<div mat-dialog-content class="modal-content-editar-turismo">
+  <div class="modal-header-editar-turismo">
+    <h5 class="modal-title-editar-turismo">Editar Rol</h5>
+    <button type="button" class="close-editar-turismo" aria-label="Close" (click)="onCancelar()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body-editar-turismo">
+    <form [formGroup]="crearForm" (ngSubmit)="onSubmit()">
+      <!-- inicio nombre -->
+      <div class="form-group-editar-turismo">
+        <label for="rolName">Nombre del Rol</label>
+        <input type="text" id="rolName" formControlName="rolName" placeholder="Ingresa el Nombre del Rol" class="form-control-editar-turismo">
+        <div *ngIf="crearForm.get('rolName')?.invalid && (crearForm.get('rolName')?.dirty || crearForm.get('rolName')?.touched)">
+          <div class="text-danger-editar-turismo" *ngIf="crearForm.get('rolName')?.hasError('required')">El Rol es obligatorio.</div>
+          <div class="text-danger-editar-turismo" *ngIf="crearForm.get('rolName')?.hasError('minlength')">El Rol debe tener al menos 5 caracteres.</div>
+          <div class="text-danger-editar-turismo" *ngIf="crearForm.get('rolName')?.hasError('maxlength')">El Rol no debe exceder los 50 caracteres.</div>
+        </div>
+      </div>
+      <!-- fin nombre -->
+
+      <!-- inicio descripción -->
+      <div class="form-group-editar-turismo">
+        <label for="rolDescripc">Descripción del Rol</label>
+        <textarea id="rolDescripc" formControlName="rolDescripc" placeholder="Ingresa la Descripción del Rol" rows="5" class="form-control-editar-turismo"></textarea>
+        <div *ngIf="crearForm.get('rolDescripc')?.invalid && (crearForm.get('rolDescripc')?.dirty || crearForm.get('rolDescripc')?.touched)">
+          <div class="text-danger-editar-turismo" *ngIf="crearForm.get('rolDescripc')?.hasError('required')">La descripción es obligatoria.</div>
+          <div class="text-danger-editar-turismo" *ngIf="crearForm.get('rolDescripc')?.hasError('minlength')">La descripción debe tener al menos 10 caracteres.</div>
+          <div class="text-danger-editar-turismo" *ngIf="crearForm.get('rolDescripc')?.hasError('maxlength')">La descripción no debe exceder los 500 caracteres.</div>
+        </div>
+      </div>
+      <!-- fin descripción -->
+
+      <!-- inicio fechas -->
+      <div class="form-group-editar-turismo">
+        <label for="rolFechaCreac">Fecha de Creación</label>
+        <input type="date" id="rolFechaCreac" formControlName="rolFechaCreac" class="form-control-editar-turismo">
+      </div>
+
+      <div class="form-group-editar-turismo">
+        <label for="rolFechaModic">Fecha de Modificación</label>
+        <input type="date" id="rolFechaModic" formControlName="rolFechaModic" class="form-control-editar-turismo">
+      </div>
+      <!-- fin fechas -->
+
+      <!-- Botones -->
+      <div class="modal-footer-editar-turismo">
+        <button type="button" class="btn btn-secondary" (click)="onCancelar()">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+        <button type="button" class="btn btn-danger" (click)="onClearForm()">Limpiar</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -152,12 +152,13 @@
   }
 }
 
-/* tabla 2 */
 
+/* Estilos existentes tabla 2*/
+
+/* Estilos para la tarjeta de eventos */
 .card-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   padding: 20px;
 }
@@ -168,13 +169,12 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  width: 350px;
   margin: 10px;
 }
 
 .card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px); /* Levita ligeramente */
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
 }
 
 .card-header {
@@ -182,11 +182,13 @@
   color: #ffffff;
   padding: 15px;
   text-align: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .card-title {
   margin: 0;
-  font-size: 26px;
+  font-size: 24px; /* Ligeramente más pequeño para balancear */
   font-weight: 700;
 }
 
@@ -194,21 +196,11 @@
   padding: 15px;
 }
 
-.card-image img {
-  width: 100%;
-  height: auto;
-  border-bottom: 1px solid #ddd;
-  transition: transform 0.3s ease;
-}
-
-.card-image img:hover {
-  transform: scale(1.05);
-}
-
 .card-content p {
   margin: 10px 0;
   font-size: 16px;
-  color: #333;
+  color: #555;
+  line-height: 1.5; /* Mejora la legibilidad */
 }
 
 .card-content p strong {
@@ -223,7 +215,8 @@
 .card-footer {
   padding: 10px;
   background: #f9f9f9;
-  border-top: 1px solid #ddd;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .card-thumbnails {
@@ -234,8 +227,8 @@
 }
 
 .thumbnail {
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   border-radius: 5px;
   object-fit: cover;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -243,18 +236,30 @@
 
 .thumbnail:hover {
   transform: scale(1.1);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 600px) {
+  .card-container {
+    grid-template-columns: 1fr;
+  }
   .card-title {
-    font-size: 22px;
+    font-size: 20px; /* Ajuste para pantallas pequeñas */
   }
   .card-content p {
     font-size: 14px;
   }
   .thumbnail {
-    width: 40px;
-    height: 40px;
+    width: 60px; /* Ajuste de tamaño para pantallas pequeñas */
+    height: 60px;
   }
 }
+
+
+
+
+
+
+
+
+

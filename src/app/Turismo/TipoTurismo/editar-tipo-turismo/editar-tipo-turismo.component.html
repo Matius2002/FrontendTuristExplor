@@ -1,1 +1,43 @@
-<p>editar-tipo-turismo works!</p>
+<!-- editar-tipo-turismo.component.html -->
+<div mat-dialog-content class="modal-content-editar-turismo">
+  <div class="modal-header-editar-turismo">
+    <h5 class="modal-title-editar-turismo">Editar Tipo de Turismo</h5>
+    <button type="button" class="close-editar-turismo" aria-label="Close" (click)="onCancelar()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body-editar-turismo">
+    <form [formGroup]="editarForm" (ngSubmit)="onSubmit()">
+      <div class="form-group-editar-turismo">
+        <label for="nombre">Nombre Tipo de Turismo</label>
+        <input type="text" id="nombre" formControlName="nombre" placeholder="Ingresa el Nombre del Tipo de Turismo" class="form-control-editar-turismo">
+        <div *ngIf="editarForm.get('nombre')?.invalid && (editarForm.get('nombre')?.dirty || editarForm.get('nombre')?.touched)">
+          <div class="text-danger-editar-turismo" *ngIf="editarForm.get('nombre')?.hasError('required')">El Tipo de Turismo es obligatorio.</div>
+          <div class="text-danger-editar-turismo" *ngIf="editarForm.get('nombre')?.hasError('minlength')">El Tipo de Turismo debe tener al menos 5 caracteres.</div>
+          <div class="text-danger-editar-turismo" *ngIf="editarForm.get('nombre')?.hasError('maxlength')">El Tipo de Turismo no debe exceder los 50 caracteres.</div>
+        </div>
+      </div>
+      <div class="form-group-editar-turismo">
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" formControlName="descripcion" placeholder="Ingresa la Descripción del Tipo de Turismo" rows="5" class="form-control-editar-turismo"></textarea>
+        <div *ngIf="editarForm.get('descripcion')?.invalid && (editarForm.get('descripcion')?.dirty || editarForm.get('descripcion')?.touched)">
+          <div class="text-danger-editar-turismo" *ngIf="editarForm.get('descripcion')?.hasError('required')">La descripción es obligatoria.</div>
+          <div class="text-danger-editar-turismo" *ngIf="editarForm.get('descripcion')?.hasError('minlength')">La descripción debe tener al menos 10 caracteres.</div>
+          <div class="text-danger-editar-turismo" *ngIf="editarForm.get('descripcion')?.hasError('maxlength')">La descripción no debe exceder los 250 caracteres.</div>
+        </div>
+      </div>
+      <div class="form-group-editar-turismo">
+        <label for="popularidad">Popularidad</label>
+        <textarea id="popularidad" formControlName="popularidad" placeholder="Ingresa la Popularidad" rows="3" class="form-control-editar-turismo"></textarea>
+        <div *ngIf="editarForm.get('popularidad')?.invalid && (editarForm.get('popularidad')?.dirty || editarForm.get('popularidad')?.touched)">
+          <div class="text-danger-editar-turismo" *ngIf="editarForm.get('popularidad')?.hasError('required')">La Popularidad es obligatoria.</div>
+        </div>
+      </div>
+      <div class="modal-footer-editar-turismo">
+        <button type="button" class="btn btn-secondary" (click)="onCancelar()">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+        <button type="button" class="btn btn-danger" (click)="onClearForm()">Limpiar</button>
+      </div>
+    </form>
+  </div>
+</div>

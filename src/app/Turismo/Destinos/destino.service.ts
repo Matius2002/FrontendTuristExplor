@@ -17,7 +17,9 @@ interface EpocasVisitar{
 }
 interface Images{
   id: number;
+  nombre: string;
   ruta: string;
+  activa: boolean;
 }
 
 interface Destinos {
@@ -30,10 +32,7 @@ interface Destinos {
   epocasVisitar: EpocasVisitar [];
   imagenes: Images [];
   fechaCreacion: Date;
-  horaCreacion: string;
   fechaActualizacion: Date;
-  horaActualizacion: string;
-
 }
 @Injectable({
   providedIn: 'root'

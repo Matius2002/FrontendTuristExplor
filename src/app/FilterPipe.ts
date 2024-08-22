@@ -19,8 +19,8 @@ export class FilterPipe implements PipeTransform {
       (item.titulo && item.titulo.toLowerCase().includes(searchTerm.toLowerCase())) ||
       (item.comentario && item.comentario.toLowerCase().includes(searchTerm.toLowerCase())) ||
       (item.rolName && item.rolName.toLowerCase().includes(searchTerm.toLowerCase())) ||
-      (item.nombreUsuario && item.nombreUsuario.toLowerCase().includes(searchTerm.toLowerCase()))
-
+      (item.nombreUsuario && item.nombreUsuario.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (item.ubicacion && item.ubicacion.toLowerCase().includes(searchTerm.toLowerCase()))
     );
   }
 }

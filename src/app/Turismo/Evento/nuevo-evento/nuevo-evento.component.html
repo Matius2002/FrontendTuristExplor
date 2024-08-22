@@ -60,106 +60,98 @@
 
     <!-- inicio imágenes -->
     <div class="form-group">
-      <label for="imagenes">Imágenes</label>
+      <label for="images">Imágenes</label>
       <div class="input-group">
         <div class="input-group-prepend">
+          <button class="btn btn-outline-primary mr-2" type="button" (click)="agregarNuevaImagen()" data-toggle="tooltip" data-placement="top" title="Agregar nueva imagen">
+            <i class="fas fa-plus"></i>
+          </button>
       <span class="input-group-text">
-        <i *ngIf="crearForm.get('imagenes')?.valid || !crearForm.get('imagenes')?.touched" class="fas fa-image"></i>
-        <i *ngIf="crearForm.get('imagenes')?.invalid && crearForm.get('imagenes')?.touched" class="fas fa-times-circle text-danger"></i>
+        <i *ngIf="crearForm.get('images')?.valid || !crearForm.get('images')?.touched" class="fas fa-image"></i>
+        <i *ngIf="crearForm.get('images')?.invalid && crearForm.get('images')?.touched" class="fas fa-times-circle text-danger"></i>
       </span>
         </div>
-        <select id="imagenes" formControlName="imagenes" class="form-control">
+        <select id="images" formControlName="images" class="form-control" multiple>
           <option value="" disabled selected>Selecciona una imagen</option>
           <option *ngFor="let imagen of imagenes" [ngValue]="imagen">{{ imagen.ruta }}</option>
         </select>
       </div>
-      <div *ngIf="crearForm.get('imagenes')?.invalid && (crearForm.get('imagenes')?.dirty || crearForm.get('imagenes')?.touched)">
-        <div class="text-danger" *ngIf="crearForm.get('imagenes')?.errors?.['required']">Las imágenes son obligatorias.</div>
+      <div *ngIf="crearForm.get('images')?.invalid && (crearForm.get('images')?.dirty || crearForm.get('images')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('images')?.errors?.['required']">Las imágenes son obligatorias.</div>
       </div>
     </div>
     <!-- fin imágenes -->
 
-    <!-- inicio fecha -->
+    <!-- inicio fecha y hora de creación -->
     <div class="form-group">
-      <label>Fecha del Evento</label>
-      <div class="fecha-evento-container">
-        <!-- Fecha Inicio del Evento -->
-        <div class="form-group">
-          <label>Fecha Inicio del Evento</label>
-          <div class="input-group">
-            <div class="input-group-prepend">
-          <span class="input-group-text">
-            <i *ngIf="crearForm.get('fechaInicio')?.valid || !crearForm.get('fechaInicio')?.touched" class="fas fa-calendar-plus"></i>
-            <i *ngIf="crearForm.get('fechaInicio')?.invalid && crearForm.get('fechaInicio')?.touched" class="fas fa-times-circle text-danger"></i>
-          </span>
-            </div>
-            <input type="date" id="fechaInicio" formControlName="fechaInicio" class="form-control">
-          </div>
+      <label>Fecha y Hora de Creación</label>
+      <div class="input-group">
+        <!-- fecha y hora de creación -->
+        <div class="input-group-prepend">
+      <span class="input-group-text">
+        <i *ngIf="crearForm.get('fechaInicio')?.valid || !crearForm.get('fechaInicio')?.touched" class="fas fa-calendar-plus"></i>
+        <i *ngIf="crearForm.get('fechaInicio')?.invalid && crearForm.get('fechaInicio')?.touched" class="fas fa-times-circle text-danger"></i>
+      </span>
         </div>
-
-        <!-- Fecha Final del Evento -->
-        <div class="form-group">
-          <label>Fecha Final del Evento</label>
-          <div class="input-group">
-            <div class="input-group-prepend">
-          <span class="input-group-text">
-            <i *ngIf="crearForm.get('fechaFin')?.valid || !crearForm.get('fechaFin')?.touched" class="fas fa-calendar-check"></i>
-            <i *ngIf="crearForm.get('fechaFin')?.invalid && crearForm.get('fechaFin')?.touched" class="fas fa-times-circle text-danger"></i>
-          </span>
-            </div>
-            <input type="date" id="fechaFin" formControlName="fechaFin" class="form-control">
-          </div>
+        <input type="datetime-local" id="fechaInicio" formControlName="fechaInicio" class="form-control">
+      </div>
+      <!-- mensajes de error -->
+      <div class="mt-2"> <!-- Espacio adicional para separar mensajes de error -->
+        <div *ngIf="crearForm.get('fechaInicio')?.invalid && (crearForm.get('fechaInicio')?.dirty || crearForm.get('fechaInicio')?.touched)">
+          <div class="text-danger" *ngIf="crearForm.get('fechaInicio')?.errors?.['required']">La fecha de hora creación es obligatoria.</div>
         </div>
       </div>
     </div>
-    <!-- fin fecha -->
-    <!-- Hora del Evento -->
+    <!-- fin fecha y hora de creación -->
+
+    <!-- inicio fecha y hora de actualización -->
     <div class="form-group">
-      <label>Hora del Evento</label>
-      <div class="hora-evento-container">
-        <!-- Hora Inicio del Evento -->
-        <div class="form-group">
-          <label>Hora Inicio del Evento</label>
-          <div class="input-group">
-            <div class="input-group-prepend">
-          <span class="input-group-text">
-            <i *ngIf="crearForm.get('horaInicio')?.valid || !crearForm.get('horaInicio')?.touched" class="fas fa-clock"></i>
-            <i *ngIf="crearForm.get('horaInicio')?.invalid && crearForm.get('horaInicio')?.touched" class="fas fa-times-circle text-danger"></i>
-          </span>
-            </div>
-            <input type="time" id="horaInicio" formControlName="horaInicio" class="form-control">
-          </div>
+      <label>Fecha y Hora de Actualización</label>
+      <div class="input-group">
+        <!-- fecha y hora de actualización -->
+        <div class="input-group-prepend">
+      <span class="input-group-text">
+        <i *ngIf="crearForm.get('fechaFin')?.valid || !crearForm.get('fechaFin')?.touched" class="fas fa-calendar-check"></i>
+        <i *ngIf="crearForm.get('fechaFin')?.invalid && crearForm.get('fechaFin')?.touched" class="fas fa-times-circle text-danger"></i>
+      </span>
         </div>
-        <!-- Hora Fin del Evento -->
-        <div class="form-group">
-          <label>Hora Fin del Evento</label>
-          <div class="input-group">
-            <div class="input-group-prepend">
-          <span class="input-group-text">
-            <i *ngIf="crearForm.get('horaFin')?.valid || !crearForm.get('horaFin')?.touched" class="fas fa-clock"></i>
-            <i *ngIf="crearForm.get('horaFin')?.invalid && crearForm.get('horaFin')?.touched" class="fas fa-times-circle text-danger"></i>
-          </span>
-            </div>
-            <input type="time" id="horaFin" formControlName="horaFin" class="form-control">
-          </div>
+        <input type="datetime-local" id="fechaFin" formControlName="fechaFin" class="form-control">
+      </div>
+      <!-- mensajes de error -->
+      <div class="mt-2"> <!-- Espacio adicional para separar mensajes de error -->
+        <div *ngIf="crearForm.get('fechaFin')?.invalid && (crearForm.get('fechaFin')?.dirty || crearForm.get('fechaFin')?.touched)">
+          <div class="text-danger" *ngIf="crearForm.get('fechaFin')?.errors?.['required']">La fecha y hora de actualización es obligatoria.</div>
         </div>
       </div>
     </div>
+    <!-- fin fecha y hora de actualización -->
 
-    <!-- Costo de la Entrada -->
+
+
+    <!-- inicio precioGeneral -->
     <div class="form-group">
-      <label>Costo de la Entrada</label>
+      <label for="costoEntrada">Costo de la Entrada</label>
       <div class="input-group">
         <div class="input-group-prepend">
-          <span class="input-group-text">$</span>
+      <span class="input-group-text">
+        <i *ngIf="crearForm.get('costoEntrada')?.valid || !crearForm.get('costoEntrada')?.touched" class="fas fa-dollar-sign"></i>
+        <i *ngIf="crearForm.get('costoEntrada')?.invalid && crearForm.get('costoEntrada')?.touched" class="fas fa-times-circle text-danger"></i>
+      </span>
         </div>
-        <input type="number" id="costoEntrada" formControlName="costoEntrada" class="form-control" placeholder="0.00" min="0" step="0.01">
+        <input type="number" id="costoEntrada" formControlName="costoEntrada" placeholder="Ingresa el precio general" class="form-control">
+      </div>
+      <div *ngIf="crearForm.get('costoEntrada')?.invalid && (crearForm.get('costoEntrada')?.dirty || crearForm.get('costoEntrada')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('costoEntrada')?.errors?.['required']">El precio general es obligatorio.</div>
       </div>
     </div>
+    <!-- fin precioGeneral -->
 
     <!-- inicio Destino turismo -->
+    <!--
+
+    -->
     <div class="form-group">
-      <label for="destinos">Destino</label>
+      <label for="destinos">Destino del evento</label>
       <div class="input-group">
         <div class="input-group-prepend">
       <span class="input-group-text">
@@ -167,17 +159,37 @@
         <i *ngIf="crearForm.get('destinos')?.invalid && crearForm.get('destinos')?.touched" class="fas fa-times-circle text-danger"></i>
       </span>
         </div>
-        <select id="destinos" formControlName="destinos" class="form-control">
+        <select id="destinos" formControlName="destinos" class="form-control" multiple>
           <option value="" disabled selected>Selecciona un destino</option>
           <option *ngFor="let destino of destinos" [ngValue]="destino">{{ destino.destinoName }}</option>
         </select>
       </div>
       <div *ngIf="crearForm.get('destinos')?.invalid && (crearForm.get('destinos')?.dirty || crearForm.get('destinos')?.touched)">
-        <div class="text-danger" *ngIf="crearForm.get('destinos')?.errors?.['required']">El Destino de turismo es obligatorio.</div>
+        <div class="text-danger" *ngIf="crearForm.get('destinos')?.errors?.['required']">El Destino del evento es obligatorio.</div>
       </div>
     </div>
     <!-- fin Destino turismo -->
 
+    <!-- inicio tipoTurismo -->
+    <div class="form-group">
+      <label for="tipoTurismo">Tipo de Turismo</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">
+                <i *ngIf="crearForm.get('tipoTurismo')?.valid || !crearForm.get('tipoTurismo')?.touched" class="fas fa-umbrella-beach"></i>
+                <i *ngIf="crearForm.get('tipoTurismo')?.invalid && crearForm.get('tipoTurismo')?.touched" class="fas fa-times-circle text-danger"></i>
+            </span>
+        </div>
+        <select id="tipoTurismo" formControlName="tipoTurismo" class="form-control">
+          <option value="" disabled selected>Selecciona un tipo de turismo</option>
+          <option *ngFor="let tipo of tipoTurismos" [ngValue]="tipo">{{ tipo.nombre }}</option>
+        </select>
+      </div>
+      <div *ngIf="crearForm.get('tipoTurismo')?.invalid && (crearForm.get('tipoTurismo')?.dirty || crearForm.get('tipoTurismo')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('tipoTurismo')?.errors?.['required']">El tipo de turismo es obligatorio.</div>
+      </div>
+    </div>
+    <!-- fin tipoTurismo -->
 
     <!-- Botones -->
     <div class="form-group">

@@ -57,7 +57,6 @@
       </div>
     </div>
     <!-- fin Fuente -->
-
     <!-- inicio tipoTurismos turismo -->
     <div class="form-group">
       <label for="tipoTurismos">Tipo de Turismo Relacionado con la Noticia</label>
@@ -70,7 +69,7 @@
         </div>
         <select id="tipoTurismos" formControlName="tipoTurismos" class="form-control">
           <option value="" disabled selected>Selecciona un Tipo de Turismo</option>
-          <option *ngFor="let tipoTurismo of tipoTurismos" [ngValue]="tipoTurismos">{{ tipoTurismo.nombre}}</option>
+          <option *ngFor="let tipoTurismo of tipoTurismo" [ngValue]="tipoTurismo">{{ tipoTurismo.nombre}}</option>
         </select>
       </div>
       <div *ngIf="crearForm.get('tipoTurismos')?.invalid && (crearForm.get('tipoTurismos')?.dirty || crearForm.get('tipoTurismos')?.touched)">
@@ -78,18 +77,20 @@
       </div>
     </div>
     <!-- fin tipoTurismos turismo -->
-
     <!-- inicio imágenes -->
     <div class="form-group">
       <label for="imagenes">Imágenes</label>
       <div class="input-group">
         <div class="input-group-prepend">
+          <button class="btn btn-outline-primary mr-2" type="button" (click)="agregarNuevaImagen()" data-toggle="tooltip" data-placement="top" title="Agregar nueva imagen">
+            <i class="fas fa-plus"></i>
+          </button>
       <span class="input-group-text">
         <i *ngIf="crearForm.get('imagenes')?.valid || !crearForm.get('imagenes')?.touched" class="fas fa-image"></i>
         <i *ngIf="crearForm.get('imagenes')?.invalid && crearForm.get('imagenes')?.touched" class="fas fa-times-circle text-danger"></i>
       </span>
         </div>
-        <select id="imagenes" formControlName="imagenes" class="form-control">
+        <select id="imagenes" formControlName="imagenes" class="form-control" multiple>
           <option value="" disabled selected>Selecciona una imagen</option>
           <option *ngFor="let imagen of imagenes" [ngValue]="imagen">{{ imagen.ruta }}</option>
         </select>
@@ -99,19 +100,20 @@
       </div>
     </div>
     <!-- fin imágenes -->
-
     <!-- inicio fecha y hora de creación -->
     <div class="form-group">
-      <label>Fecha de Publicación</label>
+      <label for="fechaPublicacion">Fecha y Hora de Publicación</label>
       <div class="input-group">
-        <!-- fecha de creación -->
         <div class="input-group-prepend">
       <span class="input-group-text">
         <i *ngIf="crearForm.get('fechaPublicacion')?.valid || !crearForm.get('fechaPublicacion')?.touched" class="fas fa-calendar-plus"></i>
         <i *ngIf="crearForm.get('fechaPublicacion')?.invalid && crearForm.get('fechaPublicacion')?.touched" class="fas fa-times-circle text-danger"></i>
       </span>
         </div>
-        <input type="date" id="fechaPublicacion" formControlName="fechaPublicacion" class="form-control" style="margin-right: 5px;">
+        <input type="datetime-local" id="fechaPublicacion" formControlName="fechaPublicacion" class="form-control">
+      </div>
+      <div *ngIf="crearForm.get('fechaPublicacion')?.invalid && (crearForm.get('fechaPublicacion')?.dirty || crearForm.get('fechaPublicacion')?.touched)">
+        <div class="text-danger" *ngIf="crearForm.get('fechaPublicacion')?.errors?.['required']">La Fecha y Hora de Publicación es obligatoria.</div>
       </div>
     </div>
 
@@ -121,7 +123,5 @@
       <button type="button" class="custom-btn secondary-btn" style="margin-left: 10px;" (click)="limpiarFormulario()">Limpiar Formulario</button>
       <button type="button" class="custom-btn info-btn" style="margin-left: 10px;" (click)="volver()">Volver</button>
     </div>
-
-
   </form>
 </div>

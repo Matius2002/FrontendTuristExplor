@@ -48,8 +48,7 @@ export class LoginComponent implements OnInit{
   ngOnInit(): void {
     this.crearForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(10)]]
-
+      password: ['', [Validators.required, Validators.minLength(1)]]
     });
   }
 
@@ -69,31 +68,17 @@ export class LoginComponent implements OnInit{
     };
 
     this.usuarioService.login(credentials).subscribe(
-      (response: any) => {
-        if (response && response.success) {
-          // Almacenar el email del usuario en el local storage
-          localStorage.setItem('userEmail', this.crearForm.value.email);
-
-          Swal.fire({
-            icon: 'success',
-            title: 'Inicio de sesión exitoso',
-          }).then(() => {
-            this.router.navigate(['/tu-inicio']);
-          });
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error al iniciar sesión',
-            text: 'Correo electrónico o contraseña incorrectos.',
-          });
-        }
-      },
-      (error: any) => {
+      response => {
+        console.log(response);
+        this.usuarioService.guardarUsuarioEnStorage(response.token);
+        this.usuarioService.guardarToken(response.token);
         Swal.fire({
-          icon: 'error',
-          title: 'Error al iniciar sesión',
-          text: 'Intente nuevamente más tarde.',
+          icon: 'success',
+          title: 'Inicio de sesión exitoso',
+        }).then(() => {
+          this.router.navigate(['/tu-inicio']);
         });
+
       }
     );
   }

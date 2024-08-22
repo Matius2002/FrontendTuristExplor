@@ -52,12 +52,6 @@
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
       </th>
-      <th (click)="sortColumn('destinos')">
-        Destinos
-        <span *ngIf="currentColumn === 'destinos'" class="sorting-icon">
-          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
-        </span>
-      </th>
       <th (click)="sortColumn('tipoAlojamiento')">
         Tipo Alojamiento
         <span *ngIf="currentColumn === 'tipoAlojamiento'" class="sorting-icon">
@@ -100,12 +94,15 @@
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
       </th>
-      <th (click)="sortColumn('fechaActualizacion')">
-        fechaActualizacion
-        <span *ngIf="currentColumn === 'fechaActualizacion'" class="sorting-icon">
+      <!--
+      <th (click)="sortColumn('destinos')">
+        Destinos
+        <span *ngIf="currentColumn === 'destinos'" class="sorting-icon">
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
       </th>
+      -->
+
       <th>Acciones</th>
     </tr>
     </thead>
@@ -114,15 +111,17 @@
       <td class="text-center">{{ alojamiento.id }}</td>
       <td [innerHTML]="highlightMatches(alojamiento.nombre, searchText)"></td>
       <td>{{ alojamiento.direccion}}</td>
+      <!--
       <td>{{ alojamiento.destinos?.nombre }}</td>
+      -->
       <td>{{ alojamiento.tipoAlojamiento?.nombre }}</td>
       <td>{{ alojamiento.direccion}}</td>
       <td>{{ alojamiento.celular}}</td>
       <td>{{ alojamiento.email}}</td>
       <td>{{ alojamiento.webUrl}}</td>
       <td>{{ alojamiento.precioGeneral}}</td>
-      <td>{{ alojamiento.fechaActualizacion}}</td>
       <td>{{ alojamiento.fechaCreacion}}</td>
+
       <td class="d-flex justify-content-center align-items-center">
         <button type="button" class="btn btn-outline-info btn-sm mr-1" appTooltip="Actualizar" (click)="openUpdateModal(alojamiento)">
           <i class="fas fa-edit"></i>

@@ -73,6 +73,7 @@ export class TipoTurismoComponent implements OnInit{
     private tipoTurismoService: TipoTurismoService,
     private dialog: MatDialog,
     private router: Router,
+
   ) {
   }
   ngOnInit(): void {
@@ -82,12 +83,13 @@ export class TipoTurismoComponent implements OnInit{
   printTable() {
     window.print();
   }
-  // Actualizar torre
+  // Actualizar Tipo de turismo
   openUpdateModal(tipoTurismo: TipoTurismo): void {
     const dialogRef = this.dialog.open(EditarTipoTurismoComponent, {
-      width: '400px',
-      data: {tipoTurismo}
+      width: '600px',
+      data: { tipoTurismo },
     });
+
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'success') {
         Swal.fire('¡Actualizado!', 'El Tipo de Turismo se ha actualizado correctamente.', 'success');

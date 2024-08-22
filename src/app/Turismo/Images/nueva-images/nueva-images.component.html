@@ -1,7 +1,6 @@
 <div class="container">
   <h2>Módulo para agregar una Nueva Imagen</h2>
   <form [formGroup]="crearForm" (ngSubmit)="onSubmit()">
-    <!-- inicio nombre -->
     <div class="form-group">
       <label for="nombre">Nombre de la Imagen</label>
       <div class="input-group">
@@ -11,31 +10,24 @@
               <i *ngIf="crearForm.get('nombre')?.invalid && crearForm.get('nombre')?.touched" class="fas fa-times-circle text-danger"></i>
             </span>
         </div>
-        <input type="text" id="nombre" formControlName="nombre" placeholder="Ingresa el Nombre del Destino">
+        <input type="text" id="nombre" formControlName="nombre" placeholder="Ingresa el Nombre de la Imagen">
       </div>
       <div *ngIf="crearForm.get('nombre')?.invalid && (crearForm.get('nombre')?.dirty || crearForm.get('nombre')?.touched)">
         <div class="text-danger" *ngIf="crearForm.get('nombre')?.errors?.['required']">El Nombre es obligatorio.</div>
-        <div class="text-danger" *ngIf="crearForm.get('nombre')?.errors?.['minlength']">l Nombre  debe tener al menos 5 caracteres.</div>
-        <div class="text-danger" *ngIf="crearForm.get('nombre')?.errors?.['maxlength']">l Nombre  no debe exceder los 50 caracteres.</div>
+        <div class="text-danger" *ngIf="crearForm.get('nombre')?.errors?.['minlength']">El Nombre debe tener al menos 5 caracteres.</div>
+        <div class="text-danger" *ngIf="crearForm.get('nombre')?.errors?.['maxlength']">El Nombre no debe exceder los 50 caracteres.</div>
       </div>
     </div>
-    <!-- fin nombre -->
-
-    <!-- inicio archivo -->
     <div class="form-group">
-      <label for="archivo" class="select-file-label">Seleccionar Archivo</label>
-      <input id="archivo" type="file" (change)="onFileChange($event)" />
-      <p class="file-info">Tamaño (máximo 500MB cada una) en formato JPG, PNG, GIF o BMP:</p>
+      <label for="archivo" class="select-file-label">Seleccionar Archivo (Solo Imágenes)</label>
+      <input id="archivo" type="file" accept="image/*" #fileInput (change)="onFileChange($event)" />
+      <p class="file-info text-center">Tamaño (máximo 500MB cada una) en formato JPG, PNG, GIF o BMP:</p>
       <div *ngIf="crearForm.get('ruta')?.invalid && crearForm.get('ruta')?.touched" class="error-messages">
         <span *ngIf="crearForm.get('ruta')?.errors?.['required']" class="error-message">La ruta es requerida.</span>
         <span *ngIf="selectedFiles.length > 0 && !validarTipoArchivo(selectedFiles[0])" class="error-message">Formato de archivo no válido. Solo se permiten archivos JPG, PNG, GIF o BMP.</span>
         <span *ngIf="selectedFiles.length > 0 && !validarTamanoArchivo(selectedFiles[0])" class="error-message">El tamaño del archivo excede el límite máximo de 500MB.</span>
       </div>
     </div>
-    <!-- fin archivo -->
-
-
-    <!-- inicio acciones de archivo -->
     <div *ngIf="selectedFiles.length > 0">
       <div class="card">
         <div class="card-body">
@@ -58,7 +50,6 @@
       </div>
     </div>
     <!-- fin acciones de archivo -->
-
 
     <!-- Botones -->
     <div class="form-group">

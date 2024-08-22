@@ -6,21 +6,22 @@ interface TipoTurismo {
   id: number;
   nombre: string;
 }
-interface Images{
+
+interface Images {
   id: number;
   nombre: string;
   ruta: string;
   activa: boolean;
 }
-interface Noticias {
+
+interface Noticia {
   id: number;
   titulo: string;
-  contenido: string
+  contenido: string;
   fechaPublicacion: Date;
   fuente: string;
-  imagenes: Images[];
-  tipoTurismos: TipoTurismo [];
-
+  images: Images[];
+  tipoTurismo: TipoTurismo;
 }
 @Injectable({
   providedIn: 'root'
@@ -34,8 +35,8 @@ export class NoticiaService {
 
   }
   // Function para guardar un nuevo Noticia
-  guardarNoticia(noticia: Noticias): Observable<Noticias> {
-    return this.http.post<Noticias>(`${this.baseUrl}/noticias/guardarNoticias`, noticia)
+  guardarNoticia(noticia: Noticia): Observable<Noticia> {
+    return this.http.post<Noticia>(`${this.baseUrl}/noticias/guardarNoticias`, noticia)
       .pipe(
         catchError(this.handleError)
       );
@@ -50,25 +51,25 @@ export class NoticiaService {
   }
 
   // Recuperar todos Noticia
-  recuperarTodosNoticia(): Observable<Noticias[]> {
-    return this.http.get<Noticias[]>(`${this.baseUrl}/noticias/obtenerTodosLosNoticias`)
+  recuperarTodosNoticia(): Observable<Noticia[]> {
+    return this.http.get<Noticia[]>(`${this.baseUrl}/noticias/obtenerTodosLosNoticias`)
       .pipe(
         catchError(this.handleError)
       );
   }
   //obtener Noticia
-  obtenerNoticia(id: number): Observable<Noticias> {
-    return this.http.get<Noticias>(`${this.baseUrl}/noticias/recuperarPorId/${id}`)
+  obtenerNoticia(id: number): Observable<Noticia> {
+    return this.http.get<Noticia>(`${this.baseUrl}/noticias/recuperarPorId/${id}`)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   // Actualizar Noticia
-  actualizarNoticia(id: number, tipoActualizada: Noticias): Observable<Noticias> {
+  actualizarNoticia(id: number, tipoActualizada: Noticia): Observable<Noticia> {
     // Asegúrate de que el ID en el cuerpo de la solicitud sea igual al ID en la URL
     tipoActualizada.id = id;
-    return this.http.put<Noticias>(`${this.baseUrl}/noticias/${id}`, tipoActualizada)
+    return this.http.put<Noticia>(`${this.baseUrl}/noticias/${id}`, tipoActualizada)
       .pipe(
         catchError(this.handleError)
       );

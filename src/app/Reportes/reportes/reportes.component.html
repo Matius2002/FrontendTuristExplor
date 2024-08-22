@@ -1,37 +1,39 @@
 <div style="background-color: #f3e6e8; height: 100vh;">
-<div class="report-container" >
+  <div class="report-container">
+    <div class="header">
+      <div class="image-container">
+        <img src="assets/images/reporte.jpg" alt="Imagen del Título">
+        <h1>Reportes</h1>
+      </div>
+    </div>
 
-  <div class="header">
-    <div class="image-container">
-      <img src="assets/images/reporte.jpg" alt="Imagen del Título">
-      <h1>Reportes</h1>
+    <div class="buttons-container">
+      <button class="report-button" (click)="showDownloadOptions('visitas')">
+        <i class="fas fa-eye"></i> Reporte de sitios más visitados
+      </button>
+      <button class="report-button" (click)="showDownloadOptions('usuarios')">
+        <i class="fas fa-users"></i> Reporte de usuarios en el sistema
+      </button>
+      <button class="report-button" (click)="showDownloadOptions('comentarios')">
+        <i class="fas fa-chart-bar"></i> Reporte de Comentarios
+      </button>
+      <button class="back-button" (click)="navigateTo('sistemas')">
+        <i class="fas fa-arrow-left"></i> Volver
+      </button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" [ngClass]="{'show': isModalVisible}">
+      <div class="modal-content">
+        <span class="close" (click)="closeModal()">&times;</span>
+        <p>Selecciona el formato de descarga para el reporte de {{ selectedReport }}</p>
+        <button class="modal-button" (click)="downloadReport(selectedReport, 'excel')">
+          <i class="fas fa-file-excel"></i> Excel
+        </button>
+        <button class="modal-button" (click)="downloadReport(selectedReport, 'pdf')">
+          <i class="fas fa-file-pdf"></i> PDF
+        </button>
+      </div>
     </div>
   </div>
-  <div class="buttons-container">
-    <button class="report-button" (click)="showDownloadOptions('sitios')">
-      <i class="fas fa-chart-bar"></i> Reporte de sitios más visitados
-    </button>
-    <button class="report-button" (click)="showDownloadOptions('usuarios')">
-      <i class="fas fa-users"></i> Reporte de usuarios en el sistema
-    </button>
-    <button class="back-button" (click)="navigateTo('sistemas')">
-      <i class="fas fa-arrow-left"></i> Volver
-    </button>
-  </div>
-</div>
-
-<!-- Modal -->
-<div class="modal" [ngClass]="{'show': isModalVisible}">
-  <div class="modal-content">
-    <span class="close" (click)="closeModal()">&times;</span>
-    <p>¿Deseas descargar el reporte en Excel o PDF?</p>
-    <button class="modal-button" (click)="downloadReport(selectedReport, 'excel')">
-      <i class="fas fa-file-excel"></i> Excel
-    </button>
-    <button class="modal-button" (click)="downloadReport(selectedReport, 'pdf')">
-      <i class="fas fa-file-pdf"></i> PDF
-    </button>
-  </div>
-</div>
-
 </div>

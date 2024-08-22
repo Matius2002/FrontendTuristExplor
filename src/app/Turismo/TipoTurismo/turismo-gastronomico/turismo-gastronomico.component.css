@@ -1,0 +1,185 @@
+.header-section {
+  position: relative;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+}
+
+.header-background {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  filter: brightness(50%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.header-content {
+  padding: 100px 20px;
+  z-index: 1;
+  position: relative;
+}
+
+.main-title {
+  font-size: 3.5em;
+  margin-bottom: 10px;
+  animation: fadeInDown 1s ease;
+  font-family: 'Arial', sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.main-subtitle {
+  text-align: center;
+  font-size: 1.8em;
+  animation: fadeInUp 1s ease;
+  font-family: 'Arial', sans-serif;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Animaciones */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 2.5em;
+  }
+  .main-subtitle {
+    font-size: 1.5em;
+  }
+}
+
+/* tabla 5 */
+.destinos-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px; /* Espacio entre tarjetas */
+  padding: 16px; /* Espacio alrededor del contenedor */
+}
+
+.destino-card {
+  width: calc(33.333% - 16px); /* Tres columnas con espacio entre ellas */
+  box-sizing: border-box;
+  margin-bottom: 16px; /* Espacio entre filas */
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+}
+
+.content-wrapper:hover {
+  transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
+}
+
+.imagenes-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid #ddd; /* Línea divisoria */
+}
+
+.imagenes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Ajusta el número de columnas según el tamaño de la imagen */
+  gap: 8px; /* Espacio entre imágenes */
+}
+
+.destino-image {
+  width: 100%;
+  height: 150px; /* Altura fija para todas las imágenes */
+  object-fit: cover; /* Asegura que las imágenes mantengan sus proporciones sin distorsionarse */
+  border-radius: 4px; /* Esquinas redondeadas en las imágenes */
+  cursor: pointer;
+}
+
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.card-heading {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.descripcion {
+  flex-grow: 1;
+}
+
+.footer {
+  padding: 0.5rem 1rem;
+  border-top: 1px solid rgba(0,0,0,0.12);
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-left,
+.footer-right {
+  font-size: 0.875rem; /* Ajusta el tamaño de fuente */
+}
+
+.bg-white {
+  background-color: #fff;
+}
+
+.small {
+  font-size: 0.75rem;
+}
+
+.lts-2px {
+  letter-spacing: 2px;
+}
+
+.shadow-1 {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.blue-hover {
+  border-bottom: 5px solid transparent;
+  transition: all 0.25s ease-in;
+}
+
+.blue-hover:hover {
+  transform: translateY(-5px);
+  border-bottom: 5px solid #2196fe;
+}
+
+
+
+
+
+
+
+
+

@@ -11,7 +11,7 @@ interface TipoAlojamiento{
   nombre: string;
   descripcion: string;
   servicios: string;
-  precioPromedio: number;
+  precioPromedio: string;
 }
 @Component({
   providers: [TipoAlojamientoService, HttpClient],
@@ -28,7 +28,7 @@ interface TipoAlojamiento{
 })
 export class NuevoTipoAlojamientoComponent implements OnInit{
   crearForm!: FormGroup;
-  tipoAlojamientos!: TipoAlojamiento;
+  tipoAlojamiento!: TipoAlojamiento;
   isSubmitting: boolean = false;
 
   constructor(

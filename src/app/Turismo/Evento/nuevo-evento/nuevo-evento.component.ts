@@ -7,19 +7,27 @@ import {Router} from "@angular/router";
 import {catchError, of} from "rxjs";
 import Swal from "sweetalert2";
 
-interface Destinos{
+interface TipoTurismo{
+  id: number;
+  nombre: string;
+  descripcion: string;
+  popularidad: string;
+}
+interface Destinos {
   id: number;
   destinoName: string;
 }
-interface Images{
+
+interface Images {
   id: number;
   nombre: string;
   ruta: string;
   activa: boolean;
 }
-interface Evento{
+
+interface Evento {
   id: number;
-  destino: Destinos;
+  destinos: Destinos[];
   nombre: string;
   descripcion: string;
   fechaInicio: Date;
@@ -27,6 +35,7 @@ interface Evento{
   ubicacion: string;
   costoEntrada: number;
   images: Images[];
+  tipoTurismo: TipoTurismo;
 }
 @Component({
   providers: [EventoService,HttpClient],
@@ -45,10 +54,10 @@ interface Evento{
 export class NuevoEventoComponent implements OnInit{
   crearForm!: FormGroup;
   eventos!: Evento;
-  destinos: Destinos [] = [];
-  imagenes: Images []=[];
+  tipoTurismos: TipoTurismo[] = [];
+  destinos: Destinos[] = [];
+  imagenes: Images[] = [];
   isSubmitting: boolean = false;
-
   constructor(
     private formBuilder: FormBuilder,
     //public dialogRef: MatDialogRef<NuevoEventoComponent>,
@@ -63,16 +72,46 @@ export class NuevoEventoComponent implements OnInit{
       ubicacion: ['', [Validators.required]],
       fechaInicio: ['', [Validators.required]],
       fechaFin: ['', [Validators.required]],
-      horaInicio: ['', [Validators.required]],
-      horaFin: ['', [Validators.required]],
       costoEntrada: ['', [Validators.required]],
-      imagenes: ['', [Validators.required]],
-      destinos: ['', [Validators.required]],
-
+      images: [[], [Validators.required]],
+      destinos: [[], [Validators.required]],
+      tipoTurismo: [[], [Validators.required]],
     });
-    //this.cargarImages();
-    //this.cargarDestinos();
+    this.cargarImages();
+    this.cargarDestinos();
+    this.cargarTipoTurismo();
   }
+  cargarImages(): void{
+    this.eventoService.recuperarImages().subscribe(
+      (imagenes: Images[]) =>{
+        this.imagenes = imagenes;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+  cargarDestinos(): void {
+    this.eventoService.recuperarDestinos().subscribe(
+      (destinos: Destinos[]) => {
+        this.destinos = destinos;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+  cargarTipoTurismo(): void {
+    this.eventoService.recuperarTipoTurismo().subscribe(
+      (tipo: TipoTurismo[]) => {
+        this.tipoTurismos = tipo;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
   onSubmit(): void {
     if (this.crearForm.valid) {
       const nombre = this.crearForm.get('nombre')!.value;
@@ -92,6 +131,7 @@ export class NuevoEventoComponent implements OnInit{
             });
           } else {
             const formData = this.crearForm.value;
+            console.log('Datos del evento antes de guardar:', formData);
             this.guardarTipo(formData);
           }
           this.isSubmitting = false;
@@ -102,13 +142,21 @@ export class NuevoEventoComponent implements OnInit{
             title: 'Error al verificar El Evento',
             text: error.message
           });
+          this.isSubmitting = false; // Detener la animación de carga en caso de error
         }
       });
     } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Formulario inválido',
+        text: 'Por favor, complete todos los campos requeridos'
+      });
     }
   }
+
   guardarTipo(tipoData: Evento): void {
     console.log('Datos del Evento:', tipoData);
+    // Asegúrate que tipoData.destinos sea un array de objetos { id: number, destinoName: string }
     this.eventoService.guardarEvento(tipoData).subscribe(() => {
       Swal.fire({
         icon: 'success',
@@ -117,22 +165,17 @@ export class NuevoEventoComponent implements OnInit{
         timer: 2500
       });
       this.crearForm.reset();
+      this.isSubmitting = false; // Detener la animación de carga después de guardar
     }, (error) => {
       Swal.fire({
         icon: 'error',
         title: 'Error',
         text: 'Error al guardar El Evento'
       });
+      this.isSubmitting = false; // Detener la animación de carga en caso de error
     });
-
   }
 
-  /*
-    onCancelar(): void {
-      this.dialogRef.close();
-    }
-
-   */
 
   limpiarFormulario() {
     this.crearForm.reset();
@@ -140,5 +183,7 @@ export class NuevoEventoComponent implements OnInit{
   volver() {
     this.router.navigate(['/eventos']);
   }
-
+  agregarNuevaImagen() {
+    this.router.navigate(['/nueva-imagen']);
+  }
 }
