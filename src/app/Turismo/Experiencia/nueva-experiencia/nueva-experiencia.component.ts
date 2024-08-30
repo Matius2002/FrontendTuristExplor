@@ -10,12 +10,10 @@ interface Usuario {
   id: number;
   nombreUsuario: string;
   email: string;
-
 }
 interface Destinos {
   id: number;
   destinoName: string;
-
 }
 interface Experiencia {
   id: number;
@@ -41,6 +39,7 @@ interface Experiencia {
   templateUrl: './nueva-experiencia.component.html',
   styleUrl: './nueva-experiencia.component.css'
 })
+
 export class NuevaExperienciaComponent implements OnInit{
   crearForm!: FormGroup;
   experiencias!: Experiencia;
@@ -63,9 +62,7 @@ export class NuevaExperienciaComponent implements OnInit{
       calificacion: ['', Validators.required]
     });
     this.currentUser = this.usuariosService.getCurrentUser();
-
     this.cargarDestinos();
-
   }
 
   cargarDestinos(): void{
@@ -78,17 +75,18 @@ export class NuevaExperienciaComponent implements OnInit{
       }
     );
   }
+
   onSubmit(): void {
     if (this.crearForm.invalid) {
       Swal.fire('Error', 'Por favor complete el formulario correctamente.', 'error');
       return;
     }
-
-    if (!this.usuariosService.isLoggedIn()) {
+  
+    if (!this.currentUser) {
       Swal.fire('Usuario no autenticado', 'Debe iniciar sesión para guardar una experiencia.', 'error');
       return;
     }
-
+  
     const nuevaExperiencia: Experiencia = {
       id: 0,
       comentario: this.crearForm.value.comentario,
@@ -97,9 +95,8 @@ export class NuevaExperienciaComponent implements OnInit{
       usuario: this.currentUser!,
       destinos: this.crearForm.value.destinos
     };
-
+  
     this.isSubmitting = true;
-
     this.experienciaService.guardarExperiencia(nuevaExperiencia).subscribe(
       () => {
         Swal.fire('Experiencia guardada', 'Su experiencia ha sido guardada exitosamente', 'success');
@@ -110,7 +107,7 @@ export class NuevaExperienciaComponent implements OnInit{
         Swal.fire('Error', 'Ocurrió un error al guardar la experiencia', 'error');
       }
     );
-  }
+  }  
 
   limpiarFormulario() {
     this.crearForm.reset();

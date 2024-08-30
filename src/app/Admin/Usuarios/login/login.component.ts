@@ -40,8 +40,6 @@ export class LoginComponent implements OnInit{
   usuarios!: Usuarios;
   constructor(
     private formBuilder: FormBuilder,
-    //public dialogRef: MatDialogRef<LoginComponent>,
-    //@Inject(MAT_DIALOG_DATA) public data: any,
     private usuarioService: UsuarioService,
     private router: Router,
   ) {}
@@ -64,21 +62,17 @@ export class LoginComponent implements OnInit{
 
     const credentials = {
       email: this.crearForm.value.email,
-      password: this.crearForm.value.password,
+      password: this.crearForm.value.password
     };
 
     this.usuarioService.login(credentials).subscribe(
       response => {
         console.log(response);
-        this.usuarioService.guardarUsuarioEnStorage(response.token);
-        this.usuarioService.guardarToken(response.token);
-        Swal.fire({
-          icon: 'success',
-          title: 'Inicio de sesión exitoso',
-        }).then(() => {
+          this.usuarioService.guardarUsuarioEnStorage(response.token);
+          this.usuarioService.guardarToken(response.token);
+        Swal.fire({icon: 'success',title: 'Inicio de sesión exitoso',}).then(() => {
           this.router.navigate(['/tu-inicio']);
         });
-
       }
     );
   }
@@ -96,6 +90,5 @@ export class LoginComponent implements OnInit{
   }
 
   goToForgetPassword() {
-
   }
 }

@@ -67,9 +67,7 @@ export const routes: Routes = [
       { path: 'evento-contenido', component: EventoContenidoComponent },
       { path: 'tipo-sostenible', component: TurismoSostenibleComponent },
       { path: 'nueva-experiencia', component: NuevaExperienciaComponent },
-
       { path: 'noticias/:id', component: DetalleNoticiaComponent },
-
       { path: 'noticia-contenido', component: NoticiasContenidoComponent },
       { path: 'tipo-cultural', component: TurismoCulturalComponent },
       { path: 'tipo-gastronomico', component: TurismoGastronomicoComponent },

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {entornos} from "../../Entorno/entornos";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {catchError, Observable, throwError} from "rxjs";
+import Swal from 'sweetalert2';
+import { UsuarioService } from '../../Admin/Usuarios/usuario.service';
 interface Usuario {
   id: number;
   nombreUsuario: string;
@@ -29,11 +31,12 @@ export class ExperienciaService {
   dynamicHost = entornos.dynamicHost;
   private baseUrl: string = `http://${this.dynamicHost}/api`;  //Url Base API
 
-  constructor(private http: HttpClient) {
-
+  constructor(private http: HttpClient, private usuarioService: UsuarioService) {
   }
   // Function para guardar una nueva experiencia
   guardarExperiencia(tipoAlojamiento: Experiencia): Observable<Experiencia> {
+    console.log(tipoAlojamiento);
+
     return this.http.post<Experiencia>(`${this.baseUrl}/experiencias/guardarExperiencia`, tipoAlojamiento)
       .pipe(
         catchError(this.handleError)
@@ -83,14 +86,20 @@ export class ExperienciaService {
   // Función para manejar errores de HTTP
   private handleError(error: HttpErrorResponse): Observable<any> {
     let errorMessage = 'Error desconocido';
+    
     if (error.error instanceof ErrorEvent) {
       // Error del lado del cliente
       errorMessage = `Error: ${error.error.message}`;
     } else {
       // Error del lado del servidor
-      errorMessage = `Código de error: ${error.status}, mensaje: ${error.error.message}`;
+      if (error.error && typeof error.error === 'object') {
+        errorMessage = `Código de error: ${error.status}, mensaje: ${error.error.message || 'Mensaje no disponible'}`;
+      } else {
+        errorMessage = `Código de error: ${error.status}, mensaje: ${error.statusText || 'Mensaje no disponible'}`;
+      }
     }
+    
     console.error(errorMessage);
     return throwError(errorMessage);
-  }
+  }  
 }

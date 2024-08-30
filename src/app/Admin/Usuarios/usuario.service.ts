@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { entornos } from "../../Entorno/entornos";
-import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
-import {BehaviorSubject, catchError, map, Observable, tap, throwError} from "rxjs";
-import {Usuario} from "./modelos/Usuario";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { BehaviorSubject, catchError, map, Observable, tap, throwError } from "rxjs";
+import { Usuario } from "./modelos/Usuario";
 import Swal from "sweetalert2";
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
 
 interface Rol {
   id: number;
@@ -32,8 +32,8 @@ export class UsuarioService {
   private baseUrl: string = `http://${this.dynamicHost}/api`;
   private expirationTime: number = 0;
 
-  private _usuarioLogeado:Usuario=new Usuario();
-  private _token:string|null=null;
+  private _usuarioLogeado: Usuario = new Usuario();
+  private _token: string | null = null;
 
   private isLoggedInSubject = new BehaviorSubject<boolean>(this.hasToken());
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
@@ -56,17 +56,16 @@ export class UsuarioService {
 
 
   setToken(token: string, expirationTime: number): void {
-    localStorage.setItem('jwtToken', token);
+    localStorage.setItem('jwtToken', token); /*jwtToken*/
     this.expirationTime = expirationTime;
-    //this.startExpirationTimer();
     this.isLoggedInSubject.next(true);
   }
 
-  public get token():string|null{
+  public get token(): string | null {
     if (this._token != null) {
       return this._token;
-    }else if (sessionStorage.getItem('token')!=null && this._token==null ) {
-      this._token=sessionStorage.getItem('token');
+    } else if (localStorage.getItem('token') != null && this._token == null) { /*token*/
+      this._token = localStorage.getItem('token'); /*token*/
       return this._token;
     }
     return null;
@@ -76,16 +75,16 @@ export class UsuarioService {
     return this.http.post<{ token: string, expirationTime: number }>('/renew-token', {});
   }
 
-  public get usuarioLogeado():Usuario{
-    if (this._usuarioLogeado!=null) {
+  public get usuarioLogeado(): Usuario {
+    if (this._usuarioLogeado != null) {
       return this._usuarioLogeado;
 
-    }else if (sessionStorage.getItem('usuario')!=null && this._usuarioLogeado==null) {
-      let usuarioStorage:string|null=sessionStorage.getItem('usuario');
-      if (usuarioStorage==null) {
+    } else if (localStorage.getItem('usuario') != null && this._usuarioLogeado == null) {
+      let usuarioStorage: string | null = localStorage.getItem('usuario');
+      if (usuarioStorage == null) {
         return new Usuario();
       }
-      this._usuarioLogeado=JSON.parse(usuarioStorage) as Usuario;
+      this._usuarioLogeado = JSON.parse(usuarioStorage) as Usuario;
       return this._usuarioLogeado;
     }
     return new Usuario();
@@ -168,7 +167,7 @@ export class UsuarioService {
 
   // Login
   login(credentials: { email: string, password: string }): Observable<any> {
-    const httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+    const httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<any>(`${this.baseUrl}/login`, credentials, { headers: httpHeaders })
       .pipe(
         tap(response => {
@@ -197,22 +196,22 @@ export class UsuarioService {
     return throwError(e);
   }
 
-  guardarUsuarioEnStorage(token:string):void{
-    let payload=this.obtenerPayload(token);
-    this._usuarioLogeado=new Usuario();
-    this._usuarioLogeado.id=payload.id;
-    this._usuarioLogeado.nombreUsuario=payload.username;
-    this._usuarioLogeado.email=payload.correo;
-    this._usuarioLogeado.permisos=payload.permisos;
-    sessionStorage.setItem('usuario', JSON.stringify(this._usuarioLogeado));
+  guardarUsuarioEnStorage(token: string): void {
+    let payload = this.obtenerPayload(token);
+    this._usuarioLogeado = new Usuario();
+    this._usuarioLogeado.id = payload.id;
+    this._usuarioLogeado.nombreUsuario = payload.username;
+    this._usuarioLogeado.email = payload.correo;
+    this._usuarioLogeado.permisos = payload.permisos;
+    localStorage.setItem('usuario', JSON.stringify(this._usuarioLogeado));
   }
 
-  guardarToken(token:string):void{
-    this._token=token;
-    sessionStorage.setItem('token', this._token);
+  guardarToken(token: string): void {
+    this._token = token;
+    localStorage.setItem('authToken', this._token); /*token*/
   }
 
-  obtenerPayload(token:string):any{
+  obtenerPayload(token: string): any {
     return JSON.parse(atob(token.split(".")[1]));
   }
 
