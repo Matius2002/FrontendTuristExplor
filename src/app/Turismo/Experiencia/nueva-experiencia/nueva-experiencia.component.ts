@@ -1,3 +1,4 @@
+/*Error identificado: ómo se maneja el almacenamiento y la recuperación del usuario autenticado en el servicio UsuarioService*/
 import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -77,6 +78,7 @@ export class NuevaExperienciaComponent implements OnInit{
   }
 
   onSubmit(): void {
+    this.isSubmitting = true;
     if (this.crearForm.invalid) {
       Swal.fire('Error', 'Por favor complete el formulario correctamente.', 'error');
       return;
@@ -96,7 +98,7 @@ export class NuevaExperienciaComponent implements OnInit{
       destinos: this.crearForm.value.destinos
     };
   
-    this.isSubmitting = true;
+    
     this.experienciaService.guardarExperiencia(nuevaExperiencia).subscribe(
       () => {
         Swal.fire('Experiencia guardada', 'Su experiencia ha sido guardada exitosamente', 'success');
@@ -107,7 +109,7 @@ export class NuevaExperienciaComponent implements OnInit{
         Swal.fire('Error', 'Ocurrió un error al guardar la experiencia', 'error');
       }
     );
-  }  
+  }    
 
   limpiarFormulario() {
     this.crearForm.reset();

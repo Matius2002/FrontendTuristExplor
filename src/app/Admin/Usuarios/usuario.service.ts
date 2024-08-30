@@ -1,3 +1,4 @@
+//Importaciones
 import { Injectable } from '@angular/core';
 import { entornos } from "../../Entorno/entornos";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
@@ -27,23 +28,70 @@ interface Usuarios {
   providedIn: 'root'
 })
 export class UsuarioService {
+
   private loggedIn: boolean = false;
   dynamicHost = entornos.dynamicHost;
   private baseUrl: string = `http://${this.dynamicHost}/api`;
   private expirationTime: number = 0;
-
   private _usuarioLogeado: Usuario = new Usuario();
   private _token: string | null = null;
-
   private isLoggedInSubject = new BehaviorSubject<boolean>(this.hasToken());
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
   constructor(
     private http: HttpClient,
-    private router: Router,
+    private router: Router
+  ) { }
 
-  ) {
+  setToken(token: string, expirationTime: number): void {
+    localStorage.setItem('jwtToken', token);
+    this.expirationTime = expirationTime;
+    this.isLoggedInSubject.next(true);
+  }
 
+  public get token(): string | null {
+    if (this._token != null) {
+      return this._token;
+    } else if (localStorage.getItem('token') != null && this._token == null) {
+      this._token = localStorage.getItem('token');
+      return this._token;
+    }
+    return null;
+  }
+
+  // Método para obtener el usuario actual
+  getCurrentUser(): Usuarios | null {
+    const token = localStorage.getItem('jwtToken');
+    if (!token) return null;
+
+    try {
+      // Obtener el payload del token JWT
+      const payload = this.obtenerPayload(token);
+      // Extraer la información del usuario del payload
+      return {
+        id: payload.id,
+        nombreUsuario: payload.username,
+        email: payload.correo,
+        password: '', // No es seguro almacenar contraseñas aquí
+        fechaRegistro: new Date(), // Ajusta este campo según lo que obtienes del token
+        rol: payload.rol // Ajusta según lo que tienes en el payload
+      };
+    } catch (error) {
+      console.error('Error al decodificar el token JWT:', error);
+      return null;
+    }
+  }
+
+  // Método para decodificar el payload de un token JWT
+  obtenerPayload(token: string): any {
+    try {
+      // Dividir el token y decodificar el payload (segunda parte)
+      const payload = token.split(".")[1];
+      // Decodificar la parte base64 y parsearla como JSON
+      return JSON.parse(atob(payload));
+    } catch (e) {
+      throw new Error('No se pudo decodificar el payload del token.');
+    }
   }
 
   // Método para obtener la URL del informe
@@ -52,23 +100,6 @@ export class UsuarioService {
     return this.http.get(url, { responseType: 'text' }).pipe(
       catchError(this.handleError)
     );
-  }
-
-
-  setToken(token: string, expirationTime: number): void {
-    localStorage.setItem('jwtToken', token); /*jwtToken*/
-    this.expirationTime = expirationTime;
-    this.isLoggedInSubject.next(true);
-  }
-
-  public get token(): string | null {
-    if (this._token != null) {
-      return this._token;
-    } else if (localStorage.getItem('token') != null && this._token == null) { /*token*/
-      this._token = localStorage.getItem('token'); /*token*/
-      return this._token;
-    }
-    return null;
   }
 
   renewToken(): Observable<{ token: string, expirationTime: number }> {
@@ -99,8 +130,8 @@ export class UsuarioService {
   // Método para cerrar sesión
   logout(): void {
     localStorage.removeItem('authToken');
-    localStorage.removeItem('currentUser');
-    this.isLoggedInSubject.next(false); // Actualizar el estado de autenticación
+    localStorage.removeItem('authToken'); 
+    this.isLoggedInSubject.next(false); 
     this.router.navigate(['/login']);
     Swal.fire({
       title: 'Sesión cerrada',
@@ -108,13 +139,7 @@ export class UsuarioService {
       icon: 'info',
       confirmButtonText: 'Aceptar'
     });
-  }
-
-  // Método para obtener el usuario actual
-  getCurrentUser(): Usuarios | null {
-    const userJson = localStorage.getItem('currentUser');
-    return userJson ? JSON.parse(userJson) : null;
-  }
+  }   
 
   // Function para guardar un nuevo Usuario
   guardarUsuario(usuario: Usuarios): Observable<Usuarios> {
@@ -180,8 +205,7 @@ export class UsuarioService {
           return this.handleError(e);
         })
       );
-  }
-
+    }    
 
   private hasToken(): boolean {
     return !!localStorage.getItem('authToken');
@@ -208,12 +232,10 @@ export class UsuarioService {
 
   guardarToken(token: string): void {
     this._token = token;
-    localStorage.setItem('authToken', this._token); /*token*/
+    localStorage.setItem('authToken', this._token); 
   }
 
-  obtenerPayload(token: string): any {
-    return JSON.parse(atob(token.split(".")[1]));
-  }
-
-
+  
 }
+
+
