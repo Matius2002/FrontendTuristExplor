@@ -1,6 +1,6 @@
 #Ignorar carpetas
 /node_modules
 /dist
-/src/assets/images/
+
 src.zip
 src/assets/images/destino13.jpg
