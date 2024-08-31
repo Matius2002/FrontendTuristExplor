@@ -30,8 +30,8 @@
         </div>
         <select id="destinos" formControlName="destinos" class="form-control">
           <option value="" disabled selected>Selecciona un destino para calificar</option>
-          <option *ngFor="let destino of destinos" [ngValue]="destino">{{ destino.destinoName }}</option>
-        </select>
+          <option *ngFor="let destino of destinos" [value]="destino.id">{{ destino.destinoName }}</option>
+        </select>               
       </div>
       <div *ngIf="crearForm.get('destinos')?.invalid && (crearForm.get('destinos')?.dirty || crearForm.get('destinos')?.touched)">
         <div class="text-danger" *ngIf="crearForm.get('destinos')?.errors?.['required']">El Destino de turismo es obligatorio.</div>

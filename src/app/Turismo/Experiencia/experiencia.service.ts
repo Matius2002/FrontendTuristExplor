@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {entornos} from "../../Entorno/entornos";
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {catchError, Observable, throwError} from "rxjs";
 import Swal from 'sweetalert2';
 import { UsuarioService } from '../../Admin/Usuarios/usuario.service';
@@ -34,14 +34,19 @@ export class ExperienciaService {
   constructor(private http: HttpClient, private usuarioService: UsuarioService) {
   }
   // Function para guardar una nueva experiencia
-  guardarExperiencia(tipoAlojamiento: Experiencia): Observable<Experiencia> {
+  /*guardarExperiencia(tipoAlojamiento: Experiencia): Observable<Experiencia> {
     console.log(tipoAlojamiento);
 
     return this.http.post<Experiencia>(`${this.baseUrl}/experiencias/guardarExperiencia`, tipoAlojamiento)
       .pipe(
         catchError(this.handleError)
       );
-  }
+  }*/
+      guardarExperiencia(experiencia: any) {
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        return this.http.post('http://localhost:8080/api/experiencias/guardarExperiencia', experiencia, { headers });
+      }
+      
 
   // Eliminar experiencias
   eliminarExperiencia(id: number): Observable<void> {
