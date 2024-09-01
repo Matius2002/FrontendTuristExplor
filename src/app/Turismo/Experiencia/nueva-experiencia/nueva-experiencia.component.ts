@@ -94,8 +94,17 @@ export class NuevaExperienciaComponent implements OnInit {
   }
 
   onSubmit(): void {
+    // Verificación del usuario autenticado
+    if (!this.currentUser) {
+      Swal.fire('Usuario no autenticado', 'Debe iniciar sesión para guardar una experiencia.', 'error');
+      this.isSubmitting = false;
+      this.router.navigate(['/login']); // Redirige al usuario a la página de inicio de sesión si no está autenticado
+      return;
+    }
+  
     this.isSubmitting = true;
   
+    // Verificación del formulario
     if (this.crearForm.invalid) {
       Swal.fire('Error', 'Por favor complete el formulario correctamente.', 'error');
       this.isSubmitting = false;
@@ -113,20 +122,13 @@ export class NuevaExperienciaComponent implements OnInit {
       return;
     }
   
-    // Busca el destino usando el ID seleccionado
+    // Busca el destino usando el ID seleccionado para asegurarse de que es válido
     const destinoSeleccionado = this.destinos.find(d => d.id === destinoIdSeleccionado);
     console.log('Destino encontrado:', destinoSeleccionado); // Debugging
   
     // Verifica que el destino encontrado no sea undefined
     if (!destinoSeleccionado) {
       Swal.fire('Error', 'Destino seleccionado no es válido.', 'error');
-      this.isSubmitting = false;
-      return;
-    }
-  
-    // Verificación del usuario autenticado
-    if (!this.currentUser) {
-      Swal.fire('Usuario no autenticado', 'Debe iniciar sesión para guardar una experiencia.', 'error');
       this.isSubmitting = false;
       return;
     }
@@ -140,7 +142,6 @@ export class NuevaExperienciaComponent implements OnInit {
       fecha: new Date().toISOString(),                 // Fecha en formato ISO
       id: 0                                            // Asegúrate de que el ID sea correcto
     };
-    
   
     console.log('Datos enviados:', experiencias);
   
@@ -161,8 +162,8 @@ export class NuevaExperienciaComponent implements OnInit {
         }
         this.isSubmitting = false;
       }
-    );        
-  }  
+    );
+  }     
 
   limpiarFormulario() {
     this.crearForm.reset();

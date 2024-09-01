@@ -1,56 +1,65 @@
+<!-- Un div que actúa como separador visual entre secciones -->
 <div class="mi-separador-div"></div>
-
+<!-- Sección de encabezado con una imagen de fondo y contenido superpuesto -->
 <div class="contenido-fluid page-header">
+  <!-- Imagen de fondo -->
   <img src="assets/images/destino122.jpg" alt="Imagen de fondo">
+  <!-- Contenedor del contenido sobre la imagen -->
   <div class="contenido">
+    <!-- Centra el texto dentro de la imagen -->
     <div class="d-flex flex-column align-items-center justify-content-center text-container">
+      <!-- Título principal en la imagen -->
       <h3 class="display-4 text-white text-uppercase">¿Ya Conocías Girardot?</h3>
+      <!-- Contenedor del breadcrumb o ruta de navegación -->
       <div class="d-inline-flex text-white breadcrumb-container">
-        <p class="m-0 text-uppercase"><a class="text-white breadcrumb-link">Descubre este maravilloso municipio</a></p>
+        <p class="m-0 text-uppercase">
+          <a class="text-white breadcrumb-link">Descubre este maravilloso municipio</a>
+        </p>
         <i class="fa fa-angle-double-right pt-1 px-3 breadcrumb-icon"></i>
         <p class="m-0 text-uppercase breadcrumb-text">Conoce su historia y costumbres</p>
       </div>
     </div>
   </div>
 </div>
+
+<!-- Otro separador visual -->
 <div class="mi-separador-div"></div>
-
-
+<!-- Contenedor principal con márgenes superiores -->
 <div class="container mt-5">
   <div class="row">
+    <!-- Columna izquierda con información introductoria sobre Girardot -->
     <div class="col-lg-4">
       <h2 class="text-center mb-4 text-primary font-weight-bold">Descubre Girardot</h2>
-      <p class="mb-4">
-        Girardot es una encantadora ciudad ubicada en el departamento de Cundinamarca, Colombia, conocida por su agradable clima cálido y su atractiva ubicación a orillas del río Magdalena. Rodeada de exuberante vegetación y paisajes pintorescos, esta ciudad se ha convertido en un destino turístico popular.
-      </p>
+      <p class="mb-4">Girardot es una encantadora ciudad ubicada en el departamento de Cundinamarca, Colombia...</p>
     </div>
+
+    <!-- Columna derecha con tarjetas informativas sobre Girardot -->
     <div class="col-lg-8">
       <div class="row">
+        <!-- Tarjeta 1: Parque Simón Bolívar -->
         <div class="col-lg-4">
           <div class="card">
             <img src="assets/images/destination-3.jpg" alt="Imagen 1" class="img-fluid polaroid animated">
             <h5 class="mt-3 text-center text-primary">Parque Simón Bolívar</h5>
-            <p class="mb-4 text-center">
-              Visitar Girardot, Cundinamarca, es una experiencia única que ofrece una combinación de atractivos naturales, actividades recreativas y una rica cultura local.
-            </p>
+            <p class="mb-4 text-center">Visitar Girardot, Cundinamarca, es una experiencia única que ofrece una combinación de...</p>
           </div>
         </div>
+        
+        <!-- Tarjeta 2: Ciudad de las Acacias -->
         <div class="col-lg-4">
           <div class="card">
             <img src="assets/images/about-1.jpg" alt="Imagen 2" class="img-fluid polaroid animated">
             <h5 class="mt-3 text-center text-primary">Ciudad de las Acacias</h5>
-            <p class="mb-4 text-center">
-              Girardot, Cundinamarca, ofrece una combinación perfecta de belleza natural, hospitalidad cálida y una amplia gama de actividades, convirtiéndola en un destino ideal para aquellos que buscan una experiencia única en Colombia.
-            </p>
+            <p class="mb-4 text-center">Girardot, Cundinamarca, ofrece una combinación perfecta de belleza natural...</p>
           </div>
         </div>
+
+        <!-- Tarjeta 3: Letras de Girardot -->
         <div class="col-lg-4">
           <div class="card">
             <img src="assets/images/destino17.JPG" alt="Imagen 3" class="img-fluid polaroid animated">
             <h5 class="mt-3 text-center text-primary">Letras de Girardot</h5>
-            <p class="mb-4 text-center">
-              Girardot es un destino turístico completo que ofrece una experiencia equilibrada entre relajación, aventura y exploración cultural, convirtiéndolo en un lugar atractivo para una escapada memorable en Colombia.
-            </p>
+            <p class="mb-4 text-center">Girardot es un destino turístico completo que ofrece una experiencia equilibrada...</p>
           </div>
         </div>
       </div>
@@ -58,11 +67,10 @@
   </div>
 </div>
 
+<!-- Otro separador visual -->
 <div class="mi-separador-div"></div>
-
-
+<!-- Estilos personalizados para la página -->
 <style>
-  /* Estilos personalizados */
   .header-title {
     color: #213999;
     font-size: 2em;
@@ -102,27 +110,34 @@
   }
 </style>
 
+<!-- Contenedor para la sección de la historia de Girardot -->
 <div class="container">
   <h2 class="header-title">Historia de Girardot</h2>
+  <!-- Carrusel con imágenes y leyendas sobre la historia de Girardot -->
   <div id="carousel" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
+      <!-- Indicadores de las imágenes del carrusel -->
       <li *ngFor="let imagen of imagenes; let i = index" [attr.data-target]="'#carousel'" [attr.data-slide-to]="i" [class.active]="i === 0"></li>
     </ol>
     <div class="carousel-inner">
+      <!-- Itera sobre las imágenes para crear los elementos del carrusel -->
       <div *ngFor="let imagen of imagenes; let i = index" [class.carousel-item]="true" [class.active]="i === 0">
         <img [src]="getImageUrl(imagen.ruta)" class="d-block w-100" [alt]="imagen.nombre" (click)="openModal(imagen)" />
         <div class="carousel-caption">
           <p class="extra-paragraph">
-            {{ i === 0 ? 'La historia de Girardot, Cundinamarca, se remonta a la época precolombina, cuando la región estaba habitada por grupos indígenas como los panches y los mesitas. Con la llegada de los conquistadores españoles en el siglo XVI, la zona fue sometida a la colonización y se establecieron las bases de lo que eventualmente se convertiría en la ciudad de Girardot.' : '' }}
-            {{ i === 1 ? 'El nombre de Girardot se asocia comúnmente con el general Francisco José de Paula Santander, quien fue un líder militar y político durante la independencia de Colombia en el siglo XIX. En honor a Santander, la ciudad adoptó el nombre de Girardot.' : '' }}
-            {{ i === 2 ? 'A medida que avanzaba el tiempo, Girardot experimentó un desarrollo económico significativo, especialmente a finales del siglo XIX y principios del siglo XX, impulsado en parte por la llegada del ferrocarril. La conexión ferroviaria mejoró la accesibilidad y facilitó el transporte de bienes y personas, contribuyendo al crecimiento de la ciudad.' : '' }}
-            {{ i === 3 ? 'Durante la época colonial, la región de Girardot fue testigo de eventos importantes en la lucha por la independencia de Colombia. La ubicación estratégica de la ciudad, a orillas del río Magdalena, la convirtió en un punto clave para el comercio y el transporte fluvial.' : '' }}
-            {{ i === 4 ? 'En el siglo XX, Girardot se convirtió en un importante destino turístico. La ciudad ofrece una variedad de atracciones naturales, culturales y recreativas, lo que la convierte en un destino ideal para una escapada de fin de semana o unas vacaciones más largas.' : '' }}
-            {{ i === 5 ? 'El 10 de febrero de 1844, los señores Ramón Bueno y José Triana donaron un gran lote de terreno donde se construyeron las primeras casas de lo que más tarde, el 9 de octubre de 1852, recibió el nombre de Girardot, en honor al prócer antioqueño Manuel Atanasio Girardot.' : '' }}
+            <!-- Descripciones históricas de Girardot, según la posición de la imagen en el carrusel -->
+            {{ i === 0 ? 'La historia de Girardot, Cundinamarca...' : '' }}
+            {{ i === 1 ? 'El nombre de Girardot se asocia...' : '' }}
+            {{ i === 2 ? 'A medida que avanzaba el tiempo...' : '' }}
+            {{ i === 3 ? 'Durante la época colonial...' : '' }}
+            {{ i === 4 ? 'En el siglo XX, Girardot se convirtió...' : '' }}
+            {{ i === 5 ? 'El 10 de febrero de 1844...' : '' }}
           </p>
         </div>
       </div>
     </div>
+
+    <!-- Controles para navegar el carrusel hacia adelante y atrás -->
     <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="sr-only">Anterior</span>
@@ -134,54 +149,38 @@
   </div>
 </div>
 
-<!-- Modal para mostrar imagen ampliada -->
+<!-- Modal para mostrar una imagen ampliada al hacer clic en el carrusel -->
 <div class="modal" [ngClass]="{'show': isModalOpen}" (click)="closeModal()">
   <span class="close" (click)="closeModal()">&times;</span>
   <img class="modal-content" [src]="getImageUrl(selectedImage?.ruta)" (click)="$event.stopPropagation()" alt="image">
   <div class="caption">{{ selectedImage?.nombre }}</div>
 </div>
 
-
-
+<!-- Otro separador visual -->
 <div class="mi-separador-div"></div>
-
-<!-- contenido Simbolos Patrios Girardot, Cundinamarca -->
+<!-- Sección dedicada a los símbolos patrios de Girardot -->
 <section id="girardot">
   <h1>Simbolos Patrios Girardot, Cundinamarca</h1>
-
+  <!-- Artículo sobre el escudo de Girardot -->
   <article id="bandera">
     <h2>Escudo</h2>
     <div class="flex-container">
       <div class="flex-item">
-        <p>El escudo tiene forma española, medio partido y cortinado, con una orla y una divisa, abrazado por un águila.</p>
-        <p>En el cuadrante superior derecho, se representa una rueda dentada simbolizando el progreso, superpuesta a un caduceo. El caduceo es un símbolo de la paz y el comercio.</p>
-        <p>En el cuadrante superior izquierdo, se visualiza un toro en posición de paso. El toro es un símbolo de la fuerza y la virilidad.</p>
-        <p>En el campo inferior, o la parte más baja, se muestra el puente del ferrocarril en perspectiva. El puente del ferrocarril es un símbolo de la conexión de Girardot con el resto del país.</p>
-        <p>La orla exhibe cuatro cruces anchas con brazos pequeños, tres en la parte superior y una en la inferior. Además, incluye dos ramas de café que ascienden desde la parte inferior hasta la superior. El café es un símbolo de la economía de Girardot.</p>
-        <p>La divisa que rodea la cabeza del águila lleva la inscripción "Siempre Adelante". Esta inscripción es un lema de la ciudad que representa su espíritu de progreso.</p>
+        <p>El escudo tiene forma española, medio partido y cortinado...</p>
         <p>Fuente: <a href="https://www.girardot-cundinamarca.gov.co/Ciudadanos/PortaldeNinos/MiMunicipio/Paginas/Nuestros-Simbolos.aspx" target="_blank">Municipio de Girardot, Cundinamarca Alcaldía de Girardot</a></p>
       </div>
       <div class="flex-item">
-        <img class="imagen" src="assets/images/iconoalcaldia.png" alt="Escudo de Girardot, Cundinamarca">            </div>
+        <img class="imagen" src="assets/images/iconoalcaldia.png" alt="Escudo de Girardot, Cundinamarca">
+      </div>
     </div>
   </article>
 
-
-  <!-- Modal para mostrar imagen ampliada -->
-  <div class="modal" [ngClass]="{'show': isModalOpen}" (click)="closeModal()">
-    <span class="close" (click)="closeModal()">&times;</span>
-    <img class="modal-content" [src]="getImageUrl(selectedImage?.ruta)" (click)="$event.stopPropagation()">
-    <div class="caption">{{ selectedImage?.nombre }}</div>
-  </div>
-
+  <!-- Artículo sobre la bandera de Girardot -->
   <article id="banderas">
     <h2>Bandera</h2>
     <div class="flex-container">
       <div class="flex-item">
-        <p>La bandera de Girardot, Cundinamarca, es un símbolo de la ciudad que representa su historia y valores. Fue adoptada oficialmente en 1973.</p>
-        <p>La bandera está compuesta por tres franjas horizontales:</p>
-        <p>La primera, que abarca la mitad del estandarte, aparece en tono rojo y simboliza la sangre vertida por los valerosos soldados durante la guerra de los mil días. Girardot, como bastión liberal, fue testigo de intensas batallas.</p>
-        <p>La segunda mitad de la bandera se divide en dos partes iguales. La franja central, de color blanco, representa la pureza de sus habitantes. El verde, por su parte, simboliza los campos y praderas que rodean la región.</p>
+        <p>La bandera de Girardot, Cundinamarca, es un símbolo de la ciudad que representa su historia...</p>
         <p>Fuente: <a href="https://www.girardot-cundinamarca.gov.co/Ciudadanos/PortaldeNinos/MiMunicipio/Paginas/Nuestros-Simbolos.aspx" target="_blank">Municipio de Girardot, Cundinamarca Alcaldía de Girardot</a></p>
       </div>
       <div class="flex-item">
@@ -190,10 +189,10 @@
     </div>
   </article>
 
+  <!-- Artículo sobre el himno de Girardot -->
   <article id="himno">
     <h2>Himno</h2>
-    <p>El himno de Girardot, Cundinamarca, es un símbolo de la ciudad que representa su historia, cultura y valores. Fue compuesto por Alfonso Rodríguez Medina y Florentino Camacho Valderrama.</p>
-    <p>El himno tiene seis estrofas y un coro. En las estrofas, se exaltan las bellezas naturales de la ciudad, su historia y su gente. El coro es una expresión de amor y orgullo por la ciudad.</p>
+    <p>El himno de Girardot, Cundinamarca, es un símbolo de la ciudad que representa su historia...</p>
     <p>Fuente: <a href="https://www.girardot-cundinamarca.gov.co/Ciudadanos/PortaldeNinos/MiMunicipio/Paginas/Nuestros-Simbolos.aspx" target="_blank">Municipio de Girardot, Cundinamarca Alcaldía de Girardot</a></p>
     <pre>
       <code class="language-html">
@@ -201,16 +200,18 @@
           <source src="assets/images/audio/himnogirardot.mp3" type="audio/mpeg">
         </audio>
       </code>
-      </pre>
+    </pre>
   </article>
 </section>
 
+<!-- Otro separador visual -->
 <div class="mi-separador-div"></div>
-
+<!-- Sección con mapa interactivo que muestra cómo llegar a Girardot -->
 <div class="map-container">
   <h1 class="title-mapa">¿Cómo llegar a Girardot, Cundinamarca?</h1>
+  <!-- Iframe con Google Maps embebido -->
   <iframe
-    src="https://www.google.com/maps/embed?pb=!1m46!1m12!1m3!1d509179.06392905884!2d-75.18207455207751!3d4.41828733291586!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m31!3e0!4m5!1s0x8e3edf00533d2963%3A0xab76b9f27b1d57a6!2sMelgar%2C%20Tolima!3m2!1d4.203571999999999!2d-74.643383!4m5!1s0x8e3f28ec54308e5f%3A0xad9e09275aa20260!2sGirardot%2C%20Cundinamarca!3m2!1d4.3045959!2d-74.8031414!4m5!1s0x8e3f6c28c552b6f1%3A0x3fee08ff0b692e24!2sLa%20Mesa%2C%20Cundinamarca!3m2!1d4.632147!2d-74.463014!4m5!1s0x8e3f28f0b074eea9%3A0x920d92c920abce50!2sFlandes%2C%20Tolima!3m2!1d4.2867309!2d-74.812294!4m5!1s0x8e38c491115f4d5f%3A0xe0cae43859d2401e!2zSWJhZ3XDqSwgVG9saW1h!3m2!1d4.444675999999999!2d-75.24243799999999!5e0!3m2!1ses!2sco!4v1721242776822!5m2!1ses!2sco"
+    src="https://www.google.com/maps/embed?pb=!1m46...5m2!1ses!2sco"
     width="600"
     height="450"
     style="border:0;"
@@ -219,14 +220,5 @@
     referrerpolicy="no-referrer-when-downgrade">
   </iframe>
 </div>
-
-
+<!-- Último separador visual -->
 <div class="mi-separador-div"></div>
-
-
-
-
-
-
-
-

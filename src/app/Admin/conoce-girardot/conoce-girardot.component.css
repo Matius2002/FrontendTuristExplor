@@ -1,324 +1,352 @@
+/* Estilos generales para el contenedor de la sección con imagen de fondo */
 .contenido-fluid {
-  position: relative;
-  width: 100%;
-  height: 400px; /* Ajusta la altura según sea necesario */
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añadir sombra para darle profundidad */
+  position: relative; /* Permite la posición absoluta de los hijos */
+  width: 100%; /* Ocupa todo el ancho disponible */
+  height: 400px; /* Altura fija, ajustable según necesidades */
+  overflow: hidden; /* Oculta el contenido que se desborda */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añade sombra para darle profundidad */
   border-radius: 10px; /* Bordes redondeados */
 }
 
+/* Estilos para la imagen de fondo en la sección */
 .contenido-fluid img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
+  width: 100%; /* Imagen ocupa todo el ancho */
+  height: 100%; /* Imagen ocupa toda la altura */
+  object-fit: cover; /* La imagen se ajusta sin distorsión */
+  position: absolute; /* Se posiciona en relación al contenedor padre */
   top: 0;
   left: 0;
-  filter: brightness(0.7); /* Oscurecer la imagen de fondo para mejorar la legibilidad del texto */
+  filter: brightness(0.7); /* Oscurece la imagen para mejorar la legibilidad del texto */
 }
 
+/* Contenedor del contenido sobre la imagen */
 .contenido {
-  position: relative;
-  z-index: 1;
-  color: white;
-  text-align: center;
-  padding: 20px; /* Espaciado interno */
+  position: relative; /* Posiciona el contenido encima de la imagen */
+  z-index: 1; /* Asegura que esté por encima de la imagen de fondo */
+  color: white; /* Texto en color blanco */
+  text-align: center; /* Centra el texto */
+  padding: 20px; /* Espacio interno alrededor del contenido */
 }
 
+/* Estilos para el título dentro del contenido */
 .contenido h3 {
-  font-size: 3rem;
-  margin: 0;
-  padding-top: 20px; /* Espacio arriba del texto */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto */
+  font-size: 3rem; /* Tamaño grande del texto */
+  margin: 0; /* Sin margen */
+  padding-top: 20px; /* Espacio adicional arriba del texto */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra para mejorar la visibilidad */
 }
 
+/* Contenedor de texto con fondo semitransparente */
 .text-container {
-  background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
-  padding: 20px; /* Espaciado interno */
+  background: rgba(0, 0, 0, 0.5); /* Fondo negro semitransparente */
+  padding: 20px; /* Espacio interno */
   border-radius: 10px; /* Bordes redondeados */
 }
 
+/* Contenedor del breadcrumb con estilos */
 .breadcrumb-container {
-  font-size: 1.2rem;
-  background: rgba(255, 255, 255, 0.2); /* Fondo semitransparente */
-  padding: 10px 20px; /* Espaciado interno */
+  font-size: 1.2rem; /* Tamaño del texto */
+  background: rgba(255, 255, 255, 0.2); /* Fondo blanco semitransparente */
+  padding: 10px 20px; /* Espacio interno */
   border-radius: 50px; /* Bordes redondeados */
   margin-top: 20px; /* Margen superior */
 }
 
+/* Estilo del enlace dentro del breadcrumb */
 .breadcrumb-link {
-  font-weight: bold;
-  transition: color 0.3s; /* Transición suave para el color */
+  font-weight: bold; /* Texto en negrita */
+  transition: color 0.3s; /* Transición suave del color al pasar el ratón */
 }
 
+/* Cambio de estilo al pasar el ratón sobre el enlace */
 .breadcrumb-link:hover {
-  color: #ffc107; /* Cambiar color al pasar el ratón */
-  text-decoration: underline; /* Subrayado al pasar el ratón */
+  color: #ffc107; /* Cambia el color a amarillo */
+  text-decoration: underline; /* Añade subrayado */
 }
 
+/* Estilo del icono dentro del breadcrumb */
 .breadcrumb-icon {
-  font-size: 1.5rem;
+  font-size: 1.5rem; /* Tamaño del icono */
 }
 
+/* Estilo del texto adicional dentro del breadcrumb */
 .breadcrumb-text {
-  font-weight: lighter;
+  font-weight: lighter; /* Texto más ligero */
   margin-left: 10px; /* Separación del texto */
 }
 
-/* General Styles */
+/* Estilos generales del contenedor */
 .container {
-  padding: 30px;
+  padding: 30px; /* Espacio interno */
 }
 
-/* Títulos */
+/* Estilos para títulos con clase text-primary */
 h2.text-primary {
-  color: #007bff;
-  font-weight: bold;
+  color: #007bff; /* Color azul */
+  font-weight: bold; /* Texto en negrita */
 }
 
-/* Párrafos */
+/* Estilo para los párrafos con clase mb-4 */
 p.mb-4 {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem; /* Margen inferior */
 }
 
-/* Imagenes */
+/* Estilos para imágenes fluidas */
 .img-fluid {
-  max-width: 100%;
-  height: auto;
+  max-width: 100%; /* Ocupa todo el ancho disponible */
+  height: auto; /* Ajusta la altura proporcionalmente */
 }
 
+/* Estilos para las imágenes con efecto Polaroid */
 .polaroid {
-  border: 10px solid white;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 10px solid white; /* Borde blanco alrededor de la imagen */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
 }
 
+/* Efecto hover sobre las imágenes Polaroid */
 .polaroid:hover {
-  transform: scale(1.05);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05); /* Aumenta el tamaño ligeramente */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Sombra más profunda */
 }
 
+/* Animación de entrada para elementos */
 .animated {
-  animation: fadeIn 1s ease-in-out;
+  animation: fadeIn 1s ease-in-out; /* Animación de desvanecimiento */
 }
 
 @keyframes fadeIn {
   0% {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-10px); /* Inicio con opacidad 0 y ligeramente desplazado hacia arriba */
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0); /* Termina con opacidad total y posición normal */
   }
 }
 
-/* Textos centrados */
+/* Estilo para centrar texto */
 .text-center {
   text-align: center;
 }
 
-/* Márgenes */
+/* Márgenes superiores */
 .mt-3 {
-  margin-top: 1rem;
+  margin-top: 1rem; /* Margen superior */
 }
 
+/* Márgenes inferiores */
 .mb-4 {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem; /* Margen inferior */
 }
 
-/* Colores primarios */
+/* Estilo de color primario azul */
 .text-primary {
   color: #007bff;
 }
 
+/* Texto en negrita */
 .font-weight-bold {
   font-weight: bold;
 }
 
-/* Flexbox para columnas */
+/* Flexbox para organizar columnas */
 .col-lg-4 {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: column; /* Elementos en columna */
+  align-items: center; /* Centra el contenido */
 }
 
+/* Estilos para imágenes dentro de las columnas */
 .col-lg-4 img {
-  margin-bottom: 1rem;
+  margin-bottom: 1rem; /* Margen inferior */
 }
 
+/* Estilos para títulos dentro de las columnas */
 .col-lg-4 h5 {
-  font-size: 1.25rem;
-  margin-top: 1rem;
-  text-align: center;
+  font-size: 1.25rem; /* Tamaño del texto */
+  margin-top: 1rem; /* Margen superior */
+  text-align: center; /* Centrado */
 }
 
+/* Estilo para las columnas dentro de las filas */
 .row .col-lg-4 {
-  margin-bottom: 2rem;
+  margin-bottom: 2rem; /* Margen inferior */
 }
 
-/* Columna de la izquierda */
+/* Estilo específico para la primera columna */
 .col-lg-4:first-child h2 {
-  margin-bottom: 2rem;
+  margin-bottom: 2rem; /* Margen inferior */
 }
 
-/* Card Styles */
+/* Estilos para tarjetas */
 .card {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  background: linear-gradient(to bottom right, #ffffff, #f9f9f9);
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  overflow: hidden;
+  flex-direction: column; /* Columnas internas */
+  justify-content: space-between; /* Distribución interna */
+  height: 100%; /* Ocupa toda la altura */
+  background: linear-gradient(to bottom right, #ffffff, #f9f9f9); /* Fondo degradado */
+  border-radius: 15px; /* Bordes redondeados */
+  padding: 20px; /* Espacio interno */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Sombra */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+  overflow: hidden; /* Oculta contenido desbordado */
 }
 
+/* Efecto hover sobre las tarjetas */
 .card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  transform: translateY(-10px); /* Desplazamiento hacia arriba */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); /* Sombra más profunda */
 }
 
+/* Estilos para las imágenes dentro de las tarjetas */
 .card img {
-  object-fit: cover;
-  max-height: 200px; /* Ajusta la altura máxima de las imágenes */
+  object-fit: cover; /* Ajuste de la imagen */
+  max-height: 200px; /* Altura máxima de las imágenes */
 }
 
+/* Estilos para los títulos dentro de las tarjetas */
 .card h5 {
-  font-size: 1.5rem;
-  margin-top: 0;
-  color: #007bff;
+  font-size: 1.5rem; /* Tamaño del texto */
+  margin-top: 0; /* Sin margen superior */
+  color: #007bff; /* Color azul */
 }
 
+/* Estilos para los párrafos dentro de las tarjetas */
 .card p {
-  font-size: 1rem;
-  color: #666;
+  font-size: 1rem; /* Tamaño del texto */
+  color: #666; /* Color gris */
 }
 
+/* Estilos para iconos dentro de las tarjetas */
 .card i {
-  font-size: 1.5rem;
-  color: #007bff;
+  font-size: 1.5rem; /* Tamaño del icono */
+  color: #007bff; /* Color azul */
 }
 
-/* Responsive Design */
+/* Diseño responsivo para pantallas pequeñas */
 @media (max-width: 992px) {
   .col-lg-4 {
-    margin-bottom: 2rem;
+    margin-bottom: 2rem; /* Margen inferior */
   }
 }
+
+/* Estilos para la sección de Girardot */
 section#girardot {
-  margin: 0 auto;
-  max-width: 800px; /* Cambiado de width a max-width */
-  padding: 20px;
+  margin: 0 auto; /* Centrado automático */
+  max-width: 800px; /* Ancho máximo */
+  padding: 20px; /* Espacio interno */
 }
 
+/* Estilos para las imágenes con clase imagen */
 .imagen {
-  width: 100%;
-  /* border-radius: 25%;
-  -webkit-border-radius: 25%; */
+  width: 100%; /* Ocupa todo el ancho */
 }
 
+/* Efecto hover sobre las imágenes */
 .imagen:hover {
-  border-radius: 50%;
-  -webkit-border-radius: 50%;
-  box-shadow: 0 0 20px 20px #ec731e;
-  -webkit-box-shadow: 0 0 20px 20px #ec731e;
-  transform: rotate(180deg);
-  -webkit-transform: rotate(0deg);
+  border-radius: 50%; /* Bordes redondeados en hover */
+  box-shadow: 0 0 20px 20px #ec731e; /* Sombra alrededor */
+  transform: rotate(180deg); /* Rotación de la imagen */
 }
 
 /* Estilos generales para el elemento de audio */
 audio {
-  width: 80%; /* Hacer que el audio ocupe todo el ancho disponible */
-  margin-top: 20px; /* Agregar espacio superior */
-  border: 1px solid #f4e0e0; /* Agregar un borde */
-  border-radius: 10px; /* Agregar esquinas redondeadas */
-  background-color: #ecfae7; /* Agregar un color de fondo */
-  padding: 10px; /* Agregar espacio interno */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Agregar sombra */
-
+  width: 80%; /* Ancho del audio */
+  margin-top: 20px; /* Margen superior */
+  border: 1px solid #f4e0e0; /* Borde del audio */
+  border-radius: 10px; /* Bordes redondeados */
+  background-color: #ecfae7; /* Fondo */
+  padding: 10px; /* Espacio interno */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
 }
 
 /* Media query para pantallas más pequeñas */
 @media screen and (max-width: 600px) {
   section#girardot {
-    padding: 10px;
+    padding: 10px; /* Espacio interno reducido */
   }
 }
+
+/* Contenedor flex para organizar elementos */
 .flex-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Espacio entre los elementos */
 }
 
+/* Estilo para los elementos dentro del contenedor flex */
 .flex-item {
-  width: 48%; /* Puedes ajustar este valor según sea necesario */
+  width: 48%; /* Ancho del 48% */
 }
 
+/* Diseño responsivo para pantallas pequeñas */
 @media screen and (max-width: 600px) {
   .flex-container {
-    flex-direction: column;
+    flex-direction: column; /* Cambia la dirección a columna */
   }
 
   .flex-item {
-    width: 100%;
+    width: 100%; /* Ancho completo */
   }
 }
+
+/* Estilo específico para la sección de la bandera */
 #bandera .flex-container {
-  flex-direction: row-reverse;
+  flex-direction: row-reverse; /* Dirección invertida de los elementos */
 }
 
+/* Diseño responsivo para pantallas pequeñas */
 @media screen and (max-width: 600px) {
   #bandera .flex-container {
-    flex-direction: column;
+    flex-direction: column; /* Cambia la dirección a columna */
   }
 }
 
-/* girardot-map.component.css */
+/* Estilos para el contenedor del mapa */
 .map-container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100%;
+  flex-direction: column; /* Dirección en columna */
+  justify-content: center; /* Centrado vertical */
+  align-items: center; /* Centrado horizontal */
+  height: 100vh; /* Ocupa toda la altura de la ventana */
+  width: 100%; /* Ocupa todo el ancho */
   background-color: #f4f4f4; /* Fondo gris claro */
-  padding: 20px; /* Espaciado alrededor */
-  box-sizing: border-box;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px; /* Espacio interno */
+  box-sizing: border-box; /* Incluye el padding en el tamaño total */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Sombra */
 }
 
-.title-mapa { /* Usar un punto para clases */
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 35px;
-  color: #ef8787; /* Color de texto */
+/* Estilos para el título del mapa */
+.title-mapa {
+  text-align: center; /* Centrado del texto */
+  margin-bottom: 20px; /* Margen inferior */
+  font-size: 35px; /* Tamaño del texto */
+  color: #ef8787; /* Color del texto */
 }
 
+/* Estilos para los iframes */
 iframe {
-  width: 90%;
-  height: 500px;
-  border: 5px;
+  width: 90%; /* Ancho del 90% */
+  height: 500px; /* Altura fija */
+  border: 5px; /* Borde */
   border-radius: 10px; /* Bordes redondeados */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
 }
+
 /* Bordes y sombras para tarjetas */
 .card {
-  border: 1px solid #ddd;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd; /* Borde gris */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
 }
-/* Estilos responsivos para dispositivos móviles */
+
+/* Diseño responsivo para dispositivos móviles */
 @media (max-width: 768px) {
   iframe {
-    width: 95%; /* Más ancho en dispositivos móviles */
-    height: 300px; /* Altura reducida en dispositivos móviles */
+    width: 95%; /* Mayor ancho en dispositivos móviles */
+    height: 300px; /* Altura reducida */
   }
-  .title-mapa { /* Usar un punto para clases */
-    font-size: 20px; /* Tamaño de fuente más pequeño en dispositivos móviles */
+  .title-mapa {
+    font-size: 20px; /* Tamaño de fuente más pequeño */
   }
 }
-
-
-
-
