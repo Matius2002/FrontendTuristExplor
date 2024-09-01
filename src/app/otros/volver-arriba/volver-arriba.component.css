@@ -1,44 +1,45 @@
-/* volver-arriba.component.css */
+/* Estilos para el botón de volver arriba */
 .volver-arriba {
-  position: fixed;
-  bottom: 40px;
-  right: 40px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: opacity 0.3s, visibility 0.3s, transform 0.5s cubic-bezier(0.42, 0, 0.58, 1);
-
+  position: fixed; /* Fija el botón en una posición específica de la pantalla */
+  bottom: 40px; /* Posiciona el botón a 40 píxeles del borde inferior */
+  right: 40px; /* Posiciona el botón a 40 píxeles del borde derecho */
+  background-color: #007bff; /* Color de fondo azul */
+  color: white; /* Color del texto en blanco */
+  border: none; /* Sin borde */
+  padding: 10px 20px; /* Relleno interno del botón */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor a una mano cuando pasa sobre el botón */
+  transition: opacity 0.3s, visibility 0.3s, transform 0.5s cubic-bezier(0.42, 0, 0.58, 1); /* Transiciones suaves para opacidad, visibilidad y transformaciones */
 }
 
+/* Cambia el color del botón al pasar el mouse o al hacer clic */
 .volver-arriba:hover,
 .volver-arriba:active {
-  background-color: #0056b3; /* Cambia el color al pasar el mouse o al hacer clic */
+  background-color: #0056b3; /* Cambia el color de fondo a un tono más oscuro de azul */
 }
 
+/* Estilos responsivos para pantallas más pequeñas */
 @media screen and (max-width: 600px) {
   .volver-arriba {
-    bottom: 20px;
-    right: 20px;
+    bottom: 20px; /* Reduce la distancia del botón al borde inferior en pantallas pequeñas */
+    right: 20px; /* Reduce la distancia del botón al borde derecho en pantallas pequeñas */
   }
 }
 
-/* Definimos la animación */
+/* Definición de la animación para la aparición del botón */
 @keyframes aparecer {
   0% {
-    transform: translateY(100%);
+    transform: translateY(100%); /* Comienza fuera de la vista, desplazado hacia abajo */
   }
   25% {
-    transform: translateY(-20%); /* Iniciamos suave */
+    transform: translateY(-20%); /* Desplazamiento inicial suave hacia arriba */
   }
   100% {
-    transform: translateY(0);
+    transform: translateY(0); /* Llega a su posición final */
   }
 }
 
-/* Aplicamos la animación cuando el botón esté visible */
+/* Aplica la animación al botón cuando se muestra */
 .volver-arriba.visible {
-  animation: aparecer 0.5s forwards;
+  animation: aparecer 0.5s forwards; /* Aplica la animación con duración de 0.5 segundos y mantiene el estado final */
 }
