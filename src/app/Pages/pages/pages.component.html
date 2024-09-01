@@ -1,13 +1,23 @@
+<!-- Componente de la barra de navegación superior -->
 <app-navbar-topbar></app-navbar-topbar>
+
+<!-- Componente de la barra de navegación principal -->
 <app-nav-bar></app-nav-bar>
 
+<!-- Contenedor principal para el contenido de la aplicación -->
 <div class="main-content">
-  <!--   <app-breadcrumbs></app-breadcrumbs> -->
-
-  <!-- Aquí irá el contenido dinámico de tu aplicación -->
+  <!-- Componente para las migas de pan (breadcrumbs) -->
+  <!-- <app-breadcrumbs></app-breadcrumbs> -->
+  
+  <!-- Aquí se renderiza el contenido dinámico de las rutas definidas en la aplicación -->
   <router-outlet></router-outlet>
 </div>
+
+<!-- Componente del pie de página de la aplicación -->
 <!-- <app-footer></app-footer> -->
 
+<!-- Componente del pie de página -->
 <app-footer></app-footer>
+
+<!-- Componente para volver al inicio de la página -->
 <app-volver-arriba></app-volver-arriba>
