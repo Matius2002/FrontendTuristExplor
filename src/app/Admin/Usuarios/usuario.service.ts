@@ -1,12 +1,12 @@
-//Importaciones
 import { Injectable } from '@angular/core';
 import { entornos } from "../../Entorno/entornos";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
-import { BehaviorSubject, catchError, map, Observable, tap, throwError } from "rxjs";
+import { BehaviorSubject, catchError, Observable, tap, throwError } from "rxjs";
 import { Usuario } from "./modelos/Usuario";
 import Swal from "sweetalert2";
 import { Router } from "@angular/router";
 
+// Definición de interfaces para roles y usuarios
 interface Rol {
   id: number;
   rolName: string;
@@ -28,27 +28,29 @@ interface Usuarios {
   providedIn: 'root'
 })
 export class UsuarioService {
-
+  // Variables y propiedades para gestionar la autenticación y el usuario actual
   private loggedIn: boolean = false;
-  dynamicHost = entornos.dynamicHost;
-  private baseUrl: string = `http://${this.dynamicHost}/api`;
-  private expirationTime: number = 0;
-  private _usuarioLogeado: Usuario = new Usuario();
-  private _token: string | null = null;
-  private isLoggedInSubject = new BehaviorSubject<boolean>(this.hasToken());
-  isLoggedIn$ = this.isLoggedInSubject.asObservable();
+  dynamicHost = entornos.dynamicHost; // Dirección dinámica del host desde la configuración de entornos
+  private baseUrl: string = `http://${this.dynamicHost}/api`; // URL base para las llamadas a la API
+  private expirationTime: number = 0; // Tiempo de expiración del token
+  private _usuarioLogeado: Usuario = new Usuario(); // Usuario actualmente logueado
+  private _token: string | null = null; // Token de autenticación
+  private isLoggedInSubject = new BehaviorSubject<boolean>(this.hasToken()); // Observable para gestionar el estado de autenticación
+  isLoggedIn$ = this.isLoggedInSubject.asObservable(); // Observable expuesto para suscribirse al estado de autenticación
 
   constructor(
-    private http: HttpClient,
-    private router: Router
+    private http: HttpClient, // Servicio HttpClient para realizar peticiones HTTP
+    private router: Router // Servicio Router para navegación dentro de la aplicación
   ) { }
 
+  // Guarda el token y actualiza el estado de autenticación
   setToken(token: string, expirationTime: number): void {
-    localStorage.setItem('jwtToken', token);
+    localStorage.setItem('authToken', token);
     this.expirationTime = expirationTime;
     this.isLoggedInSubject.next(true);
   }
 
+  // Devuelve el token almacenado
   public get token(): string | null {
     if (this._token != null) {
       return this._token;
@@ -59,42 +61,38 @@ export class UsuarioService {
     return null;
   }
 
-  // Método para obtener el usuario actual
+  // Obtiene el usuario actual decodificando el token
   getCurrentUser(): Usuarios | null {
     const token = localStorage.getItem('jwtToken');
     if (!token) return null;
 
     try {
-      // Obtener el payload del token JWT
-      const payload = this.obtenerPayload(token);
-      // Extraer la información del usuario del payload
+      const payload = this.obtenerPayload(token); // Decodifica el payload del token
       return {
         id: payload.id,
         nombreUsuario: payload.username,
         email: payload.correo,
-        password: '', // No es seguro almacenar contraseñas aquí
-        fechaRegistro: new Date(), // Ajusta este campo según lo que obtienes del token
-        rol: payload.rol // Ajusta según lo que tienes en el payload
+        password: '', 
+        fechaRegistro: new Date(), 
+        rol: payload.rol 
       };
     } catch (error) {
       console.error('Error al decodificar el token JWT:', error);
       return null;
     }
   }
-
-  // Método para decodificar el payload de un token JWT
+  
+  // Decodifica el payload de un token JWT
   obtenerPayload(token: string): any {
     try {
-      // Dividir el token y decodificar el payload (segunda parte)
       const payload = token.split(".")[1];
-      // Decodificar la parte base64 y parsearla como JSON
-      return JSON.parse(atob(payload));
+      return JSON.parse(atob(payload)); // Decodifica la parte base64 del token
     } catch (e) {
       throw new Error('No se pudo decodificar el payload del token.');
     }
   }
 
-  // Método para obtener la URL del informe
+  // Genera la URL para descargar reportes basándose en el tipo de reporte y formato
   getReportUrl(reportType: string, format: string): Observable<string> {
     const url = `${this.baseUrl}/reportes/${reportType}?format=${format}`;
     return this.http.get(url, { responseType: 'text' }).pipe(
@@ -102,14 +100,15 @@ export class UsuarioService {
     );
   }
 
+  // Método para renovar el token de autenticación
   renewToken(): Observable<{ token: string, expirationTime: number }> {
     return this.http.post<{ token: string, expirationTime: number }>('/renew-token', {});
   }
 
+  // Devuelve el usuario logueado desde el almacenamiento local
   public get usuarioLogeado(): Usuario {
     if (this._usuarioLogeado != null) {
       return this._usuarioLogeado;
-
     } else if (localStorage.getItem('usuario') != null && this._usuarioLogeado == null) {
       let usuarioStorage: string | null = localStorage.getItem('usuario');
       if (usuarioStorage == null) {
@@ -119,18 +118,16 @@ export class UsuarioService {
       return this._usuarioLogeado;
     }
     return new Usuario();
-
   }
 
-  // Método para verificar si el usuario está autenticado
+  // Verifica si hay un token guardado, lo que indica que el usuario está autenticado
   isLoggedIn(): boolean {
     return !!localStorage.getItem('authToken');
   }
 
-  // Método para cerrar sesión
+  // Cierra sesión del usuario, eliminando el token y redirigiendo al login
   logout(): void {
     localStorage.removeItem('authToken');
-    localStorage.removeItem('authToken'); 
     this.isLoggedInSubject.next(false); 
     this.router.navigate(['/login']);
     Swal.fire({
@@ -141,56 +138,56 @@ export class UsuarioService {
     });
   }   
 
-  // Function para guardar un nuevo Usuario
+  // Guarda un nuevo usuario a través de una solicitud HTTP POST a la API
   guardarUsuario(usuario: Usuarios): Observable<Usuarios> {
     return this.http.post<Usuarios>(`${this.baseUrl}/usuarios/guardarUsuario`, usuario)
       .pipe(catchError(this.handleError));
   }
 
-  // Eliminar Usuario
+  // Elimina un usuario específico por ID
   eliminarUsuario(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/usuarios/${id}`)
       .pipe(catchError(this.handleError));
   }
 
-  // Recuperar todos Usuario
+  // Recupera todos los usuarios registrados desde la API
   recuperarTodosUsuario(): Observable<Usuarios[]> {
     return this.http.get<Usuarios[]>(`${this.baseUrl}/usuarios/obtenerTodosLosUsuario`)
       .pipe(catchError(this.handleError));
   }
 
-  // Obtener Usuario
+  // Obtiene un usuario específico por su ID
   obtenerUsuario(id: number): Observable<Usuarios> {
     return this.http.get<Usuarios>(`${this.baseUrl}/usuarios/recuperarPorId/${id}`)
       .pipe(catchError(this.handleError));
   }
 
-  // Actualizar Usuario
+  // Actualiza un usuario existente mediante una solicitud PUT
   actualizarUsuario(id: number, tipoActualizada: Usuarios): Observable<Usuarios> {
     tipoActualizada.id = id;
     return this.http.put<Usuarios>(`${this.baseUrl}/usuarios/${id}`, tipoActualizada)
       .pipe(catchError(this.handleError));
   }
 
-  // Verificar Usuario ya existe en la base de datos
+  // Verifica si un nombre de usuario ya existe en la base de datos
   verificarUsuarioExistente(nombreUsuario: string): Observable<boolean> {
     return this.http.get<boolean>(`${this.baseUrl}/usuarios/existe/${encodeURIComponent(nombreUsuario)}`)
       .pipe(catchError(this.handleError));
   }
 
+  // Verifica si un correo electrónico ya está registrado
   verificarUsuarioPorEmail(email: string): Observable<boolean> {
     return this.http.get<boolean>(`${this.baseUrl}/usuarios/userExiste/${encodeURIComponent(email)}`)
       .pipe(catchError(this.handleError));
   }
 
-  // Recuperar Roles
+  // Recupera todos los roles disponibles desde la API
   recuperarTodosRoles(): Observable<Rol[]> {
     return this.http.get<Rol[]>(`${this.baseUrl}/roles/obtenerTodosLasRoles`)
       .pipe(catchError(this.handleError));
   }
 
-
-  // Login
+  // Método de inicio de sesión: envía credenciales y guarda el token recibido
   login(credentials: { email: string, password: string }): Observable<any> {
     const httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<any>(`${this.baseUrl}/login`, credentials, { headers: httpHeaders })
@@ -198,7 +195,6 @@ export class UsuarioService {
         tap(response => {
           const { token, expirationTime } = response;
           this.setToken(token, expirationTime);
-          // Aquí puedes emitir un valor para actualizar el estado de `isLoggedIn` en el componente
           this.isLoggedInSubject.next(true);
         }),
         catchError(e => {
@@ -207,12 +203,12 @@ export class UsuarioService {
       );
     }    
 
+  // Verifica si existe un token en el almacenamiento local
   private hasToken(): boolean {
     return !!localStorage.getItem('authToken');
   }
 
-
-  // Función para manejar errores de HTTP
+  // Maneja los errores HTTP y muestra alertas al usuario
   private handleError(e: HttpErrorResponse): Observable<any> {
     if (e.status === 400) {
       Swal.fire(e.error.titulo, e.error.detalle, 'error');
@@ -220,6 +216,7 @@ export class UsuarioService {
     return throwError(e);
   }
 
+  // Guarda la información del usuario logueado en el almacenamiento local
   guardarUsuarioEnStorage(token: string): void {
     let payload = this.obtenerPayload(token);
     this._usuarioLogeado = new Usuario();
@@ -230,12 +227,9 @@ export class UsuarioService {
     localStorage.setItem('usuario', JSON.stringify(this._usuarioLogeado));
   }
 
+  // Guarda el token de autenticación en el almacenamiento local
   guardarToken(token: string): void {
     this._token = token;
     localStorage.setItem('authToken', this._token); 
   }
-
-  
 }
-
-
