@@ -94,76 +94,49 @@ export class NuevaExperienciaComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // Verificación del usuario autenticado
+    // Verificar si el usuario está autenticado
     if (!this.currentUser) {
       Swal.fire('Usuario no autenticado', 'Debe iniciar sesión para guardar una experiencia.', 'error');
-      this.isSubmitting = false;
-      this.router.navigate(['/login']); // Redirige al usuario a la página de inicio de sesión si no está autenticado
+      this.router.navigate(['/login']);
       return;
     }
   
-    this.isSubmitting = true;
-  
-    // Verificación del formulario
+    // Validar el formulario
     if (this.crearForm.invalid) {
       Swal.fire('Error', 'Por favor complete el formulario correctamente.', 'error');
-      this.isSubmitting = false;
       return;
     }
   
-    // Captura y convierte correctamente el ID del destino
-    const destinoIdSeleccionado = parseInt(this.crearForm.value.destinos, 10);
-    console.log('ID seleccionado:', destinoIdSeleccionado); // Debugging
-  
-    // Verifica si el ID es válido
-    if (isNaN(destinoIdSeleccionado)) {
-      Swal.fire('Error', 'El ID del destino seleccionado no es válido.', 'error');
-      this.isSubmitting = false;
+    // Capturar los valores del formulario
+    const destinoSeleccionado = this.crearForm.get('destino')?.value;
+    if (!destinoSeleccionado || !destinoSeleccionado.id) {
+      Swal.fire('Error', 'El ID del destino seleccionado no es válido o está vacío.', 'error');
       return;
     }
   
-    // Busca el destino usando el ID seleccionado para asegurarse de que es válido
-    const destinoSeleccionado = this.destinos.find(d => d.id === destinoIdSeleccionado);
-    console.log('Destino encontrado:', destinoSeleccionado); // Debugging
-  
-    // Verifica que el destino encontrado no sea undefined
-    if (!destinoSeleccionado) {
-      Swal.fire('Error', 'Destino seleccionado no es válido.', 'error');
-      this.isSubmitting = false;
-      return;
-    }
-  
-    // Construcción del objeto de experiencia
-    const experiencias: Experiencia = {
-      destinos: destinoSeleccionado, // Debe ser un objeto válido
-      usuario: this.currentUser,     // Debe estar autenticado
-      calificacion: this.crearForm.value.calificacion, // Debe tener un valor
-      comentario: this.crearForm.value.comentario,     // Debe tener un valor
-      fecha: new Date().toISOString(),                 // Fecha en formato ISO
-      id: 0                                            // Asegúrate de que el ID sea correcto
+    // Construir el objeto de la experiencia
+    const experiencia: Experiencia = {
+      destinos: destinoSeleccionado, // Asegúrate de enviar el campo `destino` correctamente
+      usuario: this.currentUser,
+      calificacion: this.crearForm.value.calificacion,
+      comentario: this.crearForm.value.comentario,
+      fecha: new Date().toISOString(),
+      id: 0,
     };
   
-    console.log('Datos enviados:', experiencias);
-  
-    // Envío de la experiencia al backend
-    this.experienciaService.guardarExperiencia(experiencias).subscribe(
+    // Enviar la experiencia al backend
+    this.experienciaService.guardarExperiencia(experiencia).subscribe(
       response => {
-        console.log('Experiencia guardada exitosamente', response);
         Swal.fire('Éxito', 'Experiencia guardada exitosamente.', 'success');
         this.limpiarFormulario();
-        this.isSubmitting = false;
       },
       error => {
         console.error('Error al guardar la experiencia:', error);
-        if (error.error && error.error.message) {
-          Swal.fire('Error', `Error del servidor: ${error.error.message}`, 'error');
-        } else {
-          Swal.fire('Error', 'Hubo un error al guardar la experiencia.', 'error');
-        }
-        this.isSubmitting = false;
+        Swal.fire('Error', error.error || 'Hubo un error al guardar la experiencia.', 'error');
       }
     );
-  }     
+  }
+  
 
   limpiarFormulario() {
     this.crearForm.reset();

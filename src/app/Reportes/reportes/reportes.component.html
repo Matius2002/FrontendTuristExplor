@@ -1,35 +1,49 @@
+<!-- Contenedor principal con un fondo de color rosa claro y altura de toda la pantalla -->
 <div style="background-color: #f3e6e8; height: 100vh;">
+  <!-- Contenedor para organizar los elementos del reporte -->
   <div class="report-container">
+    <!-- Encabezado del reporte -->
     <div class="header">
       <div class="image-container">
+        <!-- Imagen decorativa del título -->
         <img src="assets/images/reporte.jpg" alt="Imagen del Título">
+        <!-- Título del reporte -->
         <h1>Reportes</h1>
       </div>
     </div>
 
+    <!-- Contenedor de los botones de acción -->
     <div class="buttons-container">
+      <!-- Botón para mostrar opciones de descarga del reporte de sitios más visitados -->
       <button class="report-button" (click)="showDownloadOptions('visitas')">
         <i class="fas fa-eye"></i> Reporte de sitios más visitados
       </button>
+      <!-- Botón para mostrar opciones de descarga del reporte de usuarios -->
       <button class="report-button" (click)="showDownloadOptions('usuarios')">
         <i class="fas fa-users"></i> Reporte de usuarios en el sistema
       </button>
+      <!-- Botón para mostrar opciones de descarga del reporte de comentarios -->
       <button class="report-button" (click)="showDownloadOptions('comentarios')">
         <i class="fas fa-chart-bar"></i> Reporte de Comentarios
       </button>
+      <!-- Botón para navegar de regreso a otra sección del sistema -->
       <button class="back-button" (click)="navigateTo('sistemas')">
         <i class="fas fa-arrow-left"></i> Volver
       </button>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal para seleccionar el formato de descarga del reporte -->
     <div class="modal" [ngClass]="{'show': isModalVisible}">
       <div class="modal-content">
+        <!-- Botón para cerrar el modal -->
         <span class="close" (click)="closeModal()">&times;</span>
+        <!-- Mensaje del modal indicando el reporte seleccionado -->
         <p>Selecciona el formato de descarga para el reporte de {{ selectedReport }}</p>
+        <!-- Botón para descargar el reporte en formato Excel -->
         <button class="modal-button" (click)="downloadReport(selectedReport, 'excel')">
           <i class="fas fa-file-excel"></i> Excel
         </button>
+        <!-- Botón para descargar el reporte en formato PDF -->
         <button class="modal-button" (click)="downloadReport(selectedReport, 'pdf')">
           <i class="fas fa-file-pdf"></i> PDF
         </button>
