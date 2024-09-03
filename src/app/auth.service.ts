@@ -1,24 +1,27 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root' // El servicio se proporciona en la raíz de la aplicación, lo que permite su acceso global
+  providedIn: 'root'
 })
 export class AuthService {
-  // Variable privada que mantiene el estado de autenticación del usuario
-  private loggedIn = false; 
+  //private loggedIn = false; // Estado inicial de autenticación
 
-  // Método que verifica si el usuario está autenticado
+  // Método para verificar si el usuario está autenticado
   isLoggedIn(): boolean {
-    return this.loggedIn; // Devuelve true si el usuario está autenticado, false en caso contrario
+    // Verifica si existe un token en el localStorage
+    return !!localStorage.getItem('authToken');
   }
 
-  // Método para iniciar sesión, cambiando el estado de autenticación a verdadero
-  login(): void {
-    this.loggedIn = true; // Marca al usuario como autenticado
+  // Método para iniciar sesión
+  login(token: string): void {
+    // Guarda el token de autenticación en el localStorage
+    localStorage.setItem('authToken', token);
   }
 
-  // Método para cerrar sesión, cambiando el estado de autenticación a falso
+  // Método para cerrar sesión
   logout(): void {
-    this.loggedIn = false; // Marca al usuario como no autenticado
+    //this.loggedIn = false;
+    // Elimina el token del localStorage al cerrar sesión
+    localStorage.removeItem('authToken');
   }
 }

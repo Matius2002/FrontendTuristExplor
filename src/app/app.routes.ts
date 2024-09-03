@@ -1,5 +1,5 @@
 /* Importaciones de módulos y componentes necesarios para la configuración de rutas */
-import { Routes } from '@angular/router';
+import { Routes } from '@angular/router'; 
 import { NuevoAlojamientoComponent } from './Turismo/Alojamiento/nuevo-alojamiento/nuevo-alojamiento.component';
 import { NuevoDestinoComponent } from './Turismo/Destinos/nuevo-destino/nuevo-destino.component';
 import { NuevoTipoTurismoComponent } from './Turismo/TipoTurismo/nuevo-tipo-turismo/nuevo-tipo-turismo.component';
@@ -59,7 +59,7 @@ export const routes: Routes = [
     component: PagesComponent, // Componente principal que envuelve las rutas hijas
     children: [
       { path: '', redirectTo: 'tu-inicio', pathMatch: 'full' }, // Redirige a 'tu-inicio' si la ruta está vacía
-      { path: 'tu-inicio', component: InicioComponent}, // Ruta de inicio
+      { path: 'tu-inicio', component: InicioComponent , canActivate: [authGuard]}, // Ruta de inicio
       { path: 'Conoce-Girardot', component: ConoceGirardotComponent, canActivate: [authGuard] }, // Ruta protegida que muestra información sobre Girardot
       { path: 'sistemas', component: SistemaComponent, canActivate: [authGuard] }, // Ruta protegida para sistemas
       { path: 'evento-contenido', component: EventoContenidoComponent, canActivate: [authGuard] },
@@ -86,7 +86,6 @@ export const routes: Routes = [
       { path: 'roles', component: RolesComponent, canActivate: [authGuard] },
       { path: 'permisos', component: PermisosComponent, canActivate: [authGuard] },
       { path: 'usuarios', component: UsuariosComponent, canActivate: [authGuard] },
-      { path: 'login', component: LoginComponent }, // Ruta de login, no protegida por el guardián de autenticación
       { path: 'reportes', component: ReportesComponent, canActivate: [authGuard] },
       { path: 'alojamientos', component: AlojamientoComponent, canActivate: [authGuard] },
 
@@ -103,8 +102,10 @@ export const routes: Routes = [
       { path: 'nuevo-permiso', component: NuevoPermisoComponent, canActivate: [authGuard] },
       { path: 'nuevo-usuario', component: NuevoUsuarioComponent, canActivate: [authGuard] },
       { path: 'nuevo-alojamiento', component: NuevoAlojamientoComponent, canActivate: [authGuard] },
+      
     ]
   },
+  { path: 'login', component: LoginComponent }, // Ruta de login, no protegida por el guardián de autenticación
   { path: 'pages', component: PagesComponent, canActivate: [authGuard] }, // Ruta protegida para el componente de páginas generales
   { path: 'topbar', component: NavbarTopbarComponent, canActivate: [authGuard] }, // Ruta protegida para el componente de la barra superior
   { path: 'navbar', component: NavBarComponent, canActivate: [authGuard] }, // Ruta protegida para la barra de navegación

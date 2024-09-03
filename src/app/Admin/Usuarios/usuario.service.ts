@@ -5,6 +5,7 @@ import { BehaviorSubject, catchError, Observable, tap, throwError } from "rxjs";
 import { Usuario } from "./modelos/Usuario";
 import Swal from "sweetalert2";
 import { Router } from "@angular/router";
+import { AuthService } from '../../auth.service';
 
 // Definición de interfaces para roles y usuarios
 interface Rol {
@@ -40,7 +41,8 @@ export class UsuarioService {
 
   constructor(
     private http: HttpClient, // Servicio HttpClient para realizar peticiones HTTP
-    private router: Router // Servicio Router para navegación dentro de la aplicación
+    private authService: AuthService, // Servicio Router para navegación dentro de la aplicación
+    private router: Router
   ) { }
 
   // Guarda el token y actualiza el estado de autenticación
@@ -127,6 +129,7 @@ export class UsuarioService {
 
   // Cierra sesión del usuario, eliminando el token y redirigiendo al login
   logout(): void {
+    this.authService.logout(); // Llama a AuthService para cerrar sesión
     localStorage.removeItem('authToken');
     this.isLoggedInSubject.next(false); 
     this.router.navigate(['/login']);
@@ -187,21 +190,21 @@ export class UsuarioService {
       .pipe(catchError(this.handleError));
   }
 
-  // Método de inicio de sesión: envía credenciales y guarda el token recibido
+  // Método para iniciar sesión
   login(credentials: { email: string, password: string }): Observable<any> {
     const httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<any>(`${this.baseUrl}/login`, credentials, { headers: httpHeaders })
       .pipe(
         tap(response => {
-          const { token, expirationTime } = response;
-          this.setToken(token, expirationTime);
-          this.isLoggedInSubject.next(true);
+          const token = response.token; // Asegúrate de que el backend devuelva un token en la respuesta
+          this.authService.login(token); // Guarda el token usando AuthService
         }),
         catchError(e => {
-          return this.handleError(e);
+          Swal.fire('Error', 'Error al iniciar sesión', 'error');
+          return throwError(e);
         })
       );
-    }    
+  }     
 
   // Verifica si existe un token en el almacenamiento local
   private hasToken(): boolean {
