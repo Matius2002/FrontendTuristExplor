@@ -18,51 +18,32 @@
 <div class="container">
   <h2>Agrega tu Experiencia turística</h2>
   <form [formGroup]="crearForm" (ngSubmit)="onSubmit()">
-    <!-- inicio Destino turismo -->
+    <!-- Selección de destinos -->
     <div class="form-group">
       <label for="destinos">Destino</label>
-      <div class="input-group">
-        <div class="input-group-prepend">
-      <span class="input-group-text">
-        <i *ngIf="crearForm.get('destinos')?.valid || !crearForm.get('destinos')?.touched" class="fas fa-umbrella-beach"></i>
-        <i *ngIf="crearForm.get('destinos')?.invalid && crearForm.get('destinos')?.touched" class="fas fa-times-circle text-danger"></i>
-      </span>
-        </div>
-        <select id="destinos" formControlName="destinos" class="form-control">
-          <option value="" disabled selected>Selecciona un destino para calificar</option>
-          <option *ngFor="let destino of destinos" [ngValue]="destino">{{ destino.destinoName }}</option>
-      </select>                    
-      </div>
+      <select id="destinos" formControlName="destinos" class="form-control">
+        <option value="" disabled selected>Selecciona un destino para calificar</option>
+        <option *ngFor="let destino of destinos" [ngValue]="destino">{{ destino.destinoName }}</option>
+      </select>
       <div *ngIf="crearForm.get('destinos')?.invalid && (crearForm.get('destinos')?.dirty || crearForm.get('destinos')?.touched)">
         <div class="text-danger" *ngIf="crearForm.get('destinos')?.errors?.['required']">El Destino de turismo es obligatorio.</div>
       </div>
     </div>
-    <!-- fin Destino turismo -->
-
-    <!-- inicio descripción -->
+    
+    <!-- Comentario del sitio turístico -->
     <div class="form-group">
       <label for="comentario">Comentario del Sitio Turistico</label>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">
-            <i *ngIf="crearForm.get('comentario')?.valid || !crearForm.get('comentario')?.touched" class="fas fa-align-left"></i>
-            <i *ngIf="crearForm.get('comentario')?.invalid && crearForm.get('comentario')?.touched" class="fas fa-times-circle text-danger"></i>
-          </span>
-        </div>
-        <textarea id="comentario" formControlName="comentario" placeholder="Ingresa la Descripción del Destino" rows="5" class="form-control"></textarea>
-      </div>
+      <textarea id="comentario" formControlName="comentario" placeholder="Ingresa la Descripción del Destino" rows="5" class="form-control"></textarea>
       <div *ngIf="crearForm.get('comentario')?.invalid && (crearForm.get('comentario')?.dirty || crearForm.get('comentario')?.touched)">
-        <div class="text-danger" *ngIf="crearForm.get('comentario')?.errors?.['required']">El Comentario es obligatoria.</div>
+        <div class="text-danger" *ngIf="crearForm.get('comentario')?.errors?.['required']">El Comentario es obligatorio.</div>
         <div class="text-danger" *ngIf="crearForm.get('comentario')?.errors?.['minlength']">El Comentario debe tener al menos 10 caracteres.</div>
         <div class="text-danger" *ngIf="crearForm.get('comentario')?.errors?.['maxlength']">El Comentario no debe exceder los 500 caracteres.</div>
       </div>
     </div>
-    <!-- fin descripción -->
-
-    <!-- inicio calificación -->
+  
+    <!-- Calificación -->
     <div class="form-group">
       <label>Calificación del Destino</label>
-      <!-- Sitio turístico -->
       <div class="clasificacion">
         <input id="radio1" type="radio" formControlName="calificacion" value="5">
         <label for="radio1" class="star-label">★</label>
@@ -81,15 +62,14 @@
         <span class="description">Malo</span>
       </div>
     </div>
-    <!-- fin calificación -->
-
-    <!-- Botones -->
+  
+    <!-- Botones de acción -->
     <div class="form-group">
       <button type="submit" class="custom-btn primary-btn">Guardar Destino</button>
       <button type="button" class="custom-btn secondary-btn" style="margin-left: 10px;" (click)="limpiarFormulario()">Limpiar Formulario</button>
       <button type="button" class="custom-btn info-btn" style="margin-left: 10px;" (click)="volver()">Volver</button>
     </div>
-  </form>
+  </form>  
 </div>
 <div class="mi-separador-div"></div>
 

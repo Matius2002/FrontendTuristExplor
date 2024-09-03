@@ -71,16 +71,18 @@ export class NuevaExperienciaComponent implements OnInit {
         });
       return; // Detiene la ejecución del componente si no está autenticado
     }
-
-    // Inicializar el formulario si el usuario está autenticado
+  
+    // Asegúrate de inicializar el formulario correctamente
     this.crearForm = this.formBuilder.group({
-      comentario: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
-      destinos: ['', [Validators.required]],
+      comentario: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]],
+      destinos: ['', Validators.required],
       calificacion: ['', Validators.required]
     });
-
+  
+    // Verificar la inicialización correcta del formulario
+    console.log('Formulario al inicializar:', this.crearForm);
     this.cargarDestinos();
-  }
+  }   
 
   cargarDestinos(): void {
     this.experienciaService.recuperarTodosDestinos().subscribe(
@@ -101,6 +103,9 @@ export class NuevaExperienciaComponent implements OnInit {
       return;
     }
   
+    // Mostrar el estado del formulario antes de enviar
+    console.log('Estado del formulario antes de enviar:', this.crearForm);
+  
     // Validar el formulario
     if (this.crearForm.invalid) {
       Swal.fire('Error', 'Por favor complete el formulario correctamente.', 'error');
@@ -108,7 +113,7 @@ export class NuevaExperienciaComponent implements OnInit {
     }
   
     // Capturar los valores del formulario
-    const destinoSeleccionado = this.crearForm.get('destino')?.value;
+    const destinoSeleccionado = this.crearForm.get('destinos')?.value;
     if (!destinoSeleccionado || !destinoSeleccionado.id) {
       Swal.fire('Error', 'El ID del destino seleccionado no es válido o está vacío.', 'error');
       return;
@@ -116,7 +121,7 @@ export class NuevaExperienciaComponent implements OnInit {
   
     // Construir el objeto de la experiencia
     const experiencia: Experiencia = {
-      destinos: destinoSeleccionado, // Asegúrate de enviar el campo `destino` correctamente
+      destinos: destinoSeleccionado, 
       usuario: this.currentUser,
       calificacion: this.crearForm.value.calificacion,
       comentario: this.crearForm.value.comentario,
@@ -136,7 +141,6 @@ export class NuevaExperienciaComponent implements OnInit {
       }
     );
   }
-  
 
   limpiarFormulario() {
     this.crearForm.reset();
