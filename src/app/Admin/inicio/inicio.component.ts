@@ -1,13 +1,13 @@
 // Importaciones necesarias desde Angular, servicios y otros módulos
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from "@angular/forms";
-import { Router } from "@angular/router";
-import { NgClass, NgForOf, NgIf } from "@angular/common";
-import { ExperienciaService } from "../../Turismo/Experiencia/experiencia.service";
-import { HttpClientModule } from "@angular/common/http";
-import { UsuarioService } from "../Usuarios/usuario.service";
-import { NoticiaService } from "../../Turismo/Noticia/noticia.service";
-import { interval, Subscription } from "rxjs";
+import { Component, OnInit } from '@angular/core'; // Importa `Component` y `OnInit` para definir el componente y su ciclo de vida
+import { FormBuilder } from "@angular/forms"; // Importa `FormBuilder` para crear formularios reactivos
+import { Router } from "@angular/router"; // Importa `Router` para la navegación entre rutas
+import { NgClass, NgForOf, NgIf } from "@angular/common"; // Importa directivas comunes de Angular
+import { ExperienciaService } from "../../Turismo/Experiencia/experiencia.service"; // Servicio para manejar experiencias
+import { HttpClientModule } from "@angular/common/http"; // Módulo HTTP para manejar solicitudes
+import { UsuarioService } from "../Usuarios/usuario.service"; // Servicio para manejar usuarios
+import { NoticiaService } from "../../Turismo/Noticia/noticia.service"; // Servicio para manejar noticias
+import { interval, Subscription } from "rxjs"; // Importa `interval` para crear intervalos de tiempo y `Subscription` para manejar observables
 
 // Interfaces para definir las estructuras de datos utilizadas
 interface Usuario {
@@ -54,15 +54,15 @@ interface Noticia {
 
 // Decorador del componente que define la configuración del mismo
 @Component({
-  providers: [ExperienciaService, UsuarioService, NoticiaService], // Proveedores de servicios
+  providers: [ExperienciaService, UsuarioService, NoticiaService], // Proveedores de servicios para el componente
   selector: 'app-inicio', // Selector del componente
-  standalone: true, // Componente independiente
-  imports: [NgIf, HttpClientModule, NgForOf, NgClass], // Importaciones de módulos Angular
+  standalone: true, // Indica que el componente es independiente
+  imports: [NgIf, HttpClientModule, NgForOf, NgClass], // Importaciones de módulos y directivas
   templateUrl: './inicio.component.html', // Ruta al archivo HTML de la plantilla
   styleUrl: './inicio.component.css' // Ruta al archivo CSS de estilos
 })
 export class InicioComponent implements OnInit {
-  experiencias!: Experiencia[]; // Arreglo para almacenar experiencias cargadas
+  experiencias!: Experiencia[]; // Arreglo para almacenar las experiencias cargadas
   usuarios: Usuario[] = []; // Arreglo para almacenar usuarios
   destinos: Destinos[] = []; // Arreglo para almacenar destinos
 
@@ -74,18 +74,18 @@ export class InicioComponent implements OnInit {
   selectedImage: any = null; // Imagen seleccionada para mostrar en el modal
   private subscription: Subscription = new Subscription(); // Subscripción para manejar observables
 
-  // Constructor del componente, inyecta servicios y otros dependencias
+  // Constructor del componente, inyecta servicios y otras dependencias
   constructor(
-    private formBuilder: FormBuilder, // FormBuilder para formularios reactivos
-    private usuarioService: UsuarioService, // Servicio para manejar usuarios
-    private experienciaService: ExperienciaService, // Servicio para manejar experiencias
-    private noticiaService: NoticiaService, // Servicio para manejar noticias
-    private router: Router // Router para la navegación entre rutas
+    private formBuilder: FormBuilder, // Inyecta FormBuilder para manejar formularios reactivos
+    private usuarioService: UsuarioService, // Inyecta el servicio de usuarios
+    private experienciaService: ExperienciaService, // Inyecta el servicio de experiencias
+    private noticiaService: NoticiaService, // Inyecta el servicio de noticias
+    private router: Router // Inyecta el servicio de enrutamiento para navegar entre rutas
   ) {}
 
   // Navega a una ruta específica basada en el parámetro proporcionado
   navigateTo(route: string) {
-    this.router.navigate([`/${route}`]);
+    this.router.navigate([`/${route}`]); // Navega a la ruta especificada
   }
 
   // Abre el modal para mostrar una imagen seleccionada
@@ -133,7 +133,7 @@ export class InicioComponent implements OnInit {
     this.noticiaService.recuperarTodosNoticia().subscribe(
       (data: Noticia[]) => {
         console.log('Noticias cargadas:', data); // Muestra las noticias cargadas en la consola
-        // Agrupar noticias en chunks de tamaño 3
+        // Agrupa noticias en chunks de tamaño 3
         this.noticiasChunks = this.chunkArray(data, 3);
         console.log('Chunks de noticias:', this.noticiasChunks); // Muestra los grupos de noticias
       },
