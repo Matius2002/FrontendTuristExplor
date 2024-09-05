@@ -44,15 +44,10 @@ export class NavbarTopbarComponent implements OnInit, OnDestroy{
 
   logout(): void {
     this.usuarioService.logout();
-    Swal.fire({
-      title: 'Sesión cerrada',
-      text: 'Has cerrado sesión exitosamente.',
-      icon: 'info',
-      confirmButtonText: 'Aceptar'
-    }).then(() => {
-      // Redirigir al usuario después de cerrar sesión
+    Swal.fire({icon: 'info',title: 'Sesión cerrada',text: 'Has cerrado sesión exitosamente. Serás redirigido en un momento.',timer: 3000,timerProgressBar: true,showConfirmButton: false, position: 'center',allowOutsideClick: false,allowEscapeKey: false,customClass: {popup: 'swal-custom-popup',title: 'swal-custom-title'
+    },willClose: () => {
       this.router.navigate(['/login']);
-    });
+    }});
   }
 
   navigateTo(route: string) {
