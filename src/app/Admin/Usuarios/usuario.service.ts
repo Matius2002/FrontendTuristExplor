@@ -65,7 +65,7 @@ export class UsuarioService {
 
   // Obtiene el usuario actual decodificando el token
   getCurrentUser(): Usuarios | null {
-    const token = localStorage.getItem('jwtToken');
+    const token = localStorage.getItem('authToken');
     if (!token) return null;
 
     try {
@@ -122,7 +122,7 @@ export class UsuarioService {
     return new Usuario();
   }
 
-  // Verifica si hay un token guardado, lo que indica que el usuario está autenticado
+  //Comprueba si hay un authToken guardado en localStorage. Si el token existe, devuelve true, lo que indica que el usuario está autenticado.
   isLoggedIn(): boolean {
     return !!localStorage.getItem('authToken');
   }

@@ -75,7 +75,6 @@ export class NuevaExperienciaComponent implements OnInit {
     if (!this.currentUser) { // Si no hay usuario autenticado
       Swal.fire('Usuario no autenticado', 'Debe iniciar sesión para registrar una experiencia.', 'warning') // Muestra un mensaje de advertencia
         .then(() => {
-          this.router.navigate(['/login']); // Redirige al usuario a la página de inicio de sesión
         });
       return; // Detiene la ejecución del componente si no está autenticado
     }
@@ -86,9 +85,6 @@ export class NuevaExperienciaComponent implements OnInit {
       destinos: ['', Validators.required], // Campo para el destino requerido
       calificacion: ['', Validators.required] // Campo para la calificación requerida
     });
-
-    // Verificar la inicialización correcta del formulario
-    console.log('Formulario al inicializar:', this.crearForm); // Muestra en consola el estado inicial del formulario
     this.cargarDestinos(); // Carga los destinos disponibles llamando a un método del servicio
   }
 
@@ -113,8 +109,6 @@ export class NuevaExperienciaComponent implements OnInit {
       return; // Detiene la ejecución del método
     }
 
-    // Mostrar el estado del formulario antes de enviar
-    console.log('Estado del formulario antes de enviar:', this.crearForm); // Muestra en consola el estado del formulario
 
     // Validar el formulario
     if (this.crearForm.invalid) { // Si el formulario es inválido
@@ -124,6 +118,7 @@ export class NuevaExperienciaComponent implements OnInit {
 
     // Capturar los valores del formulario
     const destinoSeleccionado = this.crearForm.get('destinos')?.value; // Obtiene el valor del campo de destino
+    console.log('Destino seleccionado antes de enviar:', destinoSeleccionado);
     if (!destinoSeleccionado || !destinoSeleccionado.id) { // Verifica que el destino seleccionado tenga un ID válido
       Swal.fire('Error', 'El ID del destino seleccionado no es válido o está vacío.', 'error'); // Muestra un mensaje de error
       return; // Detiene la ejecución del método
@@ -131,23 +126,25 @@ export class NuevaExperienciaComponent implements OnInit {
 
     // Construir el objeto de la experiencia
     const experiencia: Experiencia = {
-      destinos: destinoSeleccionado, // Asigna el destino seleccionado
-      usuario: this.currentUser, // Asigna el usuario autenticado
+      id: 0, // Se asigna 0, ya que se espera que el backend genere un ID único
       calificacion: this.crearForm.value.calificacion, // Asigna la calificación del formulario
       comentario: this.crearForm.value.comentario, // Asigna el comentario del formulario
       fecha: new Date().toISOString(), // Asigna la fecha actual en formato ISO
-      id: 0, // Se asigna 0, ya que se espera que el backend genere un ID único
+      usuario: this.currentUser, // Asigna el usuario autenticado */
+      destinos: destinoSeleccionado, // Asigna el destino seleccionado
     };
+
+    console.log('Objeto experiencia enviado:', experiencia);
 
     // Enviar la experiencia al backend
     this.experienciaService.guardarExperiencia(experiencia).subscribe(
-      response => { // Si la solicitud es exitosa
-        Swal.fire('Éxito', 'Experiencia guardada exitosamente.', 'success'); // Muestra un mensaje de éxito
-        this.limpiarFormulario(); // Limpia el formulario después de guardar
+      response => {
+        Swal.fire('Éxito', 'Experiencia guardada exitosamente.', 'success');
+        this.limpiarFormulario();
       },
-      error => { // Manejo de errores si ocurre un fallo en la solicitud
-        console.error('Error al guardar la experiencia:', error); // Imprime el error en consola
-        Swal.fire('Error', error.error || 'Hubo un error al guardar la experiencia.', 'error'); // Muestra un mensaje de error
+      error => {
+        console.error('Error al guardar la experiencia:', error);
+        Swal.fire('Error', error.error || 'Hubo un error al guardar la experiencia.', 'error');
       }
     );
   }

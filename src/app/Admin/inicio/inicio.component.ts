@@ -168,7 +168,7 @@ export class InicioComponent implements OnInit {
   // Obtiene la URL completa de una imagen, basada en su ruta
   getImageUrl(imagePath: string | undefined): string {
     const url = `http://localhost:8080/api${imagePath}`; // Construye la URL base del servidor
-    console.log(`Imagen con URL: ${url}`); // Muestra la URL en la consola para depuración
+    console.log(`Imagen con URL: ${url}`); //Muestra la URL en la consola para depuración
     return url; // Devuelve la URL completa
   }
 

@@ -39,6 +39,8 @@ interface Usuarios {
   styleUrl: './login.component.css' // Ruta del archivo de estilos CSS del componente
 })
 export class LoginComponent implements OnInit {
+
+  //Variables
   crearForm!: FormGroup; // Declaración del grupo de formularios para manejar los controles del formulario de inicio de sesión
   usuarios!: Usuarios; // Variable para almacenar la información del usuario
 
@@ -61,11 +63,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     // Verifica si el formulario es inválido, mostrando un mensaje de error si es el caso
     if (this.crearForm.invalid) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Formulario inválido',
-        text: 'Complete todos los campos correctamente.',
-      });
+      Swal.fire({icon: 'error', title: 'Formulario inválido',text: 'Complete todos los campos correctamente.'});
       return; // Detiene la ejecución si el formulario no es válido
     }
 
@@ -75,19 +73,16 @@ export class LoginComponent implements OnInit {
       password: this.crearForm.value.password
     };
 
-    // Llama al servicio de usuario para iniciar sesión con las credenciales proporcionadas
-    this.usuarioService.login(credentials).subscribe(
+    //Proceso de autenticación al inicial sesión
+    this.usuarioService.login(credentials).subscribe( //El método login() del usuarioService envía las credenciales del usuario (correo y contraseña) al backend.
       response => {
-        console.log(response);
-        // Guarda el token en el almacenamiento local y actualiza el estado del usuario logueado
-        this.usuarioService.guardarUsuarioEnStorage(response.token);
+        console.log(response); //Muestra el token
+        this.usuarioService.guardarUsuarioEnStorage(response.token); //Guarda el token en localStorage
         this.usuarioService.guardarToken(response.token);
-        // Muestra un mensaje de éxito y redirige al usuario a la página de inicio
-        Swal.fire({ icon: 'success', title: 'Inicio de sesión exitoso' }).then(() => {
+        Swal.fire({ icon: 'success', title: 'Inicio de sesión exitoso', text: '¡Bienvenido de nuevo! Serás redirigido en un momento.', timer: 3000, timerProgressBar: true, showConfirmButton: false, position: 'center', willClose: () => {
           this.router.navigate(['/tu-inicio']);
-        });
-      }
-    );
+        }});
+      });
   }
 
   // Método para limpiar el formulario de inicio de sesión
