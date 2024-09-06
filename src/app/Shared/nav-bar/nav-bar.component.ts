@@ -15,12 +15,14 @@ import {Router} from "@angular/router";
 export class NavBarComponent {
   constructor(
     private formBuilder: FormBuilder,
-    //public dialogRef: MatDialogRef<NavBarComponent>,
-    //@Inject(MAT_DIALOG_DATA) public data: any,
-    //private sistemaService: SistemaService,
     private router: Router,
   ) {}
   navigateTo(route: string) {
     this.router.navigate([`/${route}`]);
   }
+  logout(): void {
+    console.log("Sesión cerrada");
+    this.router.navigate(['/login']);
+  }
+  
 }
