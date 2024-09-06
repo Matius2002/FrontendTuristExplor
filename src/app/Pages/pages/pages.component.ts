@@ -4,7 +4,7 @@ import { FooterComponent } from "../../Shared/footer/footer.component"; // Impor
 import { BreadcrumbsComponent } from "../../Shared/breadcrumbs/breadcrumbs.component"; // Importa el componente de migas de pan
 import { RouterOutlet } from "@angular/router"; // Importa RouterOutlet para la renderización de rutas
 import { NavBarComponent } from "../../Shared/nav-bar/nav-bar.component"; // Importa el componente de la barra de navegación principal
-import { NavbarTopbarComponent } from "../../Shared/navbar-topbar/navbar-topbar.component"; // Importa el componente de la barra de navegación superior
+//import { NavbarTopbarComponent } from "../../Shared/navbar-topbar/navbar-topbar.component"; // Importa el componente de la barra de navegación superior
 import { VolverArribaComponent } from "../../otros/volver-arriba/volver-arriba.component"; // Importa el componente para volver al inicio de la página
 
 // Decorador del componente que define la configuración del mismo
@@ -16,7 +16,7 @@ import { VolverArribaComponent } from "../../otros/volver-arriba/volver-arriba.c
     BreadcrumbsComponent, // Componente de migas de pan
     RouterOutlet, // Punto de renderización para el contenido dinámico de las rutas
     NavBarComponent, // Componente de la barra de navegación principal
-    NavbarTopbarComponent, // Componente de la barra de navegación superior
+    //NavbarTopbarComponent, // Componente de la barra de navegación superior
     VolverArribaComponent // Componente para el botón de volver al inicio
   ],
   templateUrl: './pages.component.html', // Ruta del archivo de plantilla HTML para este componente

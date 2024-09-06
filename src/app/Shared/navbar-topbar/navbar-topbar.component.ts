@@ -42,7 +42,7 @@ export class NavbarTopbarComponent implements OnInit, OnDestroy{
     }
   }
 
-  logout(): void {
+  /*logout(): void {
     this.usuarioService.logout();
     Swal.fire({icon: 'info',title: 'Sesión cerrada',text: 'Has cerrado sesión exitosamente. Serás redirigido en un momento.',timer: 3000,timerProgressBar: true,showConfirmButton: false, position: 'center',allowOutsideClick: false,allowEscapeKey: false,customClass: {popup: 'swal-custom-popup',title: 'swal-custom-title'
     },willClose: () => {

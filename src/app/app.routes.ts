@@ -11,7 +11,7 @@ import { NuevaEpocaVisitarComponent } from './Turismo/EpocaVisitar/nueva-epoca-v
 import { NuevaAtracionesComponent } from './Turismo/AtracionPrincipal/nueva-atraciones/nueva-atraciones.component'; // Componente para agregar nuevas atracciones
 import { NuevaImagesComponent } from './Turismo/Images/nueva-images/nueva-images.component'; // Componente para agregar nuevas imágenes
 import { PagesComponent } from './Pages/pages/pages.component'; // Componente principal de las páginas
-import { NavbarTopbarComponent } from './Shared/navbar-topbar/navbar-topbar.component'; // Componente para la barra de navegación superior
+//import { NavbarTopbarComponent } from './Shared/navbar-topbar/navbar-topbar.component'; // Componente para la barra de navegación superior
 import { NavBarComponent } from './Shared/nav-bar/nav-bar.component'; // Componente para la barra de navegación
 import { SistemaComponent } from './Sistema/sistema/sistema.component'; // Componente del sistema
 import { TipoTurismoComponent } from './Turismo/TipoTurismo/tipo-turismo/tipo-turismo.component'; // Componente para mostrar tipos de turismo
@@ -106,7 +106,7 @@ export const routes: Routes = [
   },
   { path: 'login', component: LoginComponent }, // Ruta de login, no protegida por el guardián de autenticación
   { path: 'pages', component: PagesComponent, canActivate: [authGuard] }, // Ruta protegida para el componente de páginas generales
-  { path: 'topbar', component: NavbarTopbarComponent, canActivate: [authGuard] }, // Ruta protegida para el componente de la barra superior
+  //{ path: 'topbar', component: NavbarTopbarComponent, canActivate: [authGuard] }, // Ruta protegida para el componente de la barra superior
   { path: 'navbar', component: NavBarComponent, canActivate: [authGuard] }, // Ruta protegida para la barra de navegación
   { path: 'breadcrumbs', component: BreadcrumbsComponent, canActivate: [authGuard] }, // Ruta protegida para mostrar migas de pan
   { path: 'footer', component: FooterComponent, canActivate: [authGuard] }, // Ruta protegida para el pie de página
