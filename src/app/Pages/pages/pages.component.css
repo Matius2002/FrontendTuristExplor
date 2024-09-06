@@ -1,55 +1,49 @@
-/* Estilos para el topbar */
-app-navbar-topbar {
+/*app-navbar-topbar {
   display: block;
   padding: 0;
-  background-color: #f8f9fa; /* Color de fondo opcional */
-  border-bottom: 1px solid #ddd; /* Línea inferior opcional */
+  background-color: #f8f9fa; 
+  border-bottom: 1px solid #ddd; 
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1000; /* Asegura que esté por encima de todo */
+  z-index: 1000; 
 }
 
-/* Estilos para el navbar */
-/*app-nav-bar {
+app-nav-bar {
   display: block;
   padding: 0;
   background-color: #e9ecef; 
   border-bottom: 1px solid #ccc; 
   margin-top: 4em; 
-}*/
+}
 
-/* Estilos para el breadcrumbs */
 .breadcrumbs-content {
   font-size: 1.2em;
   font-weight: bold;
-  color: #333; /* Color de texto opcional */
+  color: #333; 
   padding: 0.5em;
-  background-color: #f1f1f1; /* Color de fondo opcional */
-  border-radius: 5px; /* Borde redondeado opcional */
-  border: 1px solid #ccc; /* Borde opcional */
+  background-color: #f1f1f1; 
+  border-radius: 5px; 
+  border: 1px solid #ccc; 
   position: fixed;
-  top: 4em; /* Ajusta la posición para dejar espacio para el topbar */
-  width: 100%; /* Establece el ancho al 100% */
-  z-index: 1001; /* Asegura que esté por encima del footer */
+  top: 4em; 
+  width: 100%; 
+  z-index: 1001; 
 }
 
-/* Estilos para el footer */
 #app-footer {
-  display: none; /* Por defecto oculto */
+  display: none; 
   padding: 0;
-  background-color: #454343; /* Color de fondo opcional */
-  border-top: 1px solid #ddd; /* Línea superior opcional */
+  background-color: #454343; 
+  border-top: 1px solid #ddd; 
   position: fixed;
   bottom: 0;
   width: 100%;
-  z-index: 1000; /* Asegura que esté por encima de todo */
+  z-index: 1000; 
 }
 
-
-/* Estilos para el contenido principal */
 .main-content {
   padding: 2em;
-  margin-top: 8em; /* Ajusta el espacio para el topbar y el navbar */
-  margin-bottom: 1em; /* Ajusta el espacio para el footer */
-}
+  margin-top: 8em; 
+  margin-bottom: 1em; 
+}*/

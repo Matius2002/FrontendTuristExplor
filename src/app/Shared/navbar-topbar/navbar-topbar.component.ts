@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+/*import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {UsuarioService} from "../../Admin/Usuarios/usuario.service";
@@ -53,5 +53,5 @@ export class NavbarTopbarComponent implements OnInit, OnDestroy{
   navigateTo(route: string) {
     this.router.navigate([`/${route}`]);
   }
-}
+}*/
 
