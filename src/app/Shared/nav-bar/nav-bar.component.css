@@ -1,178 +1,133 @@
 /* Navbar Styles */
 .navbar {
   position: fixed; /* Navbar fijo */
-  top: 50px; /* Cambiado el valor de top */
+  top: 0; /* Ajustado para que esté en la parte superior */
   left: 0; /* Lo fija a la izquierda de la página */
-  width: auto; /* Cambiado a ancho automático */
-  /* height: 150px; */
-  margin: 10px auto;
+  width: 100%; /* Ancho completo */
   z-index: 1000; /* Asegura que esté por encima de otros elementos */
-  transition: all 0.3s;
-  background-color: #f8f9fa; /* Slightly lighter background */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 0 16px 0 50px; /* Ajuste del padding */
-  border-radius: 80px; /* Redondear el cuadro negro */
+  background-color: #f8f9fa; /* Color de fondo ligero */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+  padding: 0 16px; /* Ajuste del padding */
 }
 
+/* Navbar-brand logo y texto */
 .navbar-brand h1 {
-  font-size: 24px;
-  font-weight: bold;
-  margin: 0;
-  color: #007bff;
+  font-size: 24px; /* Tamaño del texto */
+  font-weight: bold; /* Negrita */
+  margin: 0; /* Sin márgenes */
+  color: #007bff; /* Color azul para la primera palabra */
   display: flex;
-  align-items: center;
+  align-items: center; /* Centra verticalmente el logo con el texto */
 }
 
 .navbar-brand .text-success {
-  color: #28a745;
+  color: #28a745; /* Color verde para la segunda palabra */
 }
 
-.navbar-toggler {
-  border: none;
-  outline: none;
-  box-shadow: none;
+.logo {
+  width: 50px; /* Tamaño del logo */
+  height: 50px;
+  margin-right: 10px; /* Espacio entre logo y texto */
+  object-fit: contain; /* Asegura que el logo esté contenido dentro de los límites */
 }
 
-.navbar-toggler:focus {
-  outline: none;
-  box-shadow: none;
-}
-
+/* Estilos para los enlaces de navegación */
 .nav-item .nav-link {
-  font-size: 16px;
-  font-weight: 500;
-  transition: background-color 0.3s, color 0.3s;
-  padding: 0.5rem 1rem;
-  color: #343a40; /* Darker text color */
-  display: flex;
-  align-items: center;
+  font-size: 16px; /* Tamaño del texto */
+  font-weight: 500; /* Peso de la fuente */
+  transition: background-color 0.3s, color 0.3s; /* Transiciones suaves */
+  padding: 0.5rem 1rem; /* Espaciado de los enlaces */
+  color: #343a40; /* Color de texto oscuro */
 }
 
 .nav-item .nav-link:hover,
 .nav-item .nav-link:focus {
-  background-color: #e9f5e6; /* Lighter green background */
-  color: #155724 !important;
-  border-radius: 4px; /* Rounded corners for hover effect */
+  background-color: #e9f5e6; /* Fondo verde claro al hacer hover */
+  color: #155724 !important; /* Texto verde oscuro */
+  border-radius: 4px; /* Bordes redondeados para el efecto hover */
 }
 
-.dropdown-item.custom-dropdown-item {
-  padding: 0.5rem 1rem;
-  transition: background-color 0.3s, color 0.3s;
+/* Dropdown Menu */
+.nav-item.dropdown .dropdown-menu {
+  border-radius: 4px; /* Bordes redondeados para el dropdown */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  border: none; /* Sin borde */
 }
-
-.dropdown-item.custom-dropdown-item:hover,
-.dropdown-item.custom-dropdown-item:focus {
-  background-color: #e9f5e6; /* Lighter green background */
-  color: #155724 !important;
-}
-
-.dropdown-menu {
-  border-radius: 4px; /* Rounded corners for dropdown */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  border: none;
-  padding: 0.5rem 0;
-}
-
 
 .dropdown-item {
-  border-bottom: 1px solid #f1f1f1;
+  padding: 0.5rem 1rem; /* Espaciado de los elementos del dropdown */
+  transition: background-color 0.3s, color 0.3s; /* Transiciones suaves */
 }
 
-.dropdown-item:last-child {
-  border-bottom: none;
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: #e9f5e6; /* Fondo verde claro al hacer hover */
+  color: #155724 !important; /* Texto verde oscuro */
+}
+
+/* Navbar-toggler Styles */
+.navbar-toggler {
+  border-color: transparent; /* Sin borde en el toggler */
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%280, 0, 0, 0.5%29' stroke-width='2' linecap='round' linejoin='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); /* Icono de toggler personalizado */
+}
+
+.custom-navbar-toggler {
+  padding: 0.25rem 0.5rem;
+}
+
+/* Estilos para el dropdown de autenticación */
+.navbar-nav.ml-auto {
+  margin-left: auto; /* Empuja el menú a la derecha */
+}
+
+.nav-item.dropdown .dropdown-toggle::after {
+  margin-left: 0.5rem; /* Espacio entre el texto y el icono del dropdown */
+}
+
+.nav-item.dropdown .dropdown-menu {
+  right: 0; /* Alinea el dropdown a la derecha */
+  left: auto; /* Evita que se alinee a la izquierda */
 }
 
 /* Responsive Styles */
 @media (max-width: 992px) {
   .navbar-brand h1 {
-    font-size: 20px;
+    font-size: 20px; /* Ajusta el tamaño del texto en pantallas medianas */
   }
 }
 
 @media (max-width: 768px) {
   .navbar {
-    /* Modificado para permitir el ajuste automático de la altura */
     height: auto;
   }
+  
   .navbar-brand h1 {
-    font-size: 18px;
+    font-size: 18px; /* Ajusta el tamaño del texto en pantallas pequeñas */
   }
+  
   .nav-item .nav-link {
-    font-size: 14px;
+    font-size: 14px; /* Ajusta el tamaño de los enlaces en pantallas pequeñas */
   }
 }
 
-/* Logo Styles */
-.logo {
-  width: 50px;
-  height: 50px;
-  margin-right: 10px;
-  object-fit: contain; /* Ensure the logo is contained within the bounds */
+/* Sombra y colores adicionales */
+.navbar-light .navbar-nav .nav-link {
+  color: rgba(0, 0, 0, 0.5); /* Color de los enlaces */
 }
 
-/* Additional Styles for Professional Look */
-.navbar-brand {
-  display: flex;
-  align-items: center;
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link:focus {
+  color: rgba(0, 0, 0, 0.7); /* Color en hover */
 }
 
-.navbar-nav {
-  align-items: center;
+.navbar-light .navbar-brand {
+  color: rgba(0, 0, 0, 0.9); /* Color del texto de la marca */
 }
 
-.navbar-collapse {
-  justify-content: flex-end;
+/* Efecto de hover en toda la navbar */
+.navbar:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra más fuerte al hacer hover */
 }
-
-.nav-item.dropdown .nav-link::after {
-  display: inline-block;
-  width: 0;
-  height: 0;
-  margin-left: .255em;
-  vertical-align: .255em;
-  content: "";
-  border-top: .3em solid;
-  border-right: .3em solid transparent;
-  border-bottom: 0;
-  border-left: .3em solid transparent;
-}
-
-.nav-item.dropdown .nav-link[aria-expanded="true"]::after {
-  transform: rotate(-180deg);
-}
-
-/* Animation for dropdown menu */
-.dropdown-menu {
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: opacity 0.3s, transform 0.3s;
-}
-
-.nav-item.dropdown.show .dropdown-menu {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Icons for menu items */
-.nav-item .nav-link::before {
-  content: '⚬'; /* Bullet point as a placeholder for an icon */
-  margin-right: 8px;
-  color: #007bff;
-  font-size: 12px;
-  transition: color 0.3s;
-}
-
-.nav-item .nav-link:hover::before,
-.nav-item .nav-link:focus::before {
-  color: #28a745; /* Change icon color on hover */
-}
-
-/* Navbar Active Link */
-.nav-item .nav-link.active {
-  color: #007bff !important;
-  font-weight: bold;
-  border-bottom: 2px solid #007bff;
-}
-
-
-
