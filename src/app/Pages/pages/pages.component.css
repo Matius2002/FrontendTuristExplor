@@ -1,4 +1,4 @@
-/*app-navbar-topbar {
+app-navbar-topbar {
   display: block;
   padding: 0;
   background-color: #f8f9fa; 
@@ -9,13 +9,13 @@
   z-index: 1000; 
 }
 
-app-nav-bar {
+/*app-nav-bar {
   display: block;
   padding: 0;
   background-color: #e9ecef; 
   border-bottom: 1px solid #ccc; 
   margin-top: 4em; 
-}
+}*/
 
 .breadcrumbs-content {
   font-size: 1.2em;
@@ -46,4 +46,4 @@ app-nav-bar {
   padding: 2em;
   margin-top: 8em; 
   margin-bottom: 1em; 
-}*/
+}
