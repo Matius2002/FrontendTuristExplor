@@ -11,13 +11,13 @@ app-navbar-topbar {
 }
 
 /* Estilos para el navbar */
-app-nav-bar {
+/*app-nav-bar {
   display: block;
   padding: 0;
-  background-color: #e9ecef; /* Color de fondo opcional */
-  border-bottom: 1px solid #ccc; /* Línea inferior opcional */
-  margin-top: 4em; /* Ajusta el espacio debajo del topbar */
-}
+  background-color: #e9ecef; 
+  border-bottom: 1px solid #ccc; 
+  margin-top: 4em; 
+}*/
 
 /* Estilos para el breadcrumbs */
 .breadcrumbs-content {
