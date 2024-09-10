@@ -43,3 +43,42 @@ export class PagesComponent implements OnInit { // Define la clase `PagesCompone
     }
   }
 }
+/*import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router'; // Importa Router y NavigationEnd para detectar las rutas
+import { FooterComponent } from "../../Shared/footer/footer.component";
+import { RouterOutlet } from "@angular/router";
+import { NavBarComponent } from "../../Shared/nav-bar/nav-bar.component";
+import { VolverArribaComponent } from "../../otros/volver-arriba/volver-arriba.component";
+import { filter } from 'rxjs/operators'; // Importa filter para filtrar eventos de navegación
+
+@Component({
+  selector: 'app-pages',
+  standalone: true,
+  imports: [
+    FooterComponent,
+    RouterOutlet,
+    NavBarComponent,
+    VolverArribaComponent
+  ],
+  templateUrl: './pages.component.html',
+  styleUrls: ['./pages.component.css']
+})
+export class PagesComponent implements OnInit {
+  navbarVisible: boolean = true;
+  footerVisible: boolean = true;
+
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    // Detecta los cambios de ruta
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        // Oculta el Navbar y Footer en la ruta de nuevo-usuario
+        const excludedRoutes = ['/nuevo-usuario', '/login']; // Añade otras rutas si es necesario
+        this.navbarVisible = !excludedRoutes.includes(event.url);
+        this.footerVisible = !excludedRoutes.includes(event.url);
+      });
+  }
+}*/
+

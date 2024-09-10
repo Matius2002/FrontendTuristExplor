@@ -22,24 +22,37 @@ body {
 .image-container {
   position: relative;
   text-align: center;
+  display: flex;
+  justify-content: center; /* Centra los elementos horizontalmente */
+  align-items: center;    /* Centra los elementos verticalmente */
 }
 
 .image-container img {
-  width: 100%;
-  max-width: 600px; /* Limitar el tamaño máximo de la imagen */
-  border-radius: 8px;
-  display: block;
-  margin: 0 auto; /* Centrar la imagen horizontalmente */
+  display: block; /* Esto asegura que la imagen se comporte como un bloque */
+  margin: 0 auto; /* Esto centra la imagen horizontalmente */
+  max-width: 100%; /* Asegura que la imagen no exceda el ancho del contenedor */
+  height: auto; /* Mantiene las proporciones de la imagen */
 }
 
 .image-container h1 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  font-size: 2.5em;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  position: absolute; /* Para superponer el título sobre la imagen */
+  top: 50%; /* Centrar verticalmente */
+  left: 50%; /* Centrar horizontalmente */
+  transform: translate(-50%, -50%); /* Ajusta para centrar exactamente */
+  color: white; /* Color blanco para el texto */
+  font-size: 2.5em; /* Tamaño grande para el título */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra para mayor legibilidad */
+}
+
+/* Estilos responsivos para pantallas pequeñas */
+@media (max-width: 768px) {
+  .image-container img {
+    max-width: 100%; /* Asegura que la imagen no sea más ancha que la pantalla */
+  }
+
+  .image-container h1 {
+    font-size: 1.8em; /* Ajustar el tamaño del título para pantallas más pequeñas */
+  }
 }
 
 /* Botones */

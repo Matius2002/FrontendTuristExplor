@@ -56,9 +56,18 @@ import { authGuard } from './auth.guard'; // Guardián de autenticación para pr
 export const routes: Routes = [
   {
     path: '', // Ruta raíz
+    redirectTo: 'login', // Redirige al login
+    pathMatch: 'full' // Asegura que la ruta raíz redirige completamente
+  },
+  {
+    path: 'login', // Ruta para el login
+    component: LoginComponent
+  },
+  {
+    path: '', // Ruta raíz
     component: PagesComponent, // Componente principal que envuelve las rutas hijas
     children: [
-      { path: '', redirectTo: 'tu-inicio', pathMatch: 'full' }, // Redirige a 'tu-inicio' si la ruta está vacía
+      //{ path: '', redirectTo: 'tu-inicio', pathMatch: 'full' },
       { path: 'tu-inicio', component: InicioComponent, canActivate: [authGuard] }, // Ruta de inicio protegida por el guardián de autenticación
       { path: 'Conoce-Girardot', component: ConoceGirardotComponent, canActivate: [authGuard] }, // Ruta protegida que muestra información sobre Girardot
       { path: 'sistemas', component: SistemaComponent, canActivate: [authGuard] }, // Ruta protegida para sistemas
@@ -100,7 +109,7 @@ export const routes: Routes = [
       { path: 'nueva-imagen', component: NuevaImagesComponent, canActivate: [authGuard] }, // Ruta protegida para añadir una nueva imagen
       { path: 'nuevo-rol', component: NuevoRolComponent, canActivate: [authGuard] }, // Ruta protegida para añadir un nuevo rol
       { path: 'nuevo-permiso', component: NuevoPermisoComponent, canActivate: [authGuard] }, // Ruta protegida para añadir un nuevo permiso
-      { path: 'nuevo-usuario', component: NuevoUsuarioComponent, canActivate: [authGuard] }, // Ruta protegida para añadir un nuevo usuario
+      { path: 'nuevo-usuario', component: NuevoUsuarioComponent }, // Ruta protegida para añadir un nuevo usuario
       { path: 'nuevo-alojamiento', component: NuevoAlojamientoComponent, canActivate: [authGuard] }, // Ruta protegida para añadir un nuevo alojamiento
     ]
   },
