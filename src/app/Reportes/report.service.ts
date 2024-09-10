@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core'; // Importa `Injectable` para definir un servicio
 import { HttpClient } from "@angular/common/http"; // Importa `HttpClient` para manejar solicitudes HTTP
 import { entornos } from "../Entorno/entornos"; // Importa las configuraciones de entornos
-import { Observable } from "rxjs"; // Importa `Observable` para manejar respuestas asincrónicas
+import { catchError, Observable, throwError } from "rxjs"; // Importa `Observable` para manejar respuestas asincrónicas
 
 // Decorador `Injectable` para que el servicio esté disponible en toda la aplicación
 @Injectable({
@@ -18,19 +18,24 @@ export class ReportService {
   constructor(private http: HttpClient) { }
 
   // Método para obtener la URL de un reporte específico en el formato deseado
-  getReportUrl(reportType: string, format: string): Observable<any> {
-    let endpoint = ''; // Define la variable para almacenar la URL del endpoint
-    // Define el endpoint según el tipo de reporte solicitado
-    if (reportType === 'usuarios') {
-      endpoint = `${this.baseUrl}/reportes/usuarios/${format}`;
-    } else if (reportType === 'visitas') {
-      endpoint = `${this.baseUrl}/reportes/visitas/${format}`;
-    } else if (reportType === 'comentarios') {
-      endpoint = `${this.baseUrl}/reportes/comentarios/${format}`;
-    }
-    // Realiza una solicitud GET al endpoint seleccionado, esperando una respuesta de tipo `blob`
-    return this.http.get(endpoint, { responseType: 'blob' });
+getReportUrl(reportType: string, format: string): Observable<any> {
+  let endpoint = ''; 
+  if (reportType === 'usuarios') {
+    endpoint = `${this.baseUrl}/reportes/usuarios/${format}`;
+  } else if (reportType === 'visitas') {
+    endpoint = `${this.baseUrl}/reportes/visitas/${format}`;
+  } else if (reportType === 'comentarios') {
+    endpoint = `${this.baseUrl}/reportes/comentarios/${format}`;
   }
+
+  // Realiza una solicitud GET al endpoint seleccionado, esperando una respuesta de tipo `blob`
+  return this.http.get(endpoint, { responseType: 'blob' }).pipe(
+    catchError(error => {
+      console.error('Error al obtener el reporte:', error);
+      return throwError(error);
+    })
+  );
+}
 
   // Método para descargar un reporte de usuarios en formato Excel
   downloadUserExcel() {

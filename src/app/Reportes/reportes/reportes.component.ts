@@ -55,21 +55,22 @@ export class ReportesComponent implements OnInit{
 
   downloadReport(reportType: string, format: string) {
     this.reportService.getReportUrl(reportType, format).subscribe(url => {
-      // Establece la extensión correcta para Excel
       const extension = format === 'pdf' ? 'pdf' : 'xlsx';
       const blob = new Blob([url], { type: extension === 'pdf' ? 'application/pdf' : 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
       const downloadUrl = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = downloadUrl;
-      a.download = `${reportType}.${extension}`; // Usa la extensión correcta
+      a.download = `${reportType}.${extension}`; 
       a.click();
       window.URL.revokeObjectURL(downloadUrl);
       this.closeModal();
     }, error => {
       console.error('Error al descargar el reporte:', error);
+      // Reemplazar alert con SweetAlert u otro sistema de notificación que ya uses
       alert('Error al descargar el reporte. Por favor, intenta de nuevo.');
     });
   }
+  
 
 
   goBack() {
