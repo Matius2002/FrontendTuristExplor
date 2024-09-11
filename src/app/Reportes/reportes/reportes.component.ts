@@ -65,7 +65,7 @@ export class ReportesComponent implements OnInit{
       window.URL.revokeObjectURL(downloadUrl);
       this.closeModal();
     }, error => {
-      console.error('Error al descargar el reporte:', error);
+      console.error('Error al descargar el reporte: HOLA', error);
       // Reemplazar alert con SweetAlert u otro sistema de notificación que ya uses
       alert('Error al descargar el reporte. Por favor, intenta de nuevo.');
     });
