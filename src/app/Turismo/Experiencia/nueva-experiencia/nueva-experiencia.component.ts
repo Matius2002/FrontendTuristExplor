@@ -134,7 +134,7 @@ export class NuevaExperienciaComponent implements OnInit {
       destinos: destinoSeleccionado, // Asigna el destino seleccionado
     };
 
-    console.log('Objeto experiencia enviado:', experiencia);
+    console.log('ESTE ES EL OBJETO DE EXPERIENCIA ENVIADO AL BACKEND:', experiencia);
 
     // Enviar la experiencia al backend
     this.experienciaService.guardarExperiencia(experiencia).subscribe(
