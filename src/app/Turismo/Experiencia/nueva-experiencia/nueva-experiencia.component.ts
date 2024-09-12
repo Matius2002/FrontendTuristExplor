@@ -134,19 +134,19 @@ export class NuevaExperienciaComponent implements OnInit {
       destinos: destinoSeleccionado, // Asigna el destino seleccionado
     };
 
-    console.log('ESTE ES EL OBJETO DE EXPERIENCIA ENVIADO AL BACKEND:', experiencia);
+    console.log('Datos que se enviarán: ', experiencia);
 
     // Enviar la experiencia al backend
-    this.experienciaService.guardarExperiencia(experiencia).subscribe(
-      response => {
-        Swal.fire('Éxito', 'Experiencia guardada exitosamente.', 'success');
-        this.limpiarFormulario();
+    this.experienciaService.guardarExperiencia(experiencia).subscribe({
+      next: (response) => {
+        console.log('Experiencia guardada exitosamente', response);
+        // Lógica en caso de éxito
       },
-      error => {
+      error: (error) => {
         console.error('Error al guardar la experiencia:', error);
-        Swal.fire('Error', error.error || 'Hubo un error al guardar la experiencia.', 'error');
+        console.error('Código de error:', error.status, 'Mensaje:', error.message);
       }
-    );
+    });
   }
 
   // Método para limpiar el formulario

@@ -42,12 +42,14 @@ export class ExperienciaService {
   constructor(private http: HttpClient, private usuarioService: UsuarioService) { }
 
   // Método para guardar una nueva experiencia
-  guardarExperiencia(experiencia: any) {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' }); // Configura los encabezados de la solicitud HTTP
-    // Realiza una solicitud POST para guardar la experiencia en el backend
-    return this.http.post('http://localhost:8080/api/experiencias/guardarExperiencia', experiencia, { headers });
-  }
-
+  guardarExperiencia(experiencia: Experiencia): Observable<Experiencia> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<Experiencia>(`${this.baseUrl}/experiencias/guardarExperiencia`, experiencia, { headers })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }  
+  
   // Método para eliminar una experiencia por su ID
   eliminarExperiencia(id: number): Observable<void> {
     // Realiza una solicitud DELETE para eliminar una experiencia específica
