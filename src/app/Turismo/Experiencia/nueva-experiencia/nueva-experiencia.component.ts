@@ -59,47 +59,47 @@ export class NuevaExperienciaComponent implements OnInit {
   comentario: any; 
   calificacion: any; 
 
+  //Constructor
   constructor(
     private formBuilder: FormBuilder, 
     private experienciaService: ExperienciaService, 
     private router: Router,
     private usuariosService: UsuarioService, 
-  ) { }
+  ) {}
 
+  //Inicializa los datos y configura el componente antes de que se muestre la pantalla.
   ngOnInit(): void {
-    this.currentUser = this.usuariosService.getCurrentUser(); 
-    
-    
-    if (!this.currentUser) { 
-      Swal.fire('Usuario no autenticado', 'Debe iniciar sesión para registrar una experiencia.', 'warning') 
-        .then(() => {
-        });
-      return; 
-    }
+    this.currentUser = this.usuariosService.getCurrentUser(); //Obtiene el usuario actual autenticado.
 
+    //Si el usuario esta autenticado, se procede a crear un formulario utilizando formularios reactivos.
     this.crearForm = this.formBuilder.group({
-      comentario: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]], 
       destinos: ['', Validators.required], 
+      comentario: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(800)]],
       calificacion: ['', Validators.required] 
     });
-    this.cargarDestinos(); 
+    this.cargarDestinos(); //Me muestra los destinos
   }
 
-  
+
   cargarDestinos(): void {
-    this.experienciaService.recuperarTodosDestinos().subscribe(
-      (destinos: Destinos[]) => { 
-        this.destinos = destinos; 
+    //Devuelve un observable()
+    this.experienciaService.recuperarTodosDestinos().subscribe({
+      next: (destinos: Destinos[]) => { //Si la solicitud es exitosa, el observable devuelve un arreglo de objetos(lista de destinos).
+        this.destinos = destinos; //Arreglo destinos se asigna a la propiedad this.destinos.
       },
-      (error) => { 
+      error: (error) => { //Si ocurre un error al llamado del servicio se ejecuta el error.
         console.error(error); 
+      },
+      complete: () => {
+        console.log('Carga de destinos completada');
       }
-    );
+    });
   }
 
   onSubmit(): void {
+    //Valida si el usuario esta autenticado
     if (!this.currentUser) { 
-      Swal.fire('Usuario no autenticado', 'Debe iniciar sesión para guardar una experiencia.', 'error'); 
+      Swal.fire('Usuario no autenticado','Debe iniciar sesión para guardar su experiencia.', 'error'); 
       this.router.navigate(['/login']); 
       return; 
     }
