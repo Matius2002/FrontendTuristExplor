@@ -96,6 +96,7 @@ export class NuevaExperienciaComponent implements OnInit {
     });
   }
 
+  //Este método se ejecuta cuando el usuario intenta enviar un formulario para registrar una experiencia
   onSubmit(): void {
     //Valida si el usuario esta autenticado
     if (!this.currentUser) { 
@@ -104,31 +105,30 @@ export class NuevaExperienciaComponent implements OnInit {
       return; 
     }
 
+    //Valida si el formulario fue completado.
     if (this.crearForm.invalid) { 
       Swal.fire('Error', 'Por favor complete el formulario correctamente.', 'error'); 
       return; 
     }
 
-    
-    const destinoSeleccionado = this.crearForm.get('destinos')?.value; 
-    console.log('Destino seleccionado antes de enviar:', destinoSeleccionado);
-    if (!destinoSeleccionado || !destinoSeleccionado.id) { 
+    const destinoSeleccionado = this.crearForm.get('destinos')?.value; //Se obtiene el valor del campo de destinos en el formulario.
+    if (!destinoSeleccionado || !destinoSeleccionado.id) { //Si el destino seleccionado es inválido o no tiene un id valido, se muestra una alerta de error.
       Swal.fire('Error', 'El ID del destino seleccionado no es válido o está vacío.', 'error'); 
       return; 
     }
 
+    //Se crea un objeto con la información que se envíara al back.
     const experiencia: Experiencia = {
       id: 0, 
-      calificacion: this.crearForm.value.calificacion, 
-      comentario: this.crearForm.value.comentario, 
+      destinos: destinoSeleccionado,
+      comentario: this.crearForm.value.comentario,
+      calificacion: this.crearForm.value.calificacion, //Se toma del valor ingresado del formulario.
       fecha: new Date().toISOString(), 
       usuario: this.currentUser, 
-      destinos: destinoSeleccionado, 
     };
 
     console.log('Datos que se enviarán: ', experiencia);
 
-    
     this.experienciaService.guardarExperiencia(experiencia).subscribe({
       next: (response) => {
         console.log('Experiencia guardada exitosamente', response);
