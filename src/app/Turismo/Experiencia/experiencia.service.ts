@@ -1,55 +1,49 @@
-// Importaciones necesarias para el servicio y manejo de peticiones HTTP
-import { Injectable } from '@angular/core'; // Importa Injectable para definir un servicio en Angular
-import { entornos } from "../../Entorno/entornos"; // Importa configuraciones de entornos, como URLs dinámicas
-import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http"; // Importa herramientas para realizar peticiones HTTP y manejar errores
-import { catchError, Observable, throwError } from "rxjs"; // Importa operadores de RxJS para manejar errores en observables
-import Swal from 'sweetalert2'; // Librería para mostrar alertas y notificaciones
-import { UsuarioService } from '../../Admin/Usuarios/usuario.service'; // Servicio para manejar la lógica de usuarios
+import { Injectable } from '@angular/core'; 
+import { entornos } from "../../Entorno/entornos"; 
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { catchError, Observable, throwError } from "rxjs"; 
+import { UsuarioService } from '../../Admin/Usuarios/usuario.service'; 
 
-// Definición de la interfaz Usuario para asegurar la estructura de los datos
 interface Usuario {
-  id: number; // Identificador único del usuario
-  nombreUsuario: string; // Nombre del usuario
-  email: string; // Correo electrónico del usuario
+  id: number;
+  nombreUsuario: string;
+  email: string; 
 }
 
-// Definición de la interfaz Destinos para manejar la estructura de los destinos
 interface Destinos {
-  id: number; // Identificador único del destino
-  destinoName: string; // Nombre del destino
+  id: number;
+  destinoName: string; 
 }
 
-// Definición de la interfaz Experiencia para estructurar los datos de una experiencia
 interface Experiencia {
-  id: number; // Identificador único de la experiencia
-  calificacion: string; // Calificación de la experiencia
-  comentario: string; // Comentario sobre la experiencia
-  fecha: string; // Fecha de registro de la experiencia
-  usuario: Usuario; // Objeto Usuario asociado a la experiencia
-  destinos: Destinos; // Objeto Destinos asociado a la experiencia
+  id: number; 
+  calificacion: string; 
+  comentario: string;
+  fecha: string; 
+  usuario: {id: number};
+  destinos: {id: number}; 
 }
 
-// Decorador Injectable para definir el servicio y su inyección en toda la aplicación
+
 @Injectable({
-  providedIn: 'root' // Hace que el servicio esté disponible en toda la aplicación
+  providedIn: 'root' 
 })
 export class ExperienciaService {
-  // URL BASE API
-  dynamicHost = entornos.dynamicHost; // Asigna la URL del host dinámico según el entorno configurado
-  private baseUrl: string = `http://${this.dynamicHost}/api`; // Define la URL base de la API, combinando el host dinámico y el path de la API
+  dynamicHost = entornos.dynamicHost;
+  private baseUrl: string = `http://${this.dynamicHost}/api`;
 
-  // Constructor del servicio, inyectando HttpClient para realizar peticiones y UsuarioService para manejar usuarios
   constructor(private http: HttpClient, private usuarioService: UsuarioService) { }
 
-  // Método para guardar una nueva experiencia
+  //Envía datos al back mediante una solicitud HTTP (POST)
   guardarExperiencia(experiencia: Experiencia): Observable<Experiencia> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    console.log('Guardando experiencia (Servicio de experiencia): ',experiencia);
+    const headers = new HttpHeaders({'Content-Type': 'application/json' });
     return this.http.post<Experiencia>(`${this.baseUrl}/experiencias/guardarExperiencia`, experiencia, { headers })
       .pipe(
         catchError(this.handleError)
       );
-  }  
-  
+  }
+
   // Método para eliminar una experiencia por su ID
   eliminarExperiencia(id: number): Observable<void> {
     // Realiza una solicitud DELETE para eliminar una experiencia específica
@@ -97,14 +91,14 @@ export class ExperienciaService {
   }
 
   // Método privado para manejar los errores de las solicitudes HTTP
-  private handleError(error: HttpErrorResponse): Observable<any> {
-    let errorMessage = 'Error desconocido'; // Mensaje de error predeterminado
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    let errorMessage = 'Error desconocido';
 
     if (error.error instanceof ErrorEvent) {
-      // Si el error es del lado del cliente (ej. problemas de red)
+      // Errores del lado del cliente
       errorMessage = `Error: ${error.error.message}`;
     } else {
-      // Si el error es del lado del servidor
+      // Errores del lado del servidor
       if (error.error && typeof error.error === 'object') {
         errorMessage = `Código de error: ${error.status}, mensaje: ${error.error.message || 'Mensaje no disponible'}`;
       } else {
@@ -112,7 +106,7 @@ export class ExperienciaService {
       }
     }
 
-    console.error(errorMessage); // Imprime el mensaje de error en la consola para depuración
-    return throwError(errorMessage); // Devuelve un observable que lanza el error para ser manejado por los subscriptores
+    console.error(errorMessage);
+    return throwError(() => new Error(errorMessage));
   }
 }

@@ -27,10 +27,11 @@ interface Experiencia {
   calificacion: string; 
   comentario: string; 
   fecha: string; 
-  usuario: Usuario; 
-  destinos: Destinos; 
+  usuario: {id: number}; 
+  destinos: {id: number}; 
 }
 
+//Decorador
 @Component({
   providers: [ExperienciaService, HttpClient, UsuarioService], 
   selector: 'app-nueva-experiencia', 
@@ -47,8 +48,9 @@ interface Experiencia {
   styleUrl: './nueva-experiencia.component.css' 
 })
 
-
+//Clase
 export class NuevaExperienciaComponent implements OnInit {
+  //Variables
   crearForm!: FormGroup; 
   experiencias!: Experiencia; 
   usuarios: Usuario[] = [];
@@ -70,7 +72,6 @@ export class NuevaExperienciaComponent implements OnInit {
   //Inicializa los datos y configura el componente antes de que se muestre la pantalla.
   ngOnInit(): void {
     this.currentUser = this.usuariosService.getCurrentUser(); //Obtiene el usuario actual autenticado.
-
     //Si el usuario esta autenticado, se procede a crear un formulario utilizando formularios reactivos.
     this.crearForm = this.formBuilder.group({
       destinos: ['', Validators.required], 
@@ -86,6 +87,7 @@ export class NuevaExperienciaComponent implements OnInit {
     this.experienciaService.recuperarTodosDestinos().subscribe({
       next: (destinos: Destinos[]) => { //Si la solicitud es exitosa, el observable devuelve un arreglo de objetos(lista de destinos).
         this.destinos = destinos; //Arreglo destinos se asigna a la propiedad this.destinos.
+        console.log('Destinos cargados: ',this.destinos);
       },
       error: (error) => { //Si ocurre un error al llamado del servicio se ejecuta el error.
         console.error(error); 
@@ -112,30 +114,31 @@ export class NuevaExperienciaComponent implements OnInit {
     }
 
     const destinoSeleccionado = this.crearForm.get('destinos')?.value; //Se obtiene el valor del campo de destinos en el formulario.
+    console.log("Destino seleccionado: ",destinoSeleccionado);
+    
     if (!destinoSeleccionado || !destinoSeleccionado.id) { //Si el destino seleccionado es inválido o no tiene un id valido, se muestra una alerta de error.
       Swal.fire('Error', 'El ID del destino seleccionado no es válido o está vacío.', 'error'); 
       return; 
     }
-
-    //Se crea un objeto con la información que se envíara al back.
-    const experiencia: Experiencia = {
-      id: 0, 
-      destinos: destinoSeleccionado,
+    
+    const experiencia: Experiencia = { 
       comentario: this.crearForm.value.comentario,
       calificacion: this.crearForm.value.calificacion, //Se toma del valor ingresado del formulario.
       fecha: new Date().toISOString(), 
-      usuario: this.currentUser, 
+      usuario: {id: this.currentUser.id}, 
+      destinos: {id: destinoSeleccionado.id}
     };
-
-    console.log('Datos que se enviarán: ', experiencia);
 
     this.experienciaService.guardarExperiencia(experiencia).subscribe({
       next: (response) => {
         console.log('Experiencia guardada exitosamente', response);
-        
+        this.limpiarFormulario();
       },
       error: (error) => {
         console.error('Error al guardar la experiencia: ', error); //Error
+      },
+      complete: () => {
+        console.log('Proceso de guardado completado');
       }
     });
   }
