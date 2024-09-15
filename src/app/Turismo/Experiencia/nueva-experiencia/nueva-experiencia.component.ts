@@ -31,7 +31,7 @@ interface Experiencia {
   destinos: {id: number}; 
 }
 
-//Decorador
+//Decorado
 @Component({
   providers: [ExperienciaService, HttpClient, UsuarioService], 
   selector: 'app-nueva-experiencia', 
