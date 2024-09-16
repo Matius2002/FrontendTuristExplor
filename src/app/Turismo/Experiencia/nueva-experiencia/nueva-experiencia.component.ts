@@ -11,14 +11,14 @@ import { UsuarioService } from "../../../Admin/Usuarios/usuario.service";
 //Objeto Usuario
 interface Usuario {
   id: number; 
-  nombreUsuario: string; 
-  email: string; 
+  nombreUsuario?: string; 
+  email?: string; 
 }
 
 // Objeto Destinos
 interface Destinos {
   id: number; 
-  destinoName: string; 
+  destinoName?: string; 
 }
 
 // Objeto Experiencia
@@ -27,8 +27,8 @@ interface Experiencia {
   calificacion: string; 
   comentario: string; 
   fecha: string; 
-  usuario: {id: number}; 
-  destinos: {id: number}; 
+  usuario: Usuario;
+  destino: Destinos; 
 }
 
 //Decorado
@@ -121,15 +121,18 @@ export class NuevaExperienciaComponent implements OnInit {
       return; 
     }
     
-    const experiencia: Experiencia = { 
+    const nuevaExperiencia: Experiencia = { 
+      id: 0,  // Asegúrate de que el backend acepte un ID de 0 para nuevas experiencias
       comentario: this.crearForm.value.comentario,
-      calificacion: this.crearForm.value.calificacion, //Se toma del valor ingresado del formulario.
-      fecha: new Date().toISOString(), 
-      usuario: {id: this.currentUser.id}, 
-      destinos: {id: destinoSeleccionado.id}
+      calificacion: this.crearForm.value.calificacion,
+      fecha: new Date().toISOString(),
+      usuario: { id: this.currentUser.id },  // Aquí el ID del usuario actual
+      destino: { id: destinoSeleccionado.id }  // ID del destino seleccionado
     };
+    
+    this.isSubmitting = true;
 
-    this.experienciaService.guardarExperiencia(experiencia).subscribe({
+    this.experienciaService.guardarExperiencia(nuevaExperiencia).subscribe({
       next: (response) => {
         console.log('Experiencia guardada exitosamente', response);
         this.limpiarFormulario();
@@ -138,7 +141,8 @@ export class NuevaExperienciaComponent implements OnInit {
         console.error('Error al guardar la experiencia: ', error); //Error
       },
       complete: () => {
-        console.log('Proceso de guardado completado');
+        this.isSubmitting = false;
+        //console.log('Proceso de guardado completado');
       }
     });
   }

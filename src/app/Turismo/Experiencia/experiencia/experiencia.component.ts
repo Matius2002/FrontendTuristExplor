@@ -17,12 +17,12 @@ import {EditarExperienciaComponent} from "../editar-experiencia/editar-experienc
 
 interface Usuario {
   id: number;
-  nombreUsuario: string;
+  nombreUsuario?: string;
 
 }
 interface Destinos {
   id: number;
-  destinoName: string;
+  destinoName?: string;
 
 }
 interface Experiencia {
@@ -121,7 +121,7 @@ export class ExperienciaComponent implements OnInit {
             comentario: experiencia.comentario,
             fecha: experiencia.fecha,
             usuario: experiencia.usuario,
-            destinos: experiencia.destinos
+            destinos: experiencia.destino
           };
         });
         this.totalPages = Math.ceil(this.experiencias.length / this.itemsPerPage);

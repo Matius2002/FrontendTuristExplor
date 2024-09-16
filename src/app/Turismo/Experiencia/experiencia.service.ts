@@ -6,13 +6,13 @@ import { UsuarioService } from '../../Admin/Usuarios/usuario.service';
 
 interface Usuario {
   id: number;
-  nombreUsuario: string;
-  email: string; 
+  nombreUsuario?: string;
+  email?: string; 
 }
 
 interface Destinos {
   id: number;
-  destinoName: string; 
+  destinoName?: string; 
 }
 
 interface Experiencia {
@@ -20,8 +20,8 @@ interface Experiencia {
   calificacion: string; 
   comentario: string;
   fecha: string; 
-  usuario: {id: number};
-  destinos: {id: number}; 
+  usuario: Usuario;
+  destino: Destinos; 
 }
 
 

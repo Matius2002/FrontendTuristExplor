@@ -15,7 +15,7 @@
 <div class="mi-separador-div"></div>
 
 <div class="container">
-  <h2>Agrega tu Experiencia turística</h2>
+  <h2>Agrega tu Experiencia Turística</h2>
   <form [formGroup]="crearForm" (ngSubmit)="onSubmit()">
     <!-- Selección de destinos -->
     <div class="form-group">
@@ -25,21 +25,29 @@
         <option *ngFor="let destino of destinos" [ngValue]="destino">{{ destino.destinoName }}</option>
       </select>
       <div *ngIf="crearForm.get('destinos')?.invalid && (crearForm.get('destinos')?.dirty || crearForm.get('destinos')?.touched)">
-        <div class="text-danger" *ngIf="crearForm.get('destinos')?.errors?.['required']">El Destino de turismo es obligatorio.</div>
+        <div class="text-danger" *ngIf="crearForm.get('destinos')?.errors?.['required']">
+          El destino de turismo es obligatorio.
+        </div>
       </div>
     </div>
-    
+
     <!-- Comentario del sitio turístico -->
     <div class="form-group">
-      <label for="comentario">Comentario del Sitio Turistico</label>
-      <textarea id="comentario" formControlName="comentario" placeholder="Ingresa la Descripción del Destino" rows="5" class="form-control"></textarea>
+      <label for="comentario">Comentario del Sitio Turístico</label>
+      <textarea id="comentario" formControlName="comentario" placeholder="Ingresa la descripción del destino" rows="5" class="form-control"></textarea>
       <div *ngIf="crearForm.get('comentario')?.invalid && (crearForm.get('comentario')?.dirty || crearForm.get('comentario')?.touched)">
-        <div class="text-danger" *ngIf="crearForm.get('comentario')?.errors?.['required']">El Comentario es obligatorio.</div>
-        <div class="text-danger" *ngIf="crearForm.get('comentario')?.errors?.['minlength']">El Comentario debe tener al menos 10 caracteres.</div>
-        <div class="text-danger" *ngIf="crearForm.get('comentario')?.errors?.['maxlength']">El Comentario no debe exceder los 500 caracteres.</div>
+        <div class="text-danger" *ngIf="crearForm.get('comentario')?.errors?.['required']">
+          El comentario es obligatorio.
+        </div>
+        <div class="text-danger" *ngIf="crearForm.get('comentario')?.errors?.['minlength']">
+          El comentario debe tener al menos 10 caracteres.
+        </div>
+        <div class="text-danger" *ngIf="crearForm.get('comentario')?.errors?.['maxlength']">
+          El comentario no debe exceder los 500 caracteres.
+        </div>
       </div>
     </div>
-  
+
     <!-- Calificación -->
     <div class="form-group">
       <label>Calificación del Destino</label>
@@ -61,14 +69,14 @@
         <span class="description">Malo</span>
       </div>
     </div>
-  
+
     <!-- Botones de acción -->
     <div class="form-group">
-      <button type="submit" class="custom-btn primary-btn">Guardar Destino</button> <!--Botón de Guardar destino-->
+      <button type="submit" class="custom-btn primary-btn">Guardar Destino</button>
       <button type="button" class="custom-btn secondary-btn" style="margin-left: 10px;" (click)="limpiarFormulario()">Limpiar Formulario</button>
       <button type="button" class="custom-btn info-btn" style="margin-left: 10px;" (click)="volver()">Volver</button>
     </div>
-  </form>  
+  </form>
 </div>
 <div class="mi-separador-div"></div>
 

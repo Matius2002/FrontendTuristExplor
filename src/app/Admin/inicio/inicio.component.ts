@@ -12,13 +12,13 @@ import { interval, Subscription } from "rxjs"; // Importa `interval` para crear 
 // Interfaces para definir las estructuras de datos utilizadas
 interface Usuario {
   id: number;
-  nombreUsuario: string;
-  email: string;
+  nombreUsuario?: string;
+  email?: string;
 }
 
 interface Destinos {
   id: number;
-  destinoName: string;
+  destinoName?: string;
 }
 
 interface Experiencia {
@@ -27,7 +27,7 @@ interface Experiencia {
   comentario: string;
   fecha: string;
   usuario: Usuario;
-  destinos: Destinos;
+  destino: Destinos;
 }
 
 interface TipoTurismo {
