@@ -44,12 +44,21 @@ export class NavBarComponent implements OnInit, OnDestroy {
   navigateTo(route: string) {
     this.router.navigate([`/${route}`]);
   }
+
+  //Método para salir
   logout(): void {
     this.usuarioService.logout();
-    Swal.fire({icon: 'info',title: 'Sesión cerrada',text: 'Has cerrado sesión exitosamente. Serás redirigido en un momento.',timer: 3000,timerProgressBar: true,showConfirmButton: false, position: 'center',allowOutsideClick: false,allowEscapeKey: false,customClass: {popup: 'swal-custom-popup',title: 'swal-custom-title'
-    },willClose: () => {
+    Swal.fire({
+      icon: 'success',
+      title: 'Sesión cerrada',
+      timer: 1000,
+      timerProgressBar: true, 
+      showConfirmButton: false, 
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+    willClose: () => {
       this.router.navigate(['/login']);
     }});
   }
-  
+  //Fin del método
 }

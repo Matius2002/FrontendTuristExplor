@@ -1,134 +1,172 @@
-/* Navbar Styles */
+/* Estilos generales de la barra de navegación */
 .navbar {
-  position: fixed; /* Navbar fijo */
-  top: 0; /* Ajustado para que esté en la parte superior */
-  left: 0; /* Lo fija a la izquierda de la página */
+  position: fixed; /* Barra fija en la parte superior */
+  top: 0;
+  left: 0;
   width: 100%; /* Ancho completo */
-  z-index: 1000; /* Asegura que esté por encima de otros elementos */
-  background-color: #f8f9fa; /* Color de fondo ligero */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
-  padding: 0 16px; /* Ajuste del padding */
-  height: 140px; /* Altura ligeramente aumentada */
+  z-index: 1000; /* Asegura que esté encima */
+  background-color: #f8f9fa; /* Fondo claro */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+  padding: 0 16px; /* Relleno horizontal */
+  height: 140px; /* Altura fija */
 }
 
-/* Navbar-brand logo y texto */
+/* Estilos del título de la marca en la barra */
 .navbar-brand h1 {
   font-size: 24px; /* Tamaño del texto */
   font-weight: bold; /* Negrita */
-  margin: 0; /* Sin márgenes */
-  color: #007bff; /* Color azul para la primera palabra */
-  display: flex;
-  align-items: center; /* Centra verticalmente el logo con el texto */
+  margin: 0; /* Sin margen */
+  color: #007bff; /* Color azul */
+  display: flex; /* Flexbox para alinear */
+  align-items: center; /* Alineación vertical */
 }
 
+/* Color verde para parte del título */
 .navbar-brand .text-success {
-  color: #28a745; /* Color verde para la segunda palabra */
+  color: #28a745; /* Color verde éxito */
 }
 
+/* Estilos del logo en la barra */
 .logo {
-  width: 60px; /* Tamaño del logo aumentado */
-  height: 60px;
-  margin-right: 10px; /* Espacio entre logo y texto */
-  object-fit: contain; /* Asegura que el logo esté contenido dentro de los límites */
+  width: 60px; /* Ancho del logo */
+  height: 60px; /* Altura del logo */
+  margin-right: 10px; /* Separación con el texto */
+  object-fit: contain; /* Ajuste del logo dentro de su caja */
 }
 
-/* Estilos para los enlaces de navegación */
+/* Estilos para los enlaces del menú de navegación */
 .nav-item .nav-link {
-  font-size: 16px; /* Tamaño del texto */
-  font-weight: 500; /* Peso de la fuente */
-  transition: background-color 0.3s, color 0.3s; /* Transiciones suaves */
-  padding: 0.9rem 1rem; /* Espaciado de los enlaces */
-  color: #343a40; /* Color de texto oscuro */
+  font-size: 18px; /* Tamaño del texto */
+  font-weight: 700; /* Seminegrita */
+  transition: background-color 0.1s, color 0.1s; /* Transiciones suaves */
+  padding: 0.5rem 1rem; /* Relleno interno */
+  color: #343a40; /* Color de texto gris oscuro */
+  border-radius: 50px;
 }
 
+/* Hover y enfoque para enlaces */
 .nav-item .nav-link:hover,
 .nav-item .nav-link:focus {
-  background-color: #e9f5e6; /* Fondo verde claro al hacer hover */
-  color: #155724 !important; /* Texto verde oscuro */
-  border-radius: 4px; /* Bordes redondeados para el efecto hover */
+  background-color: #e9f5e6; /* Fondo verde claro */
+  color: #155724 !important; /* Color verde */
+  border-radius: 32px; /* Bordes redondeados */
 }
 
-/* Dropdown Menu */
-.nav-item.dropdown .dropdown-menu {
-  border-radius: 4px; /* Bordes redondeados para el dropdown */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-  border: none; /* Sin borde */
-}
-
-.dropdown-item {
-  padding: 0.5rem 1rem; /* Espaciado de los elementos del dropdown */
+/* Estilo para "Cerrar Sesión" */
+.logout-item {
+  color: #343a40; /* Color de texto normal */
   transition: background-color 0.3s, color 0.3s; /* Transiciones suaves */
 }
 
+.logout-item:hover,
+.logout-item:focus {
+  background-color: #f8d7da; /* Rojo suave para el fondo */
+  color: #721c24 !important; /* Rojo más oscuro para el texto */
+}
+
+/* Estilos del menú desplegable */
+.nav-item.dropdown .dropdown-menu {
+  border-radius: 4px; /* Bordes redondeados */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+  border: none; /* Sin bordes */
+}
+
+/* Estilos de los íconos en las opciones desplegables */
+.dropdown-item i {
+  margin-right: 8px; /* Espacio entre ícono y texto */
+  font-size: 1rem; /* Tamaño del ícono */
+}
+
+/* Estilos generales de los elementos del menú desplegable */
+.dropdown-item {
+  padding: 0.5rem 1rem; /* Relleno interno */
+  transition: background-color 0.3s, color 0.3s; /* Transiciones suaves */
+}
+
+/* Hover y enfoque para elementos del menú desplegable */
 .dropdown-item:hover,
 .dropdown-item:focus {
-  background-color: #e9f5e6; /* Fondo verde claro al hacer hover */
-  color: #155724 !important; /* Texto verde oscuro */
+  background-color: #e9f5e6; /* Fondo verde claro */
+  color: #155724 !important; /* Color verde */
 }
 
-/* Navbar-toggler Styles */
+/* Hover y enfoque específico para "Cerrar Sesión" dentro del menú desplegable */
+.dropdown-item.logout-item:hover,
+.dropdown-item.logout-item:focus {
+  background-color: #f8d7da; /* Fondo rojo suave */
+  color: #721c24 !important; /* Color rojo más oscuro */
+}
+
+/* Estilos del botón de toggler (para dispositivos móviles) */
 .navbar-toggler {
-  border-color: transparent; /* Sin borde en el toggler */
+  border-color: transparent; /* Sin borde */
 }
 
+/* Ícono del toggler (tres líneas) */
 .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%280, 0, 0, 0.5%29' stroke-width='2' linecap='round' linejoin='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); /* Icono de toggler personalizado */
+  background-image: url("data:image/svg+xml,..."); /* Imagen SVG del icono */
 }
 
+/* Estilos personalizados del botón toggler */
 .custom-navbar-toggler {
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 0.5rem; /* Relleno más pequeño */
 }
 
-/* Estilos para el dropdown de autenticación */
+/* Alineación de los elementos de la barra a la derecha */
 .navbar-nav.ml-auto {
-  margin-left: auto; /* Empuja el menú a la derecha */
+  margin-left: auto; /* Alinea los elementos a la derecha */
 }
 
+/* Estilo del ícono de flecha en el menú desplegable */
 .nav-item.dropdown .dropdown-toggle::after {
-  margin-left: 0.5rem; /* Espacio entre el texto y el icono del dropdown */
+  margin-left: 0.5rem; /* Separación del texto */
 }
 
+/* Alineación del menú desplegable */
 .nav-item.dropdown .dropdown-menu {
-  right: 0; /* Alinea el dropdown a la derecha */
-  left: auto; /* Evita que se alinee a la izquierda */
+  right: 0;
+  left: auto; /* Alinea el menú a la derecha */
 }
 
-/* Responsive Styles */
+/* Estilos responsivos para pantallas medianas */
 @media (max-width: 992px) {
   .navbar-brand h1 {
-    font-size: 20px; /* Ajusta el tamaño del texto en pantallas medianas */
+    font-size: 20px; /* Tamaño del texto reducido */
   }
 }
 
+/* Estilos responsivos para pantallas pequeñas */
 @media (max-width: 768px) {
   .navbar {
-    height: auto;
+    height: auto; /* Ajuste automático de altura */
   }
-  
+
   .navbar-brand h1 {
-    font-size: 18px; /* Ajusta el tamaño del texto en pantallas pequeñas */
+    font-size: 18px; /* Tamaño del texto reducido */
   }
-  
+
   .nav-item .nav-link {
-    font-size: 14px; /* Ajusta el tamaño de los enlaces en pantallas pequeñas */
+    font-size: 14px; /* Tamaño del texto reducido */
   }
 }
 
-/* Sombra y colores adicionales */
+/* Estilos para los enlaces en modo claro */
 .navbar-light .navbar-nav .nav-link {
-  color: rgba(0, 0, 0, 0.5); /* Color de los enlaces */
+  color: rgba(0, 0, 0, 0.5); /* Color gris con transparencia */
 }
 
+/* Hover y enfoque para enlaces en modo claro */
 .navbar-light .navbar-nav .nav-link:hover,
 .navbar-light .navbar-nav .nav-link:focus {
-  color: rgba(0, 0, 0, 0.7); /* Color en hover */
+  color: rgba(0, 0, 0, 0.7); /* Color más oscuro al interactuar */
 }
 
+/* Estilos para la marca en modo claro */
 .navbar-light .navbar-brand {
-  color: rgba(0, 0, 0, 0.9); /* Color del texto de la marca */
+  color: rgba(0, 0, 0, 0.9); /* Color casi negro */
 }
 
-/* Efecto de hover en toda la navbar */
+/* Efecto hover en toda la barra de navegación */
 .navbar:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra más fuerte al hacer hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra más intensa */
 }
