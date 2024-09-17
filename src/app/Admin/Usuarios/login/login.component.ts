@@ -59,48 +59,65 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  // Método que se ejecuta cuando se envía el formulario
+  //Inicio del método onSubmit
   onSubmit() {
-    // Verifica si el formulario es inválido, mostrando un mensaje de error si es el caso
     if (this.crearForm.invalid) {
-      Swal.fire({icon: 'error', title: 'Formulario inválido',text: 'Complete todos los campos correctamente.'});
-      return; // Detiene la ejecución si el formulario no es válido
+      Swal.fire({
+        icon: 'error', 
+        title: '¡Error!',
+        text: 'Complete todos los campos correctamente.',
+        timer: 5000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        allowEscapeKey: false,}); 
+        return;
     }
 
-    // Crea un objeto con las credenciales a partir de los valores del formulario
+    //Constante para obtener valores
     const credentials = {
       email: this.crearForm.value.email,
       password: this.crearForm.value.password
     };
 
-    //Proceso de autenticación al inicial sesión
-    this.usuarioService.login(credentials).subscribe( //El método login() del usuarioService envía las credenciales del usuario (correo y contraseña) al backend.
-      response => {
-        console.log(response); //Muestra el token
-        this.usuarioService.guardarUsuarioEnStorage(response.token); //Guarda el token en localStorage
+    //Proceso de autenticación al iniciar sesión
+    this.usuarioService.login(credentials).subscribe(response => {
+        this.usuarioService.guardarUsuarioEnStorage(response.token); 
         this.usuarioService.guardarToken(response.token);
-        Swal.fire({ icon: 'success', title: 'Inicio de sesión exitoso', text: '¡Bienvenido de nuevo! Serás redirigido en un momento.', timer: 3000, timerProgressBar: true, showConfirmButton: false, position: 'center', willClose: () => {
-          this.router.navigate(['/tu-inicio']);
-        }});
+        Swal.fire({
+          icon: 'success',
+          title: 'Inicio de sesión',
+          timer: 10000,
+          timerProgressBar: true,
+          showConfirmButton: false,
+          showCancelButton: true,
+          cancelButtonText: 'Cancelar',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        }).then((result) => {
+          if (result.dismiss === Swal.DismissReason.cancel) {
+            // Si el usuario presiona "Cancelar", no hacemos nada (se queda en la página actual)
+          } else {
+            // Si no cancela, se redirige a la página indicada
+            this.router.navigate(['/tu-inicio']);
+          }
+        }); //Fin de alerta                     
       });
   }
+  //Fin del método onSubmit
 
-  // Método para limpiar el formulario de inicio de sesión
   limpiarFormulario() {
     this.crearForm.reset();
   }
 
-  // Método para redirigir al usuario a la página de inicio
   volver() {
     this.router.navigate(['/tu-inicio']);
   }
 
-  // Método para redirigir al usuario a la página de registro de un nuevo usuario
   goToRegister() {
     this.router.navigate(['/nuevo-usuario']);
   }
 
-  // Método para redirigir al usuario a la página de recuperación de contraseña (pendiente de implementación)
   goToForgetPassword() {
   }
 }
