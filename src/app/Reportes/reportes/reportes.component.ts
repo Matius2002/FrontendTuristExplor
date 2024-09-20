@@ -4,7 +4,7 @@ import {Router} from "@angular/router";
 import {HttpClientModule} from "@angular/common/http";
 import {UsuarioService} from "../../Admin/Usuarios/usuario.service";
 import {ReportService} from "../report.service";
-
+import { VisitService } from '../visit-service.service';
 
 interface  Rol {
   id: number;
@@ -13,6 +13,7 @@ interface  Rol {
   rolFechaCreac: Date;
   rolFechaModic: Date;
 }
+
 interface Usuarios {
   id: number;
   nombreUsuario: string;
@@ -21,25 +22,25 @@ interface Usuarios {
   fechaRegistro: Date;
   rol: Rol;
 }
+
 @Component({
   providers: [UsuarioService, ReportService],
   selector: 'app-reportes',
   standalone: true,
-  imports: [
-    NgClass,
-    HttpClientModule,
-
-  ],
+  imports: [NgClass,HttpClientModule],
   templateUrl: './reportes.component.html',
   styleUrl: './reportes.component.css'
 })
+
 export class ReportesComponent implements OnInit{
+  visitasPorRuta: any[] = [];
   isModalVisible: boolean = false;
   selectedReport: string = '';
 
   constructor(
     private router: Router,
-    private reportService: ReportService
+    private reportService: ReportService,
+    private visitService: VisitService
   ) {}
 
   ngOnInit(): void {}
@@ -71,8 +72,6 @@ export class ReportesComponent implements OnInit{
     });
   }
   
-
-
   goBack() {
     this.router.navigate(['/']);
   }

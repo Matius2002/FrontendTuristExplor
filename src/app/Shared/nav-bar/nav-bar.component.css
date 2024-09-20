@@ -8,7 +8,7 @@
   background-color: #f8f9fa; /* Fondo claro */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
   padding: 0 16px; /* Relleno horizontal */
-  height: 140px; /* Altura fija */
+  height: auto; /* Ajuste automático de altura */
 }
 
 /* Estilos del título de la marca en la barra */
@@ -94,79 +94,31 @@
 .dropdown-item.logout-item:hover,
 .dropdown-item.logout-item:focus {
   background-color: #f8d7da; /* Fondo rojo suave */
-  color: #721c24 !important; /* Color rojo más oscuro */
-}
-
-/* Estilos del botón de toggler (para dispositivos móviles) */
-.navbar-toggler {
-  border-color: transparent; /* Sin borde */
-}
-
-/* Ícono del toggler (tres líneas) */
-.navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,..."); /* Imagen SVG del icono */
-}
-
-/* Estilos personalizados del botón toggler */
-.custom-navbar-toggler {
-  padding: 0.25rem 0.5rem; /* Relleno más pequeño */
-}
-
-/* Alineación de los elementos de la barra a la derecha */
-.navbar-nav.ml-auto {
-  margin-left: auto; /* Alinea los elementos a la derecha */
-}
-
-/* Estilo del ícono de flecha en el menú desplegable */
-.nav-item.dropdown .dropdown-toggle::after {
-  margin-left: 0.5rem; /* Separación del texto */
-}
-
-/* Alineación del menú desplegable */
-.nav-item.dropdown .dropdown-menu {
-  right: 0;
-  left: auto; /* Alinea el menú a la derecha */
-}
-
-/* Estilos responsivos para pantallas medianas */
-@media (max-width: 992px) {
-  .navbar-brand h1 {
-    font-size: 20px; /* Tamaño del texto reducido */
-  }
+  color: #721c24 !important; /* Texto rojo oscuro */
 }
 
 /* Estilos responsivos para pantallas pequeñas */
 @media (max-width: 768px) {
   .navbar {
-    height: auto; /* Ajuste automático de altura */
+    padding: 10px; /* Relleno ajustado */
+  }
+
+  .navbar-nav {
+    display: flex;
+    flex-wrap: wrap; /* Permitir que los enlaces se envuelvan en varias líneas */
+  }
+
+  .navbar-nav .nav-item {
+    flex: 1 0 50%; /* Ocupa 50% del ancho, distribución en 2 columnas */
+    text-align: center; /* Alinear el texto en el centro */
+  }
+
+  .nav-item .nav-link {
+    font-size: 16px; /* Tamaño de fuente ajustado */
+    padding: 10px; /* Espaciado reducido */
   }
 
   .navbar-brand h1 {
     font-size: 18px; /* Tamaño del texto reducido */
   }
-
-  .nav-item .nav-link {
-    font-size: 14px; /* Tamaño del texto reducido */
-  }
-}
-
-/* Estilos para los enlaces en modo claro */
-.navbar-light .navbar-nav .nav-link {
-  color: rgba(0, 0, 0, 0.5); /* Color gris con transparencia */
-}
-
-/* Hover y enfoque para enlaces en modo claro */
-.navbar-light .navbar-nav .nav-link:hover,
-.navbar-light .navbar-nav .nav-link:focus {
-  color: rgba(0, 0, 0, 0.7); /* Color más oscuro al interactuar */
-}
-
-/* Estilos para la marca en modo claro */
-.navbar-light .navbar-brand {
-  color: rgba(0, 0, 0, 0.9); /* Color casi negro */
-}
-
-/* Efecto hover en toda la barra de navegación */
-.navbar:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra más intensa */
 }

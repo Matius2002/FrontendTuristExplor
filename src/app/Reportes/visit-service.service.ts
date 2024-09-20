@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 })
 export class VisitService {
   dynamicHost = entornos.dynamicHost;
-  private baseUrl: string = `http://${this.dynamicHost}/api/visitas`;
+  private baseUrl: string = `http://${this.dynamicHost}/api/reportes/visitas`;
 
   constructor(private http: HttpClient) {}
 
@@ -17,19 +17,12 @@ export class VisitService {
     return this.http.post(this.baseUrl, { route });
   }
 
-  // Método para descargar el reporte en formato Excel
-  downloadReportExcel(): Observable<Blob> {
-    const url = `${this.baseUrl}/reporte/excel`; // Asegúrate que esta ruta esté configurada en el backend
+  // Método para descargar el reporte en formato dinámico (Excel o PDF)
+  downloadReport(format: string): Observable<Blob> {
+    const url = `${this.baseUrl}/${format}`; // URL dinámica para Excel o PDF
     return this.http.get(url, {
-      responseType: 'blob', // Indica que la respuesta será un archivo binario (Blob)
-    });
-  }
-
-  // Método para descargar el reporte en formato PDF
-  downloadReportPDF(): Observable<Blob> {
-    const url = `${this.baseUrl}/reporte/pdf`; // Asegúrate que esta ruta esté configurada en el backend
-    return this.http.get(url, {
-      responseType: 'blob', // Indica que la respuesta será un archivo binario (Blob)
+      responseType: 'blob', // Respuesta será un archivo binario (Blob)
     });
   }
 }
+

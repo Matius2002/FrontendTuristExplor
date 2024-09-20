@@ -72,20 +72,22 @@ export const routes: Routes = [
       { path: 'Conoce-Girardot', component: ConoceGirardotComponent, canActivate: [authGuard] }, // Ruta protegida que muestra información sobre Girardot
       { path: 'sistemas', component: SistemaComponent, canActivate: [authGuard] }, // Ruta protegida para sistemas
       { path: 'evento-contenido', component: EventoContenidoComponent, canActivate: [authGuard] }, // Ruta protegida para contenido de eventos
-      { path: 'tipo-sostenible', component: TurismoSostenibleComponent, canActivate: [authGuard] }, // Ruta protegida para turismo sostenible
       { path: 'nueva-experiencia', component: NuevaExperienciaComponent, canActivate: [authGuard] }, // Ruta protegida para agregar una nueva experiencia
       { path: 'noticias/:id', component: DetalleNoticiaComponent, canActivate: [authGuard] }, // Ruta protegida para mostrar detalles de una noticia con ID
       { path: 'noticia-contenido', component: NoticiasContenidoComponent, canActivate: [authGuard] }, // Ruta protegida para contenido de noticias
+
       { path: 'tipo-cultural', component: TurismoCulturalComponent, canActivate: [authGuard] }, // Ruta protegida para turismo cultural
       { path: 'tipo-gastronomico', component: TurismoGastronomicoComponent, canActivate: [authGuard] }, // Ruta protegida para turismo gastronómico
       { path: 'tipo-religioso', component: TurismoReligiosoComponent, canActivate: [authGuard] }, // Ruta protegida para turismo religioso
       { path: 'tipo-aventura', component: TurismoAventurasComponent, canActivate: [authGuard] }, // Ruta protegida para turismo de aventuras
+      { path: 'tipo-sostenible', component: TurismoSostenibleComponent, canActivate: [authGuard] }, // Ruta protegida para turismo sostenible
       { path: 'tipo-compras', component: TurismoComprasComponent, canActivate: [authGuard] }, // Ruta protegida para turismo de compras
       { path: 'tipo-nocturno', component: TurismoNocturnoComponent, canActivate: [authGuard] }, // Ruta protegida para turismo nocturno
+      { path: 'tipo-alojamiento', component: TipoAlojamientoComponent, canActivate: [authGuard] }, // Ruta protegida para tipos de alojamiento
+      
       { path: 'alojamiento-contenido', component: AlojamientoContenidoComponent, canActivate: [authGuard] }, // Ruta protegida para contenido de alojamiento
       { path: 'destinos', component: DestinosComponent, canActivate: [authGuard] }, // Ruta protegida para mostrar destinos
       { path: 'tipo-turismo', component: TipoTurismoComponent, canActivate: [authGuard] }, // Ruta protegida para tipos de turismo
-      { path: 'tipo-alojamiento', component: TipoAlojamientoComponent, canActivate: [authGuard] }, // Ruta protegida para tipos de alojamiento
       { path: 'images', component: ImagesComponent, canActivate: [authGuard] }, // Ruta protegida para mostrar imágenes
       { path: 'atraciones-principales', component: AtracionesPrincipalComponent, canActivate: [authGuard] }, // Ruta protegida para mostrar atracciones principales
       { path: 'epoca-visitar', component: EpocaVisitarComponent, canActivate: [authGuard] }, // Ruta protegida para mostrar épocas de visita
