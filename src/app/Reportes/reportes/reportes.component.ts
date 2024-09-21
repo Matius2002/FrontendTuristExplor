@@ -5,6 +5,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {UsuarioService} from "../../Admin/Usuarios/usuario.service";
 import {ReportService} from "../report.service";
 import { VisitService } from '../visit-service.service';
+import Swal from 'sweetalert2';
 
 interface  Rol {
   id: number;
@@ -70,7 +71,7 @@ export class ReportesComponent implements OnInit{
       // Reemplazar alert con SweetAlert u otro sistema de notificación que ya uses
       alert('Error al descargar el reporte. Por favor, intenta de nuevo.');
     });
-  }
+  }  
   
   goBack() {
     this.router.navigate(['/']);

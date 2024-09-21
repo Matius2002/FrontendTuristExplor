@@ -45,7 +45,7 @@ export class ExperienciaService {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-
+    
     return this.http.post<Experiencia>(`${this.baseUrl}/experiencias/guardarExperiencia`, experiencia, { headers })
       .pipe(
         catchError(this.handleError)

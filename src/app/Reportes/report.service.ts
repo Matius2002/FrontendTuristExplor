@@ -24,14 +24,6 @@ export class ReportService {
 getReportUrl(reportType: string, format: string): Observable<any> {
   let endpoint = ''; 
 
-  /*if (reportType === 'usuarios') {
-    endpoint = `${this.baseUrl}/reportes/usuarios/${format}`;
-  } else if (reportType === 'visitas') {
-    endpoint = `${this.baseUrl}/reportes/visitas/${format}`;
-  } else if (reportType === 'comentarios') {
-    endpoint = `${this.baseUrl}/reportes/comentarios/${format}`;
-  }*/
-
     switch (reportType) {
       case 'usuarios':
         endpoint = `${this.baseUrl}/reportes/usuarios/${format}`;
@@ -67,30 +59,4 @@ getReportUrl(reportType: string, format: string): Observable<any> {
     });
   }
 }
-
-  // Método para descargar un reporte de usuarios en formato Excel
-  /*downloadUserExcel() {
-    // Realiza una solicitud GET para obtener el archivo Excel
-    return this.http.get('/reportes/usuarios/excel', { responseType: 'blob' }).subscribe(blob => {
-      const url = window.URL.createObjectURL(blob); // Crea una URL temporal para el archivo blob
-      const a = document.createElement('a'); // Crea un elemento <a> para simular la descarga
-      a.href = url; // Asigna la URL al href del enlace
-      a.download = 'usuarios.xlsx'; // Establece el nombre del archivo descargado
-      a.click(); // Simula un clic para iniciar la descarga
-      window.URL.revokeObjectURL(url); // Revoca la URL para liberar memoria
-    });
-  }*/
-
-  // Método para descargar un reporte de usuarios en formato PDF
-  /*downloadUserPDF() {
-    // Realiza una solicitud GET para obtener el archivo PDF
-   return this.http.get('/reportes/usuarios/pdf', { responseType: 'blob' }).subscribe(blob => {
-      const url = window.URL.createObjectURL(blob); // Crea una URL temporal para el archivo blob
-      const a = document.createElement('a'); // Crea un elemento <a> para simular la descarga
-      a.href = url; // Asigna la URL al href del enlace
-      a.download = 'usuarios.pdf'; // Establece el nombre del archivo descargado
-      a.click(); // Simula un clic para iniciar la descarga
-      window.URL.revokeObjectURL(url); // Revoca la URL para liberar memoria
-    });
-  }*/
 

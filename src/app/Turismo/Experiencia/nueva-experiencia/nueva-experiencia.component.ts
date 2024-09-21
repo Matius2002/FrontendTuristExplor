@@ -97,9 +97,9 @@ export class NuevaExperienciaComponent implements OnInit{
 
     // Elimina el campo destinos antes de enviar al backend
     delete experiencia.destinos;
-
+    
     this.experienciaService.guardarExperiencia(experiencia).subscribe(
-      response => {
+      _response => {
         Swal.fire({
           icon: 'success',
           title: 'Experiencia guardada con éxito',

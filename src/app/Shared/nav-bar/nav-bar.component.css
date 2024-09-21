@@ -109,16 +109,11 @@
   }
 
   .navbar-nav .nav-item {
-    flex: 1 0 50%; /* Ocupa 50% del ancho, distribución en 2 columnas */
-    text-align: center; /* Alinear el texto en el centro */
+    flex: 1 0 50%; /* Ocupa 50% del ancho, dos enlaces por fila */
+    margin: 5px 0; /* Espacio vertical entre enlaces */
   }
 
-  .nav-item .nav-link {
-    font-size: 16px; /* Tamaño de fuente ajustado */
-    padding: 10px; /* Espaciado reducido */
-  }
-
-  .navbar-brand h1 {
-    font-size: 18px; /* Tamaño del texto reducido */
+  .navbar-toggler {
+    font-size: 1.25rem; /* Aumenta el tamaño del icono del toggler */
   }
 }

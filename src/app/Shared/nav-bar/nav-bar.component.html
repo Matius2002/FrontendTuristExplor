@@ -4,13 +4,14 @@
       <img src="/assets/images/iconoalcaldia.png" alt="" class="logo">
       <h1 class="d-inline m-0"><span class="text-dark">Turist</span><span class="text-success">Explor</span></h1>
     </a>
-    <button class="navbar-toggler custom-navbar-toggler" type="button" data-toggle="collapse"
-      data-target="#userDropdown" aria-controls="userDropdown" aria-expanded="false"
-      aria-label="Toggle navigation">
+    <button class="navbar-toggler custom-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="navbar-collapse justify-content-end">
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
       <ul class="navbar-nav">
+        <!-- Enlaces principales -->
         <li class="nav-item">
           <a class="nav-link custom-nav-item" (click)="navigateTo('tu-inicio')">Inicio</a>
         </li>
@@ -23,9 +24,11 @@
         <li class="nav-item">
           <a class="nav-link custom-nav-item" (click)="navigateTo('evento-contenido')">Eventos</a>
         </li>
+        
+        <!-- Menú desplegable Guía Turística -->
         <li class="nav-item dropdown">
-          <a class="nav-link custom-dropdown-toggle dropdown-toggle" id="navbarDropdown" role="button"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Guía Turística</a>
+          <a class="nav-link dropdown-toggle custom-dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">Guía Turística</a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item custom-dropdown-item" (click)="navigateTo('tipo-cultural')">Turismo Cultural</a>
             <a class="dropdown-item custom-dropdown-item" (click)="navigateTo('tipo-gastronomico')">Turismo Gastronómico</a>
@@ -38,13 +41,16 @@
             <a class="dropdown-item custom-dropdown-item" (click)="navigateTo('noticia-contenido')">Blog de Noticias</a>
           </div>
         </li>
+
+        <!-- Enlace Administrador -->
         <li class="nav-item">
           <a class="nav-link custom-nav-item" (click)="navigateTo('sistemas')">Administrador</a>
         </li>
-        <!-- Desplegable para Menú de Usuario -->
+
+        <!-- Menú desplegable Usuario -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-cog"></i> <!-- Icono de la tuerca -->
+            <i class="fas fa-cog"></i>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
             <a class="dropdown-item" (click)="navigateTo('nuevo-usuario')"><i class="fas fa-user-plus"></i> Registrarse</a>
