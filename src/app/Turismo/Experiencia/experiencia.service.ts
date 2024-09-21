@@ -1,111 +1,107 @@
-import { Injectable } from '@angular/core'; 
-import { entornos } from "../../Entorno/entornos"; 
+import { Injectable } from '@angular/core';
+import { entornos } from "../../Entorno/entornos";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
-import { catchError, Observable, throwError } from "rxjs"; 
-import { UsuarioService } from '../../Admin/Usuarios/usuario.service'; 
+import { catchError, Observable, throwError } from "rxjs";
 
 interface Usuario {
   id: number;
-  nombreUsuario?: string;
-  email?: string; 
+  nombreUsuario: string;
+  email: string;
 }
 
 interface Destinos {
   id: number;
-  destinoName?: string; 
+  destinoName: string;
 }
 
 interface Experiencia {
-  id: number; 
-  calificacion: string; 
+  id: number;
+  calificacion: string;
   comentario: string;
-  fecha: string; 
+  fecha: string;
   usuario: Usuario;
-  destino: Destinos; 
+  destino: Destinos;
 }
 
-
 @Injectable({
-  providedIn: 'root' 
+  providedIn: 'root'
 })
 export class ExperienciaService {
+  // URL BASE API
   dynamicHost = entornos.dynamicHost;
-  private baseUrl: string = `http://${this.dynamicHost}/api`;
+  private baseUrl: string = `http://${this.dynamicHost}/api`;  // Url Base API
 
-  constructor(private http: HttpClient, private usuarioService: UsuarioService) { }
+  constructor(private http: HttpClient) {}
 
-  //Envía datos al back mediante una solicitud HTTP (POST)
+  // Function para guardar una nueva experiencia
   guardarExperiencia(experiencia: Experiencia): Observable<Experiencia> {
-    console.log('Guardando experiencia (Servicio de experiencia): ',experiencia);
-    const headers = new HttpHeaders({'Content-Type': 'application/json' });
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+      // Aquí puedes manejar el error en caso de que el token no esté disponible
+      return throwError(() => new Error('Token no disponible'));
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
     return this.http.post<Experiencia>(`${this.baseUrl}/experiencias/guardarExperiencia`, experiencia, { headers })
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  // Método para eliminar una experiencia por su ID
+  // Eliminar experiencias
   eliminarExperiencia(id: number): Observable<void> {
-    // Realiza una solicitud DELETE para eliminar una experiencia específica
     return this.http.delete<void>(`${this.baseUrl}/experiencias/${id}`)
       .pipe(
-        catchError(this.handleError) // Maneja los errores de la solicitud usando una función personalizada
+        catchError(this.handleError)
       );
   }
 
-  // Método para recuperar todas las experiencias
+  // Recuperar todas las experiencias
   recuperarTodosExperiencia(): Observable<Experiencia[]> {
-    // Realiza una solicitud GET para obtener todas las experiencias desde el backend
     return this.http.get<Experiencia[]>(`${this.baseUrl}/experiencias/obtenerTodosLosExperiencia`)
       .pipe(
-        catchError(this.handleError) // Maneja los errores de la solicitud
+        catchError(this.handleError)
       );
   }
 
-  // Método para obtener una experiencia específica por su ID
+  // Obtener una experiencia por ID
   obtenerExperiencia(id: number): Observable<Experiencia> {
-    // Realiza una solicitud GET para obtener una experiencia específica por ID
     return this.http.get<Experiencia>(`${this.baseUrl}/experiencias/recuperarPorId/${id}`)
       .pipe(
-        catchError(this.handleError) // Maneja los errores de la solicitud
+        catchError(this.handleError)
       );
   }
 
-  // Método para actualizar una experiencia existente
+  // Actualizar experiencias
   actualizarExperiencia(id: number, tipoActualizada: Experiencia): Observable<Experiencia> {
-    tipoActualizada.id = id; // Asegura que el ID de la experiencia coincida con el ID de la solicitud
-    // Realiza una solicitud PUT para actualizar la experiencia con los nuevos datos
     return this.http.put<Experiencia>(`${this.baseUrl}/experiencias/${id}`, tipoActualizada)
       .pipe(
-        catchError(this.handleError) // Maneja los errores de la solicitud
+        catchError(this.handleError)
       );
   }
 
-  // Método para recuperar todos los destinos disponibles
+  // Recuperar todos los destinos
   recuperarTodosDestinos(): Observable<Destinos[]> {
-    // Realiza una solicitud GET para obtener todos los destinos
     return this.http.get<Destinos[]>(`${this.baseUrl}/destinos/obtenerTodosLosDestinos`)
       .pipe(
-        catchError(this.handleError) // Maneja los errores de la solicitud
+        catchError(this.handleError)
       );
   }
 
-  // Método privado para manejar los errores de las solicitudes HTTP
-  private handleError(error: HttpErrorResponse): Observable<never> {
+  // Función para manejar errores de HTTP
+  private handleError(error: HttpErrorResponse): Observable<any> {
     let errorMessage = 'Error desconocido';
-
     if (error.error instanceof ErrorEvent) {
-      // Errores del lado del cliente
+      // Error del lado del cliente
       errorMessage = `Error: ${error.error.message}`;
     } else {
-      // Errores del lado del servidor
-      if (error.error && typeof error.error === 'object') {
-        errorMessage = `Código de error: ${error.status}, mensaje: ${error.error.message || 'Mensaje no disponible'}`;
-      } else {
-        errorMessage = `Código de error: ${error.status}, mensaje: ${error.statusText || 'Mensaje no disponible'}`;
-      }
+      // Error del lado del servidor
+      errorMessage = `Código de error: ${error.status}, mensaje: ${error.message}`;
     }
-
     console.error(errorMessage);
     return throwError(() => new Error(errorMessage));
   }
