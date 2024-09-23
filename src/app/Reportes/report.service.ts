@@ -1,61 +1,66 @@
-// Importaciones necesarias
-import { Injectable } from '@angular/core'; // Importa `Injectable` para definir un servicio
-import { HttpClient } from "@angular/common/http"; // Importa `HttpClient` para manejar solicitudes HTTP
-import { entornos } from "../Entorno/entornos"; // Importa las configuraciones de entornos
-import { catchError, Observable, throwError } from "rxjs"; // Importa `Observable` para manejar respuestas asincrónicas
+import { Injectable } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { entornos } from "../Entorno/entornos";
+import { catchError, Observable, throwError } from "rxjs";
+import Swal from 'sweetalert2';
 
-// Decorador `Injectable` para que el servicio esté disponible en toda la aplicación
 @Injectable({
-  providedIn: 'root' // El servicio estará disponible de forma global sin necesidad de declararlo en un módulo
+  providedIn: 'root'
 })
 export class ReportService {
+  reportService: any;
+
   obtenerReporteVisitas() {
     throw new Error('Method not implemented.');
   }
-  // Host dinámico según el entorno (desarrollo, producción, staging)
+
   dynamicHost = entornos.dynamicHost;
-  // URL base de la API construida con el host dinámico
   private baseUrl: string = `http://${this.dynamicHost}/api`;
 
-  // Constructor que inyecta el servicio HttpClient para realizar solicitudes HTTP
   constructor(private http: HttpClient) { }
 
-  // Método para obtener la URL de un reporte específico en el formato deseado
-getReportUrl(reportType: string, format: string): Observable<any> {
-  let endpoint = ''; 
+  getReportUrl(reportType: string, format: string): Observable<any> {
+    let endpoint = '';
 
     switch (reportType) {
-      case 'usuarios':
+      case 'REPORTE DE USUARIOS':
         endpoint = `${this.baseUrl}/reportes/usuarios/${format}`;
         break;
-      case 'visitas':
+      case 'REPORTE DE VISITAS':
         endpoint = `${this.baseUrl}/reportes/visitas/${format}`;
         break;
-      case 'comentarios':
+      case 'REPORTE DE COMENTARIOS':
         endpoint = `${this.baseUrl}/reportes/comentarios/${format}`;
         break;
       default:
         throw new Error('Tipo de reporte no soportado');
     }
 
-  // Realiza una solicitud GET al endpoint seleccionado, esperando una respuesta de tipo `blob`
-  return this.http.get(endpoint, { responseType: 'blob' }).pipe(
-    catchError(error => {
-      console.error('Error al obtener el reporte:', error);
-      return throwError(error);
-    })
-  );
-}
+    console.log("Valor del endpoint: ",endpoint);
+    
 
-  // Método genérico para descargar el reporte
+    return this.http.get(endpoint, { responseType: 'blob' }).pipe(
+      catchError(error => {
+        console.error('Error al obtener el reporte:', error);
+        return throwError(error);
+      })
+    );
+  }
+
   downloadReport(reportType: string, format: string) {
-    this.getReportUrl(reportType, format).subscribe(blob => {
-      const url = window.URL.createObjectURL(blob); // Crear una URL temporal para el blob
-      const a = document.createElement('a'); // Crear un enlace para descargar el archivo
+    this.getReportUrl(reportType, format).subscribe((blob: Blob) => { 
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
       a.href = url;
-      a.download = `${reportType}.${format}`; // Usar el tipo de reporte y formato en el nombre del archivo
-      a.click(); // Simular clic para iniciar la descarga
-      window.URL.revokeObjectURL(url); // Revocar la URL para liberar memoria
+      a.click();
+      window.URL.revokeObjectURL(url);
+    }, (error: any) => { 
+      console.error('Error al descargar el reporte:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error al descargar el reporte. Por favor, intenta de nuevo.',
+      });
     });
   }
 }

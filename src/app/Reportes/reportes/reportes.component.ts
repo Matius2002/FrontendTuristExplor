@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {NgClass} from "@angular/common";
-import {Router} from "@angular/router";
-import {HttpClientModule} from "@angular/common/http";
-import {UsuarioService} from "../../Admin/Usuarios/usuario.service";
-import {ReportService} from "../report.service";
+import { Component, OnInit } from '@angular/core';
+import { NgClass } from "@angular/common";
+import { Router } from "@angular/router";
+import { HttpClientModule, HttpResponse } from "@angular/common/http";
+import { UsuarioService } from "../../Admin/Usuarios/usuario.service";
+import { ReportService } from "../report.service";
 import { VisitService } from '../visit-service.service';
 import Swal from 'sweetalert2';
 
-interface  Rol {
+interface Rol {
   id: number;
   rolName: string;
   rolDescripc: string;
@@ -28,12 +28,12 @@ interface Usuarios {
   providers: [UsuarioService, ReportService],
   selector: 'app-reportes',
   standalone: true,
-  imports: [NgClass,HttpClientModule],
+  imports: [NgClass, HttpClientModule],
   templateUrl: './reportes.component.html',
   styleUrl: './reportes.component.css'
 })
 
-export class ReportesComponent implements OnInit{
+export class ReportesComponent implements OnInit {
   visitasPorRuta: any[] = [];
   isModalVisible: boolean = false;
   selectedReport: string = '';
@@ -42,9 +42,9 @@ export class ReportesComponent implements OnInit{
     private router: Router,
     private reportService: ReportService,
     private visitService: VisitService
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   showDownloadOptions(reportType: string) {
     this.selectedReport = reportType;
@@ -56,23 +56,38 @@ export class ReportesComponent implements OnInit{
   }
 
   downloadReport(reportType: string, format: string) {
-    this.reportService.getReportUrl(reportType, format).subscribe(url => {
-      const extension = format === 'pdf' ? 'pdf' : 'xlsx';
-      const blob = new Blob([url], { type: extension === 'pdf' ? 'application/pdf' : 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    
+    const fecha = new Date();
+    const fechaFormato = fecha.toLocaleDateString('es-ES').replace(/\//g, '-'); 
+    const horaFormato = fecha.toLocaleTimeString('es-ES').replace(/:/g, '-');   
+
+    const filename = `${reportType} ${fechaFormato} A LAS ${horaFormato}.${format === 'pdf' ? 'pdf' : 'xlsx'}`;
+
+    this.reportService.getReportUrl(reportType, format).subscribe((response: Blob) => {
+      const blob = new Blob([response], {
+        type: format === 'pdf' ? 'application/pdf' : 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      });
       const downloadUrl = window.URL.createObjectURL(blob);
+
       const a = document.createElement('a');
       a.href = downloadUrl;
-      a.download = `${reportType}.${extension}`; 
+      a.download = filename; 
+      document.body.appendChild(a); 
       a.click();
       window.URL.revokeObjectURL(downloadUrl);
+      document.body.removeChild(a); 
+
       this.closeModal();
-    }, error => {
+    }, (error) => {
       console.error('Error al descargar el reporte:', error);
-      // Reemplazar alert con SweetAlert u otro sistema de notificación que ya uses
-      alert('Error al descargar el reporte. Por favor, intenta de nuevo.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error al descargar el reporte. Por favor, intenta de nuevo.',
+      });
     });
-  }  
-  
+  }
+
   goBack() {
     this.router.navigate(['/']);
   }
