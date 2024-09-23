@@ -34,7 +34,7 @@
         <!-- Botón para cerrar el modal -->
         <span class="close" (click)="closeModal()">&times;</span>
         <!-- Mensaje del modal indicando el reporte seleccionado -->
-        <p>Selecciona el formato de descarga para el reporte de {{ selectedReport }}</p>
+        <p>Selecciona el formato de descarga para el {{selectedReport}}</p>
         <!-- Botón para descargar el reporte en formato Excel -->
         <button class="modal-button" (click)="downloadReport(selectedReport, 'excel')">
           <i class="fas fa-file-excel"></i> Excel
